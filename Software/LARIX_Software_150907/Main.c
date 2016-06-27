@@ -15,22 +15,35 @@
  *
  */
 
-
+#ifndef DEBUG_ON_PC
 #include <DAVE3.h>			//Declarations from DAVE3 Code Generation (includes SFR declaration)
+#else
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdint.h>
+#define bool int
+#endif
+
 #include <limits.h>
 
+#ifndef DEBUG_ON_PC
 #include "_Quadrocopter/_HAL/GPIO.h"
 #include "_Quadrocopter/_HAL/Delay/util.h"
 #include "_Quadrocopter/_HAL/I2C/I2Cdev.h"
+#endif
 
 #include "_Quadrocopter/Sensors/MPU9X50/MPU9150.h"
 #include "_Quadrocopter/Sensors/DPS310/DPS310.h"
 
 #include "_Quadrocopter/RadioControl/RCReceive.h"
 
-#include "_Quadrocopter/Attitude_Control/Attitudecontroller.h"
+#include "_Quadrocopter/Attitude_Control/AttitudeController.h"
 
+#ifndef DEBUG_ON_PC
 #include "_Quadrocopter/MCI_DaisyChain/DaisyChain.h"
+#else
+#include "simulator.h"
+#endif
 
 //#define LARIX_with_PWM_used
 #define WIDEFIELD_used
@@ -42,6 +55,8 @@
 #define DEBUG_SPECIFIC
 //#define DEBUG_CONTINOUS0
 #define LED_test
+//Be careful, do not enable the motor test when you have propellers installed!
+//#define DEBUG_MOTOR_TEST
 //--------------------------------Enable DEBUG-----------------------------------------------//
 
 //--------------------------------OUTPUT Config-----------------------------------------------//
@@ -274,7 +289,8 @@ void Initialize()
 
 int main(void)
 {
-
+	int i=0;
+	int orcount=0;
 
 	Control_P0_9(OUTPUT_PP_GP, VERYSTRONG);
 	Control_P3_2(OUTPUT_PP_GP, VERYSTRONG);
@@ -294,14 +310,14 @@ int main(void)
 	#ifdef LED_test
 	int ortime=0L;
 				while(ortime<10){
-
-						for (int orcount = 0; orcount<200000; orcount++)__NOP();
+						int orcount=0;
+						for (orcount = 0; orcount<200000; orcount++)__NOP();
 						TOGGLE_P3_0;
-						for (int orcount = 0; orcount<200000; orcount++)__NOP();
+						for (orcount = 0; orcount<200000; orcount++)__NOP();
 						TOGGLE_P3_1;
-						for (int orcount = 0; orcount<200000; orcount++)__NOP();
+						for (orcount = 0; orcount<200000; orcount++)__NOP();
 						TOGGLE_P3_2;
-						for (int orcount = 0; orcount<200000; orcount++)__NOP();
+						for (orcount = 0; orcount<200000; orcount++)__NOP();
 						TOGGLE_P0_9;
 						ortime++;
 				}
@@ -312,6 +328,20 @@ int main(void)
 	DAVE_Init();			// Initialization of DAVE Apps
 	Initialize();
 
+#ifdef DEBUG_MOTOR_TEST
+	for(j=0;j<100;j++)
+	{
+		for(i=45;i<90;i++)
+		{
+	  		PWMSP001_SetDutyCycle((PWMSP001_HandleType*)&ESC_PWM_Handle0, i);
+	  		PWMSP001_SetDutyCycle((PWMSP001_HandleType*)&ESC_PWM_Handle1, i);
+	  		PWMSP001_SetDutyCycle((PWMSP001_HandleType*)&ESC_PWM_Handle2, i);
+ 	  		PWMSP001_SetDutyCycle((PWMSP001_HandleType*)&ESC_PWM_Handle3, i);
+			for (int orcount = 0; orcount<3000000; orcount++)__NOP();
+
+		}
+	}
+#endif
 
 	Control_P0_0(INPUT, STRONG); //SET UART PIN to TRISTATE: necessary with LARIX_V3
 	Control_P0_1(INPUT, STRONG); //SET UART PIN to TRISTATE: necessary with LARIX_V3
@@ -323,9 +353,10 @@ int main(void)
 		ortime=0;
 		while(ortime<20){
 
-								for (int orcount = 0; orcount<300000; orcount++)__NOP();
+								int orcount=0;
+								for (orcount = 0; orcount<300000; orcount++)__NOP();
 								TOGGLE_P3_0;
-								for (int orcount = 0; orcount<300000; orcount++)__NOP();
+								for (orcount = 0; orcount<300000; orcount++)__NOP();
 								TOGGLE_P3_2;
 								ortime++;
 						}
