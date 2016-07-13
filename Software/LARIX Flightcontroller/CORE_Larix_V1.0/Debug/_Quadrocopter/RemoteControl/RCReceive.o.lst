@@ -1,0 +1,1693 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"RCReceive.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	throttle
+  20              		.bss
+  21              		.align	2
+  24              	throttle:
+  25 0000 00000000 		.space	4
+  26              		.global	rudder
+  27              		.align	2
+  30              	rudder:
+  31 0004 00000000 		.space	4
+  32              		.global	elevator
+  33              		.align	2
+  36              	elevator:
+  37 0008 00000000 		.space	4
+  38              		.global	aileron
+  39              		.align	2
+  42              	aileron:
+  43 000c 00000000 		.space	4
+  44              		.global	throttleBT
+  45              		.align	1
+  48              	throttleBT:
+  49 0010 0000     		.space	2
+  50              		.global	heightControlBT
+  53              	heightControlBT:
+  54 0012 00       		.space	1
+  55              		.global	rudderBT
+  56 0013 00       		.align	2
+  59              	rudderBT:
+  60 0014 00000000 		.space	4
+  61              		.global	aileronBT
+  62              		.align	2
+  65              	aileronBT:
+  66 0018 00000000 		.space	4
+  67              		.global	elevatorBT
+  68              		.align	2
+  71              	elevatorBT:
+  72 001c 00000000 		.space	4
+  73              		.global	modeBT
+  76              	modeBT:
+  77 0020 00       		.space	1
+  78              		.global	flightmode
+  81              	flightmode:
+  82 0021 00       		.space	1
+  83              		.global	RCTimeOut
+  84              		.data
+  87              	RCTimeOut:
+  88 0000 01       		.byte	1
+  89              		.global	RCCount
+  90              		.bss
+  93              	RCCount:
+  94 0022 00       		.space	1
+  95              		.global	BTTimeOut
+  96              		.data
+  99              	BTTimeOut:
+ 100 0001 01       		.byte	1
+ 101              		.global	BTCount
+ 102              		.bss
+ 105              	BTCount:
+ 106 0023 00       		.space	1
+ 107              		.global	conn
+ 110              	conn:
+ 111 0024 00       		.space	1
+ 112              		.comm	TimerWatchRC,4,4
+ 113              		.section	.text.mergeBytes,"ax",%progbits
+ 114              		.align	2
+ 115              		.global	mergeBytes
+ 116              		.thumb
+ 117              		.thumb_func
+ 119              	mergeBytes:
+ 120              	.LFB120:
+ 121              		.file 1 "../_Quadrocopter/RemoteControl/RCReceive.c"
+   1:../_Quadrocopter/RemoteControl/RCReceive.c **** /*
+   2:../_Quadrocopter/RemoteControl/RCReceive.c ****  * RCReceive.c
+   3:../_Quadrocopter/RemoteControl/RCReceive.c ****  *
+   4:../_Quadrocopter/RemoteControl/RCReceive.c ****  *  Created on: 22.12.2014
+   5:../_Quadrocopter/RemoteControl/RCReceive.c ****  *      Author: maan
+   6:../_Quadrocopter/RemoteControl/RCReceive.c ****  */
+   7:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+   8:../_Quadrocopter/RemoteControl/RCReceive.c **** #include "RCReceive.h"
+   9:../_Quadrocopter/RemoteControl/RCReceive.c **** #include "../_HAL/GPIO.h"
+  10:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+  11:../_Quadrocopter/RemoteControl/RCReceive.c **** ////////////////////Variablen Elias///////////////////////////////
+  12:../_Quadrocopter/RemoteControl/RCReceive.c **** extern uint8_t* ReadBufBT;
+  13:../_Quadrocopter/RemoteControl/RCReceive.c **** extern ControlValue control_value;
+  14:../_Quadrocopter/RemoteControl/RCReceive.c **** extern DataPacket dpacket;
+  15:../_Quadrocopter/RemoteControl/RCReceive.c **** ///////////////////////////////////////////////////////////////////
+  16:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+  17:../_Quadrocopter/RemoteControl/RCReceive.c **** //Joystick values (range between -1 and 1, 0 in middle position)
+  18:../_Quadrocopter/RemoteControl/RCReceive.c **** float throttle = 0.0;
+  19:../_Quadrocopter/RemoteControl/RCReceive.c **** float rudder = 0.0;
+  20:../_Quadrocopter/RemoteControl/RCReceive.c **** float elevator = 0.0;
+  21:../_Quadrocopter/RemoteControl/RCReceive.c **** float aileron = 0.0;
+  22:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+  23:../_Quadrocopter/RemoteControl/RCReceive.c **** //Bluetooth values
+  24:../_Quadrocopter/RemoteControl/RCReceive.c **** uint16_t throttleBT = 0;
+  25:../_Quadrocopter/RemoteControl/RCReceive.c **** uint8_t heightControlBT = 0;
+  26:../_Quadrocopter/RemoteControl/RCReceive.c **** float rudderBT = 0;
+  27:../_Quadrocopter/RemoteControl/RCReceive.c **** float aileronBT = 0;
+  28:../_Quadrocopter/RemoteControl/RCReceive.c **** float elevatorBT = 0;
+  29:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+  30:../_Quadrocopter/RemoteControl/RCReceive.c **** uint8_t modeBT = 0;
+  31:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+  32:../_Quadrocopter/RemoteControl/RCReceive.c **** uint8_t flightmode = 0;
+  33:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+  34:../_Quadrocopter/RemoteControl/RCReceive.c **** uint8_t RCTimeOut = 1; //Timeout remote control 0:OK 1:TimeOut
+  35:../_Quadrocopter/RemoteControl/RCReceive.c **** uint8_t RCCount = 0; //Counter for RC read (used for TimeOut)
+  36:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+  37:../_Quadrocopter/RemoteControl/RCReceive.c **** uint8_t BTTimeOut = 1;
+  38:../_Quadrocopter/RemoteControl/RCReceive.c **** uint8_t BTCount = 0;
+  39:../_Quadrocopter/RemoteControl/RCReceive.c **** _Bool conn = false;
+  40:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+  41:../_Quadrocopter/RemoteControl/RCReceive.c **** // Software timer
+  42:../_Quadrocopter/RemoteControl/RCReceive.c **** handle_t TimerWatchRC; //Timer for RC watchdog
+  43:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+  44:../_Quadrocopter/RemoteControl/RCReceive.c **** /*
+  45:../_Quadrocopter/RemoteControl/RCReceive.c ****  * Merge two bytes to one integer
+  46:../_Quadrocopter/RemoteControl/RCReceive.c ****  *
+  47:../_Quadrocopter/RemoteControl/RCReceive.c ****  * Parameters:
+  48:../_Quadrocopter/RemoteControl/RCReceive.c ****  * uint8_t a: high-byte
+  49:../_Quadrocopter/RemoteControl/RCReceive.c ****  * uint8_t b: low-byte
+  50:../_Quadrocopter/RemoteControl/RCReceive.c ****  *
+  51:../_Quadrocopter/RemoteControl/RCReceive.c ****  * Returnvalue:
+  52:../_Quadrocopter/RemoteControl/RCReceive.c ****  * int Merged bytes
+  53:../_Quadrocopter/RemoteControl/RCReceive.c ****  */
+  54:../_Quadrocopter/RemoteControl/RCReceive.c **** int mergeBytes(uint8_t a, uint8_t b)
+  55:../_Quadrocopter/RemoteControl/RCReceive.c **** {
+ 122              		.loc 1 55 0
+ 123              		.cfi_startproc
+ 124              		@ args = 0, pretend = 0, frame = 16
+ 125              		@ frame_needed = 1, uses_anonymous_args = 0
+ 126              		@ link register save eliminated.
+ 127 0000 80B4     		push	{r7}
+ 128              	.LCFI0:
+ 129              		.cfi_def_cfa_offset 4
+ 130              		.cfi_offset 7, -4
+ 131 0002 85B0     		sub	sp, sp, #20
+ 132              	.LCFI1:
+ 133              		.cfi_def_cfa_offset 24
+ 134 0004 00AF     		add	r7, sp, #0
+ 135              	.LCFI2:
+ 136              		.cfi_def_cfa_register 7
+ 137 0006 0246     		mov	r2, r0
+ 138 0008 0B46     		mov	r3, r1
+ 139 000a FA71     		strb	r2, [r7, #7]
+ 140 000c BB71     		strb	r3, [r7, #6]
+  56:../_Quadrocopter/RemoteControl/RCReceive.c **** 	int c = a;
+ 141              		.loc 1 56 0
+ 142 000e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 143 0010 FB60     		str	r3, [r7, #12]
+  57:../_Quadrocopter/RemoteControl/RCReceive.c **** 	return (c << 8) | b;
+ 144              		.loc 1 57 0
+ 145 0012 FB68     		ldr	r3, [r7, #12]
+ 146 0014 4FEA0322 		lsl	r2, r3, #8
+ 147 0018 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 148 001a 1343     		orrs	r3, r3, r2
+  58:../_Quadrocopter/RemoteControl/RCReceive.c **** }
+ 149              		.loc 1 58 0
+ 150 001c 1846     		mov	r0, r3
+ 151 001e 07F11407 		add	r7, r7, #20
+ 152 0022 BD46     		mov	sp, r7
+ 153 0024 80BC     		pop	{r7}
+ 154 0026 7047     		bx	lr
+ 155              		.cfi_endproc
+ 156              	.LFE120:
+ 158              		.section	.text.CCU41_1_IRQHandler,"ax",%progbits
+ 159              		.align	2
+ 160              		.global	CCU41_1_IRQHandler
+ 161              		.thumb
+ 162              		.thumb_func
+ 164              	CCU41_1_IRQHandler:
+ 165              	.LFB121:
+  59:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+  60:../_Quadrocopter/RemoteControl/RCReceive.c **** /**
+  61:../_Quadrocopter/RemoteControl/RCReceive.c ****  *Bluetooth Keep-Alive Messages
+  62:../_Quadrocopter/RemoteControl/RCReceive.c ****  * for Android-App to check connection
+  63:../_Quadrocopter/RemoteControl/RCReceive.c ****  */
+  64:../_Quadrocopter/RemoteControl/RCReceive.c **** void Bluetooth_Keep_Alive()
+  65:../_Quadrocopter/RemoteControl/RCReceive.c **** {
+ 166              		.loc 1 65 0
+ 167              		.cfi_startproc
+ 168              		@ args = 0, pretend = 0, frame = 8
+ 169              		@ frame_needed = 1, uses_anonymous_args = 0
+ 170 0000 80B5     		push	{r7, lr}
+ 171              	.LCFI3:
+ 172              		.cfi_def_cfa_offset 8
+ 173              		.cfi_offset 7, -8
+ 174              		.cfi_offset 14, -4
+ 175 0002 82B0     		sub	sp, sp, #8
+ 176              	.LCFI4:
+ 177              		.cfi_def_cfa_offset 16
+ 178 0004 00AF     		add	r7, sp, #0
+ 179              	.LCFI5:
+ 180              		.cfi_def_cfa_register 7
+  66:../_Quadrocopter/RemoteControl/RCReceive.c **** 	uint8_t keep_alive = 0xFF;
+ 181              		.loc 1 66 0
+ 182 0006 4FF0FF03 		mov	r3, #255
+ 183 000a FB71     		strb	r3, [r7, #7]
+  67:../_Quadrocopter/RemoteControl/RCReceive.c **** 	UART001_WriteDataBytes(&BT_UART_Handle,(uint8_t*)&keep_alive,1);
+ 184              		.loc 1 67 0
+ 185 000c 07F10703 		add	r3, r7, #7
+ 186 0010 40F20000 		movw	r0, #:lower16:UART001_Handle2
+ 187 0014 C0F20000 		movt	r0, #:upper16:UART001_Handle2
+ 188 0018 1946     		mov	r1, r3
+ 189 001a 4FF00102 		mov	r2, #1
+ 190 001e FFF7FEFF 		bl	UART001_WriteDataBytes
+  68:../_Quadrocopter/RemoteControl/RCReceive.c **** }
+ 191              		.loc 1 68 0
+ 192 0022 07F10807 		add	r7, r7, #8
+ 193 0026 BD46     		mov	sp, r7
+ 194 0028 80BD     		pop	{r7, pc}
+ 195              		.cfi_endproc
+ 196              	.LFE121:
+ 198              		.global	__aeabi_i2d
+ 199              		.global	__aeabi_ddiv
+ 200              		.global	__aeabi_d2f
+ 201 002a 00BF     		.section	.text.USIC1_0_IRQHandler,"ax",%progbits
+ 202              		.align	2
+ 203              		.global	USIC1_0_IRQHandler
+ 204              		.thumb
+ 205              		.thumb_func
+ 207              	USIC1_0_IRQHandler:
+ 208              	.LFB122:
+  69:../_Quadrocopter/RemoteControl/RCReceive.c **** /**
+  70:../_Quadrocopter/RemoteControl/RCReceive.c ****  * Interrupt routine from UART FIFO in buffer
+  71:../_Quadrocopter/RemoteControl/RCReceive.c ****  * Buffer is full, new data is ready to read
+  72:../_Quadrocopter/RemoteControl/RCReceive.c ****  */
+  73:../_Quadrocopter/RemoteControl/RCReceive.c **** void RC_RECEIVE_ISR()
+  74:../_Quadrocopter/RemoteControl/RCReceive.c **** {
+ 209              		.loc 1 74 0
+ 210              		.cfi_startproc
+ 211              		@ args = 0, pretend = 0, frame = 56
+ 212              		@ frame_needed = 1, uses_anonymous_args = 0
+ 213 0000 80B5     		push	{r7, lr}
+ 214              	.LCFI6:
+ 215              		.cfi_def_cfa_offset 8
+ 216              		.cfi_offset 7, -8
+ 217              		.cfi_offset 14, -4
+ 218 0002 90B0     		sub	sp, sp, #64
+ 219              	.LCFI7:
+ 220              		.cfi_def_cfa_offset 72
+ 221 0004 02AF     		add	r7, sp, #8
+ 222              	.LCFI8:
+ 223              		.cfi_def_cfa 7, 64
+  75:../_Quadrocopter/RemoteControl/RCReceive.c **** 	//Raw values from receiver
+  76:../_Quadrocopter/RemoteControl/RCReceive.c **** 	int throttleRaw;
+  77:../_Quadrocopter/RemoteControl/RCReceive.c **** 	int rudderRaw;
+  78:../_Quadrocopter/RemoteControl/RCReceive.c **** 	int elevatorRaw;
+  79:../_Quadrocopter/RemoteControl/RCReceive.c **** 	int aileronRaw;
+  80:../_Quadrocopter/RemoteControl/RCReceive.c **** 	int flightmodeRaw;
+  81:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+  82:../_Quadrocopter/RemoteControl/RCReceive.c **** 	uint8_t ReadBufRC[32]; //Readbuffer
+  83:../_Quadrocopter/RemoteControl/RCReceive.c **** 	int start = 0; //Index of start byte (contains 0x30)
+ 224              		.loc 1 83 0
+ 225 0006 4FF00003 		mov	r3, #0
+ 226 000a 7B63     		str	r3, [r7, #52]
+  84:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+  85:../_Quadrocopter/RemoteControl/RCReceive.c **** 	//Check if receive buffer interrupt is set
+  86:../_Quadrocopter/RemoteControl/RCReceive.c **** 	if (UART001_GetFlagStatus(&RC_UART_Handle, UART001_FIFO_STD_RECV_BUF_FLAG)
+ 227              		.loc 1 86 0
+ 228 000c 40F20000 		movw	r0, #:lower16:UART001_Handle0
+ 229 0010 C0F20000 		movt	r0, #:upper16:UART001_Handle0
+ 230 0014 4FF01001 		mov	r1, #16
+ 231 0018 FFF7FEFF 		bl	UART001_GetFlagStatus
+ 232 001c 0346     		mov	r3, r0
+ 233 001e 022B     		cmp	r3, #2
+ 234 0020 40F07D81 		bne	.L4
+  87:../_Quadrocopter/RemoteControl/RCReceive.c **** 			== UART001_SET)
+  88:../_Quadrocopter/RemoteControl/RCReceive.c **** 	{
+  89:../_Quadrocopter/RemoteControl/RCReceive.c **** 		//Read data from UART buffer
+  90:../_Quadrocopter/RemoteControl/RCReceive.c **** 		UART001_ReadDataBytes(&RC_UART_Handle, ReadBufRC, 32);
+ 235              		.loc 1 90 0
+ 236 0024 3B46     		mov	r3, r7
+ 237 0026 40F20000 		movw	r0, #:lower16:UART001_Handle0
+ 238 002a C0F20000 		movt	r0, #:upper16:UART001_Handle0
+ 239 002e 1946     		mov	r1, r3
+ 240 0030 4FF02002 		mov	r2, #32
+ 241 0034 FFF7FEFF 		bl	UART001_ReadDataBytes
+  91:../_Quadrocopter/RemoteControl/RCReceive.c **** 		//Clear receive buffer interrupt flag
+  92:../_Quadrocopter/RemoteControl/RCReceive.c **** 		UART001_ClearFlag(&RC_UART_Handle, UART001_FIFO_STD_RECV_BUF_FLAG);
+ 242              		.loc 1 92 0
+ 243 0038 40F20000 		movw	r0, #:lower16:UART001_Handle0
+ 244 003c C0F20000 		movt	r0, #:upper16:UART001_Handle0
+ 245 0040 4FF01001 		mov	r1, #16
+ 246 0044 FFF7FEFF 		bl	UART001_ClearFlag
+  93:../_Quadrocopter/RemoteControl/RCReceive.c **** 		//Search for start byte and check static values
+  94:../_Quadrocopter/RemoteControl/RCReceive.c **** 		while (ReadBufRC[start] != 0x30 || ReadBufRC[start + 1] != 0x00
+ 247              		.loc 1 94 0
+ 248 0048 0CE0     		b	.L6
+ 249              	.L8:
+  95:../_Quadrocopter/RemoteControl/RCReceive.c **** 				|| ReadBufRC[start + 5] != 0xA2 || ReadBufRC[start + 8] != 0x2B
+  96:../_Quadrocopter/RemoteControl/RCReceive.c **** 				|| ReadBufRC[start + 9] != 0xFE)
+  97:../_Quadrocopter/RemoteControl/RCReceive.c **** 		{
+  98:../_Quadrocopter/RemoteControl/RCReceive.c **** 			if (start++ > 16)
+ 250              		.loc 1 98 0
+ 251 004a 7B6B     		ldr	r3, [r7, #52]
+ 252 004c 102B     		cmp	r3, #16
+ 253 004e D4BF     		ite	le
+ 254 0050 0023     		movle	r3, #0
+ 255 0052 0123     		movgt	r3, #1
+ 256 0054 DBB2     		uxtb	r3, r3
+ 257 0056 7A6B     		ldr	r2, [r7, #52]
+ 258 0058 02F10102 		add	r2, r2, #1
+ 259 005c 7A63     		str	r2, [r7, #52]
+ 260 005e 002B     		cmp	r3, #0
+ 261 0060 40F05D81 		bne	.L4
+ 262              	.L6:
+  94:../_Quadrocopter/RemoteControl/RCReceive.c **** 		while (ReadBufRC[start] != 0x30 || ReadBufRC[start + 1] != 0x00
+ 263              		.loc 1 94 0 discriminator 1
+ 264 0064 3A46     		mov	r2, r7
+ 265 0066 7B6B     		ldr	r3, [r7, #52]
+ 266 0068 D318     		adds	r3, r2, r3
+ 267 006a 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 268 006c 302B     		cmp	r3, #48
+ 269 006e ECD1     		bne	.L8
+  94:../_Quadrocopter/RemoteControl/RCReceive.c **** 		while (ReadBufRC[start] != 0x30 || ReadBufRC[start + 1] != 0x00
+ 270              		.loc 1 94 0 is_stmt 0 discriminator 2
+ 271 0070 7B6B     		ldr	r3, [r7, #52]
+ 272 0072 03F10103 		add	r3, r3, #1
+ 273 0076 07F13801 		add	r1, r7, #56
+ 274 007a CB18     		adds	r3, r1, r3
+ 275 007c 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 276 0080 002B     		cmp	r3, #0
+ 277 0082 E2D1     		bne	.L8
+  95:../_Quadrocopter/RemoteControl/RCReceive.c **** 				|| ReadBufRC[start + 5] != 0xA2 || ReadBufRC[start + 8] != 0x2B
+ 278              		.loc 1 95 0 is_stmt 1
+ 279 0084 7B6B     		ldr	r3, [r7, #52]
+ 280 0086 03F10503 		add	r3, r3, #5
+ 281 008a 07F13802 		add	r2, r7, #56
+ 282 008e D318     		adds	r3, r2, r3
+ 283 0090 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 284 0094 A22B     		cmp	r3, #162
+ 285 0096 D8D1     		bne	.L8
+  95:../_Quadrocopter/RemoteControl/RCReceive.c **** 				|| ReadBufRC[start + 5] != 0xA2 || ReadBufRC[start + 8] != 0x2B
+ 286              		.loc 1 95 0 is_stmt 0 discriminator 1
+ 287 0098 7B6B     		ldr	r3, [r7, #52]
+ 288 009a 03F10803 		add	r3, r3, #8
+ 289 009e 07F13801 		add	r1, r7, #56
+ 290 00a2 CB18     		adds	r3, r1, r3
+ 291 00a4 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 292 00a8 2B2B     		cmp	r3, #43
+ 293 00aa CED1     		bne	.L8
+  96:../_Quadrocopter/RemoteControl/RCReceive.c **** 				|| ReadBufRC[start + 9] != 0xFE)
+ 294              		.loc 1 96 0 is_stmt 1
+ 295 00ac 7B6B     		ldr	r3, [r7, #52]
+ 296 00ae 03F10903 		add	r3, r3, #9
+ 297 00b2 07F13802 		add	r2, r7, #56
+ 298 00b6 D318     		adds	r3, r2, r3
+ 299 00b8 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 300 00bc FE2B     		cmp	r3, #254
+ 301 00be C4D1     		bne	.L8
+  99:../_Quadrocopter/RemoteControl/RCReceive.c **** 			{
+ 100:../_Quadrocopter/RemoteControl/RCReceive.c **** 				//Communication check bytes not in buffer
+ 101:../_Quadrocopter/RemoteControl/RCReceive.c **** 				return;
+ 102:../_Quadrocopter/RemoteControl/RCReceive.c **** 			}
+ 103:../_Quadrocopter/RemoteControl/RCReceive.c **** 		}
+ 104:../_Quadrocopter/RemoteControl/RCReceive.c **** 		//Get data from stream
+ 105:../_Quadrocopter/RemoteControl/RCReceive.c **** 		throttleRaw = mergeBytes(ReadBufRC[start + 2], ReadBufRC[start + 3]);
+ 302              		.loc 1 105 0
+ 303 00c0 7B6B     		ldr	r3, [r7, #52]
+ 304 00c2 03F10203 		add	r3, r3, #2
+ 305 00c6 07F13801 		add	r1, r7, #56
+ 306 00ca CB18     		adds	r3, r1, r3
+ 307 00cc 13F8382C 		ldrb	r2, [r3, #-56]	@ zero_extendqisi2
+ 308 00d0 7B6B     		ldr	r3, [r7, #52]
+ 309 00d2 03F10303 		add	r3, r3, #3
+ 310 00d6 07F13801 		add	r1, r7, #56
+ 311 00da CB18     		adds	r3, r1, r3
+ 312 00dc 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 313 00e0 1046     		mov	r0, r2
+ 314 00e2 1946     		mov	r1, r3
+ 315 00e4 FFF7FEFF 		bl	mergeBytes
+ 316 00e8 3863     		str	r0, [r7, #48]
+ 106:../_Quadrocopter/RemoteControl/RCReceive.c **** 		throttle = map(throttleRaw, THROTTLE_MIN, THROTTLE_MAX, 0, 60000)
+ 317              		.loc 1 106 0
+ 318 00ea 4EF66023 		movw	r3, #60000
+ 319 00ee 0093     		str	r3, [sp, #0]
+ 320 00f0 386B     		ldr	r0, [r7, #48]
+ 321 00f2 4FF49971 		mov	r1, #306
+ 322 00f6 40F2F762 		movw	r2, #1783
+ 323 00fa 4FF00003 		mov	r3, #0
+ 324 00fe FFF7FEFF 		bl	map
+ 325 0102 0346     		mov	r3, r0
+ 107:../_Quadrocopter/RemoteControl/RCReceive.c **** 				/ 60000.0;
+ 326              		.loc 1 107 0
+ 327 0104 1846     		mov	r0, r3
+ 328 0106 FFF7FEFF 		bl	__aeabi_i2d
+ 329 010a 0246     		mov	r2, r0
+ 330 010c 0B46     		mov	r3, r1
+ 331 010e 1046     		mov	r0, r2
+ 332 0110 1946     		mov	r1, r3
+ 333 0112 85A3     		adr	r3, .L12
+ 334 0114 D3E90023 		ldrd	r2, [r3]
+ 335 0118 FFF7FEFF 		bl	__aeabi_ddiv
+ 336 011c 0246     		mov	r2, r0
+ 337 011e 0B46     		mov	r3, r1
+ 106:../_Quadrocopter/RemoteControl/RCReceive.c **** 		throttle = map(throttleRaw, THROTTLE_MIN, THROTTLE_MAX, 0, 60000)
+ 338              		.loc 1 106 0
+ 339 0120 1046     		mov	r0, r2
+ 340 0122 1946     		mov	r1, r3
+ 341 0124 FFF7FEFF 		bl	__aeabi_d2f
+ 342 0128 0246     		mov	r2, r0	@ float
+ 343 012a 40F20003 		movw	r3, #:lower16:throttle
+ 344 012e C0F20003 		movt	r3, #:upper16:throttle
+ 345 0132 1A60     		str	r2, [r3, #0]	@ float
+ 108:../_Quadrocopter/RemoteControl/RCReceive.c **** 		aileronRaw = mergeBytes(ReadBufRC[start + 6], ReadBufRC[start + 7]);
+ 346              		.loc 1 108 0
+ 347 0134 7B6B     		ldr	r3, [r7, #52]
+ 348 0136 03F10603 		add	r3, r3, #6
+ 349 013a 07F13802 		add	r2, r7, #56
+ 350 013e D318     		adds	r3, r2, r3
+ 351 0140 13F8382C 		ldrb	r2, [r3, #-56]	@ zero_extendqisi2
+ 352 0144 7B6B     		ldr	r3, [r7, #52]
+ 353 0146 03F10703 		add	r3, r3, #7
+ 354 014a 07F13801 		add	r1, r7, #56
+ 355 014e CB18     		adds	r3, r1, r3
+ 356 0150 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 357 0154 1046     		mov	r0, r2
+ 358 0156 1946     		mov	r1, r3
+ 359 0158 FFF7FEFF 		bl	mergeBytes
+ 360 015c F862     		str	r0, [r7, #44]
+ 109:../_Quadrocopter/RemoteControl/RCReceive.c **** 		aileron = map(aileronRaw, AILERON_MIN, AILERON_MAX, -30000, 30000)
+ 361              		.loc 1 109 0
+ 362 015e 47F23053 		movw	r3, #30000
+ 363 0162 0093     		str	r3, [sp, #0]
+ 364 0164 F86A     		ldr	r0, [r7, #44]
+ 365 0166 40F63211 		movw	r1, #2354
+ 366 016a 40F6CC62 		movw	r2, #3788
+ 367 016e 48F6D023 		movw	r3, #35536
+ 368 0172 CFF6FF73 		movt	r3, 65535
+ 369 0176 FFF7FEFF 		bl	map
+ 370 017a 0346     		mov	r3, r0
+ 110:../_Quadrocopter/RemoteControl/RCReceive.c **** 				/ 30000.0;
+ 371              		.loc 1 110 0
+ 372 017c 1846     		mov	r0, r3
+ 373 017e FFF7FEFF 		bl	__aeabi_i2d
+ 374 0182 0246     		mov	r2, r0
+ 375 0184 0B46     		mov	r3, r1
+ 376 0186 1046     		mov	r0, r2
+ 377 0188 1946     		mov	r1, r3
+ 378 018a 69A3     		adr	r3, .L12+8
+ 379 018c D3E90023 		ldrd	r2, [r3]
+ 380 0190 FFF7FEFF 		bl	__aeabi_ddiv
+ 381 0194 0246     		mov	r2, r0
+ 382 0196 0B46     		mov	r3, r1
+ 109:../_Quadrocopter/RemoteControl/RCReceive.c **** 		aileron = map(aileronRaw, AILERON_MIN, AILERON_MAX, -30000, 30000)
+ 383              		.loc 1 109 0
+ 384 0198 1046     		mov	r0, r2
+ 385 019a 1946     		mov	r1, r3
+ 386 019c FFF7FEFF 		bl	__aeabi_d2f
+ 387 01a0 0246     		mov	r2, r0	@ float
+ 388 01a2 40F20003 		movw	r3, #:lower16:aileron
+ 389 01a6 C0F20003 		movt	r3, #:upper16:aileron
+ 390 01aa 1A60     		str	r2, [r3, #0]	@ float
+ 111:../_Quadrocopter/RemoteControl/RCReceive.c **** 		elevatorRaw = mergeBytes(ReadBufRC[start + 10], ReadBufRC[start + 11]);
+ 391              		.loc 1 111 0
+ 392 01ac 7B6B     		ldr	r3, [r7, #52]
+ 393 01ae 03F10A03 		add	r3, r3, #10
+ 394 01b2 07F13802 		add	r2, r7, #56
+ 395 01b6 D318     		adds	r3, r2, r3
+ 396 01b8 13F8382C 		ldrb	r2, [r3, #-56]	@ zero_extendqisi2
+ 397 01bc 7B6B     		ldr	r3, [r7, #52]
+ 398 01be 03F10B03 		add	r3, r3, #11
+ 399 01c2 07F13801 		add	r1, r7, #56
+ 400 01c6 CB18     		adds	r3, r1, r3
+ 401 01c8 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 402 01cc 1046     		mov	r0, r2
+ 403 01ce 1946     		mov	r1, r3
+ 404 01d0 FFF7FEFF 		bl	mergeBytes
+ 405 01d4 B862     		str	r0, [r7, #40]
+ 112:../_Quadrocopter/RemoteControl/RCReceive.c **** 		elevator = map(elevatorRaw, ELEVATOR_MIN, ELEVATOR_MAX, -30000, 30000)
+ 406              		.loc 1 112 0
+ 407 01d6 47F23053 		movw	r3, #30000
+ 408 01da 0093     		str	r3, [sp, #0]
+ 409 01dc B86A     		ldr	r0, [r7, #40]
+ 410 01de 41F23011 		movw	r1, #4400
+ 411 01e2 41F2CA62 		movw	r2, #5834
+ 412 01e6 48F6D023 		movw	r3, #35536
+ 413 01ea CFF6FF73 		movt	r3, 65535
+ 414 01ee FFF7FEFF 		bl	map
+ 415 01f2 0346     		mov	r3, r0
+ 113:../_Quadrocopter/RemoteControl/RCReceive.c **** 				/ 30000.0;
+ 416              		.loc 1 113 0
+ 417 01f4 1846     		mov	r0, r3
+ 418 01f6 FFF7FEFF 		bl	__aeabi_i2d
+ 419 01fa 0246     		mov	r2, r0
+ 420 01fc 0B46     		mov	r3, r1
+ 421 01fe 1046     		mov	r0, r2
+ 422 0200 1946     		mov	r1, r3
+ 423 0202 4BA3     		adr	r3, .L12+8
+ 424 0204 D3E90023 		ldrd	r2, [r3]
+ 425 0208 FFF7FEFF 		bl	__aeabi_ddiv
+ 426 020c 0246     		mov	r2, r0
+ 427 020e 0B46     		mov	r3, r1
+ 112:../_Quadrocopter/RemoteControl/RCReceive.c **** 		elevator = map(elevatorRaw, ELEVATOR_MIN, ELEVATOR_MAX, -30000, 30000)
+ 428              		.loc 1 112 0
+ 429 0210 1046     		mov	r0, r2
+ 430 0212 1946     		mov	r1, r3
+ 431 0214 FFF7FEFF 		bl	__aeabi_d2f
+ 432 0218 0246     		mov	r2, r0	@ float
+ 433 021a 40F20003 		movw	r3, #:lower16:elevator
+ 434 021e C0F20003 		movt	r3, #:upper16:elevator
+ 435 0222 1A60     		str	r2, [r3, #0]	@ float
+ 114:../_Quadrocopter/RemoteControl/RCReceive.c **** 		rudderRaw = mergeBytes(ReadBufRC[start + 14], ReadBufRC[start + 15]);
+ 436              		.loc 1 114 0
+ 437 0224 7B6B     		ldr	r3, [r7, #52]
+ 438 0226 03F10E03 		add	r3, r3, #14
+ 439 022a 07F13802 		add	r2, r7, #56
+ 440 022e D318     		adds	r3, r2, r3
+ 441 0230 13F8382C 		ldrb	r2, [r3, #-56]	@ zero_extendqisi2
+ 442 0234 7B6B     		ldr	r3, [r7, #52]
+ 443 0236 03F10F03 		add	r3, r3, #15
+ 444 023a 07F13801 		add	r1, r7, #56
+ 445 023e CB18     		adds	r3, r1, r3
+ 446 0240 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 447 0244 1046     		mov	r0, r2
+ 448 0246 1946     		mov	r1, r3
+ 449 0248 FFF7FEFF 		bl	mergeBytes
+ 450 024c 7862     		str	r0, [r7, #36]
+ 115:../_Quadrocopter/RemoteControl/RCReceive.c **** 		rudder = map(rudderRaw, RUDDER_MIN, RUDDER_MAX, -30000, 30000)
+ 451              		.loc 1 115 0
+ 452 024e 47F23053 		movw	r3, #30000
+ 453 0252 0093     		str	r3, [sp, #0]
+ 454 0254 786A     		ldr	r0, [r7, #36]
+ 455 0256 41F63211 		movw	r1, #6450
+ 456 025a 41F6CC62 		movw	r2, #7884
+ 457 025e 48F6D023 		movw	r3, #35536
+ 458 0262 CFF6FF73 		movt	r3, 65535
+ 459 0266 FFF7FEFF 		bl	map
+ 460 026a 0346     		mov	r3, r0
+ 116:../_Quadrocopter/RemoteControl/RCReceive.c **** 				/ 30000.0;
+ 461              		.loc 1 116 0
+ 462 026c 1846     		mov	r0, r3
+ 463 026e FFF7FEFF 		bl	__aeabi_i2d
+ 464 0272 0246     		mov	r2, r0
+ 465 0274 0B46     		mov	r3, r1
+ 466 0276 1046     		mov	r0, r2
+ 467 0278 1946     		mov	r1, r3
+ 468 027a 2DA3     		adr	r3, .L12+8
+ 469 027c D3E90023 		ldrd	r2, [r3]
+ 470 0280 FFF7FEFF 		bl	__aeabi_ddiv
+ 471 0284 0246     		mov	r2, r0
+ 472 0286 0B46     		mov	r3, r1
+ 115:../_Quadrocopter/RemoteControl/RCReceive.c **** 		rudder = map(rudderRaw, RUDDER_MIN, RUDDER_MAX, -30000, 30000)
+ 473              		.loc 1 115 0
+ 474 0288 1046     		mov	r0, r2
+ 475 028a 1946     		mov	r1, r3
+ 476 028c FFF7FEFF 		bl	__aeabi_d2f
+ 477 0290 0246     		mov	r2, r0	@ float
+ 478 0292 40F20003 		movw	r3, #:lower16:rudder
+ 479 0296 C0F20003 		movt	r3, #:upper16:rudder
+ 480 029a 1A60     		str	r2, [r3, #0]	@ float
+ 117:../_Quadrocopter/RemoteControl/RCReceive.c **** 		flightmodeRaw = mergeBytes(ReadBufRC[start + 12],
+ 481              		.loc 1 117 0
+ 482 029c 7B6B     		ldr	r3, [r7, #52]
+ 483 029e 03F10C03 		add	r3, r3, #12
+ 484 02a2 07F13802 		add	r2, r7, #56
+ 485 02a6 D318     		adds	r3, r2, r3
+ 486 02a8 13F8382C 		ldrb	r2, [r3, #-56]	@ zero_extendqisi2
+ 118:../_Quadrocopter/RemoteControl/RCReceive.c **** 				ReadBufRC[start + 13]);
+ 487              		.loc 1 118 0
+ 488 02ac 7B6B     		ldr	r3, [r7, #52]
+ 489 02ae 03F10D03 		add	r3, r3, #13
+ 117:../_Quadrocopter/RemoteControl/RCReceive.c **** 		flightmodeRaw = mergeBytes(ReadBufRC[start + 12],
+ 490              		.loc 1 117 0
+ 491 02b2 07F13801 		add	r1, r7, #56
+ 492 02b6 CB18     		adds	r3, r1, r3
+ 493 02b8 13F8383C 		ldrb	r3, [r3, #-56]	@ zero_extendqisi2
+ 494 02bc 1046     		mov	r0, r2
+ 495 02be 1946     		mov	r1, r3
+ 496 02c0 FFF7FEFF 		bl	mergeBytes
+ 497 02c4 3862     		str	r0, [r7, #32]
+ 119:../_Quadrocopter/RemoteControl/RCReceive.c **** 		if (flightmodeRaw == FLIGHTMODE0)
+ 498              		.loc 1 119 0
+ 499 02c6 3A6A     		ldr	r2, [r7, #32]
+ 500 02c8 42F23213 		movw	r3, #8498
+ 501 02cc 9A42     		cmp	r2, r3
+ 502 02ce 06D1     		bne	.L9
+ 120:../_Quadrocopter/RemoteControl/RCReceive.c **** 			flightmode = 0;
+ 503              		.loc 1 120 0
+ 504 02d0 40F20003 		movw	r3, #:lower16:flightmode
+ 505 02d4 C0F20003 		movt	r3, #:upper16:flightmode
+ 506 02d8 4FF00002 		mov	r2, #0
+ 507 02dc 1A70     		strb	r2, [r3, #0]
+ 508              	.L9:
+ 121:../_Quadrocopter/RemoteControl/RCReceive.c **** 		if (flightmodeRaw == FLIGHTMODE1)
+ 509              		.loc 1 121 0
+ 510 02de 3A6A     		ldr	r2, [r7, #32]
+ 511 02e0 42F2CA63 		movw	r3, #9930
+ 512 02e4 9A42     		cmp	r2, r3
+ 513 02e6 06D1     		bne	.L10
+ 122:../_Quadrocopter/RemoteControl/RCReceive.c **** 			flightmode = 1;
+ 514              		.loc 1 122 0
+ 515 02e8 40F20003 		movw	r3, #:lower16:flightmode
+ 516 02ec C0F20003 		movt	r3, #:upper16:flightmode
+ 517 02f0 4FF00102 		mov	r2, #1
+ 518 02f4 1A70     		strb	r2, [r3, #0]
+ 519              	.L10:
+ 123:../_Quadrocopter/RemoteControl/RCReceive.c **** 		//Set values for RC Timeout check
+ 124:../_Quadrocopter/RemoteControl/RCReceive.c **** 		RCTimeOut = 0;
+ 520              		.loc 1 124 0
+ 521 02f6 40F20003 		movw	r3, #:lower16:RCTimeOut
+ 522 02fa C0F20003 		movt	r3, #:upper16:RCTimeOut
+ 523 02fe 4FF00002 		mov	r2, #0
+ 524 0302 1A70     		strb	r2, [r3, #0]
+ 125:../_Quadrocopter/RemoteControl/RCReceive.c **** 		RCCount++;
+ 525              		.loc 1 125 0
+ 526 0304 40F20003 		movw	r3, #:lower16:RCCount
+ 527 0308 C0F20003 		movt	r3, #:upper16:RCCount
+ 528 030c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 529 030e 03F10103 		add	r3, r3, #1
+ 530 0312 DAB2     		uxtb	r2, r3
+ 531 0314 40F20003 		movw	r3, #:lower16:RCCount
+ 532 0318 C0F20003 		movt	r3, #:upper16:RCCount
+ 533 031c 1A70     		strb	r2, [r3, #0]
+ 534              	.L4:
+ 126:../_Quadrocopter/RemoteControl/RCReceive.c **** 	}
+ 127:../_Quadrocopter/RemoteControl/RCReceive.c **** }
+ 535              		.loc 1 127 0
+ 536 031e 07F13807 		add	r7, r7, #56
+ 537 0322 BD46     		mov	sp, r7
+ 538 0324 80BD     		pop	{r7, pc}
+ 539              	.L13:
+ 540 0326 00BF     		.align	3
+ 541              	.L12:
+ 542 0328 00000000 		.word	0
+ 543 032c 004CED40 		.word	1089293312
+ 544 0330 00000000 		.word	0
+ 545 0334 004CDD40 		.word	1088244736
+ 546              		.cfi_endproc
+ 547              	.LFE122:
+ 549              		.global	__aeabi_f2d
+ 550              		.global	__aeabi_dmul
+ 551              		.section	.text.USIC0_3_IRQHandler,"ax",%progbits
+ 552              		.align	2
+ 553              		.global	USIC0_3_IRQHandler
+ 554              		.thumb
+ 555              		.thumb_func
+ 557              	USIC0_3_IRQHandler:
+ 558              	.LFB123:
+ 128:../_Quadrocopter/RemoteControl/RCReceive.c **** void BT_RECEIVE_ISR()
+ 129:../_Quadrocopter/RemoteControl/RCReceive.c **** {
+ 559              		.loc 1 129 0
+ 560              		.cfi_startproc
+ 561              		@ args = 0, pretend = 0, frame = 8
+ 562              		@ frame_needed = 1, uses_anonymous_args = 0
+ 563 0000 80B5     		push	{r7, lr}
+ 564              	.LCFI9:
+ 565              		.cfi_def_cfa_offset 8
+ 566              		.cfi_offset 7, -8
+ 567              		.cfi_offset 14, -4
+ 568 0002 82B0     		sub	sp, sp, #8
+ 569              	.LCFI10:
+ 570              		.cfi_def_cfa_offset 16
+ 571 0004 00AF     		add	r7, sp, #0
+ 572              	.LCFI11:
+ 573              		.cfi_def_cfa_register 7
+ 130:../_Quadrocopter/RemoteControl/RCReceive.c **** 	if (UART001_GetFlagStatus(&BT_UART_Handle, UART001_FIFO_STD_RECV_BUF_FLAG)
+ 574              		.loc 1 130 0
+ 575 0006 40F20000 		movw	r0, #:lower16:UART001_Handle2
+ 576 000a C0F20000 		movt	r0, #:upper16:UART001_Handle2
+ 577 000e 4FF01001 		mov	r1, #16
+ 578 0012 FFF7FEFF 		bl	UART001_GetFlagStatus
+ 579 0016 0346     		mov	r3, r0
+ 580 0018 022B     		cmp	r3, #2
+ 581 001a 40F0E980 		bne	.L14
+ 582              	.LBB2:
+ 131:../_Quadrocopter/RemoteControl/RCReceive.c **** 			== UART001_SET)
+ 132:../_Quadrocopter/RemoteControl/RCReceive.c **** 	{
+ 133:../_Quadrocopter/RemoteControl/RCReceive.c **** 		UART001_ReadDataBytes(&BT_UART_Handle,ReadBufBT,PACKET_SIZE);
+ 583              		.loc 1 133 0
+ 584 001e 40F20003 		movw	r3, #:lower16:ReadBufBT
+ 585 0022 C0F20003 		movt	r3, #:upper16:ReadBufBT
+ 586 0026 1B68     		ldr	r3, [r3, #0]
+ 587 0028 40F20000 		movw	r0, #:lower16:UART001_Handle2
+ 588 002c C0F20000 		movt	r0, #:upper16:UART001_Handle2
+ 589 0030 1946     		mov	r1, r3
+ 590 0032 4FF01302 		mov	r2, #19
+ 591 0036 FFF7FEFF 		bl	UART001_ReadDataBytes
+ 134:../_Quadrocopter/RemoteControl/RCReceive.c **** 		//Clear receive buffer interrupt flag
+ 135:../_Quadrocopter/RemoteControl/RCReceive.c **** 		UART001_ClearFlag(&BT_UART_Handle, UART001_FIFO_STD_RECV_BUF_FLAG);
+ 592              		.loc 1 135 0
+ 593 003a 40F20000 		movw	r0, #:lower16:UART001_Handle2
+ 594 003e C0F20000 		movt	r0, #:upper16:UART001_Handle2
+ 595 0042 4FF01001 		mov	r1, #16
+ 596 0046 FFF7FEFF 		bl	UART001_ClearFlag
+ 136:../_Quadrocopter/RemoteControl/RCReceive.c **** 		status_t rec_mode = maintainBluetoothInputBuffer(ReadBufBT,
+ 597              		.loc 1 136 0
+ 598 004a 40F20003 		movw	r3, #:lower16:ReadBufBT
+ 599 004e C0F20003 		movt	r3, #:upper16:ReadBufBT
+ 600 0052 1B68     		ldr	r3, [r3, #0]
+ 601 0054 1846     		mov	r0, r3
+ 602 0056 40F20001 		movw	r1, #:lower16:control_value
+ 603 005a C0F20001 		movt	r1, #:upper16:control_value
+ 604 005e 40F20002 		movw	r2, #:lower16:dpacket
+ 605 0062 C0F20002 		movt	r2, #:upper16:dpacket
+ 606 0066 FFF7FEFF 		bl	maintainBluetoothInputBuffer
+ 607 006a 7860     		str	r0, [r7, #4]
+ 137:../_Quadrocopter/RemoteControl/RCReceive.c **** 				&control_value, &dpacket);
+ 138:../_Quadrocopter/RemoteControl/RCReceive.c **** 		switch (rec_mode)
+ 608              		.loc 1 138 0
+ 609 006c 7B68     		ldr	r3, [r7, #4]
+ 610 006e 012B     		cmp	r3, #1
+ 611 0070 00F0BD80 		beq	.L20
+ 612 0074 012B     		cmp	r3, #1
+ 613 0076 07D3     		bcc	.L16
+ 614 0078 13F1020F 		cmn	r3, #2
+ 615 007c 00F09980 		beq	.L18
+ 616 0080 B3F1FF3F 		cmp	r3, #-1
+ 617 0084 78D0     		beq	.L19
+ 618 0086 B3E0     		b	.L14
+ 619              	.L16:
+ 139:../_Quadrocopter/RemoteControl/RCReceive.c **** 		{
+ 140:../_Quadrocopter/RemoteControl/RCReceive.c **** 		case RECEIVED_CONTROL_PACKET:
+ 141:../_Quadrocopter/RemoteControl/RCReceive.c **** 			throttleBT = (uint16_t)*control_value.speed;
+ 620              		.loc 1 141 0
+ 621 0088 40F20003 		movw	r3, #:lower16:control_value
+ 622 008c C0F20003 		movt	r3, #:upper16:control_value
+ 623 0090 9B68     		ldr	r3, [r3, #8]
+ 624 0092 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 625 0094 1A46     		mov	r2, r3
+ 626 0096 40F20003 		movw	r3, #:lower16:throttleBT
+ 627 009a C0F20003 		movt	r3, #:upper16:throttleBT
+ 628 009e 1A80     		strh	r2, [r3, #0]	@ movhi
+ 142:../_Quadrocopter/RemoteControl/RCReceive.c **** 			heightControlBT = *control_value.height_control;
+ 629              		.loc 1 142 0
+ 630 00a0 40F20003 		movw	r3, #:lower16:control_value
+ 631 00a4 C0F20003 		movt	r3, #:upper16:control_value
+ 632 00a8 5B68     		ldr	r3, [r3, #4]
+ 633 00aa 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 634 00ac 40F20003 		movw	r3, #:lower16:heightControlBT
+ 635 00b0 C0F20003 		movt	r3, #:upper16:heightControlBT
+ 636 00b4 1A70     		strb	r2, [r3, #0]
+ 143:../_Quadrocopter/RemoteControl/RCReceive.c **** 			aileronBT = *control_value.x_pitch*0.7;
+ 637              		.loc 1 143 0
+ 638 00b6 40F20003 		movw	r3, #:lower16:control_value
+ 639 00ba C0F20003 		movt	r3, #:upper16:control_value
+ 640 00be 1B69     		ldr	r3, [r3, #16]
+ 641 00c0 1B68     		ldr	r3, [r3, #0]	@ float
+ 642 00c2 1846     		mov	r0, r3	@ float
+ 643 00c4 FFF7FEFF 		bl	__aeabi_f2d
+ 644 00c8 0246     		mov	r2, r0
+ 645 00ca 0B46     		mov	r3, r1
+ 646 00cc 1046     		mov	r0, r2
+ 647 00ce 1946     		mov	r1, r3
+ 648 00d0 49A3     		adr	r3, .L21
+ 649 00d2 D3E90023 		ldrd	r2, [r3]
+ 650 00d6 FFF7FEFF 		bl	__aeabi_dmul
+ 651 00da 0246     		mov	r2, r0
+ 652 00dc 0B46     		mov	r3, r1
+ 653 00de 1046     		mov	r0, r2
+ 654 00e0 1946     		mov	r1, r3
+ 655 00e2 FFF7FEFF 		bl	__aeabi_d2f
+ 656 00e6 0246     		mov	r2, r0	@ float
+ 657 00e8 40F20003 		movw	r3, #:lower16:aileronBT
+ 658 00ec C0F20003 		movt	r3, #:upper16:aileronBT
+ 659 00f0 1A60     		str	r2, [r3, #0]	@ float
+ 144:../_Quadrocopter/RemoteControl/RCReceive.c **** 			elevatorBT = -*control_value.y_roll*0.7;
+ 660              		.loc 1 144 0
+ 661 00f2 40F20003 		movw	r3, #:lower16:control_value
+ 662 00f6 C0F20003 		movt	r3, #:upper16:control_value
+ 663 00fa 5B69     		ldr	r3, [r3, #20]
+ 664 00fc D3ED007A 		flds	s15, [r3, #0]
+ 665 0100 F1EE677A 		fnegs	s15, s15
+ 666 0104 17EE903A 		fmrs	r3, s15
+ 667 0108 1846     		mov	r0, r3	@ float
+ 668 010a FFF7FEFF 		bl	__aeabi_f2d
+ 669 010e 0246     		mov	r2, r0
+ 670 0110 0B46     		mov	r3, r1
+ 671 0112 1046     		mov	r0, r2
+ 672 0114 1946     		mov	r1, r3
+ 673 0116 38A3     		adr	r3, .L21
+ 674 0118 D3E90023 		ldrd	r2, [r3]
+ 675 011c FFF7FEFF 		bl	__aeabi_dmul
+ 676 0120 0246     		mov	r2, r0
+ 677 0122 0B46     		mov	r3, r1
+ 678 0124 1046     		mov	r0, r2
+ 679 0126 1946     		mov	r1, r3
+ 680 0128 FFF7FEFF 		bl	__aeabi_d2f
+ 681 012c 0246     		mov	r2, r0	@ float
+ 682 012e 40F20003 		movw	r3, #:lower16:elevatorBT
+ 683 0132 C0F20003 		movt	r3, #:upper16:elevatorBT
+ 684 0136 1A60     		str	r2, [r3, #0]	@ float
+ 145:../_Quadrocopter/RemoteControl/RCReceive.c **** 			rudderBT = *control_value.z_rotate;
+ 685              		.loc 1 145 0
+ 686 0138 40F20003 		movw	r3, #:lower16:control_value
+ 687 013c C0F20003 		movt	r3, #:upper16:control_value
+ 688 0140 DB68     		ldr	r3, [r3, #12]
+ 689 0142 1A68     		ldr	r2, [r3, #0]	@ float
+ 690 0144 40F20003 		movw	r3, #:lower16:rudderBT
+ 691 0148 C0F20003 		movt	r3, #:upper16:rudderBT
+ 692 014c 1A60     		str	r2, [r3, #0]	@ float
+ 146:../_Quadrocopter/RemoteControl/RCReceive.c **** 			BTTimeOut = 0;
+ 693              		.loc 1 146 0
+ 694 014e 40F20003 		movw	r3, #:lower16:BTTimeOut
+ 695 0152 C0F20003 		movt	r3, #:upper16:BTTimeOut
+ 696 0156 4FF00002 		mov	r2, #0
+ 697 015a 1A70     		strb	r2, [r3, #0]
+ 147:../_Quadrocopter/RemoteControl/RCReceive.c **** 			BTCount++;
+ 698              		.loc 1 147 0
+ 699 015c 40F20003 		movw	r3, #:lower16:BTCount
+ 700 0160 C0F20003 		movt	r3, #:upper16:BTCount
+ 701 0164 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 702 0166 03F10103 		add	r3, r3, #1
+ 703 016a DAB2     		uxtb	r2, r3
+ 704 016c 40F20003 		movw	r3, #:lower16:BTCount
+ 705 0170 C0F20003 		movt	r3, #:upper16:BTCount
+ 706 0174 1A70     		strb	r2, [r3, #0]
+ 148:../_Quadrocopter/RemoteControl/RCReceive.c **** 			break;
+ 707              		.loc 1 148 0
+ 708 0176 3BE0     		b	.L14
+ 709              	.L19:
+ 149:../_Quadrocopter/RemoteControl/RCReceive.c **** 		case RECEIVED_DATA_PACKET:
+ 150:../_Quadrocopter/RemoteControl/RCReceive.c **** 			break;
+ 151:../_Quadrocopter/RemoteControl/RCReceive.c **** 		case CHECKSUM_ERROR:
+ 152:../_Quadrocopter/RemoteControl/RCReceive.c **** 			throttleBT = 0;
+ 710              		.loc 1 152 0
+ 711 0178 40F20003 		movw	r3, #:lower16:throttleBT
+ 712 017c C0F20003 		movt	r3, #:upper16:throttleBT
+ 713 0180 4FF00002 		mov	r2, #0
+ 714 0184 1A80     		strh	r2, [r3, #0]	@ movhi
+ 153:../_Quadrocopter/RemoteControl/RCReceive.c **** 			aileronBT = 0;
+ 715              		.loc 1 153 0
+ 716 0186 40F20003 		movw	r3, #:lower16:aileronBT
+ 717 018a C0F20003 		movt	r3, #:upper16:aileronBT
+ 718 018e 4FF00002 		mov	r2, #0
+ 719 0192 1A60     		str	r2, [r3, #0]	@ float
+ 154:../_Quadrocopter/RemoteControl/RCReceive.c **** 			elevatorBT = 0;
+ 720              		.loc 1 154 0
+ 721 0194 40F20003 		movw	r3, #:lower16:elevatorBT
+ 722 0198 C0F20003 		movt	r3, #:upper16:elevatorBT
+ 723 019c 4FF00002 		mov	r2, #0
+ 724 01a0 1A60     		str	r2, [r3, #0]	@ float
+ 155:../_Quadrocopter/RemoteControl/RCReceive.c **** 			rudderBT = 0;
+ 725              		.loc 1 155 0
+ 726 01a2 40F20003 		movw	r3, #:lower16:rudderBT
+ 727 01a6 C0F20003 		movt	r3, #:upper16:rudderBT
+ 728 01aa 4FF00002 		mov	r2, #0
+ 729 01ae 1A60     		str	r2, [r3, #0]	@ float
+ 156:../_Quadrocopter/RemoteControl/RCReceive.c **** 			//Todo: Add Error-Handling
+ 157:../_Quadrocopter/RemoteControl/RCReceive.c **** 			break;
+ 730              		.loc 1 157 0
+ 731 01b0 1EE0     		b	.L14
+ 732              	.L18:
+ 158:../_Quadrocopter/RemoteControl/RCReceive.c **** 		case UNDEFINED_ERROR:
+ 159:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+ 160:../_Quadrocopter/RemoteControl/RCReceive.c **** 			throttleBT = 0;
+ 733              		.loc 1 160 0
+ 734 01b2 40F20003 		movw	r3, #:lower16:throttleBT
+ 735 01b6 C0F20003 		movt	r3, #:upper16:throttleBT
+ 736 01ba 4FF00002 		mov	r2, #0
+ 737 01be 1A80     		strh	r2, [r3, #0]	@ movhi
+ 161:../_Quadrocopter/RemoteControl/RCReceive.c **** 			aileronBT = 0;
+ 738              		.loc 1 161 0
+ 739 01c0 40F20003 		movw	r3, #:lower16:aileronBT
+ 740 01c4 C0F20003 		movt	r3, #:upper16:aileronBT
+ 741 01c8 4FF00002 		mov	r2, #0
+ 742 01cc 1A60     		str	r2, [r3, #0]	@ float
+ 162:../_Quadrocopter/RemoteControl/RCReceive.c **** 			elevatorBT = 0;
+ 743              		.loc 1 162 0
+ 744 01ce 40F20003 		movw	r3, #:lower16:elevatorBT
+ 745 01d2 C0F20003 		movt	r3, #:upper16:elevatorBT
+ 746 01d6 4FF00002 		mov	r2, #0
+ 747 01da 1A60     		str	r2, [r3, #0]	@ float
+ 163:../_Quadrocopter/RemoteControl/RCReceive.c **** 			rudderBT = 0;
+ 748              		.loc 1 163 0
+ 749 01dc 40F20003 		movw	r3, #:lower16:rudderBT
+ 750 01e0 C0F20003 		movt	r3, #:upper16:rudderBT
+ 751 01e4 4FF00002 		mov	r2, #0
+ 752 01e8 1A60     		str	r2, [r3, #0]	@ float
+ 164:../_Quadrocopter/RemoteControl/RCReceive.c **** 			//undef_error++;
+ 165:../_Quadrocopter/RemoteControl/RCReceive.c **** 			//Todo: Add Error-Handling
+ 166:../_Quadrocopter/RemoteControl/RCReceive.c **** 			break;
+ 753              		.loc 1 166 0
+ 754 01ea 00BF     		nop
+ 755 01ec 00E0     		b	.L14
+ 756              	.L20:
+ 150:../_Quadrocopter/RemoteControl/RCReceive.c **** 			break;
+ 757              		.loc 1 150 0
+ 758 01ee 00BF     		nop
+ 759              	.L14:
+ 760              	.LBE2:
+ 167:../_Quadrocopter/RemoteControl/RCReceive.c **** 		}
+ 168:../_Quadrocopter/RemoteControl/RCReceive.c **** 	}
+ 169:../_Quadrocopter/RemoteControl/RCReceive.c **** }
+ 761              		.loc 1 169 0
+ 762 01f0 07F10807 		add	r7, r7, #8
+ 763 01f4 BD46     		mov	sp, r7
+ 764 01f6 80BD     		pop	{r7, pc}
+ 765              	.L22:
+ 766              		.align	3
+ 767              	.L21:
+ 768 01f8 66666666 		.word	1717986918
+ 769 01fc 6666E63F 		.word	1072064102
+ 770              		.cfi_endproc
+ 771              	.LFE123:
+ 773              		.section	.text.WatchRC,"ax",%progbits
+ 774              		.align	2
+ 775              		.global	WatchRC
+ 776              		.thumb
+ 777              		.thumb_func
+ 779              	WatchRC:
+ 780              	.LFB124:
+ 170:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+ 171:../_Quadrocopter/RemoteControl/RCReceive.c **** /*
+ 172:../_Quadrocopter/RemoteControl/RCReceive.c ****  * Check if new data has been arrived since last function call
+ 173:../_Quadrocopter/RemoteControl/RCReceive.c ****  * This function is called from software Timer "TimerWatchRC"
+ 174:../_Quadrocopter/RemoteControl/RCReceive.c ****  */
+ 175:../_Quadrocopter/RemoteControl/RCReceive.c **** void WatchRC(void* Temp)
+ 176:../_Quadrocopter/RemoteControl/RCReceive.c **** {
+ 781              		.loc 1 176 0
+ 782              		.cfi_startproc
+ 783              		@ args = 0, pretend = 0, frame = 8
+ 784              		@ frame_needed = 1, uses_anonymous_args = 0
+ 785              		@ link register save eliminated.
+ 786 0000 80B4     		push	{r7}
+ 787              	.LCFI12:
+ 788              		.cfi_def_cfa_offset 4
+ 789              		.cfi_offset 7, -4
+ 790 0002 83B0     		sub	sp, sp, #12
+ 791              	.LCFI13:
+ 792              		.cfi_def_cfa_offset 16
+ 793 0004 00AF     		add	r7, sp, #0
+ 794              	.LCFI14:
+ 795              		.cfi_def_cfa_register 7
+ 796 0006 7860     		str	r0, [r7, #4]
+ 177:../_Quadrocopter/RemoteControl/RCReceive.c **** 	static uint8_t lastCount;
+ 178:../_Quadrocopter/RemoteControl/RCReceive.c **** 	static uint8_t lastBTCount;
+ 179:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+ 180:../_Quadrocopter/RemoteControl/RCReceive.c **** 	if (lastCount == RCCount)
+ 797              		.loc 1 180 0
+ 798 0008 40F20003 		movw	r3, #:lower16:lastCount.11219
+ 799 000c C0F20003 		movt	r3, #:upper16:lastCount.11219
+ 800 0010 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 801 0012 40F20003 		movw	r3, #:lower16:RCCount
+ 802 0016 C0F20003 		movt	r3, #:upper16:RCCount
+ 803 001a 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 804 001c 9A42     		cmp	r2, r3
+ 805 001e 06D1     		bne	.L24
+ 181:../_Quadrocopter/RemoteControl/RCReceive.c **** 		RCTimeOut = 1;
+ 806              		.loc 1 181 0
+ 807 0020 40F20003 		movw	r3, #:lower16:RCTimeOut
+ 808 0024 C0F20003 		movt	r3, #:upper16:RCTimeOut
+ 809 0028 4FF00102 		mov	r2, #1
+ 810 002c 1A70     		strb	r2, [r3, #0]
+ 811              	.L24:
+ 182:../_Quadrocopter/RemoteControl/RCReceive.c **** 	lastCount = RCCount;
+ 812              		.loc 1 182 0
+ 813 002e 40F20003 		movw	r3, #:lower16:RCCount
+ 814 0032 C0F20003 		movt	r3, #:upper16:RCCount
+ 815 0036 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 816 0038 40F20003 		movw	r3, #:lower16:lastCount.11219
+ 817 003c C0F20003 		movt	r3, #:upper16:lastCount.11219
+ 818 0040 1A70     		strb	r2, [r3, #0]
+ 183:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+ 184:../_Quadrocopter/RemoteControl/RCReceive.c **** 	if (lastBTCount == BTCount)
+ 819              		.loc 1 184 0
+ 820 0042 40F20003 		movw	r3, #:lower16:lastBTCount.11220
+ 821 0046 C0F20003 		movt	r3, #:upper16:lastBTCount.11220
+ 822 004a 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 823 004c 40F20003 		movw	r3, #:lower16:BTCount
+ 824 0050 C0F20003 		movt	r3, #:upper16:BTCount
+ 825 0054 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 826 0056 9A42     		cmp	r2, r3
+ 827 0058 06D1     		bne	.L25
+ 185:../_Quadrocopter/RemoteControl/RCReceive.c **** 		BTTimeOut = 1;
+ 828              		.loc 1 185 0
+ 829 005a 40F20003 		movw	r3, #:lower16:BTTimeOut
+ 830 005e C0F20003 		movt	r3, #:upper16:BTTimeOut
+ 831 0062 4FF00102 		mov	r2, #1
+ 832 0066 1A70     		strb	r2, [r3, #0]
+ 833              	.L25:
+ 186:../_Quadrocopter/RemoteControl/RCReceive.c **** 	lastBTCount = BTCount;
+ 834              		.loc 1 186 0
+ 835 0068 40F20003 		movw	r3, #:lower16:BTCount
+ 836 006c C0F20003 		movt	r3, #:upper16:BTCount
+ 837 0070 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 838 0072 40F20003 		movw	r3, #:lower16:lastBTCount.11220
+ 839 0076 C0F20003 		movt	r3, #:upper16:lastBTCount.11220
+ 840 007a 1A70     		strb	r2, [r3, #0]
+ 187:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+ 188:../_Quadrocopter/RemoteControl/RCReceive.c **** 	//keep_alive packet for connection state_check
+ 189:../_Quadrocopter/RemoteControl/RCReceive.c **** 	//uint8_t keep_alive = 0xFF;
+ 190:../_Quadrocopter/RemoteControl/RCReceive.c **** 	//UART001_WriteDataBytes(&BT_UART_Handle, (uint8_t*) &keep_alive, 1);
+ 191:../_Quadrocopter/RemoteControl/RCReceive.c **** }
+ 841              		.loc 1 191 0
+ 842 007c 07F10C07 		add	r7, r7, #12
+ 843 0080 BD46     		mov	sp, r7
+ 844 0082 80BC     		pop	{r7}
+ 845 0084 7047     		bx	lr
+ 846              		.cfi_endproc
+ 847              	.LFE124:
+ 849 0086 00BF     		.section	.text.WatchRC_Init,"ax",%progbits
+ 850              		.align	2
+ 851              		.global	WatchRC_Init
+ 852              		.thumb
+ 853              		.thumb_func
+ 855              	WatchRC_Init:
+ 856              	.LFB125:
+ 192:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+ 193:../_Quadrocopter/RemoteControl/RCReceive.c **** /*
+ 194:../_Quadrocopter/RemoteControl/RCReceive.c ****  * Initialize RC watchdog
+ 195:../_Quadrocopter/RemoteControl/RCReceive.c ****  */
+ 196:../_Quadrocopter/RemoteControl/RCReceive.c **** void WatchRC_Init()
+ 197:../_Quadrocopter/RemoteControl/RCReceive.c **** {
+ 857              		.loc 1 197 0
+ 858              		.cfi_startproc
+ 859              		@ args = 0, pretend = 0, frame = 0
+ 860              		@ frame_needed = 1, uses_anonymous_args = 0
+ 861 0000 80B5     		push	{r7, lr}
+ 862              	.LCFI15:
+ 863              		.cfi_def_cfa_offset 8
+ 864              		.cfi_offset 7, -8
+ 865              		.cfi_offset 14, -4
+ 866 0002 00AF     		add	r7, sp, #0
+ 867              	.LCFI16:
+ 868              		.cfi_def_cfa_register 7
+ 198:../_Quadrocopter/RemoteControl/RCReceive.c **** 	//Set timer to check every 500ms, if new data has arrived
+ 199:../_Quadrocopter/RemoteControl/RCReceive.c **** 	TimerWatchRC = SYSTM001_CreateTimer(200, SYSTM001_PERIODIC, WatchRC, NULL);
+ 869              		.loc 1 199 0
+ 870 0004 4FF0C800 		mov	r0, #200
+ 871 0008 4FF00101 		mov	r1, #1
+ 872 000c 40F20002 		movw	r2, #:lower16:WatchRC
+ 873 0010 C0F20002 		movt	r2, #:upper16:WatchRC
+ 874 0014 4FF00003 		mov	r3, #0
+ 875 0018 FFF7FEFF 		bl	SYSTM001_CreateTimer
+ 876 001c 0246     		mov	r2, r0
+ 877 001e 40F20003 		movw	r3, #:lower16:TimerWatchRC
+ 878 0022 C0F20003 		movt	r3, #:upper16:TimerWatchRC
+ 879 0026 1A60     		str	r2, [r3, #0]
+ 200:../_Quadrocopter/RemoteControl/RCReceive.c **** 	if (TimerWatchRC != 0)
+ 880              		.loc 1 200 0
+ 881 0028 40F20003 		movw	r3, #:lower16:TimerWatchRC
+ 882 002c C0F20003 		movt	r3, #:upper16:TimerWatchRC
+ 883 0030 1B68     		ldr	r3, [r3, #0]
+ 884 0032 002B     		cmp	r3, #0
+ 885 0034 07D0     		beq	.L26
+ 201:../_Quadrocopter/RemoteControl/RCReceive.c **** 	{
+ 202:../_Quadrocopter/RemoteControl/RCReceive.c **** 		//Timer is created successfully
+ 203:../_Quadrocopter/RemoteControl/RCReceive.c **** 		if (SYSTM001_StartTimer(TimerWatchRC) == DAVEApp_SUCCESS)
+ 886              		.loc 1 203 0
+ 887 0036 40F20003 		movw	r3, #:lower16:TimerWatchRC
+ 888 003a C0F20003 		movt	r3, #:upper16:TimerWatchRC
+ 889 003e 1B68     		ldr	r3, [r3, #0]
+ 890 0040 1846     		mov	r0, r3
+ 891 0042 FFF7FEFF 		bl	SYSTM001_StartTimer
+ 892              	.L26:
+ 204:../_Quadrocopter/RemoteControl/RCReceive.c **** 		{
+ 205:../_Quadrocopter/RemoteControl/RCReceive.c **** 			//Timer started
+ 206:../_Quadrocopter/RemoteControl/RCReceive.c **** 		}
+ 207:../_Quadrocopter/RemoteControl/RCReceive.c **** 	}
+ 208:../_Quadrocopter/RemoteControl/RCReceive.c **** }
+ 893              		.loc 1 208 0
+ 894 0046 80BD     		pop	{r7, pc}
+ 895              		.cfi_endproc
+ 896              	.LFE125:
+ 898              		.section	.text.GetRCCount,"ax",%progbits
+ 899              		.align	2
+ 900              		.global	GetRCCount
+ 901              		.thumb
+ 902              		.thumb_func
+ 904              	GetRCCount:
+ 905              	.LFB126:
+ 209:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+ 210:../_Quadrocopter/RemoteControl/RCReceive.c **** uint8_t GetRCCount()
+ 211:../_Quadrocopter/RemoteControl/RCReceive.c **** {
+ 906              		.loc 1 211 0
+ 907              		.cfi_startproc
+ 908              		@ args = 0, pretend = 0, frame = 0
+ 909              		@ frame_needed = 1, uses_anonymous_args = 0
+ 910              		@ link register save eliminated.
+ 911 0000 80B4     		push	{r7}
+ 912              	.LCFI17:
+ 913              		.cfi_def_cfa_offset 4
+ 914              		.cfi_offset 7, -4
+ 915 0002 00AF     		add	r7, sp, #0
+ 916              	.LCFI18:
+ 917              		.cfi_def_cfa_register 7
+ 212:../_Quadrocopter/RemoteControl/RCReceive.c **** 	return RCCount;
+ 918              		.loc 1 212 0
+ 919 0004 40F20003 		movw	r3, #:lower16:RCCount
+ 920 0008 C0F20003 		movt	r3, #:upper16:RCCount
+ 921 000c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 213:../_Quadrocopter/RemoteControl/RCReceive.c **** }
+ 922              		.loc 1 213 0
+ 923 000e 1846     		mov	r0, r3
+ 924 0010 BD46     		mov	sp, r7
+ 925 0012 80BC     		pop	{r7}
+ 926 0014 7047     		bx	lr
+ 927              		.cfi_endproc
+ 928              	.LFE126:
+ 930              		.global	__aeabi_dcmpgt
+ 931              		.global	__aeabi_dcmplt
+ 932 0016 00BF     		.section	.text.GetRCData,"ax",%progbits
+ 933              		.align	2
+ 934              		.global	GetRCData
+ 935              		.thumb
+ 936              		.thumb_func
+ 938              	GetRCData:
+ 939              	.LFB127:
+ 214:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+ 215:../_Quadrocopter/RemoteControl/RCReceive.c **** void GetRCData(float* power,uint8_t* height_control, float* yaw_dot, float* pitch, float* roll)
+ 216:../_Quadrocopter/RemoteControl/RCReceive.c **** {
+ 940              		.loc 1 216 0
+ 941              		.cfi_startproc
+ 942              		@ args = 4, pretend = 0, frame = 16
+ 943              		@ frame_needed = 1, uses_anonymous_args = 0
+ 944 0000 80B5     		push	{r7, lr}
+ 945              	.LCFI19:
+ 946              		.cfi_def_cfa_offset 8
+ 947              		.cfi_offset 7, -8
+ 948              		.cfi_offset 14, -4
+ 949 0002 84B0     		sub	sp, sp, #16
+ 950              	.LCFI20:
+ 951              		.cfi_def_cfa_offset 24
+ 952 0004 00AF     		add	r7, sp, #0
+ 953              	.LCFI21:
+ 954              		.cfi_def_cfa_register 7
+ 955 0006 F860     		str	r0, [r7, #12]
+ 956 0008 B960     		str	r1, [r7, #8]
+ 957 000a 7A60     		str	r2, [r7, #4]
+ 958 000c 3B60     		str	r3, [r7, #0]
+ 217:../_Quadrocopter/RemoteControl/RCReceive.c **** #ifdef BT_ONLY		//BT only controlled (no RC needed)
+ 218:../_Quadrocopter/RemoteControl/RCReceive.c **** 		if (BTTimeOut)
+ 219:../_Quadrocopter/RemoteControl/RCReceive.c **** 		{
+ 220:../_Quadrocopter/RemoteControl/RCReceive.c **** 			*power = 0.0;
+ 221:../_Quadrocopter/RemoteControl/RCReceive.c **** 			*yaw_dot = 0.0;
+ 222:../_Quadrocopter/RemoteControl/RCReceive.c **** 			*pitch = 0.0;
+ 223:../_Quadrocopter/RemoteControl/RCReceive.c **** 			*roll = 0.0;
+ 224:../_Quadrocopter/RemoteControl/RCReceive.c **** 		}
+ 225:../_Quadrocopter/RemoteControl/RCReceive.c **** 		else
+ 226:../_Quadrocopter/RemoteControl/RCReceive.c **** 		{
+ 227:../_Quadrocopter/RemoteControl/RCReceive.c **** 			*power = throttleBT;
+ 228:../_Quadrocopter/RemoteControl/RCReceive.c **** 			*height_control = heightControlBT;
+ 229:../_Quadrocopter/RemoteControl/RCReceive.c **** 			*pitch = elevatorBT;
+ 230:../_Quadrocopter/RemoteControl/RCReceive.c **** 			*roll = -aileronBT;
+ 231:../_Quadrocopter/RemoteControl/RCReceive.c **** 			*yaw_dot = rudderBT;
+ 232:../_Quadrocopter/RemoteControl/RCReceive.c **** 			if (*pitch > 30.0)
+ 233:../_Quadrocopter/RemoteControl/RCReceive.c **** 			{
+ 234:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*pitch = 30.0;
+ 235:../_Quadrocopter/RemoteControl/RCReceive.c **** 			}
+ 236:../_Quadrocopter/RemoteControl/RCReceive.c **** 			else if (*pitch < -30.0)
+ 237:../_Quadrocopter/RemoteControl/RCReceive.c **** 			{
+ 238:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*pitch = -30.0;
+ 239:../_Quadrocopter/RemoteControl/RCReceive.c **** 			}
+ 240:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+ 241:../_Quadrocopter/RemoteControl/RCReceive.c **** 			if (*roll > 30.0)
+ 242:../_Quadrocopter/RemoteControl/RCReceive.c **** 			{
+ 243:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*roll = 30.0;
+ 244:../_Quadrocopter/RemoteControl/RCReceive.c **** 			}
+ 245:../_Quadrocopter/RemoteControl/RCReceive.c **** 			else if (*roll < -30.0)
+ 246:../_Quadrocopter/RemoteControl/RCReceive.c **** 			{
+ 247:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*roll = -30.0;
+ 248:../_Quadrocopter/RemoteControl/RCReceive.c **** 			}
+ 249:../_Quadrocopter/RemoteControl/RCReceive.c **** 		}
+ 250:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+ 251:../_Quadrocopter/RemoteControl/RCReceive.c **** #else		//for RC Control with switch to BT Control
+ 252:../_Quadrocopter/RemoteControl/RCReceive.c **** 	if (flightmode == 0)
+ 959              		.loc 1 252 0
+ 960 000e 40F20003 		movw	r3, #:lower16:flightmode
+ 961 0012 C0F20003 		movt	r3, #:upper16:flightmode
+ 962 0016 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 963 0018 002B     		cmp	r3, #0
+ 964 001a 7BD1     		bne	.L31
+ 253:../_Quadrocopter/RemoteControl/RCReceive.c **** 		{
+ 254:../_Quadrocopter/RemoteControl/RCReceive.c **** 			if (RCTimeOut)
+ 965              		.loc 1 254 0
+ 966 001c 40F20003 		movw	r3, #:lower16:RCTimeOut
+ 967 0020 C0F20003 		movt	r3, #:upper16:RCTimeOut
+ 968 0024 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 969 0026 002B     		cmp	r3, #0
+ 970 0028 10D0     		beq	.L32
+ 255:../_Quadrocopter/RemoteControl/RCReceive.c **** 			{
+ 256:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*power = 0;
+ 971              		.loc 1 256 0
+ 972 002a FB68     		ldr	r3, [r7, #12]
+ 973 002c 4FF00002 		mov	r2, #0
+ 974 0030 1A60     		str	r2, [r3, #0]	@ float
+ 257:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*yaw_dot = 0;
+ 975              		.loc 1 257 0
+ 976 0032 7B68     		ldr	r3, [r7, #4]
+ 977 0034 4FF00002 		mov	r2, #0
+ 978 0038 1A60     		str	r2, [r3, #0]	@ float
+ 258:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*pitch = 0;
+ 979              		.loc 1 258 0
+ 980 003a 3B68     		ldr	r3, [r7, #0]
+ 981 003c 4FF00002 		mov	r2, #0
+ 982 0040 1A60     		str	r2, [r3, #0]	@ float
+ 259:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*roll = 0;
+ 983              		.loc 1 259 0
+ 984 0042 BB69     		ldr	r3, [r7, #24]
+ 985 0044 4FF00002 		mov	r2, #0
+ 986 0048 1A60     		str	r2, [r3, #0]	@ float
+ 987 004a F0E0     		b	.L30
+ 988              	.L32:
+ 260:../_Quadrocopter/RemoteControl/RCReceive.c **** 			}
+ 261:../_Quadrocopter/RemoteControl/RCReceive.c **** 			else
+ 262:../_Quadrocopter/RemoteControl/RCReceive.c **** 			{
+ 263:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*power = SCALE_POWER * throttle;
+ 989              		.loc 1 263 0
+ 990 004c 40F20003 		movw	r3, #:lower16:throttle
+ 991 0050 C0F20003 		movt	r3, #:upper16:throttle
+ 992 0054 93ED007A 		flds	s14, [r3, #0]
+ 993 0058 DFED7B7A 		flds	s15, .L54+16
+ 994 005c 67EE277A 		fmuls	s15, s14, s15
+ 995 0060 FB68     		ldr	r3, [r7, #12]
+ 996 0062 C3ED007A 		fsts	s15, [r3, #0]
+ 264:../_Quadrocopter/RemoteControl/RCReceive.c **** 				if (rudder > 0.01 || rudder < -0.01)
+ 997              		.loc 1 264 0
+ 998 0066 40F20003 		movw	r3, #:lower16:rudder
+ 999 006a C0F20003 		movt	r3, #:upper16:rudder
+ 1000 006e 1B68     		ldr	r3, [r3, #0]	@ float
+ 1001 0070 1846     		mov	r0, r3	@ float
+ 1002 0072 FFF7FEFF 		bl	__aeabi_f2d
+ 1003 0076 0246     		mov	r2, r0
+ 1004 0078 0B46     		mov	r3, r1
+ 1005 007a 1046     		mov	r0, r2
+ 1006 007c 1946     		mov	r1, r3
+ 1007 007e 6EA3     		adr	r3, .L54
+ 1008 0080 D3E90023 		ldrd	r2, [r3]
+ 1009 0084 FFF7FEFF 		bl	__aeabi_dcmpgt
+ 1010 0088 0346     		mov	r3, r0
+ 1011 008a 002B     		cmp	r3, #0
+ 1012 008c 13D1     		bne	.L34
+ 1013              		.loc 1 264 0 is_stmt 0 discriminator 1
+ 1014 008e 40F20003 		movw	r3, #:lower16:rudder
+ 1015 0092 C0F20003 		movt	r3, #:upper16:rudder
+ 1016 0096 1B68     		ldr	r3, [r3, #0]	@ float
+ 1017 0098 1846     		mov	r0, r3	@ float
+ 1018 009a FFF7FEFF 		bl	__aeabi_f2d
+ 1019 009e 0246     		mov	r2, r0
+ 1020 00a0 0B46     		mov	r3, r1
+ 1021 00a2 1046     		mov	r0, r2
+ 1022 00a4 1946     		mov	r1, r3
+ 1023 00a6 66A3     		adr	r3, .L54+8
+ 1024 00a8 D3E90023 		ldrd	r2, [r3]
+ 1025 00ac FFF7FEFF 		bl	__aeabi_dcmplt
+ 1026 00b0 0346     		mov	r3, r0
+ 1027 00b2 002B     		cmp	r3, #0
+ 1028 00b4 0DD0     		beq	.L51
+ 1029              	.L34:
+ 265:../_Quadrocopter/RemoteControl/RCReceive.c **** 					*yaw_dot = rudder * SCALE_YAW;
+ 1030              		.loc 1 265 0 is_stmt 1
+ 1031 00b6 40F20003 		movw	r3, #:lower16:rudder
+ 1032 00ba C0F20003 		movt	r3, #:upper16:rudder
+ 1033 00be 93ED007A 		flds	s14, [r3, #0]
+ 1034 00c2 DFED627A 		flds	s15, .L54+20
+ 1035 00c6 67EE277A 		fmuls	s15, s14, s15
+ 1036 00ca 7B68     		ldr	r3, [r7, #4]
+ 1037 00cc C3ED007A 		fsts	s15, [r3, #0]
+ 1038 00d0 03E0     		b	.L37
+ 1039              	.L51:
+ 266:../_Quadrocopter/RemoteControl/RCReceive.c **** 				else
+ 267:../_Quadrocopter/RemoteControl/RCReceive.c **** 					*yaw_dot = 0;
+ 1040              		.loc 1 267 0
+ 1041 00d2 7B68     		ldr	r3, [r7, #4]
+ 1042 00d4 4FF00002 		mov	r2, #0
+ 1043 00d8 1A60     		str	r2, [r3, #0]	@ float
+ 1044              	.L37:
+ 268:../_Quadrocopter/RemoteControl/RCReceive.c **** 					*pitch=elevator*SCALE_PITCH;
+ 1045              		.loc 1 268 0
+ 1046 00da 40F20003 		movw	r3, #:lower16:elevator
+ 1047 00de C0F20003 		movt	r3, #:upper16:elevator
+ 1048 00e2 93ED007A 		flds	s14, [r3, #0]
+ 1049 00e6 F3EE0E7A 		fconsts	s15, #62
+ 1050 00ea 67EE277A 		fmuls	s15, s14, s15
+ 1051 00ee 3B68     		ldr	r3, [r7, #0]
+ 1052 00f0 C3ED007A 		fsts	s15, [r3, #0]
+ 269:../_Quadrocopter/RemoteControl/RCReceive.c **** 					*roll=-aileron*SCALE_ROLL;
+ 1053              		.loc 1 269 0
+ 1054 00f4 40F20003 		movw	r3, #:lower16:aileron
+ 1055 00f8 C0F20003 		movt	r3, #:upper16:aileron
+ 1056 00fc D3ED007A 		flds	s15, [r3, #0]
+ 1057 0100 B1EE677A 		fnegs	s14, s15
+ 1058 0104 F3EE0E7A 		fconsts	s15, #62
+ 1059 0108 67EE277A 		fmuls	s15, s14, s15
+ 1060 010c BB69     		ldr	r3, [r7, #24]
+ 1061 010e C3ED007A 		fsts	s15, [r3, #0]
+ 1062 0112 8CE0     		b	.L30
+ 1063              	.L31:
+ 270:../_Quadrocopter/RemoteControl/RCReceive.c **** 			}
+ 271:../_Quadrocopter/RemoteControl/RCReceive.c **** 		}
+ 272:../_Quadrocopter/RemoteControl/RCReceive.c **** 		else
+ 273:../_Quadrocopter/RemoteControl/RCReceive.c **** 		{
+ 274:../_Quadrocopter/RemoteControl/RCReceive.c **** 			if (BTTimeOut || RCTimeOut)
+ 1064              		.loc 1 274 0
+ 1065 0114 40F20003 		movw	r3, #:lower16:BTTimeOut
+ 1066 0118 C0F20003 		movt	r3, #:upper16:BTTimeOut
+ 1067 011c 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 1068 011e 002B     		cmp	r3, #0
+ 1069 0120 06D1     		bne	.L38
+ 1070              		.loc 1 274 0 is_stmt 0 discriminator 1
+ 1071 0122 40F20003 		movw	r3, #:lower16:RCTimeOut
+ 1072 0126 C0F20003 		movt	r3, #:upper16:RCTimeOut
+ 1073 012a 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 1074 012c 002B     		cmp	r3, #0
+ 1075 012e 10D0     		beq	.L39
+ 1076              	.L38:
+ 275:../_Quadrocopter/RemoteControl/RCReceive.c **** 			{
+ 276:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*power = 0.0;
+ 1077              		.loc 1 276 0 is_stmt 1
+ 1078 0130 FB68     		ldr	r3, [r7, #12]
+ 1079 0132 4FF00002 		mov	r2, #0
+ 1080 0136 1A60     		str	r2, [r3, #0]	@ float
+ 277:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*yaw_dot = 0.0;
+ 1081              		.loc 1 277 0
+ 1082 0138 7B68     		ldr	r3, [r7, #4]
+ 1083 013a 4FF00002 		mov	r2, #0
+ 1084 013e 1A60     		str	r2, [r3, #0]	@ float
+ 278:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*pitch = 0.0;
+ 1085              		.loc 1 278 0
+ 1086 0140 3B68     		ldr	r3, [r7, #0]
+ 1087 0142 4FF00002 		mov	r2, #0
+ 1088 0146 1A60     		str	r2, [r3, #0]	@ float
+ 279:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*roll = 0.0;
+ 1089              		.loc 1 279 0
+ 1090 0148 BB69     		ldr	r3, [r7, #24]
+ 1091 014a 4FF00002 		mov	r2, #0
+ 1092 014e 1A60     		str	r2, [r3, #0]	@ float
+ 1093 0150 6DE0     		b	.L30
+ 1094              	.L39:
+ 280:../_Quadrocopter/RemoteControl/RCReceive.c **** 			}
+ 281:../_Quadrocopter/RemoteControl/RCReceive.c **** 			else
+ 282:../_Quadrocopter/RemoteControl/RCReceive.c **** 			{
+ 283:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*power = throttleBT;
+ 1095              		.loc 1 283 0
+ 1096 0152 40F20003 		movw	r3, #:lower16:throttleBT
+ 1097 0156 C0F20003 		movt	r3, #:upper16:throttleBT
+ 1098 015a 1B88     		ldrh	r3, [r3, #0]
+ 1099 015c 07EE103A 		fmsr	s14, r3	@ int
+ 1100 0160 F8EE477A 		fuitos	s15, s14
+ 1101 0164 FB68     		ldr	r3, [r7, #12]
+ 1102 0166 C3ED007A 		fsts	s15, [r3, #0]
+ 284:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*height_control = heightControlBT;
+ 1103              		.loc 1 284 0
+ 1104 016a 40F20003 		movw	r3, #:lower16:heightControlBT
+ 1105 016e C0F20003 		movt	r3, #:upper16:heightControlBT
+ 1106 0172 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 1107 0174 BB68     		ldr	r3, [r7, #8]
+ 1108 0176 1A70     		strb	r2, [r3, #0]
+ 285:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*pitch = elevatorBT;
+ 1109              		.loc 1 285 0
+ 1110 0178 40F20003 		movw	r3, #:lower16:elevatorBT
+ 1111 017c C0F20003 		movt	r3, #:upper16:elevatorBT
+ 1112 0180 1A68     		ldr	r2, [r3, #0]	@ float
+ 1113 0182 3B68     		ldr	r3, [r7, #0]
+ 1114 0184 1A60     		str	r2, [r3, #0]	@ float
+ 286:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*roll = -aileronBT;
+ 1115              		.loc 1 286 0
+ 1116 0186 40F20003 		movw	r3, #:lower16:aileronBT
+ 1117 018a C0F20003 		movt	r3, #:upper16:aileronBT
+ 1118 018e D3ED007A 		flds	s15, [r3, #0]
+ 1119 0192 F1EE677A 		fnegs	s15, s15
+ 1120 0196 BB69     		ldr	r3, [r7, #24]
+ 1121 0198 C3ED007A 		fsts	s15, [r3, #0]
+ 287:../_Quadrocopter/RemoteControl/RCReceive.c **** 				*yaw_dot = rudderBT;
+ 1122              		.loc 1 287 0
+ 1123 019c 40F20003 		movw	r3, #:lower16:rudderBT
+ 1124 01a0 C0F20003 		movt	r3, #:upper16:rudderBT
+ 1125 01a4 1A68     		ldr	r2, [r3, #0]	@ float
+ 1126 01a6 7B68     		ldr	r3, [r7, #4]
+ 1127 01a8 1A60     		str	r2, [r3, #0]	@ float
+ 288:../_Quadrocopter/RemoteControl/RCReceive.c **** 				if (*pitch > 30.0)
+ 1128              		.loc 1 288 0
+ 1129 01aa 3B68     		ldr	r3, [r7, #0]
+ 1130 01ac 93ED007A 		flds	s14, [r3, #0]
+ 1131 01b0 F3EE0E7A 		fconsts	s15, #62
+ 1132 01b4 B4EEE77A 		fcmpes	s14, s15
+ 1133 01b8 F1EE10FA 		fmstat
+ 1134 01bc 06DD     		ble	.L52
+ 1135              	.L47:
+ 289:../_Quadrocopter/RemoteControl/RCReceive.c **** 				{
+ 290:../_Quadrocopter/RemoteControl/RCReceive.c **** 					*pitch = 30.0;
+ 1136              		.loc 1 290 0
+ 1137 01be 3B68     		ldr	r3, [r7, #0]
+ 1138 01c0 4FF00002 		mov	r2, #0
+ 1139 01c4 C4F2F012 		movt	r2, 16880
+ 1140 01c8 1A60     		str	r2, [r3, #0]	@ float
+ 1141 01ca 0FE0     		b	.L42
+ 1142              	.L52:
+ 291:../_Quadrocopter/RemoteControl/RCReceive.c **** 				}
+ 292:../_Quadrocopter/RemoteControl/RCReceive.c **** 				else if (*pitch < -30.0)
+ 1143              		.loc 1 292 0
+ 1144 01cc 3B68     		ldr	r3, [r7, #0]
+ 1145 01ce 93ED007A 		flds	s14, [r3, #0]
+ 1146 01d2 FBEE0E7A 		fconsts	s15, #190
+ 1147 01d6 B4EEE77A 		fcmpes	s14, s15
+ 1148 01da F1EE10FA 		fmstat
+ 1149 01de 05D5     		bpl	.L42
+ 1150              	.L48:
+ 293:../_Quadrocopter/RemoteControl/RCReceive.c **** 				{
+ 294:../_Quadrocopter/RemoteControl/RCReceive.c **** 					*pitch = -30.0;
+ 1151              		.loc 1 294 0
+ 1152 01e0 3B68     		ldr	r3, [r7, #0]
+ 1153 01e2 4FF00002 		mov	r2, #0
+ 1154 01e6 CCF2F012 		movt	r2, 49648
+ 1155 01ea 1A60     		str	r2, [r3, #0]	@ float
+ 1156              	.L42:
+ 295:../_Quadrocopter/RemoteControl/RCReceive.c **** 				}
+ 296:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+ 297:../_Quadrocopter/RemoteControl/RCReceive.c **** 				if (*roll > 30.0)
+ 1157              		.loc 1 297 0
+ 1158 01ec BB69     		ldr	r3, [r7, #24]
+ 1159 01ee 93ED007A 		flds	s14, [r3, #0]
+ 1160 01f2 F3EE0E7A 		fconsts	s15, #62
+ 1161 01f6 B4EEE77A 		fcmpes	s14, s15
+ 1162 01fa F1EE10FA 		fmstat
+ 1163 01fe 06DD     		ble	.L53
+ 1164              	.L49:
+ 298:../_Quadrocopter/RemoteControl/RCReceive.c **** 				{
+ 299:../_Quadrocopter/RemoteControl/RCReceive.c **** 					*roll = 30.0;
+ 1165              		.loc 1 299 0
+ 1166 0200 BB69     		ldr	r3, [r7, #24]
+ 1167 0202 4FF00002 		mov	r2, #0
+ 1168 0206 C4F2F012 		movt	r2, 16880
+ 1169 020a 1A60     		str	r2, [r3, #0]	@ float
+ 1170 020c 0FE0     		b	.L30
+ 1171              	.L53:
+ 300:../_Quadrocopter/RemoteControl/RCReceive.c **** 				}
+ 301:../_Quadrocopter/RemoteControl/RCReceive.c **** 				else if (*roll < -30.0)
+ 1172              		.loc 1 301 0
+ 1173 020e BB69     		ldr	r3, [r7, #24]
+ 1174 0210 93ED007A 		flds	s14, [r3, #0]
+ 1175 0214 FBEE0E7A 		fconsts	s15, #190
+ 1176 0218 B4EEE77A 		fcmpes	s14, s15
+ 1177 021c F1EE10FA 		fmstat
+ 1178 0220 05D5     		bpl	.L30
+ 1179              	.L50:
+ 302:../_Quadrocopter/RemoteControl/RCReceive.c **** 				{
+ 303:../_Quadrocopter/RemoteControl/RCReceive.c **** 					*roll = -30.0;
+ 1180              		.loc 1 303 0
+ 1181 0222 BB69     		ldr	r3, [r7, #24]
+ 1182 0224 4FF00002 		mov	r2, #0
+ 1183 0228 CCF2F012 		movt	r2, 49648
+ 1184 022c 1A60     		str	r2, [r3, #0]	@ float
+ 1185              	.L30:
+ 304:../_Quadrocopter/RemoteControl/RCReceive.c **** 				}
+ 305:../_Quadrocopter/RemoteControl/RCReceive.c **** 			}
+ 306:../_Quadrocopter/RemoteControl/RCReceive.c **** 		}
+ 307:../_Quadrocopter/RemoteControl/RCReceive.c **** #endif
+ 308:../_Quadrocopter/RemoteControl/RCReceive.c **** }
+ 1186              		.loc 1 308 0
+ 1187 022e 07F11007 		add	r7, r7, #16
+ 1188 0232 BD46     		mov	sp, r7
+ 1189 0234 80BD     		pop	{r7, pc}
+ 1190              	.L55:
+ 1191 0236 00BF     		.align	3
+ 1192              	.L54:
+ 1193 0238 7B14AE47 		.word	1202590843
+ 1194 023c E17A843F 		.word	1065646817
+ 1195 0240 7B14AE47 		.word	1202590843
+ 1196 0244 E17A84BF 		.word	-1081836831
+ 1197 0248 0000C842 		.word	1120403456
+ 1198 024c 0000B442 		.word	1119092736
+ 1199              		.cfi_endproc
+ 1200              	.LFE127:
+ 1202              		.section	.text.map,"ax",%progbits
+ 1203              		.align	2
+ 1204              		.global	map
+ 1205              		.thumb
+ 1206              		.thumb_func
+ 1208              	map:
+ 1209              	.LFB128:
+ 309:../_Quadrocopter/RemoteControl/RCReceive.c **** 
+ 310:../_Quadrocopter/RemoteControl/RCReceive.c **** long map(long x, long in_min, long in_max, long out_min, long out_max)
+ 311:../_Quadrocopter/RemoteControl/RCReceive.c **** {
+ 1210              		.loc 1 311 0
+ 1211              		.cfi_startproc
+ 1212              		@ args = 4, pretend = 0, frame = 16
+ 1213              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1214              		@ link register save eliminated.
+ 1215 0000 80B4     		push	{r7}
+ 1216              	.LCFI22:
+ 1217              		.cfi_def_cfa_offset 4
+ 1218              		.cfi_offset 7, -4
+ 1219 0002 85B0     		sub	sp, sp, #20
+ 1220              	.LCFI23:
+ 1221              		.cfi_def_cfa_offset 24
+ 1222 0004 00AF     		add	r7, sp, #0
+ 1223              	.LCFI24:
+ 1224              		.cfi_def_cfa_register 7
+ 1225 0006 F860     		str	r0, [r7, #12]
+ 1226 0008 B960     		str	r1, [r7, #8]
+ 1227 000a 7A60     		str	r2, [r7, #4]
+ 1228 000c 3B60     		str	r3, [r7, #0]
+ 312:../_Quadrocopter/RemoteControl/RCReceive.c **** 	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+ 1229              		.loc 1 312 0
+ 1230 000e FA68     		ldr	r2, [r7, #12]
+ 1231 0010 BB68     		ldr	r3, [r7, #8]
+ 1232 0012 D31A     		subs	r3, r2, r3
+ 1233 0014 B969     		ldr	r1, [r7, #24]
+ 1234 0016 3A68     		ldr	r2, [r7, #0]
+ 1235 0018 8A1A     		subs	r2, r1, r2
+ 1236 001a 02FB03F2 		mul	r2, r2, r3
+ 1237 001e 7968     		ldr	r1, [r7, #4]
+ 1238 0020 BB68     		ldr	r3, [r7, #8]
+ 1239 0022 CB1A     		subs	r3, r1, r3
+ 1240 0024 92FBF3F2 		sdiv	r2, r2, r3
+ 1241 0028 3B68     		ldr	r3, [r7, #0]
+ 1242 002a D318     		adds	r3, r2, r3
+ 313:../_Quadrocopter/RemoteControl/RCReceive.c **** }
+ 1243              		.loc 1 313 0
+ 1244 002c 1846     		mov	r0, r3
+ 1245 002e 07F11407 		add	r7, r7, #20
+ 1246 0032 BD46     		mov	sp, r7
+ 1247 0034 80BC     		pop	{r7}
+ 1248 0036 7047     		bx	lr
+ 1249              		.cfi_endproc
+ 1250              	.LFE128:
+ 1252              		.bss
+ 1253              	lastCount.11219:
+ 1254 0025 00       		.space	1
+ 1255              	lastBTCount.11220:
+ 1256 0026 00       		.space	1
+ 1257 0027 00       		.text
+ 1258              	.Letext0:
+ 1259              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 1260              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 1261              		.file 4 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
+ 1262              		.file 5 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
+ 1263              		.file 6 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
+ 1264              		.file 7 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
+ 1265              		.file 8 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
+ 1266              		.file 9 "../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.h"
+ 1267              		.file 10 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 1268              		.file 11 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAV
+DEFINED SYMBOLS
+                            *ABS*:00000000 RCReceive.c
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:24     .bss:00000000 throttle
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:21     .bss:00000000 $d
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:30     .bss:00000004 rudder
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:36     .bss:00000008 elevator
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:42     .bss:0000000c aileron
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:48     .bss:00000010 throttleBT
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:53     .bss:00000012 heightControlBT
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:59     .bss:00000014 rudderBT
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:65     .bss:00000018 aileronBT
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:71     .bss:0000001c elevatorBT
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:76     .bss:00000020 modeBT
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:81     .bss:00000021 flightmode
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:87     .data:00000000 RCTimeOut
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:93     .bss:00000022 RCCount
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:99     .data:00000001 BTTimeOut
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:105    .bss:00000023 BTCount
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:110    .bss:00000024 conn
+                            *COM*:00000004 TimerWatchRC
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:114    .text.mergeBytes:00000000 $t
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:119    .text.mergeBytes:00000000 mergeBytes
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:159    .text.CCU41_1_IRQHandler:00000000 $t
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:164    .text.CCU41_1_IRQHandler:00000000 CCU41_1_IRQHandler
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:202    .text.USIC1_0_IRQHandler:00000000 $t
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:207    .text.USIC1_0_IRQHandler:00000000 USIC1_0_IRQHandler
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:1208   .text.map:00000000 map
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:542    .text.USIC1_0_IRQHandler:00000328 $d
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:552    .text.USIC0_3_IRQHandler:00000000 $t
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:557    .text.USIC0_3_IRQHandler:00000000 USIC0_3_IRQHandler
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:768    .text.USIC0_3_IRQHandler:000001f8 $d
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:774    .text.WatchRC:00000000 $t
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:779    .text.WatchRC:00000000 WatchRC
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:1253   .bss:00000025 lastCount.11219
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:1255   .bss:00000026 lastBTCount.11220
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:850    .text.WatchRC_Init:00000000 $t
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:855    .text.WatchRC_Init:00000000 WatchRC_Init
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:899    .text.GetRCCount:00000000 $t
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:904    .text.GetRCCount:00000000 GetRCCount
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:933    .text.GetRCData:00000000 $t
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:938    .text.GetRCData:00000000 GetRCData
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:1193   .text.GetRCData:00000238 $d
+C:\Users\Krainesi\AppData\Local\Temp\ccKxXILj.s:1203   .text.map:00000000 $t
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.4a863fbae1c79f0db26da3ce2dc30d02
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.951091d95913dd2ff36d761323a1771d
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.uc_id.h.35.fa57ecd9f559d2767f56c96da2848c12
+                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
+                           .group:00000000 wm4.CLK001_Conf.h.81.851ac7a1268528f4d6739384c2f248a5
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.time.h.16.a4579e68956d2601c6113814b546764b
+                           .group:00000000 wm4.RTC001.h.113.715d6fcab1863c6656b238bddd304166
+                           .group:00000000 wm4.lmm001_debuglog.h.40.8031299705ecf04ad726bd19baff976d
+                           .group:00000000 wm4.reent.h.11.a39e4126dcf3c6afd3054e0622577bae
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.LMM001.h.45.fa2df8bae969f45df5071221ac433ffa
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.time.h.2.9857e62ad6ac99431e29d58067232314
+                           .group:00000000 wm4.time.h.24.c499d4c1915694df17abb795fd34b719
+                           .group:00000000 wm4.time.h.124.10ced469f846269cafc58b59c853e1bb
+                           .group:00000000 wm4.errno.h.2.ba016d646105af6cad23be83630b6a3f
+                           .group:00000000 wm4.errno.h.9.65044c2b5d8494e43f5986ab0a1d770f
+                           .group:00000000 wm4.unistd.h.2.6ce1b91c4223f6078c1b210c7538c1d2
+                           .group:00000000 wm4.unistd.h.251.605bc560cdc6c3b07b599bb71ac4e425
+                           .group:00000000 wm4.malloc.h.4.62bd13b8107d5245f60bd92bb5994838
+                           .group:00000000 wm4.malloc.h.148.73b7de3bd065dafbd594b04197a9466e
+                           .group:00000000 wm4.reent.h.91.faac4d0ac97c0fcf23d10d0786197642
+                           .group:00000000 wm4.SLTHA003.h.104.05371e300b30617373255b3cdb4765a2
+                           .group:00000000 wm4.SYSTM001.h.64.6ecb31c49bc3e7691644fdcdfc11b5cd
+                           .group:00000000 wm4.stdarg.h.31.fa591a4b1df9e413e9f5b8097f9ae89d
+                           .group:00000000 wm4.Type_CM.h.61.3660c940695d7d5fef91de9c4081d0f0
+                           .group:00000000 wm4.dwc_os.h.82.db2ca40c41e2f648d146b8942e5157d9
+                           .group:00000000 wm4.dwc_otg_core_if.h.95.37e41eee47e9a4502e4044edf60ea92d
+                           .group:00000000 wm4.usbcore001_device.h.107.6c032c9c28ac6c3f4e5e24a068720cd7
+                           .group:00000000 wm4.USB.h.399.44a2bec94122294f06c4d854450494d3
+                           .group:00000000 wm4.Common.h.102.bc881ac788d1d7ce84e651cbaa40f2c2
+                           .group:00000000 wm4.Common.h.134.5069b632a0407201156f18fde915b80c
+                           .group:00000000 wm4.USBMode.h.234.0cc9e23131c025605bb7c0db3ebb8ac9
+                           .group:00000000 wm4.StdRequestType.h.93.4e19c7c655f990c2abedbb76a546fcde
+                           .group:00000000 wm4.Endpoint.h.116.4ef46b127c9047ed49fe1e0df19e09b8
+                           .group:00000000 wm4.StdDescriptors.h.120.0ce817e16dcc91b8cf4a79ba0e0e19b6
+                           .group:00000000 wm4.CDC.h.103.7ce3e4692dde29e827f8736493eef7ef
+                           .group:00000000 wm4.CDC.h.115.c83a7d6c5b6c8644b3dec6212d4ced09
+                           .group:00000000 wm4.Descriptors.h.91.5cf84c2489ee54d154cabfe9e14b5c19
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.fce01a2aa073e958cae0b1cc894db26c
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.10a5fc586e1563647b9633c45b1b739e
+                           .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.49528b5ba8318d62684d7423600f8092
+                           .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
+                           .group:00000000 wm4.I2C001_Conf.h.58.2b816ac2c964c55a6c88f9c406d78c9f
+                           .group:00000000 wm4.ERU001_Conf.h.69.61c28b1ac8f55fb79ee064524d8b6415
+                           .group:00000000 wm4.ERU002_Conf.h.49.449ecc05b9e62e9b43f2dc6ead06a5ce
+                           .group:00000000 wm4.IO002_Conf.h.51.87e2c8c60b647393fe9ced2cae198f63
+                           .group:00000000 wm4.ADCGROUP001.h.66.3ee81aba16709c201614af7d67499bdb
+                           .group:00000000 wm4.IO001.h.49.4efcabb368feaef60c65bd7504b48505
+                           .group:00000000 wm4.ADC001.h.72.a0f6b9479a18584b91fa95e6f862978d
+                           .group:00000000 wm4.IO004.h.53.442ea5eb47ad9eedc675253aa35f3107
+                           .group:00000000 wm4.BluetoothProtocol.h.15.5d0e6511d0a0b48dfdf591d0a2f8c5c0
+                           .group:00000000 wm4.RCReceive.h.14.6f351c757b3522b0d45b4afd218a5d6b
+                           .group:00000000 wm4.GPIO.h.35.fd2b996ad226d0284af5aeaa80d83d32
+
+UNDEFINED SYMBOLS
+UART001_Handle2
+UART001_WriteDataBytes
+__aeabi_i2d
+__aeabi_ddiv
+__aeabi_d2f
+UART001_Handle0
+UART001_GetFlagStatus
+UART001_ReadDataBytes
+UART001_ClearFlag
+__aeabi_f2d
+__aeabi_dmul
+ReadBufBT
+control_value
+dpacket
+maintainBluetoothInputBuffer
+SYSTM001_CreateTimer
+SYSTM001_StartTimer
+__aeabi_dcmpgt
+__aeabi_dcmplt

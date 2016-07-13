@@ -1,0 +1,4 @@
+Copter v5.1 17-Feb-2016
+Changes from v5
+1) MPU9250 Pin 9 (AD0) connected to VDD
+2) MPU9250 I2C address is now 0xD2

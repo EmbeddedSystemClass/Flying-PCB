@@ -1,0 +1,1796 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 6
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"Main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	PWM_percent
+  20              		.bss
+  21              		.align	2
+  24              	PWM_percent:
+  25 0000 00000000 		.space	16
+  25      00000000 
+  25      00000000 
+  25      00000000 
+  26              		.comm	x_pitch,8,4
+  27              		.comm	x_roll,8,4
+  28              		.global	u_yaw_dot
+  29              		.align	2
+  32              	u_yaw_dot:
+  33 0010 00000000 		.space	4
+  34              		.global	u_pitch
+  35              		.align	2
+  38              	u_pitch:
+  39 0014 00000000 		.space	4
+  40              		.global	u_roll
+  41              		.align	2
+  44              	u_roll:
+  45 0018 00000000 		.space	4
+  46              		.global	T
+  47              		.section	.rodata
+  48              		.align	2
+  51              	T:
+  52 0000 6F12033B 		.word	990057071
+  53              		.global	P_roll
+  54              		.align	2
+  57              	P_roll:
+  58 0004 00008C42 		.word	1116471296
+  59              		.global	I_roll
+  60              		.align	2
+  63              	I_roll:
+  64 0008 CDCC4C3E 		.word	1045220557
+  65              		.global	D_roll
+  66              		.align	2
+  69              	D_roll:
+  70 000c 9A99D93F 		.word	1071225242
+  71              		.global	N_roll
+  72              		.align	2
+  75              	N_roll:
+  76 0010 0000C843 		.word	1137180672
+  77              		.global	P_pitch
+  78              		.align	2
+  81              	P_pitch:
+  82 0014 00008C42 		.word	1116471296
+  83              		.global	I_pitch
+  84              		.align	2
+  87              	I_pitch:
+  88 0018 CDCC4C3E 		.word	1045220557
+  89              		.global	D_pitch
+  90              		.align	2
+  93              	D_pitch:
+  94 001c 9A99D93F 		.word	1071225242
+  95              		.global	N_pitch
+  96              		.align	2
+  99              	N_pitch:
+ 100 0020 0000C843 		.word	1137180672
+ 101              		.global	P_yaw
+ 102              		.align	2
+ 105              	P_yaw:
+ 106 0024 00004843 		.word	1128792064
+ 107              		.comm	a_roll,8,4
+ 108              		.comm	a_pitch,8,4
+ 109              		.comm	b_roll,12,4
+ 110              		.comm	b_pitch,12,4
+ 111              		.global	powerD
+ 112              		.bss
+ 113              		.align	2
+ 116              	powerD:
+ 117 001c 00000000 		.space	4
+ 118              		.global	height_control
+ 121              	height_control:
+ 122 0020 00       		.space	1
+ 123              		.global	yawD_dot
+ 124 0021 000000   		.align	2
+ 127              	yawD_dot:
+ 128 0024 00000000 		.space	4
+ 129              		.global	pitchD
+ 130              		.align	2
+ 133              	pitchD:
+ 134 0028 00000000 		.space	4
+ 135              		.global	rollD
+ 136              		.align	2
+ 139              	rollD:
+ 140 002c 00000000 		.space	4
+ 141              		.comm	YPR,12,4
+ 142              		.comm	sensorData,12,4
+ 143              		.global	pressure
+ 144              		.align	2
+ 147              	pressure:
+ 148 0030 00000000 		.space	4
+ 149              		.global	temperature
+ 150              		.align	2
+ 153              	temperature:
+ 154 0034 00000000 		.space	4
+ 155              		.comm	PressureFIR,56,4
+ 156              		.global	TxBuffer
+ 157              		.align	2
+ 160              	TxBuffer:
+ 161 0038 00000000 		.space	100
+ 161      00000000 
+ 161      00000000 
+ 161      00000000 
+ 161      00000000 
+ 162              		.comm	c,100,4
+ 163              		.global	VBat
+ 164              		.align	2
+ 167              	VBat:
+ 168 009c 00000000 		.space	4
+ 169              		.global	sendMag
+ 172              	sendMag:
+ 173 00a0 00       		.space	1
+ 174              		.global	counter_main
+ 175 00a1 00       		.align	1
+ 178              	counter_main:
+ 179 00a2 0000     		.space	2
+ 180              		.global	MonitorBuffer
+ 181              		.align	2
+ 184              	MonitorBuffer:
+ 185 00a4 00000000 		.space	14
+ 185      00000000 
+ 185      00000000 
+ 185      0000
+ 186              		.global	MotorRunning
+ 189              	MotorRunning:
+ 190 00b2 00       		.space	1
+ 191              		.global	__aeabi_f2d
+ 192              		.global	__aeabi_ddiv
+ 193              		.global	__aeabi_dmul
+ 194              		.global	__aeabi_d2uiz
+ 195 00b3 00       		.section	.text.CCU40_2_IRQHandler,"ax",%progbits
+ 196              		.align	2
+ 197              		.global	CCU40_2_IRQHandler
+ 198              		.thumb
+ 199              		.thumb_func
+ 201              	CCU40_2_IRQHandler:
+ 202              	.LFB153:
+ 203              		.file 1 "../Main.c"
+   1:../Main.c     **** /*
+   2:../Main.c     ****  * Main.c
+   3:../Main.c     ****  *
+   4:../Main.c     ****  *  Created on: 25.12.2014
+   5:../Main.c     ****  *      Author: Andreas
+   6:../Main.c     ****  */
+   7:../Main.c     **** 
+   8:../Main.c     **** //----------------------------------------------------------------------------
+   9:../Main.c     **** //
+  10:../Main.c     **** //					LARIX Flight Controller Software with DPS310
+  11:../Main.c     **** //				(compatible with Flight Controller App V2.0 or higher)
+  12:../Main.c     **** //
+  13:../Main.c     **** //----------------------------------------------------------------------------
+  14:../Main.c     **** //
+  15:../Main.c     **** //		Default Mode: RC controlled with switch for Bluetooth-App Control
+  16:../Main.c     **** //		(for Bluetooth only Version "#define BT_ONLY" in the RCReceive.h)
+  17:../Main.c     **** //
+  18:../Main.c     **** //----------------------------------------------------------------------------
+  19:../Main.c     **** 
+  20:../Main.c     **** 
+  21:../Main.c     **** #include <DAVE3.h>			//Declarations from DAVE3 Code Generation (includes SFR declaration)
+  22:../Main.c     **** #include <limits.h>
+  23:../Main.c     **** #include "_Quadrocopter/_HAL/Delay/util.h"
+  24:../Main.c     **** #include "_Quadrocopter/_HAL/I2C/I2Cdev.h"
+  25:../Main.c     **** #include "_Quadrocopter/Sensors/MPU9X50/MPU9150.h"
+  26:../Main.c     **** #include "_Quadrocopter/Sensors/DPS310/DPS310.h"
+  27:../Main.c     **** 
+  28:../Main.c     **** #include "_Quadrocopter/RemoteControl/RCReceive.h"
+  29:../Main.c     **** #include "_Quadrocopter/Attitude_Control/Attitudecontroller.h"
+  30:../Main.c     **** #include "_Quadrocopter/DaisyChain/DaisyChain.h"
+  31:../Main.c     **** 
+  32:../Main.c     **** #include "_Quadrocopter/_FIR_Filter/FIR_Filter.h"
+  33:../Main.c     **** 
+  34:../Main.c     **** #include "_Quadrocopter/BatterySafety/BatterySafety.h"
+  35:../Main.c     **** 
+  36:../Main.c     **** //Define which Frame is used:
+  37:../Main.c     **** //++++++++++++++++++++++++++++++++++++++++
+  38:../Main.c     **** //#define Carbon
+  39:../Main.c     **** #define Plexi
+  40:../Main.c     **** //++++++++++++++++++++++++++++++++++++++++
+  41:../Main.c     **** 
+  42:../Main.c     **** 
+  43:../Main.c     **** #define CONTROL_ORDER 2
+  44:../Main.c     **** //Actor values
+  45:../Main.c     **** float PWM_percent[] = {0.0, 0.0, 0.0, 0.0};
+  46:../Main.c     **** 
+  47:../Main.c     **** float x_pitch[CONTROL_ORDER];
+  48:../Main.c     **** float x_roll[CONTROL_ORDER];
+  49:../Main.c     **** 
+  50:../Main.c     **** float u_yaw_dot = 0.0;
+  51:../Main.c     **** float u_pitch = 0.0;
+  52:../Main.c     **** float u_roll = 0.0;
+  53:../Main.c     **** //------------------------------------------------------------------------
+  54:../Main.c     **** //Controllerparamter for Carbon
+  55:../Main.c     **** #ifdef Carbon
+  56:../Main.c     **** const float T=0.002;
+  57:../Main.c     **** const float P_roll = 125.0;		//for Carbon: 125.0;
+  58:../Main.c     **** const float I_roll = 0.0;		//for Carbon: 0.2;
+  59:../Main.c     **** const float D_roll =  4.0;		//for Carbon: 4.0;
+  60:../Main.c     **** const float N_roll = 400.0;		//for Carbon: 400.0;
+  61:../Main.c     **** const float P_pitch = 125.0;	//for Carbon: 125.0;
+  62:../Main.c     **** const float I_pitch = 0.0;		//for Carbon: 0.2;
+  63:../Main.c     **** const float D_pitch = 4.0;		//for Carbon: 4.0;
+  64:../Main.c     **** const float N_pitch = 400.0;	//for Carbon: 400.0;
+  65:../Main.c     **** const float P_yaw = 200.0;		//for Carbon: 40.0;
+  66:../Main.c     **** #endif
+  67:../Main.c     **** //------------------------------------------------------------------------
+  68:../Main.c     **** //Controllerparamter for Plexi
+  69:../Main.c     **** #ifdef Plexi
+  70:../Main.c     **** const float T=0.002;
+  71:../Main.c     **** const float P_roll = 70.0;		//for Plexi: 65.0
+  72:../Main.c     **** const float I_roll = 0.2;		//for Plexi: 0.2
+  73:../Main.c     **** const float D_roll =  1.7;		//for Plexi: 1.7
+  74:../Main.c     **** const float N_roll = 400.0;		//for Plexi: 400.0
+  75:../Main.c     **** const float P_pitch = 70.0;		//for Plexi: 65.0
+  76:../Main.c     **** const float I_pitch = 0.2;		//for Plexi: 0.2
+  77:../Main.c     **** const float D_pitch = 1.7;		//for Plexi: 1.7
+  78:../Main.c     **** const float N_pitch = 400.0;	//for Plexi: 400.0
+  79:../Main.c     **** const float P_yaw = 200.0;		//for Plexi: 200.0
+  80:../Main.c     **** #endif
+  81:../Main.c     **** //------------------------------------------------------------------------
+  82:../Main.c     **** //Controllerpolynomials
+  83:../Main.c     **** float a_roll[CONTROL_ORDER];
+  84:../Main.c     **** float a_pitch[CONTROL_ORDER];
+  85:../Main.c     **** float b_roll[CONTROL_ORDER+1];
+  86:../Main.c     **** float b_pitch[CONTROL_ORDER+1];
+  87:../Main.c     **** 
+  88:../Main.c     **** //Remote Control
+  89:../Main.c     **** float powerD = 0.0;
+  90:../Main.c     **** uint8_t height_control = 0;		// 0xFF when activated
+  91:../Main.c     **** float yawD_dot = 0.0;
+  92:../Main.c     **** float pitchD = 0.0;
+  93:../Main.c     **** float rollD = 0.0;
+  94:../Main.c     **** 
+  95:../Main.c     **** float YPR[3];
+  96:../Main.c     **** float sensorData[3];
+  97:../Main.c     **** 
+  98:../Main.c     **** //DPS3100 Pressure-Sensor
+  99:../Main.c     **** float pressure = 0;
+ 100:../Main.c     **** float temperature = 0;
+ 101:../Main.c     **** struct structFIR PressureFIR;
+ 102:../Main.c     **** 
+ 103:../Main.c     **** int8_t TxBuffer[100] = { 0 };
+ 104:../Main.c     **** char c[100]; //for displaying data
+ 105:../Main.c     **** 
+ 106:../Main.c     **** //Battery Safety
+ 107:../Main.c     **** float VBat = 0;
+ 108:../Main.c     **** 
+ 109:../Main.c     **** bool sendMag = FALSE;
+ 110:../Main.c     **** 
+ 111:../Main.c     **** uint16_t counter_main=0;
+ 112:../Main.c     **** 
+ 113:../Main.c     **** int8_t MonitorBuffer[14] = {0};
+ 114:../Main.c     **** int8_t MotorRunning=0;
+ 115:../Main.c     **** 
+ 116:../Main.c     **** void Monitoring_Int_Handler();
+ 117:../Main.c     **** 
+ 118:../Main.c     **** void Controller_CompareMatch_Int_Handler(void)
+ 119:../Main.c     **** {
+ 204              		.loc 1 119 0
+ 205              		.cfi_startproc
+ 206              		@ args = 0, pretend = 0, frame = 0
+ 207              		@ frame_needed = 1, uses_anonymous_args = 0
+ 208 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 209              	.LCFI0:
+ 210              		.cfi_def_cfa_offset 20
+ 211              		.cfi_offset 4, -20
+ 212              		.cfi_offset 5, -16
+ 213              		.cfi_offset 6, -12
+ 214              		.cfi_offset 7, -8
+ 215              		.cfi_offset 14, -4
+ 216 0002 85B0     		sub	sp, sp, #20
+ 217              	.LCFI1:
+ 218              		.cfi_def_cfa_offset 40
+ 219 0004 04AF     		add	r7, sp, #16
+ 220              	.LCFI2:
+ 221              		.cfi_def_cfa 7, 24
+ 120:../Main.c     **** 	GetAngles(YPR);
+ 222              		.loc 1 120 0
+ 223 0006 40F20000 		movw	r0, #:lower16:YPR
+ 224 000a C0F20000 		movt	r0, #:upper16:YPR
+ 225 000e FFF7FEFF 		bl	GetAngles
+ 121:../Main.c     **** 	GetRCData(&powerD, &height_control, &yawD_dot, &pitchD, &rollD);
+ 226              		.loc 1 121 0
+ 227 0012 40F20003 		movw	r3, #:lower16:rollD
+ 228 0016 C0F20003 		movt	r3, #:upper16:rollD
+ 229 001a 0093     		str	r3, [sp, #0]
+ 230 001c 40F20000 		movw	r0, #:lower16:powerD
+ 231 0020 C0F20000 		movt	r0, #:upper16:powerD
+ 232 0024 40F20001 		movw	r1, #:lower16:height_control
+ 233 0028 C0F20001 		movt	r1, #:upper16:height_control
+ 234 002c 40F20002 		movw	r2, #:lower16:yawD_dot
+ 235 0030 C0F20002 		movt	r2, #:upper16:yawD_dot
+ 236 0034 40F20003 		movw	r3, #:lower16:pitchD
+ 237 0038 C0F20003 		movt	r3, #:upper16:pitchD
+ 238 003c FFF7FEFF 		bl	GetRCData
+ 122:../Main.c     **** 	//yaw control
+ 123:../Main.c     **** 	AngleRateController(&yawD_dot, &YPR[0], &P_yaw, &u_yaw_dot);
+ 239              		.loc 1 123 0
+ 240 0040 40F20000 		movw	r0, #:lower16:yawD_dot
+ 241 0044 C0F20000 		movt	r0, #:upper16:yawD_dot
+ 242 0048 40F20001 		movw	r1, #:lower16:YPR
+ 243 004c C0F20001 		movt	r1, #:upper16:YPR
+ 244 0050 40F20002 		movw	r2, #:lower16:P_yaw
+ 245 0054 C0F20002 		movt	r2, #:upper16:P_yaw
+ 246 0058 40F20003 		movw	r3, #:lower16:u_yaw_dot
+ 247 005c C0F20003 		movt	r3, #:upper16:u_yaw_dot
+ 248 0060 FFF7FEFF 		bl	AngleRateController
+ 124:../Main.c     **** 	//pitch control
+ 125:../Main.c     **** 	AngleController(&pitchD, &YPR[1], CONTROL_ORDER, a_pitch, b_pitch, x_pitch, &u_pitch);
+ 249              		.loc 1 125 0
+ 250 0064 40F20003 		movw	r3, #:lower16:b_pitch
+ 251 0068 C0F20003 		movt	r3, #:upper16:b_pitch
+ 252 006c 0093     		str	r3, [sp, #0]
+ 253 006e 40F20003 		movw	r3, #:lower16:x_pitch
+ 254 0072 C0F20003 		movt	r3, #:upper16:x_pitch
+ 255 0076 0193     		str	r3, [sp, #4]
+ 256 0078 40F20003 		movw	r3, #:lower16:u_pitch
+ 257 007c C0F20003 		movt	r3, #:upper16:u_pitch
+ 258 0080 0293     		str	r3, [sp, #8]
+ 259 0082 40F20000 		movw	r0, #:lower16:pitchD
+ 260 0086 C0F20000 		movt	r0, #:upper16:pitchD
+ 261 008a 8549     		ldr	r1, .L7+8
+ 262 008c 4FF00202 		mov	r2, #2
+ 263 0090 40F20003 		movw	r3, #:lower16:a_pitch
+ 264 0094 C0F20003 		movt	r3, #:upper16:a_pitch
+ 265 0098 FFF7FEFF 		bl	AngleController
+ 126:../Main.c     **** 	//roll control
+ 127:../Main.c     **** 	AngleController(&rollD, &YPR[2], CONTROL_ORDER, a_roll, b_roll, x_roll, &u_roll);
+ 266              		.loc 1 127 0
+ 267 009c 40F20003 		movw	r3, #:lower16:b_roll
+ 268 00a0 C0F20003 		movt	r3, #:upper16:b_roll
+ 269 00a4 0093     		str	r3, [sp, #0]
+ 270 00a6 40F20003 		movw	r3, #:lower16:x_roll
+ 271 00aa C0F20003 		movt	r3, #:upper16:x_roll
+ 272 00ae 0193     		str	r3, [sp, #4]
+ 273 00b0 40F20003 		movw	r3, #:lower16:u_roll
+ 274 00b4 C0F20003 		movt	r3, #:upper16:u_roll
+ 275 00b8 0293     		str	r3, [sp, #8]
+ 276 00ba 40F20000 		movw	r0, #:lower16:rollD
+ 277 00be C0F20000 		movt	r0, #:upper16:rollD
+ 278 00c2 7849     		ldr	r1, .L7+12
+ 279 00c4 4FF00202 		mov	r2, #2
+ 280 00c8 40F20003 		movw	r3, #:lower16:a_roll
+ 281 00cc C0F20003 		movt	r3, #:upper16:a_roll
+ 282 00d0 FFF7FEFF 		bl	AngleController
+ 128:../Main.c     **** 
+ 129:../Main.c     **** 	//generate actuator values
+ 130:../Main.c     **** 	CreatePulseWidth(&u_roll, &u_pitch, &u_yaw_dot, &powerD, PWM_percent);
+ 283              		.loc 1 130 0
+ 284 00d4 40F20003 		movw	r3, #:lower16:PWM_percent
+ 285 00d8 C0F20003 		movt	r3, #:upper16:PWM_percent
+ 286 00dc 0093     		str	r3, [sp, #0]
+ 287 00de 40F20000 		movw	r0, #:lower16:u_roll
+ 288 00e2 C0F20000 		movt	r0, #:upper16:u_roll
+ 289 00e6 40F20001 		movw	r1, #:lower16:u_pitch
+ 290 00ea C0F20001 		movt	r1, #:upper16:u_pitch
+ 291 00ee 40F20002 		movw	r2, #:lower16:u_yaw_dot
+ 292 00f2 C0F20002 		movt	r2, #:upper16:u_yaw_dot
+ 293 00f6 40F20003 		movw	r3, #:lower16:powerD
+ 294 00fa C0F20003 		movt	r3, #:upper16:powerD
+ 295 00fe FFF7FEFF 		bl	CreatePulseWidth
+ 131:../Main.c     **** 
+ 132:../Main.c     **** 	if (powerD > 5.0)
+ 296              		.loc 1 132 0
+ 297 0102 40F20003 		movw	r3, #:lower16:powerD
+ 298 0106 C0F20003 		movt	r3, #:upper16:powerD
+ 299 010a 93ED007A 		flds	s14, [r3, #0]
+ 300 010e F1EE047A 		fconsts	s15, #20
+ 301 0112 B4EEE77A 		fcmpes	s14, s15
+ 302 0116 F1EE10FA 		fmstat
+ 303 011a 40F39D80 		ble	.L6
+ 304              	.L5:
+ 133:../Main.c     **** 		SendDaisyData(SET_REF_CURRENT,
+ 134:../Main.c     **** 			PWM_percent[2]/100.0*1279,
+ 305              		.loc 1 134 0
+ 306 011e 40F20003 		movw	r3, #:lower16:PWM_percent
+ 307 0122 C0F20003 		movt	r3, #:upper16:PWM_percent
+ 308 0126 9B68     		ldr	r3, [r3, #8]	@ float
+ 309 0128 1846     		mov	r0, r3	@ float
+ 310 012a FFF7FEFF 		bl	__aeabi_f2d
+ 311 012e 0246     		mov	r2, r0
+ 312 0130 0B46     		mov	r3, r1
+ 313 0132 1046     		mov	r0, r2
+ 314 0134 1946     		mov	r1, r3
+ 315 0136 4FF00002 		mov	r2, #0
+ 316 013a 4FF00003 		mov	r3, #0
+ 317 013e C4F25903 		movt	r3, 16473
+ 318 0142 FFF7FEFF 		bl	__aeabi_ddiv
+ 319 0146 0246     		mov	r2, r0
+ 320 0148 0B46     		mov	r3, r1
+ 321 014a 1046     		mov	r0, r2
+ 322 014c 1946     		mov	r1, r3
+ 323 014e 52A3     		adr	r3, .L7
+ 324 0150 D3E90023 		ldrd	r2, [r3]
+ 325 0154 FFF7FEFF 		bl	__aeabi_dmul
+ 326 0158 0246     		mov	r2, r0
+ 327 015a 0B46     		mov	r3, r1
+ 133:../Main.c     **** 		SendDaisyData(SET_REF_CURRENT,
+ 328              		.loc 1 133 0
+ 329 015c 1046     		mov	r0, r2
+ 330 015e 1946     		mov	r1, r3
+ 331 0160 FFF7FEFF 		bl	__aeabi_d2uiz
+ 332 0164 0346     		mov	r3, r0
+ 333 0166 9EB2     		uxth	r6, r3
+ 135:../Main.c     **** 			PWM_percent[0]/100.0*1279,
+ 334              		.loc 1 135 0
+ 335 0168 40F20003 		movw	r3, #:lower16:PWM_percent
+ 336 016c C0F20003 		movt	r3, #:upper16:PWM_percent
+ 337 0170 1B68     		ldr	r3, [r3, #0]	@ float
+ 338 0172 1846     		mov	r0, r3	@ float
+ 339 0174 FFF7FEFF 		bl	__aeabi_f2d
+ 340 0178 0246     		mov	r2, r0
+ 341 017a 0B46     		mov	r3, r1
+ 342 017c 1046     		mov	r0, r2
+ 343 017e 1946     		mov	r1, r3
+ 344 0180 4FF00002 		mov	r2, #0
+ 345 0184 4FF00003 		mov	r3, #0
+ 346 0188 C4F25903 		movt	r3, 16473
+ 347 018c FFF7FEFF 		bl	__aeabi_ddiv
+ 348 0190 0246     		mov	r2, r0
+ 349 0192 0B46     		mov	r3, r1
+ 350 0194 1046     		mov	r0, r2
+ 351 0196 1946     		mov	r1, r3
+ 352 0198 3FA3     		adr	r3, .L7
+ 353 019a D3E90023 		ldrd	r2, [r3]
+ 354 019e FFF7FEFF 		bl	__aeabi_dmul
+ 355 01a2 0246     		mov	r2, r0
+ 356 01a4 0B46     		mov	r3, r1
+ 133:../Main.c     **** 		SendDaisyData(SET_REF_CURRENT,
+ 357              		.loc 1 133 0
+ 358 01a6 1046     		mov	r0, r2
+ 359 01a8 1946     		mov	r1, r3
+ 360 01aa FFF7FEFF 		bl	__aeabi_d2uiz
+ 361 01ae 0346     		mov	r3, r0
+ 362 01b0 9DB2     		uxth	r5, r3
+ 136:../Main.c     **** 			PWM_percent[1]/100.0*1279,
+ 363              		.loc 1 136 0
+ 364 01b2 40F20003 		movw	r3, #:lower16:PWM_percent
+ 365 01b6 C0F20003 		movt	r3, #:upper16:PWM_percent
+ 366 01ba 5B68     		ldr	r3, [r3, #4]	@ float
+ 367 01bc 1846     		mov	r0, r3	@ float
+ 368 01be FFF7FEFF 		bl	__aeabi_f2d
+ 369 01c2 0246     		mov	r2, r0
+ 370 01c4 0B46     		mov	r3, r1
+ 371 01c6 1046     		mov	r0, r2
+ 372 01c8 1946     		mov	r1, r3
+ 373 01ca 4FF00002 		mov	r2, #0
+ 374 01ce 4FF00003 		mov	r3, #0
+ 375 01d2 C4F25903 		movt	r3, 16473
+ 376 01d6 FFF7FEFF 		bl	__aeabi_ddiv
+ 377 01da 0246     		mov	r2, r0
+ 378 01dc 0B46     		mov	r3, r1
+ 379 01de 1046     		mov	r0, r2
+ 380 01e0 1946     		mov	r1, r3
+ 381 01e2 2DA3     		adr	r3, .L7
+ 382 01e4 D3E90023 		ldrd	r2, [r3]
+ 383 01e8 FFF7FEFF 		bl	__aeabi_dmul
+ 384 01ec 0246     		mov	r2, r0
+ 385 01ee 0B46     		mov	r3, r1
+ 133:../Main.c     **** 		SendDaisyData(SET_REF_CURRENT,
+ 386              		.loc 1 133 0
+ 387 01f0 1046     		mov	r0, r2
+ 388 01f2 1946     		mov	r1, r3
+ 389 01f4 FFF7FEFF 		bl	__aeabi_d2uiz
+ 390 01f8 0346     		mov	r3, r0
+ 391 01fa 9CB2     		uxth	r4, r3
+ 137:../Main.c     **** 			PWM_percent[3]/100.0*1279);
+ 392              		.loc 1 137 0
+ 393 01fc 40F20003 		movw	r3, #:lower16:PWM_percent
+ 394 0200 C0F20003 		movt	r3, #:upper16:PWM_percent
+ 395 0204 DB68     		ldr	r3, [r3, #12]	@ float
+ 396 0206 1846     		mov	r0, r3	@ float
+ 397 0208 FFF7FEFF 		bl	__aeabi_f2d
+ 398 020c 0246     		mov	r2, r0
+ 399 020e 0B46     		mov	r3, r1
+ 400 0210 1046     		mov	r0, r2
+ 401 0212 1946     		mov	r1, r3
+ 402 0214 4FF00002 		mov	r2, #0
+ 403 0218 4FF00003 		mov	r3, #0
+ 404 021c C4F25903 		movt	r3, 16473
+ 405 0220 FFF7FEFF 		bl	__aeabi_ddiv
+ 406 0224 0246     		mov	r2, r0
+ 407 0226 0B46     		mov	r3, r1
+ 408 0228 1046     		mov	r0, r2
+ 409 022a 1946     		mov	r1, r3
+ 410 022c 1AA3     		adr	r3, .L7
+ 411 022e D3E90023 		ldrd	r2, [r3]
+ 412 0232 FFF7FEFF 		bl	__aeabi_dmul
+ 413 0236 0246     		mov	r2, r0
+ 414 0238 0B46     		mov	r3, r1
+ 133:../Main.c     **** 		SendDaisyData(SET_REF_CURRENT,
+ 415              		.loc 1 133 0
+ 416 023a 1046     		mov	r0, r2
+ 417 023c 1946     		mov	r1, r3
+ 418 023e FFF7FEFF 		bl	__aeabi_d2uiz
+ 419 0242 0346     		mov	r3, r0
+ 420 0244 9BB2     		uxth	r3, r3
+ 421 0246 0093     		str	r3, [sp, #0]
+ 422 0248 4FF02200 		mov	r0, #34
+ 423 024c 3146     		mov	r1, r6
+ 424 024e 2A46     		mov	r2, r5
+ 425 0250 2346     		mov	r3, r4
+ 426 0252 FFF7FEFF 		bl	SendDaisyData
+ 427 0256 0CE0     		b	.L4
+ 428              	.L6:
+ 138:../Main.c     **** 	else
+ 139:../Main.c     **** 		SendDaisyData(STOP_MOTOR,0,0,0,0);
+ 429              		.loc 1 139 0
+ 430 0258 4FF00003 		mov	r3, #0
+ 431 025c 0093     		str	r3, [sp, #0]
+ 432 025e 4FF00B00 		mov	r0, #11
+ 433 0262 4FF00001 		mov	r1, #0
+ 434 0266 4FF00002 		mov	r2, #0
+ 435 026a 4FF00003 		mov	r3, #0
+ 436 026e FFF7FEFF 		bl	SendDaisyData
+ 437              	.L4:
+ 140:../Main.c     **** 
+ 141:../Main.c     **** 	counter_main++;
+ 438              		.loc 1 141 0
+ 439 0272 40F20003 		movw	r3, #:lower16:counter_main
+ 440 0276 C0F20003 		movt	r3, #:upper16:counter_main
+ 441 027a 1B88     		ldrh	r3, [r3, #0]
+ 442 027c 03F10103 		add	r3, r3, #1
+ 443 0280 9AB2     		uxth	r2, r3
+ 444 0282 40F20003 		movw	r3, #:lower16:counter_main
+ 445 0286 C0F20003 		movt	r3, #:upper16:counter_main
+ 446 028a 1A80     		strh	r2, [r3, #0]	@ movhi
+ 142:../Main.c     **** }
+ 447              		.loc 1 142 0
+ 448 028c 07F10407 		add	r7, r7, #4
+ 449 0290 BD46     		mov	sp, r7
+ 450 0292 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 451              	.L8:
+ 452 0294 AFF30080 		.align	3
+ 453              	.L7:
+ 454 0298 00000000 		.word	0
+ 455 029c 00FC9340 		.word	1083440128
+ 456 02a0 04000000 		.word	YPR+4
+ 457 02a4 08000000 		.word	YPR+8
+ 458              		.cfi_endproc
+ 459              	.LFE153:
+ 461              		.section	.text.Initialize,"ax",%progbits
+ 462              		.align	2
+ 463              		.global	Initialize
+ 464              		.thumb
+ 465              		.thumb_func
+ 467              	Initialize:
+ 468              	.LFB154:
+ 143:../Main.c     **** 
+ 144:../Main.c     **** void Initialize()
+ 145:../Main.c     **** {
+ 469              		.loc 1 145 0
+ 470              		.cfi_startproc
+ 471              		@ args = 0, pretend = 0, frame = 56
+ 472              		@ frame_needed = 1, uses_anonymous_args = 0
+ 473 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 474              	.LCFI3:
+ 475              		.cfi_def_cfa_offset 24
+ 476              		.cfi_offset 4, -24
+ 477              		.cfi_offset 5, -20
+ 478              		.cfi_offset 6, -16
+ 479              		.cfi_offset 7, -12
+ 480              		.cfi_offset 8, -8
+ 481              		.cfi_offset 14, -4
+ 482 0004 9AB0     		sub	sp, sp, #104
+ 483              	.LCFI4:
+ 484              		.cfi_def_cfa_offset 128
+ 485 0006 0CAF     		add	r7, sp, #48
+ 486              	.LCFI5:
+ 487              		.cfi_def_cfa 7, 80
+ 146:../Main.c     **** 
+ 147:../Main.c     **** 	initBluetoothStorage();
+ 488              		.loc 1 147 0
+ 489 0008 FFF7FEFF 		bl	initBluetoothStorage
+ 148:../Main.c     **** 	delay(1000);
+ 490              		.loc 1 148 0
+ 491 000c 4FF47A70 		mov	r0, #1000
+ 492 0010 FFF7FEFF 		bl	delay
+ 149:../Main.c     ****     // initialize device
+ 150:../Main.c     **** 	MPU9150_Setup();
+ 493              		.loc 1 150 0
+ 494 0014 FFF7FEFF 		bl	MPU9150_Setup
+ 151:../Main.c     **** 	delay(1000);
+ 495              		.loc 1 151 0
+ 496 0018 4FF47A70 		mov	r0, #1000
+ 497 001c FFF7FEFF 		bl	delay
+ 152:../Main.c     **** 
+ 153:../Main.c     ****     // initilize controller polynomials
+ 154:../Main.c     **** 	b_roll[0]=P_roll-I_roll*T-P_roll*N_roll*T+N_roll*I_roll*T*T+D_roll*N_roll;
+ 498              		.loc 1 154 0
+ 499 0020 40F20003 		movw	r3, #:lower16:P_roll
+ 500 0024 C0F20003 		movt	r3, #:upper16:P_roll
+ 501 0028 93ED007A 		flds	s14, [r3, #0]
+ 502 002c 40F20003 		movw	r3, #:lower16:I_roll
+ 503 0030 C0F20003 		movt	r3, #:upper16:I_roll
+ 504 0034 D3ED006A 		flds	s13, [r3, #0]
+ 505 0038 40F20003 		movw	r3, #:lower16:T
+ 506 003c C0F20003 		movt	r3, #:upper16:T
+ 507 0040 D3ED007A 		flds	s15, [r3, #0]
+ 508 0044 66EEA77A 		fmuls	s15, s13, s15
+ 509 0048 37EE677A 		fsubs	s14, s14, s15
+ 510 004c 40F20003 		movw	r3, #:lower16:P_roll
+ 511 0050 C0F20003 		movt	r3, #:upper16:P_roll
+ 512 0054 D3ED006A 		flds	s13, [r3, #0]
+ 513 0058 40F20003 		movw	r3, #:lower16:N_roll
+ 514 005c C0F20003 		movt	r3, #:upper16:N_roll
+ 515 0060 D3ED007A 		flds	s15, [r3, #0]
+ 516 0064 66EEA76A 		fmuls	s13, s13, s15
+ 517 0068 40F20003 		movw	r3, #:lower16:T
+ 518 006c C0F20003 		movt	r3, #:upper16:T
+ 519 0070 D3ED007A 		flds	s15, [r3, #0]
+ 520 0074 66EEA77A 		fmuls	s15, s13, s15
+ 521 0078 37EE677A 		fsubs	s14, s14, s15
+ 522 007c 40F20003 		movw	r3, #:lower16:N_roll
+ 523 0080 C0F20003 		movt	r3, #:upper16:N_roll
+ 524 0084 D3ED006A 		flds	s13, [r3, #0]
+ 525 0088 40F20003 		movw	r3, #:lower16:I_roll
+ 526 008c C0F20003 		movt	r3, #:upper16:I_roll
+ 527 0090 D3ED007A 		flds	s15, [r3, #0]
+ 528 0094 66EEA76A 		fmuls	s13, s13, s15
+ 529 0098 40F20003 		movw	r3, #:lower16:T
+ 530 009c C0F20003 		movt	r3, #:upper16:T
+ 531 00a0 D3ED007A 		flds	s15, [r3, #0]
+ 532 00a4 66EEA76A 		fmuls	s13, s13, s15
+ 533 00a8 40F20003 		movw	r3, #:lower16:T
+ 534 00ac C0F20003 		movt	r3, #:upper16:T
+ 535 00b0 D3ED007A 		flds	s15, [r3, #0]
+ 536 00b4 66EEA77A 		fmuls	s15, s13, s15
+ 537 00b8 37EE277A 		fadds	s14, s14, s15
+ 538 00bc 40F20003 		movw	r3, #:lower16:D_roll
+ 539 00c0 C0F20003 		movt	r3, #:upper16:D_roll
+ 540 00c4 D3ED006A 		flds	s13, [r3, #0]
+ 541 00c8 40F20003 		movw	r3, #:lower16:N_roll
+ 542 00cc C0F20003 		movt	r3, #:upper16:N_roll
+ 543 00d0 D3ED007A 		flds	s15, [r3, #0]
+ 544 00d4 66EEA77A 		fmuls	s15, s13, s15
+ 545 00d8 77EE277A 		fadds	s15, s14, s15
+ 546 00dc 40F20003 		movw	r3, #:lower16:b_roll
+ 547 00e0 C0F20003 		movt	r3, #:upper16:b_roll
+ 548 00e4 C3ED007A 		fsts	s15, [r3, #0]
+ 155:../Main.c     **** 	b_roll[1]=I_roll*T-2*P_roll+P_roll*N_roll*T-2*D_roll*N_roll;
+ 549              		.loc 1 155 0
+ 550 00e8 40F20003 		movw	r3, #:lower16:I_roll
+ 551 00ec C0F20003 		movt	r3, #:upper16:I_roll
+ 552 00f0 93ED007A 		flds	s14, [r3, #0]
+ 553 00f4 40F20003 		movw	r3, #:lower16:T
+ 554 00f8 C0F20003 		movt	r3, #:upper16:T
+ 555 00fc D3ED007A 		flds	s15, [r3, #0]
+ 556 0100 27EE277A 		fmuls	s14, s14, s15
+ 557 0104 40F20003 		movw	r3, #:lower16:P_roll
+ 558 0108 C0F20003 		movt	r3, #:upper16:P_roll
+ 559 010c D3ED007A 		flds	s15, [r3, #0]
+ 560 0110 77EEA77A 		fadds	s15, s15, s15
+ 561 0114 37EE677A 		fsubs	s14, s14, s15
+ 562 0118 40F20003 		movw	r3, #:lower16:P_roll
+ 563 011c C0F20003 		movt	r3, #:upper16:P_roll
+ 564 0120 D3ED006A 		flds	s13, [r3, #0]
+ 565 0124 40F20003 		movw	r3, #:lower16:N_roll
+ 566 0128 C0F20003 		movt	r3, #:upper16:N_roll
+ 567 012c D3ED007A 		flds	s15, [r3, #0]
+ 568 0130 66EEA76A 		fmuls	s13, s13, s15
+ 569 0134 40F20003 		movw	r3, #:lower16:T
+ 570 0138 C0F20003 		movt	r3, #:upper16:T
+ 571 013c D3ED007A 		flds	s15, [r3, #0]
+ 572 0140 66EEA77A 		fmuls	s15, s13, s15
+ 573 0144 37EE277A 		fadds	s14, s14, s15
+ 574 0148 40F20003 		movw	r3, #:lower16:D_roll
+ 575 014c C0F20003 		movt	r3, #:upper16:D_roll
+ 576 0150 D3ED007A 		flds	s15, [r3, #0]
+ 577 0154 77EEA76A 		fadds	s13, s15, s15
+ 578 0158 40F20003 		movw	r3, #:lower16:N_roll
+ 579 015c C0F20003 		movt	r3, #:upper16:N_roll
+ 580 0160 D3ED007A 		flds	s15, [r3, #0]
+ 581 0164 66EEA77A 		fmuls	s15, s13, s15
+ 582 0168 77EE677A 		fsubs	s15, s14, s15
+ 583 016c 40F20003 		movw	r3, #:lower16:b_roll
+ 584 0170 C0F20003 		movt	r3, #:upper16:b_roll
+ 585 0174 C3ED017A 		fsts	s15, [r3, #4]
+ 156:../Main.c     **** 	b_roll[2]=P_roll+D_roll*N_roll;
+ 586              		.loc 1 156 0
+ 587 0178 40F20003 		movw	r3, #:lower16:D_roll
+ 588 017c C0F20003 		movt	r3, #:upper16:D_roll
+ 589 0180 93ED007A 		flds	s14, [r3, #0]
+ 590 0184 40F20003 		movw	r3, #:lower16:N_roll
+ 591 0188 C0F20003 		movt	r3, #:upper16:N_roll
+ 592 018c D3ED007A 		flds	s15, [r3, #0]
+ 593 0190 27EE277A 		fmuls	s14, s14, s15
+ 594 0194 40F20003 		movw	r3, #:lower16:P_roll
+ 595 0198 C0F20003 		movt	r3, #:upper16:P_roll
+ 596 019c D3ED007A 		flds	s15, [r3, #0]
+ 597 01a0 77EE277A 		fadds	s15, s14, s15
+ 598 01a4 40F20003 		movw	r3, #:lower16:b_roll
+ 599 01a8 C0F20003 		movt	r3, #:upper16:b_roll
+ 600 01ac C3ED027A 		fsts	s15, [r3, #8]
+ 157:../Main.c     **** 	a_roll[0]=1-N_roll*T;
+ 601              		.loc 1 157 0
+ 602 01b0 40F20003 		movw	r3, #:lower16:N_roll
+ 603 01b4 C0F20003 		movt	r3, #:upper16:N_roll
+ 604 01b8 93ED007A 		flds	s14, [r3, #0]
+ 605 01bc 40F20003 		movw	r3, #:lower16:T
+ 606 01c0 C0F20003 		movt	r3, #:upper16:T
+ 607 01c4 D3ED007A 		flds	s15, [r3, #0]
+ 608 01c8 67EE277A 		fmuls	s15, s14, s15
+ 609 01cc B7EE007A 		fconsts	s14, #112
+ 610 01d0 77EE677A 		fsubs	s15, s14, s15
+ 611 01d4 40F20003 		movw	r3, #:lower16:a_roll
+ 612 01d8 C0F20003 		movt	r3, #:upper16:a_roll
+ 613 01dc C3ED007A 		fsts	s15, [r3, #0]
+ 158:../Main.c     **** 	a_roll[1]=N_roll*T-2;
+ 614              		.loc 1 158 0
+ 615 01e0 40F20003 		movw	r3, #:lower16:N_roll
+ 616 01e4 C0F20003 		movt	r3, #:upper16:N_roll
+ 617 01e8 93ED007A 		flds	s14, [r3, #0]
+ 618 01ec 40F20003 		movw	r3, #:lower16:T
+ 619 01f0 C0F20003 		movt	r3, #:upper16:T
+ 620 01f4 D3ED007A 		flds	s15, [r3, #0]
+ 621 01f8 27EE277A 		fmuls	s14, s14, s15
+ 622 01fc F0EE007A 		fconsts	s15, #0
+ 623 0200 77EE677A 		fsubs	s15, s14, s15
+ 624 0204 40F20003 		movw	r3, #:lower16:a_roll
+ 625 0208 C0F20003 		movt	r3, #:upper16:a_roll
+ 626 020c C3ED017A 		fsts	s15, [r3, #4]
+ 159:../Main.c     **** 
+ 160:../Main.c     **** 	b_pitch[0]=P_pitch-I_pitch*T-P_pitch*N_pitch*T+N_pitch*I_pitch*T*T+D_pitch*N_pitch;
+ 627              		.loc 1 160 0
+ 628 0210 40F20003 		movw	r3, #:lower16:P_pitch
+ 629 0214 C0F20003 		movt	r3, #:upper16:P_pitch
+ 630 0218 93ED007A 		flds	s14, [r3, #0]
+ 631 021c 40F20003 		movw	r3, #:lower16:I_pitch
+ 632 0220 C0F20003 		movt	r3, #:upper16:I_pitch
+ 633 0224 D3ED006A 		flds	s13, [r3, #0]
+ 634 0228 40F20003 		movw	r3, #:lower16:T
+ 635 022c C0F20003 		movt	r3, #:upper16:T
+ 636 0230 D3ED007A 		flds	s15, [r3, #0]
+ 637 0234 66EEA77A 		fmuls	s15, s13, s15
+ 638 0238 37EE677A 		fsubs	s14, s14, s15
+ 639 023c 40F20003 		movw	r3, #:lower16:P_pitch
+ 640 0240 C0F20003 		movt	r3, #:upper16:P_pitch
+ 641 0244 D3ED006A 		flds	s13, [r3, #0]
+ 642 0248 40F20003 		movw	r3, #:lower16:N_pitch
+ 643 024c C0F20003 		movt	r3, #:upper16:N_pitch
+ 644 0250 D3ED007A 		flds	s15, [r3, #0]
+ 645 0254 66EEA76A 		fmuls	s13, s13, s15
+ 646 0258 40F20003 		movw	r3, #:lower16:T
+ 647 025c C0F20003 		movt	r3, #:upper16:T
+ 648 0260 D3ED007A 		flds	s15, [r3, #0]
+ 649 0264 66EEA77A 		fmuls	s15, s13, s15
+ 650 0268 37EE677A 		fsubs	s14, s14, s15
+ 651 026c 40F20003 		movw	r3, #:lower16:N_pitch
+ 652 0270 C0F20003 		movt	r3, #:upper16:N_pitch
+ 653 0274 D3ED006A 		flds	s13, [r3, #0]
+ 654 0278 40F20003 		movw	r3, #:lower16:I_pitch
+ 655 027c C0F20003 		movt	r3, #:upper16:I_pitch
+ 656 0280 D3ED007A 		flds	s15, [r3, #0]
+ 657 0284 66EEA76A 		fmuls	s13, s13, s15
+ 658 0288 40F20003 		movw	r3, #:lower16:T
+ 659 028c C0F20003 		movt	r3, #:upper16:T
+ 660 0290 D3ED007A 		flds	s15, [r3, #0]
+ 661 0294 66EEA76A 		fmuls	s13, s13, s15
+ 662 0298 40F20003 		movw	r3, #:lower16:T
+ 663 029c C0F20003 		movt	r3, #:upper16:T
+ 664 02a0 D3ED007A 		flds	s15, [r3, #0]
+ 665 02a4 66EEA77A 		fmuls	s15, s13, s15
+ 666 02a8 37EE277A 		fadds	s14, s14, s15
+ 667 02ac 40F20003 		movw	r3, #:lower16:D_pitch
+ 668 02b0 C0F20003 		movt	r3, #:upper16:D_pitch
+ 669 02b4 D3ED006A 		flds	s13, [r3, #0]
+ 670 02b8 40F20003 		movw	r3, #:lower16:N_pitch
+ 671 02bc C0F20003 		movt	r3, #:upper16:N_pitch
+ 672 02c0 D3ED007A 		flds	s15, [r3, #0]
+ 673 02c4 66EEA77A 		fmuls	s15, s13, s15
+ 674 02c8 77EE277A 		fadds	s15, s14, s15
+ 675 02cc 40F20003 		movw	r3, #:lower16:b_pitch
+ 676 02d0 C0F20003 		movt	r3, #:upper16:b_pitch
+ 677 02d4 C3ED007A 		fsts	s15, [r3, #0]
+ 161:../Main.c     **** 	b_pitch[1]=I_pitch*T-2*P_pitch+P_pitch*N_pitch*T-2*D_pitch*N_pitch;
+ 678              		.loc 1 161 0
+ 679 02d8 40F20003 		movw	r3, #:lower16:I_pitch
+ 680 02dc C0F20003 		movt	r3, #:upper16:I_pitch
+ 681 02e0 93ED007A 		flds	s14, [r3, #0]
+ 682 02e4 40F20003 		movw	r3, #:lower16:T
+ 683 02e8 C0F20003 		movt	r3, #:upper16:T
+ 684 02ec D3ED007A 		flds	s15, [r3, #0]
+ 685 02f0 27EE277A 		fmuls	s14, s14, s15
+ 686 02f4 40F20003 		movw	r3, #:lower16:P_pitch
+ 687 02f8 C0F20003 		movt	r3, #:upper16:P_pitch
+ 688 02fc D3ED007A 		flds	s15, [r3, #0]
+ 689 0300 77EEA77A 		fadds	s15, s15, s15
+ 690 0304 37EE677A 		fsubs	s14, s14, s15
+ 691 0308 40F20003 		movw	r3, #:lower16:P_pitch
+ 692 030c C0F20003 		movt	r3, #:upper16:P_pitch
+ 693 0310 D3ED006A 		flds	s13, [r3, #0]
+ 694 0314 40F20003 		movw	r3, #:lower16:N_pitch
+ 695 0318 C0F20003 		movt	r3, #:upper16:N_pitch
+ 696 031c D3ED007A 		flds	s15, [r3, #0]
+ 697 0320 66EEA76A 		fmuls	s13, s13, s15
+ 698 0324 40F20003 		movw	r3, #:lower16:T
+ 699 0328 C0F20003 		movt	r3, #:upper16:T
+ 700 032c D3ED007A 		flds	s15, [r3, #0]
+ 701 0330 66EEA77A 		fmuls	s15, s13, s15
+ 702 0334 37EE277A 		fadds	s14, s14, s15
+ 703 0338 40F20003 		movw	r3, #:lower16:D_pitch
+ 704 033c C0F20003 		movt	r3, #:upper16:D_pitch
+ 705 0340 D3ED007A 		flds	s15, [r3, #0]
+ 706 0344 77EEA76A 		fadds	s13, s15, s15
+ 707 0348 40F20003 		movw	r3, #:lower16:N_pitch
+ 708 034c C0F20003 		movt	r3, #:upper16:N_pitch
+ 709 0350 D3ED007A 		flds	s15, [r3, #0]
+ 710 0354 66EEA77A 		fmuls	s15, s13, s15
+ 711 0358 77EE677A 		fsubs	s15, s14, s15
+ 712 035c 40F20003 		movw	r3, #:lower16:b_pitch
+ 713 0360 C0F20003 		movt	r3, #:upper16:b_pitch
+ 714 0364 C3ED017A 		fsts	s15, [r3, #4]
+ 162:../Main.c     **** 	b_pitch[2]=P_pitch+D_pitch*N_pitch;
+ 715              		.loc 1 162 0
+ 716 0368 40F20003 		movw	r3, #:lower16:D_pitch
+ 717 036c C0F20003 		movt	r3, #:upper16:D_pitch
+ 718 0370 93ED007A 		flds	s14, [r3, #0]
+ 719 0374 40F20003 		movw	r3, #:lower16:N_pitch
+ 720 0378 C0F20003 		movt	r3, #:upper16:N_pitch
+ 721 037c D3ED007A 		flds	s15, [r3, #0]
+ 722 0380 27EE277A 		fmuls	s14, s14, s15
+ 723 0384 40F20003 		movw	r3, #:lower16:P_pitch
+ 724 0388 C0F20003 		movt	r3, #:upper16:P_pitch
+ 725 038c D3ED007A 		flds	s15, [r3, #0]
+ 726 0390 77EE277A 		fadds	s15, s14, s15
+ 727 0394 40F20003 		movw	r3, #:lower16:b_pitch
+ 728 0398 C0F20003 		movt	r3, #:upper16:b_pitch
+ 729 039c C3ED027A 		fsts	s15, [r3, #8]
+ 163:../Main.c     **** 	a_pitch[0]=1-N_pitch*T;
+ 730              		.loc 1 163 0
+ 731 03a0 40F20003 		movw	r3, #:lower16:N_pitch
+ 732 03a4 C0F20003 		movt	r3, #:upper16:N_pitch
+ 733 03a8 93ED007A 		flds	s14, [r3, #0]
+ 734 03ac 40F20003 		movw	r3, #:lower16:T
+ 735 03b0 C0F20003 		movt	r3, #:upper16:T
+ 736 03b4 D3ED007A 		flds	s15, [r3, #0]
+ 737 03b8 67EE277A 		fmuls	s15, s14, s15
+ 738 03bc B7EE007A 		fconsts	s14, #112
+ 739 03c0 77EE677A 		fsubs	s15, s14, s15
+ 740 03c4 40F20003 		movw	r3, #:lower16:a_pitch
+ 741 03c8 C0F20003 		movt	r3, #:upper16:a_pitch
+ 742 03cc C3ED007A 		fsts	s15, [r3, #0]
+ 164:../Main.c     **** 	a_pitch[1]=N_pitch*T-2;
+ 743              		.loc 1 164 0
+ 744 03d0 40F20003 		movw	r3, #:lower16:N_pitch
+ 745 03d4 C0F20003 		movt	r3, #:upper16:N_pitch
+ 746 03d8 93ED007A 		flds	s14, [r3, #0]
+ 747 03dc 40F20003 		movw	r3, #:lower16:T
+ 748 03e0 C0F20003 		movt	r3, #:upper16:T
+ 749 03e4 D3ED007A 		flds	s15, [r3, #0]
+ 750 03e8 27EE277A 		fmuls	s14, s14, s15
+ 751 03ec F0EE007A 		fconsts	s15, #0
+ 752 03f0 77EE677A 		fsubs	s15, s14, s15
+ 753 03f4 40F20003 		movw	r3, #:lower16:a_pitch
+ 754 03f8 C0F20003 		movt	r3, #:upper16:a_pitch
+ 755 03fc C3ED017A 		fsts	s15, [r3, #4]
+ 165:../Main.c     **** 
+ 166:../Main.c     **** 	WatchRC_Init(); //Initialize RC watchdog
+ 756              		.loc 1 166 0
+ 757 0400 FFF7FEFF 		bl	WatchRC_Init
+ 167:../Main.c     **** 
+ 168:../Main.c     **** 	//initialize DPS310
+ 169:../Main.c     **** 	setupDPS310();
+ 758              		.loc 1 169 0
+ 759 0404 FFF7FEFF 		bl	setupDPS310
+ 170:../Main.c     **** 	getCoefficients();
+ 760              		.loc 1 170 0
+ 761 0408 FFF7FEFF 		bl	getCoefficients
+ 171:../Main.c     **** 
+ 172:../Main.c     **** 	//initialize FIR Filter
+ 173:../Main.c     **** 	PressureFIR = Initialize_FIR_Filter(PressureFIR, MOVING_AVERAGE);
+ 762              		.loc 1 173 0
+ 763 040c 40F20008 		movw	r8, #:lower16:PressureFIR
+ 764 0410 C0F20008 		movt	r8, #:upper16:PressureFIR
+ 765 0414 BE46     		mov	lr, r7
+ 766 0416 40F20006 		movw	r6, #:lower16:PressureFIR
+ 767 041a C0F20006 		movt	r6, #:upper16:PressureFIR
+ 768 041e 4FF00003 		mov	r3, #0
+ 769 0422 0B93     		str	r3, [sp, #44]
+ 770 0424 6C46     		mov	r4, sp
+ 771 0426 06F10C05 		add	r5, r6, #12
+ 772 042a 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 773 042c 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 774 042e 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 775 0430 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 776 0432 95E80700 		ldmia	r5, {r0, r1, r2}
+ 777 0436 84E80700 		stmia	r4, {r0, r1, r2}
+ 778 043a 96E80E00 		ldmia	r6, {r1, r2, r3}
+ 779 043e 7046     		mov	r0, lr
+ 780 0440 FFF7FEFF 		bl	Initialize_FIR_Filter
+ 781 0444 4446     		mov	r4, r8
+ 782 0446 3D46     		mov	r5, r7
+ 783 0448 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 784 044a 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 785 044c 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 786 044e 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 787 0450 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 788 0452 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 789 0454 95E80300 		ldmia	r5, {r0, r1}
+ 790 0458 84E80300 		stmia	r4, {r0, r1}
+ 174:../Main.c     **** 
+ 175:../Main.c     **** 	delay(2000);
+ 791              		.loc 1 175 0
+ 792 045c 4FF4FA60 		mov	r0, #2000
+ 793 0460 FFF7FEFF 		bl	delay
+ 176:../Main.c     **** 
+ 177:../Main.c     **** 	PWMSP001_Start(&PWMSP001_Handle0);
+ 794              		.loc 1 177 0
+ 795 0464 40F20000 		movw	r0, #:lower16:PWMSP001_Handle0
+ 796 0468 C0F20000 		movt	r0, #:upper16:PWMSP001_Handle0
+ 797 046c FFF7FEFF 		bl	PWMSP001_Start
+ 178:../Main.c     **** }
+ 798              		.loc 1 178 0
+ 799 0470 07F13807 		add	r7, r7, #56
+ 800 0474 BD46     		mov	sp, r7
+ 801 0476 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 802              		.cfi_endproc
+ 803              	.LFE154:
+ 805 047a 00BF     		.section	.rodata
+ 806              		.align	2
+ 807              	.LC0:
+ 808 0028 5468726F 		.ascii	"Throttle: %f   Rudder: %f   Elevator: %f   Aileron:"
+ 808      74746C65 
+ 808      3A202566 
+ 808      20202052 
+ 808      75646465 
+ 809 005b 2025660A 		.ascii	" %f\012\000"
+ 809      00
+ 810              		.align	2
+ 811              	.LC1:
+ 812 0060 593A2531 		.ascii	"Y:%1.2f P:%1.2f R:%1.2f\012\000"
+ 812      2E326620 
+ 812      503A2531 
+ 812      2E326620 
+ 812      523A2531 
+ 813 0079 000000   		.align	2
+ 814              	.LC2:
+ 815 007c 50574D31 		.ascii	"PWM1:%f PWM2:%f PWM3:%f PWM4:%f\012\000"
+ 815      3A256620 
+ 815      50574D32 
+ 815      3A256620 
+ 815      50574D33 
+ 816 009d 000000   		.align	2
+ 817              	.LC3:
+ 818 00a0 65593A25 		.ascii	"eY:%f eP:%f eR:%f\012\000"
+ 818      66206550 
+ 818      3A256620 
+ 818      65523A25 
+ 818      660A00
+ 819 00b3 00       		.align	2
+ 820              	.LC4:
+ 821 00b4 54696D65 		.ascii	"TimerSensor:%d TimerMain:%d TimerRC:%d\012\000"
+ 821      7253656E 
+ 821      736F723A 
+ 821      25642054 
+ 821      696D6572 
+ 822              		.align	2
+ 823              	.LC5:
+ 824 00dc 4779726F 		.ascii	"GyroX:%3.2f GyroY:%3.2f GyroZ:%3.2f\012\000"
+ 824      583A2533 
+ 824      2E326620 
+ 824      4779726F 
+ 824      593A2533 
+ 825 0101 000000   		.align	2
+ 826              	.LC6:
+ 827 0104 41636358 		.ascii	"AccX:%f AccY:%f AccZ:%f\012\000"
+ 827      3A256620 
+ 827      41636359 
+ 827      3A256620 
+ 827      4163635A 
+ 828 011d 000000   		.align	2
+ 829              	.LC7:
+ 830 0120 50726573 		.ascii	"Pressure:%f Temperature:%f\012\000"
+ 830      73757265 
+ 830      3A256620 
+ 830      54656D70 
+ 830      65726174 
+ 831              		.align	2
+ 832              	.LC8:
+ 833 013c 56426174 		.ascii	"VBat:%0.2f\012\000"
+ 833      3A25302E 
+ 833      32660A00 
+ 834              		.section	.text.main,"ax",%progbits
+ 835              		.align	2
+ 836              		.global	main
+ 837              		.thumb
+ 838              		.thumb_func
+ 840              	main:
+ 841              	.LFB155:
+ 179:../Main.c     **** 
+ 180:../Main.c     **** int main(void)
+ 181:../Main.c     **** {
+ 842              		.loc 1 181 0
+ 843              		.cfi_startproc
+ 844              		@ args = 0, pretend = 0, frame = 8
+ 845              		@ frame_needed = 1, uses_anonymous_args = 0
+ 846 0000 2DE9B04F 		push	{r4, r5, r7, r8, r9, sl, fp, lr}
+ 847              	.LCFI6:
+ 848              		.cfi_def_cfa_offset 32
+ 849              		.cfi_offset 4, -32
+ 850              		.cfi_offset 5, -28
+ 851              		.cfi_offset 7, -24
+ 852              		.cfi_offset 8, -20
+ 853              		.cfi_offset 9, -16
+ 854              		.cfi_offset 10, -12
+ 855              		.cfi_offset 11, -8
+ 856              		.cfi_offset 14, -4
+ 857 0004 88B0     		sub	sp, sp, #32
+ 858              	.LCFI7:
+ 859              		.cfi_def_cfa_offset 64
+ 860 0006 06AF     		add	r7, sp, #24
+ 861              	.LCFI8:
+ 862              		.cfi_def_cfa 7, 40
+ 182:../Main.c     **** 	uint16_t Bytes = 0;
+ 863              		.loc 1 182 0
+ 864 0008 4FF00003 		mov	r3, #0
+ 865 000c BB80     		strh	r3, [r7, #4]	@ movhi
+ 183:../Main.c     **** 	uint16_t nByte;
+ 184:../Main.c     **** //	status_t status;		// Declaration of return variable for DAVE3 APIs (toggle comment if required)
+ 185:../Main.c     **** 
+ 186:../Main.c     **** 	DAVE_Init();			// Initialization of DAVE Apps
+ 866              		.loc 1 186 0
+ 867 000e FFF7FEFF 		bl	DAVE_Init
+ 187:../Main.c     **** 	USBVC001_Init();		//Initialize the USB core in Device mode
+ 868              		.loc 1 187 0
+ 869 0012 FFF7FEFF 		bl	USBVC001_Init
+ 188:../Main.c     **** 
+ 189:../Main.c     **** 	Initialize();
+ 870              		.loc 1 189 0
+ 871 0016 FFF7FEFF 		bl	Initialize
+ 872              	.L27:
+ 190:../Main.c     **** 
+ 191:../Main.c     **** 	while(1)
+ 192:../Main.c     **** 	{
+ 193:../Main.c     **** 
+ 194:../Main.c     **** 	    //--------------------------------------------------------------------------------------------
+ 195:../Main.c     **** 		//		for serial communication (USB)
+ 196:../Main.c     **** 
+ 197:../Main.c     **** 		// Check number of bytes received
+ 198:../Main.c     **** 	    Bytes = USBVC001_BytesReceived();
+ 873              		.loc 1 198 0
+ 874 001a FFF7FEFF 		bl	USBVC001_BytesReceived
+ 875 001e 0346     		mov	r3, r0
+ 876 0020 BB80     		strh	r3, [r7, #4]	@ movhi
+ 199:../Main.c     **** 
+ 200:../Main.c     **** 	    if(Bytes != 0)
+ 877              		.loc 1 200 0
+ 878 0022 BB88     		ldrh	r3, [r7, #4]
+ 879 0024 002B     		cmp	r3, #0
+ 880 0026 00F0F181 		beq	.L11
+ 201:../Main.c     **** 	    {
+ 202:../Main.c     **** 	    	for(nByte = 0; nByte < Bytes; nByte++)
+ 881              		.loc 1 202 0
+ 882 002a 4FF00003 		mov	r3, #0
+ 883 002e FB80     		strh	r3, [r7, #6]	@ movhi
+ 884 0030 09E0     		b	.L12
+ 885              	.L13:
+ 203:../Main.c     **** 	    	{
+ 204:../Main.c     **** 	    		// Receive Byte
+ 205:../Main.c     **** 	    		if(USBVC001_ReceiveByte(&TxBuffer[0]) != DAVEApp_SUCCESS)
+ 886              		.loc 1 205 0
+ 887 0032 40F20000 		movw	r0, #:lower16:TxBuffer
+ 888 0036 C0F20000 		movt	r0, #:upper16:TxBuffer
+ 889 003a FFF7FEFF 		bl	USBVC001_ReceiveByte
+ 202:../Main.c     **** 	    	for(nByte = 0; nByte < Bytes; nByte++)
+ 890              		.loc 1 202 0
+ 891 003e FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 892 0040 03F10103 		add	r3, r3, #1
+ 893 0044 FB80     		strh	r3, [r7, #6]	@ movhi
+ 894              	.L12:
+ 202:../Main.c     **** 	    	for(nByte = 0; nByte < Bytes; nByte++)
+ 895              		.loc 1 202 0 is_stmt 0 discriminator 1
+ 896 0046 FA88     		ldrh	r2, [r7, #6]
+ 897 0048 BB88     		ldrh	r3, [r7, #4]
+ 898 004a 9A42     		cmp	r2, r3
+ 899 004c F1D3     		bcc	.L13
+ 206:../Main.c     **** 	    		{
+ 207:../Main.c     **** 	    			//Error
+ 208:../Main.c     **** 	    		}
+ 209:../Main.c     **** 	    	}
+ 210:../Main.c     **** 			switch(TxBuffer[0])
+ 900              		.loc 1 210 0 is_stmt 1
+ 901 004e 40F20003 		movw	r3, #:lower16:TxBuffer
+ 902 0052 C0F20003 		movt	r3, #:upper16:TxBuffer
+ 903 0056 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 904 0058 5BB2     		sxtb	r3, r3
+ 905 005a A3F13003 		sub	r3, r3, #48
+ 906 005e 092B     		cmp	r3, #9
+ 907 0060 00F2CE81 		bhi	.L14
+ 908 0064 01A2     		adr	r2, .L25
+ 909 0066 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 910 006a 00BF     		.align	2
+ 911              	.L25:
+ 912 006c D7030000 		.word	.L15+1
+ 913 0070 95000000 		.word	.L16+1
+ 914 0074 0B010000 		.word	.L17+1
+ 915 0078 19010000 		.word	.L18+1
+ 916 007c 77010000 		.word	.L19+1
+ 917 0080 ED010000 		.word	.L20+1
+ 918 0084 87020000 		.word	.L21+1
+ 919 0088 BD020000 		.word	.L22+1
+ 920 008c 27030000 		.word	.L23+1
+ 921 0090 91030000 		.word	.L24+1
+ 922              	.L16:
+ 211:../Main.c     **** 			{
+ 212:../Main.c     **** 				case '1':
+ 213:../Main.c     **** 					sprintf(c, "Throttle: %f   Rudder: %f   Elevator: %f   Aileron: %f\n", powerD, yawD_dot, pitch
+ 923              		.loc 1 213 0
+ 924 0094 40F20003 		movw	r3, #:lower16:powerD
+ 925 0098 C0F20003 		movt	r3, #:upper16:powerD
+ 926 009c 1B68     		ldr	r3, [r3, #0]	@ float
+ 927 009e 1846     		mov	r0, r3	@ float
+ 928 00a0 FFF7FEFF 		bl	__aeabi_f2d
+ 929 00a4 0446     		mov	r4, r0
+ 930 00a6 0D46     		mov	r5, r1
+ 931 00a8 40F20003 		movw	r3, #:lower16:yawD_dot
+ 932 00ac C0F20003 		movt	r3, #:upper16:yawD_dot
+ 933 00b0 1B68     		ldr	r3, [r3, #0]	@ float
+ 934 00b2 1846     		mov	r0, r3	@ float
+ 935 00b4 FFF7FEFF 		bl	__aeabi_f2d
+ 936 00b8 8246     		mov	sl, r0
+ 937 00ba 8B46     		mov	fp, r1
+ 938 00bc 40F20003 		movw	r3, #:lower16:pitchD
+ 939 00c0 C0F20003 		movt	r3, #:upper16:pitchD
+ 940 00c4 1B68     		ldr	r3, [r3, #0]	@ float
+ 941 00c6 1846     		mov	r0, r3	@ float
+ 942 00c8 FFF7FEFF 		bl	__aeabi_f2d
+ 943 00cc 8046     		mov	r8, r0
+ 944 00ce 8946     		mov	r9, r1
+ 945 00d0 40F20003 		movw	r3, #:lower16:rollD
+ 946 00d4 C0F20003 		movt	r3, #:upper16:rollD
+ 947 00d8 1B68     		ldr	r3, [r3, #0]	@ float
+ 948 00da 1846     		mov	r0, r3	@ float
+ 949 00dc FFF7FEFF 		bl	__aeabi_f2d
+ 950 00e0 0246     		mov	r2, r0
+ 951 00e2 0B46     		mov	r3, r1
+ 952 00e4 CDE900AB 		strd	sl, [sp]
+ 953 00e8 CDE90289 		strd	r8, [sp, #8]
+ 954 00ec CDE90423 		strd	r2, [sp, #16]
+ 955 00f0 40F20000 		movw	r0, #:lower16:c
+ 956 00f4 C0F20000 		movt	r0, #:upper16:c
+ 957 00f8 40F20001 		movw	r1, #:lower16:.LC0
+ 958 00fc C0F20001 		movt	r1, #:upper16:.LC0
+ 959 0100 2246     		mov	r2, r4
+ 960 0102 2B46     		mov	r3, r5
+ 961 0104 FFF7FEFF 		bl	sprintf
+ 214:../Main.c     **** 					break;
+ 962              		.loc 1 214 0
+ 963 0108 7AE1     		b	.L14
+ 964              	.L17:
+ 215:../Main.c     **** 				case '2':
+ 216:../Main.c     **** 					PWMSP001_Start(&PWMSP001_Handle2);
+ 965              		.loc 1 216 0
+ 966 010a 40F20000 		movw	r0, #:lower16:PWMSP001_Handle2
+ 967 010e C0F20000 		movt	r0, #:upper16:PWMSP001_Handle2
+ 968 0112 FFF7FEFF 		bl	PWMSP001_Start
+ 217:../Main.c     **** 					break;
+ 969              		.loc 1 217 0
+ 970 0116 73E1     		b	.L14
+ 971              	.L18:
+ 218:../Main.c     **** 				case '3':
+ 219:../Main.c     **** 					sprintf(c, "Y:%1.2f P:%1.2f R:%1.2f\n", YPR[0], YPR[1], YPR[2]);
+ 972              		.loc 1 219 0
+ 973 0118 40F20003 		movw	r3, #:lower16:YPR
+ 974 011c C0F20003 		movt	r3, #:upper16:YPR
+ 975 0120 1B68     		ldr	r3, [r3, #0]	@ float
+ 976 0122 1846     		mov	r0, r3	@ float
+ 977 0124 FFF7FEFF 		bl	__aeabi_f2d
+ 978 0128 0446     		mov	r4, r0
+ 979 012a 0D46     		mov	r5, r1
+ 980 012c 40F20003 		movw	r3, #:lower16:YPR
+ 981 0130 C0F20003 		movt	r3, #:upper16:YPR
+ 982 0134 5B68     		ldr	r3, [r3, #4]	@ float
+ 983 0136 1846     		mov	r0, r3	@ float
+ 984 0138 FFF7FEFF 		bl	__aeabi_f2d
+ 985 013c 8046     		mov	r8, r0
+ 986 013e 8946     		mov	r9, r1
+ 987 0140 40F20003 		movw	r3, #:lower16:YPR
+ 988 0144 C0F20003 		movt	r3, #:upper16:YPR
+ 989 0148 9B68     		ldr	r3, [r3, #8]	@ float
+ 990 014a 1846     		mov	r0, r3	@ float
+ 991 014c FFF7FEFF 		bl	__aeabi_f2d
+ 992 0150 0246     		mov	r2, r0
+ 993 0152 0B46     		mov	r3, r1
+ 994 0154 CDE90089 		strd	r8, [sp]
+ 995 0158 CDE90223 		strd	r2, [sp, #8]
+ 996 015c 40F20000 		movw	r0, #:lower16:c
+ 997 0160 C0F20000 		movt	r0, #:upper16:c
+ 998 0164 40F20001 		movw	r1, #:lower16:.LC1
+ 999 0168 C0F20001 		movt	r1, #:upper16:.LC1
+ 1000 016c 2246     		mov	r2, r4
+ 1001 016e 2B46     		mov	r3, r5
+ 1002 0170 FFF7FEFF 		bl	sprintf
+ 220:../Main.c     **** 					break;
+ 1003              		.loc 1 220 0
+ 1004 0174 44E1     		b	.L14
+ 1005              	.L19:
+ 221:../Main.c     **** 				case '4':
+ 222:../Main.c     **** 					sprintf(c, "PWM1:%f PWM2:%f PWM3:%f PWM4:%f\n", PWM_percent[0], PWM_percent[1], PWM_percent[2]
+ 1006              		.loc 1 222 0
+ 1007 0176 40F20003 		movw	r3, #:lower16:PWM_percent
+ 1008 017a C0F20003 		movt	r3, #:upper16:PWM_percent
+ 1009 017e 1B68     		ldr	r3, [r3, #0]	@ float
+ 1010 0180 1846     		mov	r0, r3	@ float
+ 1011 0182 FFF7FEFF 		bl	__aeabi_f2d
+ 1012 0186 0446     		mov	r4, r0
+ 1013 0188 0D46     		mov	r5, r1
+ 1014 018a 40F20003 		movw	r3, #:lower16:PWM_percent
+ 1015 018e C0F20003 		movt	r3, #:upper16:PWM_percent
+ 1016 0192 5B68     		ldr	r3, [r3, #4]	@ float
+ 1017 0194 1846     		mov	r0, r3	@ float
+ 1018 0196 FFF7FEFF 		bl	__aeabi_f2d
+ 1019 019a 8246     		mov	sl, r0
+ 1020 019c 8B46     		mov	fp, r1
+ 1021 019e 40F20003 		movw	r3, #:lower16:PWM_percent
+ 1022 01a2 C0F20003 		movt	r3, #:upper16:PWM_percent
+ 1023 01a6 9B68     		ldr	r3, [r3, #8]	@ float
+ 1024 01a8 1846     		mov	r0, r3	@ float
+ 1025 01aa FFF7FEFF 		bl	__aeabi_f2d
+ 1026 01ae 8046     		mov	r8, r0
+ 1027 01b0 8946     		mov	r9, r1
+ 1028 01b2 40F20003 		movw	r3, #:lower16:PWM_percent
+ 1029 01b6 C0F20003 		movt	r3, #:upper16:PWM_percent
+ 1030 01ba DB68     		ldr	r3, [r3, #12]	@ float
+ 1031 01bc 1846     		mov	r0, r3	@ float
+ 1032 01be FFF7FEFF 		bl	__aeabi_f2d
+ 1033 01c2 0246     		mov	r2, r0
+ 1034 01c4 0B46     		mov	r3, r1
+ 1035 01c6 CDE900AB 		strd	sl, [sp]
+ 1036 01ca CDE90289 		strd	r8, [sp, #8]
+ 1037 01ce CDE90423 		strd	r2, [sp, #16]
+ 1038 01d2 40F20000 		movw	r0, #:lower16:c
+ 1039 01d6 C0F20000 		movt	r0, #:upper16:c
+ 1040 01da 40F20001 		movw	r1, #:lower16:.LC2
+ 1041 01de C0F20001 		movt	r1, #:upper16:.LC2
+ 1042 01e2 2246     		mov	r2, r4
+ 1043 01e4 2B46     		mov	r3, r5
+ 1044 01e6 FFF7FEFF 		bl	sprintf
+ 223:../Main.c     **** 					break;
+ 1045              		.loc 1 223 0
+ 1046 01ea 09E1     		b	.L14
+ 1047              	.L20:
+ 224:../Main.c     **** 				case '5':
+ 225:../Main.c     **** 					sprintf(c, "eY:%f eP:%f eR:%f\n", yawD_dot-YPR[0], pitchD-YPR[1], rollD-YPR[2]);
+ 1048              		.loc 1 225 0
+ 1049 01ec 40F20003 		movw	r3, #:lower16:yawD_dot
+ 1050 01f0 C0F20003 		movt	r3, #:upper16:yawD_dot
+ 1051 01f4 93ED007A 		flds	s14, [r3, #0]
+ 1052 01f8 40F20003 		movw	r3, #:lower16:YPR
+ 1053 01fc C0F20003 		movt	r3, #:upper16:YPR
+ 1054 0200 D3ED007A 		flds	s15, [r3, #0]
+ 1055 0204 77EE677A 		fsubs	s15, s14, s15
+ 1056 0208 17EE900A 		fmrs	r0, s15
+ 1057 020c FFF7FEFF 		bl	__aeabi_f2d
+ 1058 0210 0446     		mov	r4, r0
+ 1059 0212 0D46     		mov	r5, r1
+ 1060 0214 40F20003 		movw	r3, #:lower16:pitchD
+ 1061 0218 C0F20003 		movt	r3, #:upper16:pitchD
+ 1062 021c 93ED007A 		flds	s14, [r3, #0]
+ 1063 0220 40F20003 		movw	r3, #:lower16:YPR
+ 1064 0224 C0F20003 		movt	r3, #:upper16:YPR
+ 1065 0228 D3ED017A 		flds	s15, [r3, #4]
+ 1066 022c 77EE677A 		fsubs	s15, s14, s15
+ 1067 0230 17EE900A 		fmrs	r0, s15
+ 1068 0234 FFF7FEFF 		bl	__aeabi_f2d
+ 1069 0238 8046     		mov	r8, r0
+ 1070 023a 8946     		mov	r9, r1
+ 1071 023c 40F20003 		movw	r3, #:lower16:rollD
+ 1072 0240 C0F20003 		movt	r3, #:upper16:rollD
+ 1073 0244 93ED007A 		flds	s14, [r3, #0]
+ 1074 0248 40F20003 		movw	r3, #:lower16:YPR
+ 1075 024c C0F20003 		movt	r3, #:upper16:YPR
+ 1076 0250 D3ED027A 		flds	s15, [r3, #8]
+ 1077 0254 77EE677A 		fsubs	s15, s14, s15
+ 1078 0258 17EE900A 		fmrs	r0, s15
+ 1079 025c FFF7FEFF 		bl	__aeabi_f2d
+ 1080 0260 0246     		mov	r2, r0
+ 1081 0262 0B46     		mov	r3, r1
+ 1082 0264 CDE90089 		strd	r8, [sp]
+ 1083 0268 CDE90223 		strd	r2, [sp, #8]
+ 1084 026c 40F20000 		movw	r0, #:lower16:c
+ 1085 0270 C0F20000 		movt	r0, #:upper16:c
+ 1086 0274 40F20001 		movw	r1, #:lower16:.LC3
+ 1087 0278 C0F20001 		movt	r1, #:upper16:.LC3
+ 1088 027c 2246     		mov	r2, r4
+ 1089 027e 2B46     		mov	r3, r5
+ 1090 0280 FFF7FEFF 		bl	sprintf
+ 226:../Main.c     **** 					break;
+ 1091              		.loc 1 226 0
+ 1092 0284 BCE0     		b	.L14
+ 1093              	.L21:
+ 227:../Main.c     **** 				case '6':
+ 228:../Main.c     **** 					sprintf(c, "TimerSensor:%d TimerMain:%d TimerRC:%d\n", (int)GetSensorCount(), (int)counter_mai
+ 1094              		.loc 1 228 0
+ 1095 0286 FFF7FEFF 		bl	GetSensorCount
+ 1096 028a 0346     		mov	r3, r0
+ 1097 028c 1D46     		mov	r5, r3
+ 1098 028e 40F20003 		movw	r3, #:lower16:counter_main
+ 1099 0292 C0F20003 		movt	r3, #:upper16:counter_main
+ 1100 0296 1B88     		ldrh	r3, [r3, #0]
+ 1101 0298 1C46     		mov	r4, r3
+ 1102 029a FFF7FEFF 		bl	GetRCCount
+ 1103 029e 0346     		mov	r3, r0
+ 1104 02a0 0093     		str	r3, [sp, #0]
+ 1105 02a2 40F20000 		movw	r0, #:lower16:c
+ 1106 02a6 C0F20000 		movt	r0, #:upper16:c
+ 1107 02aa 40F20001 		movw	r1, #:lower16:.LC4
+ 1108 02ae C0F20001 		movt	r1, #:upper16:.LC4
+ 1109 02b2 2A46     		mov	r2, r5
+ 1110 02b4 2346     		mov	r3, r4
+ 1111 02b6 FFF7FEFF 		bl	sprintf
+ 229:../Main.c     **** 					break;
+ 1112              		.loc 1 229 0
+ 1113 02ba A1E0     		b	.L14
+ 1114              	.L22:
+ 230:../Main.c     **** 				case '7':
+ 231:../Main.c     **** 					GetGyroData(sensorData);
+ 1115              		.loc 1 231 0
+ 1116 02bc 40F20000 		movw	r0, #:lower16:sensorData
+ 1117 02c0 C0F20000 		movt	r0, #:upper16:sensorData
+ 1118 02c4 FFF7FEFF 		bl	GetGyroData
+ 232:../Main.c     **** 					sprintf(c, "GyroX:%3.2f GyroY:%3.2f GyroZ:%3.2f\n", sensorData[0], sensorData[1], sensorData[2
+ 1119              		.loc 1 232 0
+ 1120 02c8 40F20003 		movw	r3, #:lower16:sensorData
+ 1121 02cc C0F20003 		movt	r3, #:upper16:sensorData
+ 1122 02d0 1B68     		ldr	r3, [r3, #0]	@ float
+ 1123 02d2 1846     		mov	r0, r3	@ float
+ 1124 02d4 FFF7FEFF 		bl	__aeabi_f2d
+ 1125 02d8 0446     		mov	r4, r0
+ 1126 02da 0D46     		mov	r5, r1
+ 1127 02dc 40F20003 		movw	r3, #:lower16:sensorData
+ 1128 02e0 C0F20003 		movt	r3, #:upper16:sensorData
+ 1129 02e4 5B68     		ldr	r3, [r3, #4]	@ float
+ 1130 02e6 1846     		mov	r0, r3	@ float
+ 1131 02e8 FFF7FEFF 		bl	__aeabi_f2d
+ 1132 02ec 8046     		mov	r8, r0
+ 1133 02ee 8946     		mov	r9, r1
+ 1134 02f0 40F20003 		movw	r3, #:lower16:sensorData
+ 1135 02f4 C0F20003 		movt	r3, #:upper16:sensorData
+ 1136 02f8 9B68     		ldr	r3, [r3, #8]	@ float
+ 1137 02fa 1846     		mov	r0, r3	@ float
+ 1138 02fc FFF7FEFF 		bl	__aeabi_f2d
+ 1139 0300 0246     		mov	r2, r0
+ 1140 0302 0B46     		mov	r3, r1
+ 1141 0304 CDE90089 		strd	r8, [sp]
+ 1142 0308 CDE90223 		strd	r2, [sp, #8]
+ 1143 030c 40F20000 		movw	r0, #:lower16:c
+ 1144 0310 C0F20000 		movt	r0, #:upper16:c
+ 1145 0314 40F20001 		movw	r1, #:lower16:.LC5
+ 1146 0318 C0F20001 		movt	r1, #:upper16:.LC5
+ 1147 031c 2246     		mov	r2, r4
+ 1148 031e 2B46     		mov	r3, r5
+ 1149 0320 FFF7FEFF 		bl	sprintf
+ 233:../Main.c     **** 					break;
+ 1150              		.loc 1 233 0
+ 1151 0324 6CE0     		b	.L14
+ 1152              	.L23:
+ 234:../Main.c     **** 				case '8':
+ 235:../Main.c     **** 					GetAccData(sensorData);
+ 1153              		.loc 1 235 0
+ 1154 0326 40F20000 		movw	r0, #:lower16:sensorData
+ 1155 032a C0F20000 		movt	r0, #:upper16:sensorData
+ 1156 032e FFF7FEFF 		bl	GetAccData
+ 236:../Main.c     **** 					sprintf(c, "AccX:%f AccY:%f AccZ:%f\n", sensorData[0], sensorData[1], sensorData[2]);
+ 1157              		.loc 1 236 0
+ 1158 0332 40F20003 		movw	r3, #:lower16:sensorData
+ 1159 0336 C0F20003 		movt	r3, #:upper16:sensorData
+ 1160 033a 1B68     		ldr	r3, [r3, #0]	@ float
+ 1161 033c 1846     		mov	r0, r3	@ float
+ 1162 033e FFF7FEFF 		bl	__aeabi_f2d
+ 1163 0342 0446     		mov	r4, r0
+ 1164 0344 0D46     		mov	r5, r1
+ 1165 0346 40F20003 		movw	r3, #:lower16:sensorData
+ 1166 034a C0F20003 		movt	r3, #:upper16:sensorData
+ 1167 034e 5B68     		ldr	r3, [r3, #4]	@ float
+ 1168 0350 1846     		mov	r0, r3	@ float
+ 1169 0352 FFF7FEFF 		bl	__aeabi_f2d
+ 1170 0356 8046     		mov	r8, r0
+ 1171 0358 8946     		mov	r9, r1
+ 1172 035a 40F20003 		movw	r3, #:lower16:sensorData
+ 1173 035e C0F20003 		movt	r3, #:upper16:sensorData
+ 1174 0362 9B68     		ldr	r3, [r3, #8]	@ float
+ 1175 0364 1846     		mov	r0, r3	@ float
+ 1176 0366 FFF7FEFF 		bl	__aeabi_f2d
+ 1177 036a 0246     		mov	r2, r0
+ 1178 036c 0B46     		mov	r3, r1
+ 1179 036e CDE90089 		strd	r8, [sp]
+ 1180 0372 CDE90223 		strd	r2, [sp, #8]
+ 1181 0376 40F20000 		movw	r0, #:lower16:c
+ 1182 037a C0F20000 		movt	r0, #:upper16:c
+ 1183 037e 40F20001 		movw	r1, #:lower16:.LC6
+ 1184 0382 C0F20001 		movt	r1, #:upper16:.LC6
+ 1185 0386 2246     		mov	r2, r4
+ 1186 0388 2B46     		mov	r3, r5
+ 1187 038a FFF7FEFF 		bl	sprintf
+ 237:../Main.c     **** 					break;
+ 1188              		.loc 1 237 0
+ 1189 038e 37E0     		b	.L14
+ 1190              	.L24:
+ 238:../Main.c     **** 				case '9':
+ 239:../Main.c     **** 					sprintf(c, "Pressure:%f Temperature:%f\n", pressure, temperature);
+ 1191              		.loc 1 239 0
+ 1192 0390 40F20003 		movw	r3, #:lower16:pressure
+ 1193 0394 C0F20003 		movt	r3, #:upper16:pressure
+ 1194 0398 1B68     		ldr	r3, [r3, #0]	@ float
+ 1195 039a 1846     		mov	r0, r3	@ float
+ 1196 039c FFF7FEFF 		bl	__aeabi_f2d
+ 1197 03a0 0446     		mov	r4, r0
+ 1198 03a2 0D46     		mov	r5, r1
+ 1199 03a4 40F20003 		movw	r3, #:lower16:temperature
+ 1200 03a8 C0F20003 		movt	r3, #:upper16:temperature
+ 1201 03ac 1B68     		ldr	r3, [r3, #0]	@ float
+ 1202 03ae 1846     		mov	r0, r3	@ float
+ 1203 03b0 FFF7FEFF 		bl	__aeabi_f2d
+ 1204 03b4 0246     		mov	r2, r0
+ 1205 03b6 0B46     		mov	r3, r1
+ 1206 03b8 CDE90023 		strd	r2, [sp]
+ 1207 03bc 40F20000 		movw	r0, #:lower16:c
+ 1208 03c0 C0F20000 		movt	r0, #:upper16:c
+ 1209 03c4 40F20001 		movw	r1, #:lower16:.LC7
+ 1210 03c8 C0F20001 		movt	r1, #:upper16:.LC7
+ 1211 03cc 2246     		mov	r2, r4
+ 1212 03ce 2B46     		mov	r3, r5
+ 1213 03d0 FFF7FEFF 		bl	sprintf
+ 240:../Main.c     **** 					break;
+ 1214              		.loc 1 240 0
+ 1215 03d4 14E0     		b	.L14
+ 1216              	.L15:
+ 241:../Main.c     **** 				case '0':
+ 242:../Main.c     **** 					sprintf(c, "VBat:%0.2f\n", VBat);
+ 1217              		.loc 1 242 0
+ 1218 03d6 40F20003 		movw	r3, #:lower16:VBat
+ 1219 03da C0F20003 		movt	r3, #:upper16:VBat
+ 1220 03de 1B68     		ldr	r3, [r3, #0]	@ float
+ 1221 03e0 1846     		mov	r0, r3	@ float
+ 1222 03e2 FFF7FEFF 		bl	__aeabi_f2d
+ 1223 03e6 0246     		mov	r2, r0
+ 1224 03e8 0B46     		mov	r3, r1
+ 1225 03ea 40F20000 		movw	r0, #:lower16:c
+ 1226 03ee C0F20000 		movt	r0, #:upper16:c
+ 1227 03f2 40F20001 		movw	r1, #:lower16:.LC8
+ 1228 03f6 C0F20001 		movt	r1, #:upper16:.LC8
+ 1229 03fa FFF7FEFF 		bl	sprintf
+ 243:../Main.c     **** 					break;
+ 1230              		.loc 1 243 0
+ 1231 03fe 00BF     		nop
+ 1232              	.L14:
+ 244:../Main.c     **** 			}
+ 245:../Main.c     **** 			USBVC001_SendString((const char *)c);
+ 1233              		.loc 1 245 0
+ 1234 0400 40F20000 		movw	r0, #:lower16:c
+ 1235 0404 C0F20000 		movt	r0, #:upper16:c
+ 1236 0408 FFF7FEFF 		bl	USBVC001_SendString
+ 1237              	.L11:
+ 246:../Main.c     **** 	    }
+ 247:../Main.c     **** 	    if (sendMag)
+ 1238              		.loc 1 247 0
+ 1239 040c 40F20003 		movw	r3, #:lower16:sendMag
+ 1240 0410 C0F20003 		movt	r3, #:upper16:sendMag
+ 1241 0414 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
+ 1242 0416 002B     		cmp	r3, #0
+ 1243 0418 0CD0     		beq	.L26
+ 248:../Main.c     **** 	    {
+ 249:../Main.c     **** 	    	sendMag = FALSE;
+ 1244              		.loc 1 249 0
+ 1245 041a 40F20003 		movw	r3, #:lower16:sendMag
+ 1246 041e C0F20003 		movt	r3, #:upper16:sendMag
+ 1247 0422 4FF00002 		mov	r2, #0
+ 1248 0426 1A70     		strb	r2, [r3, #0]
+ 250:../Main.c     **** 	    	USBVC001_SendString((const char *)c);
+ 1249              		.loc 1 250 0
+ 1250 0428 40F20000 		movw	r0, #:lower16:c
+ 1251 042c C0F20000 		movt	r0, #:upper16:c
+ 1252 0430 FFF7FEFF 		bl	USBVC001_SendString
+ 1253              	.L26:
+ 251:../Main.c     **** 	    }
+ 252:../Main.c     **** 	    // Call continuous to handle class specific control request
+ 253:../Main.c     **** 	    USB_USBTask();
+ 1254              		.loc 1 253 0
+ 1255 0434 FFF7FEFF 		bl	USB_USBTask
+ 254:../Main.c     **** 	    //--------------------------------------------------------------------------------------------
+ 255:../Main.c     **** 	}
+ 1256              		.loc 1 255 0
+ 1257 0438 EFE5     		b	.L27
+ 1258              		.cfi_endproc
+ 1259              	.LFE155:
+ 1261 043a 00BF     		.section	.rodata
+ 1262              		.align	2
+ 1263              	.LC9:
+ 1264 0148 25662C25 		.ascii	"%f,%f,%f\015\012\000"
+ 1264      662C2566 
+ 1264      0D0A00
+ 1265 0153 00       		.section	.text.CCU40_0_IRQHandler,"ax",%progbits
+ 1266              		.align	2
+ 1267              		.global	CCU40_0_IRQHandler
+ 1268              		.thumb
+ 1269              		.thumb_func
+ 1271              	CCU40_0_IRQHandler:
+ 1272              	.LFB156:
+ 256:../Main.c     **** 	return 0;
+ 257:../Main.c     **** }
+ 258:../Main.c     **** 
+ 259:../Main.c     **** void Mag_Calibration_Int_Handler()
+ 260:../Main.c     **** {
+ 1273              		.loc 1 260 0
+ 1274              		.cfi_startproc
+ 1275              		@ args = 0, pretend = 0, frame = 0
+ 1276              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1277 0000 2DE9B043 		push	{r4, r5, r7, r8, r9, lr}
+ 1278              	.LCFI9:
+ 1279              		.cfi_def_cfa_offset 24
+ 1280              		.cfi_offset 4, -24
+ 1281              		.cfi_offset 5, -20
+ 1282              		.cfi_offset 7, -16
+ 1283              		.cfi_offset 8, -12
+ 1284              		.cfi_offset 9, -8
+ 1285              		.cfi_offset 14, -4
+ 1286 0004 84B0     		sub	sp, sp, #16
+ 1287              	.LCFI10:
+ 1288              		.cfi_def_cfa_offset 40
+ 1289 0006 04AF     		add	r7, sp, #16
+ 1290              	.LCFI11:
+ 1291              		.cfi_def_cfa 7, 24
+ 261:../Main.c     ****     GetMagData(sensorData);
+ 1292              		.loc 1 261 0
+ 1293 0008 40F20000 		movw	r0, #:lower16:sensorData
+ 1294 000c C0F20000 		movt	r0, #:upper16:sensorData
+ 1295 0010 FFF7FEFF 		bl	GetMagData
+ 262:../Main.c     ****     sprintf(c, "%f,%f,%f\r\n", sensorData[0], sensorData[1], sensorData[2]);
+ 1296              		.loc 1 262 0
+ 1297 0014 40F20003 		movw	r3, #:lower16:sensorData
+ 1298 0018 C0F20003 		movt	r3, #:upper16:sensorData
+ 1299 001c 1B68     		ldr	r3, [r3, #0]	@ float
+ 1300 001e 1846     		mov	r0, r3	@ float
+ 1301 0020 FFF7FEFF 		bl	__aeabi_f2d
+ 1302 0024 0446     		mov	r4, r0
+ 1303 0026 0D46     		mov	r5, r1
+ 1304 0028 40F20003 		movw	r3, #:lower16:sensorData
+ 1305 002c C0F20003 		movt	r3, #:upper16:sensorData
+ 1306 0030 5B68     		ldr	r3, [r3, #4]	@ float
+ 1307 0032 1846     		mov	r0, r3	@ float
+ 1308 0034 FFF7FEFF 		bl	__aeabi_f2d
+ 1309 0038 8046     		mov	r8, r0
+ 1310 003a 8946     		mov	r9, r1
+ 1311 003c 40F20003 		movw	r3, #:lower16:sensorData
+ 1312 0040 C0F20003 		movt	r3, #:upper16:sensorData
+ 1313 0044 9B68     		ldr	r3, [r3, #8]	@ float
+ 1314 0046 1846     		mov	r0, r3	@ float
+ 1315 0048 FFF7FEFF 		bl	__aeabi_f2d
+ 1316 004c 0246     		mov	r2, r0
+ 1317 004e 0B46     		mov	r3, r1
+ 1318 0050 CDE90089 		strd	r8, [sp]
+ 1319 0054 CDE90223 		strd	r2, [sp, #8]
+ 1320 0058 40F20000 		movw	r0, #:lower16:c
+ 1321 005c C0F20000 		movt	r0, #:upper16:c
+ 1322 0060 40F20001 		movw	r1, #:lower16:.LC9
+ 1323 0064 C0F20001 		movt	r1, #:upper16:.LC9
+ 1324 0068 2246     		mov	r2, r4
+ 1325 006a 2B46     		mov	r3, r5
+ 1326 006c FFF7FEFF 		bl	sprintf
+ 263:../Main.c     ****     sendMag = TRUE;
+ 1327              		.loc 1 263 0
+ 1328 0070 40F20003 		movw	r3, #:lower16:sendMag
+ 1329 0074 C0F20003 		movt	r3, #:upper16:sendMag
+ 1330 0078 4FF00102 		mov	r2, #1
+ 1331 007c 1A70     		strb	r2, [r3, #0]
+ 264:../Main.c     **** }
+ 1332              		.loc 1 264 0
+ 1333 007e BD46     		mov	sp, r7
+ 1334 0080 BDE8B083 		pop	{r4, r5, r7, r8, r9, pc}
+ 1335              		.cfi_endproc
+ 1336              	.LFE156:
+ 1338              		.text
+ 1339              	.Letext0:
+ 1340              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 1341              		.file 3 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 1342              		.file 4 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
+ 1343              		.file 5 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
+ 1344              		.file 6 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
+ 1345              		.file 7 "../_Quadrocopter/Sensors/DPS310/../../_FIR_Filter/FIR_Filter.h"
+ 1346              		.file 8 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 1347              		.file 9 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
+DEFINED SYMBOLS
+                            *ABS*:00000000 Main.c
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:24     .bss:00000000 PWM_percent
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:21     .bss:00000000 $d
+                            *COM*:00000008 x_pitch
+                            *COM*:00000008 x_roll
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:32     .bss:00000010 u_yaw_dot
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:38     .bss:00000014 u_pitch
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:44     .bss:00000018 u_roll
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:51     .rodata:00000000 T
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:48     .rodata:00000000 $d
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:57     .rodata:00000004 P_roll
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:63     .rodata:00000008 I_roll
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:69     .rodata:0000000c D_roll
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:75     .rodata:00000010 N_roll
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:81     .rodata:00000014 P_pitch
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:87     .rodata:00000018 I_pitch
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:93     .rodata:0000001c D_pitch
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:99     .rodata:00000020 N_pitch
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:105    .rodata:00000024 P_yaw
+                            *COM*:00000008 a_roll
+                            *COM*:00000008 a_pitch
+                            *COM*:0000000c b_roll
+                            *COM*:0000000c b_pitch
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:116    .bss:0000001c powerD
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:121    .bss:00000020 height_control
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:127    .bss:00000024 yawD_dot
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:133    .bss:00000028 pitchD
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:139    .bss:0000002c rollD
+                            *COM*:0000000c YPR
+                            *COM*:0000000c sensorData
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:147    .bss:00000030 pressure
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:153    .bss:00000034 temperature
+                            *COM*:00000038 PressureFIR
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:160    .bss:00000038 TxBuffer
+                            *COM*:00000064 c
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:167    .bss:0000009c VBat
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:172    .bss:000000a0 sendMag
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:178    .bss:000000a2 counter_main
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:184    .bss:000000a4 MonitorBuffer
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:189    .bss:000000b2 MotorRunning
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:196    .text.CCU40_2_IRQHandler:00000000 $t
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:201    .text.CCU40_2_IRQHandler:00000000 CCU40_2_IRQHandler
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:454    .text.CCU40_2_IRQHandler:00000298 $d
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:462    .text.Initialize:00000000 $t
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:467    .text.Initialize:00000000 Initialize
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:807    .rodata:00000028 .LC0
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:811    .rodata:00000060 .LC1
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:814    .rodata:0000007c .LC2
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:817    .rodata:000000a0 .LC3
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:820    .rodata:000000b4 .LC4
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:823    .rodata:000000dc .LC5
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:826    .rodata:00000104 .LC6
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:829    .rodata:00000120 .LC7
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:832    .rodata:0000013c .LC8
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:835    .text.main:00000000 $t
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:840    .text.main:00000000 main
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:912    .text.main:0000006c $d
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:924    .text.main:00000094 $t
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:1263   .rodata:00000148 .LC9
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:1266   .text.CCU40_0_IRQHandler:00000000 $t
+C:\Users\Krainesi\AppData\Local\Temp\ccxw41iT.s:1271   .text.CCU40_0_IRQHandler:00000000 CCU40_0_IRQHandler
+                     .debug_frame:00000010 $d
+                           .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
+                           .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
+                           .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
+                           .group:00000000 wm4.newlib.h.8.a9901dc52d1357e3e94003403d43f8b5
+                           .group:00000000 wm4.features.h.22.b72b3baab2bb2eab3661375590100b6b
+                           .group:00000000 wm4.config.h.193.5fb8ef056cdff92dec3dee9552839d8c
+                           .group:00000000 wm4._ansi.h.23.7aefdac4826acebbfc9f3822a0aeb14c
+                           .group:00000000 wm4.stdint.h.20.54ad762faa59e3c05491630641c8d8bf
+                           .group:00000000 wm4.core_cmInstr.h.39.3d3d1b4a79aef37532666dc6ee87c6ac
+                           .group:00000000 wm4.core_cm4_simd.h.43.b5d1d38735af6366227b4256d330cf13
+                           .group:00000000 wm4.core_cm4.h.178.e5ef5ce66d198d7f00f9d0076e267c41
+                           .group:00000000 wm4.system_XMC4500.h.29.827f68baa362c84f2abae4ab67dde7c9
+                           .group:00000000 wm4.XMC4500.h.198.8e022f279ff353ed081df898dc7b9cf3
+                           .group:00000000 wm4.stddef.h.40.50cf36416e06376af8a9dca28536f2e4
+                           .group:00000000 wm4.types.h.60.e75c47576398c648cdcf9000ace5e3d8
+                           .group:00000000 wm4.MULTIPLEXER.h.46.4a863fbae1c79f0db26da3ce2dc30d02
+                           .group:00000000 wm4.CCU8PWMLIB.h.74.725ec81203769525cc7a424597055f47
+                           .group:00000000 wm4.MOTORLIB.h.62.951091d95913dd2ff36d761323a1771d
+                           .group:00000000 wm4.DBG001.h.116.d6d9e7459a0faa3905c97c1d2edb339d
+                           .group:00000000 wm4.uc_id.h.35.fa57ecd9f559d2767f56c96da2848c12
+                           .group:00000000 wm4.CLK001_Const.h.50.e5e9c2ddc89f4cc9e7b93e9648fa94e4
+                           .group:00000000 wm4.CLK001_Conf.h.81.851ac7a1268528f4d6739384c2f248a5
+                           .group:00000000 wm4._default_types.h.6.5e12cd604db8ce00b62bb2f02708eaf3
+                           .group:00000000 wm4.lock.h.2.9bc98482741e5e2a9450b12934a684ea
+                           .group:00000000 wm4.stddef.h.161.c6104a0666cf681b6269ddc9b4f516d4
+                           .group:00000000 wm4.types.h.2.e9cec8c90ab35f77d9f499e06ae02400
+                           .group:00000000 wm4.types.h.80.1f2c84c0d57dd52dd9936095d9ac218e
+                           .group:00000000 wm4.time.h.16.a4579e68956d2601c6113814b546764b
+                           .group:00000000 wm4.RTC001.h.113.715d6fcab1863c6656b238bddd304166
+                           .group:00000000 wm4.lmm001_debuglog.h.40.8031299705ecf04ad726bd19baff976d
+                           .group:00000000 wm4.reent.h.11.a39e4126dcf3c6afd3054e0622577bae
+                           .group:00000000 wm4.stddef.h.161.e50ff8a9d5d1abbc15641da28ac571bf
+                           .group:00000000 wm4.string.h.86.d5c872ff52e2712c985b588a0ef39f3c
+                           .group:00000000 wm4.LMM001.h.45.fa2df8bae969f45df5071221ac433ffa
+                           .group:00000000 wm4.stdio.h.27.f2ac352bab34f31f9f478442827b2ba6
+                           .group:00000000 wm4.stdarg.h.34.3a23a216c0c293b3d2ea2e89281481e6
+                           .group:00000000 wm4.stdio.h.2.4aa87247282eca6c8f36f9de33d8df1a
+                           .group:00000000 wm4.stdio.h.63.dfdea6580b080784d08faace69b6ed76
+                           .group:00000000 wm4.stdlib.h.13.603ed7eb09a1561ab06840b7c0fcff58
+                           .group:00000000 wm4.alloca.h.8.dfc0c703c47ec3e69746825b17d9e66d
+                           .group:00000000 wm4.stdlib.h.53.c69c7609933ff56d59c757cec2d13230
+                           .group:00000000 wm4.time.h.2.9857e62ad6ac99431e29d58067232314
+                           .group:00000000 wm4.time.h.24.c499d4c1915694df17abb795fd34b719
+                           .group:00000000 wm4.time.h.124.10ced469f846269cafc58b59c853e1bb
+                           .group:00000000 wm4.errno.h.2.ba016d646105af6cad23be83630b6a3f
+                           .group:00000000 wm4.errno.h.9.65044c2b5d8494e43f5986ab0a1d770f
+                           .group:00000000 wm4.unistd.h.2.6ce1b91c4223f6078c1b210c7538c1d2
+                           .group:00000000 wm4.unistd.h.251.605bc560cdc6c3b07b599bb71ac4e425
+                           .group:00000000 wm4.malloc.h.4.62bd13b8107d5245f60bd92bb5994838
+                           .group:00000000 wm4.malloc.h.148.73b7de3bd065dafbd594b04197a9466e
+                           .group:00000000 wm4.reent.h.91.faac4d0ac97c0fcf23d10d0786197642
+                           .group:00000000 wm4.SLTHA003.h.104.05371e300b30617373255b3cdb4765a2
+                           .group:00000000 wm4.SYSTM001.h.64.6ecb31c49bc3e7691644fdcdfc11b5cd
+                           .group:00000000 wm4.stdarg.h.31.fa591a4b1df9e413e9f5b8097f9ae89d
+                           .group:00000000 wm4.Type_CM.h.61.3660c940695d7d5fef91de9c4081d0f0
+                           .group:00000000 wm4.dwc_os.h.82.db2ca40c41e2f648d146b8942e5157d9
+                           .group:00000000 wm4.dwc_otg_core_if.h.95.37e41eee47e9a4502e4044edf60ea92d
+                           .group:00000000 wm4.usbcore001_device.h.107.6c032c9c28ac6c3f4e5e24a068720cd7
+                           .group:00000000 wm4.USB.h.399.44a2bec94122294f06c4d854450494d3
+                           .group:00000000 wm4.Common.h.102.bc881ac788d1d7ce84e651cbaa40f2c2
+                           .group:00000000 wm4.Common.h.134.5069b632a0407201156f18fde915b80c
+                           .group:00000000 wm4.USBMode.h.234.0cc9e23131c025605bb7c0db3ebb8ac9
+                           .group:00000000 wm4.StdRequestType.h.93.4e19c7c655f990c2abedbb76a546fcde
+                           .group:00000000 wm4.Endpoint.h.116.4ef46b127c9047ed49fe1e0df19e09b8
+                           .group:00000000 wm4.StdDescriptors.h.120.0ce817e16dcc91b8cf4a79ba0e0e19b6
+                           .group:00000000 wm4.CDC.h.103.7ce3e4692dde29e827f8736493eef7ef
+                           .group:00000000 wm4.CDC.h.115.c83a7d6c5b6c8644b3dec6212d4ced09
+                           .group:00000000 wm4.Descriptors.h.91.5cf84c2489ee54d154cabfe9e14b5c19
+                           .group:00000000 wm4.Usic.h.54.8af9f733ba5771eeb374435d205ea54b
+                           .group:00000000 wm4.UART001_Conf.h.53.fce01a2aa073e958cae0b1cc894db26c
+                           .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
+                           .group:00000000 wm4.CCU4Global_Conf.h.63.10a5fc586e1563647b9633c45b1b739e
+                           .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
+                           .group:00000000 wm4.NVIC002_Conf.h.63.49528b5ba8318d62684d7423600f8092
+                           .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
+                           .group:00000000 wm4.I2C001_Conf.h.58.2b816ac2c964c55a6c88f9c406d78c9f
+                           .group:00000000 wm4.ERU001_Conf.h.69.61c28b1ac8f55fb79ee064524d8b6415
+                           .group:00000000 wm4.ERU002_Conf.h.49.449ecc05b9e62e9b43f2dc6ead06a5ce
+                           .group:00000000 wm4.IO002_Conf.h.51.87e2c8c60b647393fe9ced2cae198f63
+                           .group:00000000 wm4.ADCGROUP001.h.66.3ee81aba16709c201614af7d67499bdb
+                           .group:00000000 wm4.IO001.h.49.4efcabb368feaef60c65bd7504b48505
+                           .group:00000000 wm4.ADC001.h.72.a0f6b9479a18584b91fa95e6f862978d
+                           .group:00000000 wm4.IO004.h.53.442ea5eb47ad9eedc675253aa35f3107
+                           .group:00000000 wm4.limits.h.2.43fda939be266b929466b0fef1d948d4
+                           .group:00000000 wm4.limits.h.61.9aaff5f42682428210a5b13055277813
+                           .group:00000000 wm4.math.h.35.cc9264b0ced3bd063c5784e64e89cf51
+                           .group:00000000 wm4.arm_math.h.258.4f811f2034dd4ca295ea6f28c00c3d1e
+                           .group:00000000 wm4.arm_math.h.277.3c36979cd3767d76e13a76d35d605b04
+                           .group:00000000 wm4.I2Cdev.h.14.f8691519f66653930a002c194805c1eb
+                           .group:00000000 wm4.QuaternionFilters.h.9.8d6677ee602ddf2a66354108c84046ca
+                           .group:00000000 wm4.MPU9150.h.24.5b885a59e2282a0c8589994451f09df3
+                           .group:00000000 wm4.FIR_Filter.h.9.4e964a304570d6362a54bd10cf9ece8c
+                           .group:00000000 wm4.DPS310.h.16.caa4c47411da0fdd1759c4186e449235
+                           .group:00000000 wm4.BluetoothProtocol.h.15.5d0e6511d0a0b48dfdf591d0a2f8c5c0
+                           .group:00000000 wm4.RCReceive.h.14.6f351c757b3522b0d45b4afd218a5d6b
+                           .group:00000000 wm4.DaisyCodes.h.9.06b3ba8a33d82ef6faf2c6f59bdf534a
+                           .group:00000000 wm4.BatterySafety.h.22.e0f263b65b628e016ddf3845e2cf7037
+
+UNDEFINED SYMBOLS
+__aeabi_f2d
+__aeabi_ddiv
+__aeabi_dmul
+__aeabi_d2uiz
+GetAngles
+GetRCData
+AngleRateController
+AngleController
+CreatePulseWidth
+SendDaisyData
+initBluetoothStorage
+delay
+MPU9150_Setup
+WatchRC_Init
+setupDPS310
+getCoefficients
+Initialize_FIR_Filter
+PWMSP001_Handle0
+PWMSP001_Start
+DAVE_Init
+USBVC001_Init
+USBVC001_BytesReceived
+USBVC001_ReceiveByte
+sprintf
+PWMSP001_Handle2
+GetSensorCount
+GetRCCount
+GetGyroData
+GetAccData
+USBVC001_SendString
+USB_USBTask
+GetMagData
