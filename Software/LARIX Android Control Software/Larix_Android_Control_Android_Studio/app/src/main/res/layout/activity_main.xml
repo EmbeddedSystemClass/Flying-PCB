@@ -1,0 +1,85 @@
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:keepScreenOn="true"
+    tools:context=".MainActivity">
+
+    <steurer.infineon.com.flightcontroller_gui.CustomSliderViewVertical
+        android:id="@+id/slider1"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:padding="0px">
+
+        <ImageView android:id="@+id/sliderBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|fill_horizontal"
+            android:scaleType="fitXY"
+            android:src="@drawable/speed">
+        </ImageView>
+
+        <ImageView android:id="@+id/thumbBar"
+            android:src="@drawable/slider_front"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical|fill_horizontal"
+            android:scaleType="centerCrop">
+        </ImageView>
+
+    </steurer.infineon.com.flightcontroller_gui.CustomSliderViewVertical>
+
+    <steurer.infineon.com.flightcontroller_gui.CustomSliderView
+        android:id="@+id/slider2"
+        android:layout_width="240dp"
+        android:layout_height="80dp"
+        android:padding="0px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true">
+
+        <ImageView android:id="@+id/sliderBar2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|fill_vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/rotation">
+        </ImageView>
+
+        <ImageView android:id="@+id/thumbBar2"
+            android:src="@drawable/slider_front1"
+            android:layout_width="20dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal|fill_vertical"
+            android:scaleType="centerCrop">
+        </ImageView>
+
+    </steurer.infineon.com.flightcontroller_gui.CustomSliderView>
+
+    <steurer.infineon.com.flightcontroller_gui.VisualisationView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="120dp"
+        android:id="@+id/visualisationView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
+
+    <Button
+        android:id="@+id/button_height_control"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/slider2"
+        android:layout_toRightOf="@+id/slider1"
+        android:layout_toStartOf="@+id/visualisationView"
+        android:text="Height Control"
+        android:gravity="center_horizontal|center_vertical"
+        android:textSize="20sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:background="#ffffff"/>
+
+</RelativeLayout>
