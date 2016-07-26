@@ -781,20 +781,20 @@
  478              		.file 3 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
 DEFINED SYMBOLS
                             *ABS*:00000000 CLK002.c
-C:\Users\maan\AppData\Local\Temp\ccUxB6q7.s:18     .text.CLK002_Init:00000000 $t
-C:\Users\maan\AppData\Local\Temp\ccUxB6q7.s:23     .text.CLK002_Init:00000000 CLK002_Init
-C:\Users\maan\AppData\Local\Temp\ccUxB6q7.s:107    .text.CLK002_lDivUpdate:00000000 CLK002_lDivUpdate
-C:\Users\maan\AppData\Local\Temp\ccUxB6q7.s:69     .text.CLK002_Init:00000030 $d
-C:\Users\maan\AppData\Local\Temp\ccUxB6q7.s:75     .text.AllowClkInitByStartup:00000000 $t
-C:\Users\maan\AppData\Local\Temp\ccUxB6q7.s:80     .text.AllowClkInitByStartup:00000000 AllowClkInitByStartup
-C:\Users\maan\AppData\Local\Temp\ccUxB6q7.s:103    .text.CLK002_lDivUpdate:00000000 $t
-C:\Users\maan\AppData\Local\Temp\ccUxB6q7.s:345    .text.CLK002_lFrequencyDownScaling:00000000 CLK002_lFrequencyDownScaling
-C:\Users\maan\AppData\Local\Temp\ccUxB6q7.s:204    .text.CLK002_lFrequencyUpScaling:00000000 CLK002_lFrequencyUpScaling
-C:\Users\maan\AppData\Local\Temp\ccUxB6q7.s:194    .text.CLK002_lDivUpdate:00000070 $d
-C:\Users\maan\AppData\Local\Temp\ccUxB6q7.s:200    .text.CLK002_lFrequencyUpScaling:00000000 $t
-C:\Users\maan\AppData\Local\Temp\ccUxB6q7.s:334    .text.CLK002_lFrequencyUpScaling:000000b0 $d
-C:\Users\maan\AppData\Local\Temp\ccUxB6q7.s:341    .text.CLK002_lFrequencyDownScaling:00000000 $t
-C:\Users\maan\AppData\Local\Temp\ccUxB6q7.s:469    .text.CLK002_lFrequencyDownScaling:000000a4 $d
+C:\Users\KirschWa\AppData\Local\Temp\ccE8ln5K.s:18     .text.CLK002_Init:00000000 $t
+C:\Users\KirschWa\AppData\Local\Temp\ccE8ln5K.s:23     .text.CLK002_Init:00000000 CLK002_Init
+C:\Users\KirschWa\AppData\Local\Temp\ccE8ln5K.s:107    .text.CLK002_lDivUpdate:00000000 CLK002_lDivUpdate
+C:\Users\KirschWa\AppData\Local\Temp\ccE8ln5K.s:69     .text.CLK002_Init:00000030 $d
+C:\Users\KirschWa\AppData\Local\Temp\ccE8ln5K.s:75     .text.AllowClkInitByStartup:00000000 $t
+C:\Users\KirschWa\AppData\Local\Temp\ccE8ln5K.s:80     .text.AllowClkInitByStartup:00000000 AllowClkInitByStartup
+C:\Users\KirschWa\AppData\Local\Temp\ccE8ln5K.s:103    .text.CLK002_lDivUpdate:00000000 $t
+C:\Users\KirschWa\AppData\Local\Temp\ccE8ln5K.s:345    .text.CLK002_lFrequencyDownScaling:00000000 CLK002_lFrequencyDownScaling
+C:\Users\KirschWa\AppData\Local\Temp\ccE8ln5K.s:204    .text.CLK002_lFrequencyUpScaling:00000000 CLK002_lFrequencyUpScaling
+C:\Users\KirschWa\AppData\Local\Temp\ccE8ln5K.s:194    .text.CLK002_lDivUpdate:00000070 $d
+C:\Users\KirschWa\AppData\Local\Temp\ccE8ln5K.s:200    .text.CLK002_lFrequencyUpScaling:00000000 $t
+C:\Users\KirschWa\AppData\Local\Temp\ccE8ln5K.s:334    .text.CLK002_lFrequencyUpScaling:000000b0 $d
+C:\Users\KirschWa\AppData\Local\Temp\ccE8ln5K.s:341    .text.CLK002_lFrequencyDownScaling:00000000 $t
+C:\Users\KirschWa\AppData\Local\Temp\ccE8ln5K.s:469    .text.CLK002_lFrequencyDownScaling:000000a4 $d
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.665d63c3c957c91c5ed795826dcbc088
                            .group:00000000 wm4.XMC1300.h.45.4ee692c6c98aa9fc42e2abbc732052b9

@@ -28,7 +28,7 @@
 							<option id="com.ifx.xmc4000.option.targetName.1192630283" name="Target Name" superClass="com.ifx.xmc4000.option.targetName" value="XMC1302-Q040X0128" valueType="string"/>
 							<option id="com.ifx.xmc4000.option.startupFilePrefrence.1003873921" name="Startup File Preference" superClass="com.ifx.xmc4000.option.startupFilePrefrence" value="true" valueType="boolean"/>
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.GNU_ELF" id="com.ifx.xmc4000.targetPlatform.2142086141" isAbstract="false" name="Windows Platform" osList="win32" superClass="com.ifx.xmc4000.targetPlatform"/>
-							<builder buildPath="${workspace_loc:/ESC_Pinus_XMC1302_V1.2/Release}" id="com.ifx.XMC4000.toolchainBuilder.714642786" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="XMC Builder" parallelBuildOn="true" parallelizationNumber="-1" superClass="com.ifx.XMC4000.toolchainBuilder"/>
+							<builder buildPath="${workspace_loc:/ESC_Pinus_XMC1302_V1.2/Release}" id="com.ifx.XMC4000.toolchainBuilder.714642786" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="XMC Builder" parallelBuildOn="true" parallelizationNumber="2" superClass="com.ifx.XMC4000.toolchainBuilder"/>
 							<tool id="com.ifx.xmc4000.appRelease.compiler.887949117" name="ARM-GCC C Compiler" superClass="com.ifx.xmc4000.appRelease.compiler">
 								<option id="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.optimization.level.1835006668" name="Optimization level" superClass="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.optimization.level" value="org.eclipse.cdt.cross.arm.gnu.base.option.optimization.level.size" valueType="enumerated"/>
 								<option id="com.ifx.xmc4000.compiler.option.misc.mfloat.1489846933" name="Floating point" superClass="com.ifx.xmc4000.compiler.option.misc.mfloat" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.soft" valueType="enumerated"/>
@@ -70,6 +70,9 @@
 								<inputType id="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.937708967" superClass="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input"/>
 							</tool>
 							<tool id="com.ifx.xmc4000.appRelease.linker.1415620679" name="ARM-GCC C Linker" superClass="com.ifx.xmc4000.appRelease.linker">
+								<option id="com.ifx.xmc4000.appLinker.option.libs.345589942" name="Libraries (-l)" superClass="com.ifx.xmc4000.appLinker.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="m"/>
+								</option>
 								<inputType id="com.ifx.xmc4000.appLinker.inputType.1253033649" name="ARM-GCC for XMC Linker Input Type" superClass="com.ifx.xmc4000.appLinker.inputType">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -83,7 +86,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="Dave/Model" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="Startup/startup_XMC1300_arm.s|Dave/Model" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

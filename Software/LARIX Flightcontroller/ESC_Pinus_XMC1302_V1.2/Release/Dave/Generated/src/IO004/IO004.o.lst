@@ -214,13 +214,13 @@
  220              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 IO004.c
-C:\Users\TOGABL~1\AppData\Local\Temp\cckkJf35.s:15     .text.IO004_Init:00000000 $t
-C:\Users\TOGABL~1\AppData\Local\Temp\cckkJf35.s:20     .text.IO004_Init:00000000 IO004_Init
-C:\Users\TOGABL~1\AppData\Local\Temp\cckkJf35.s:37     .text.IO004_Init:00000018 $d
-C:\Users\TOGABL~1\AppData\Local\Temp\cckkJf35.s:41     .text.IO004_DisableOutputDriver:00000000 $t
-C:\Users\TOGABL~1\AppData\Local\Temp\cckkJf35.s:46     .text.IO004_DisableOutputDriver:00000000 IO004_DisableOutputDriver
-C:\Users\TOGABL~1\AppData\Local\Temp\cckkJf35.s:131    .text.IO004_EnableOutputDriver:00000000 $t
-C:\Users\TOGABL~1\AppData\Local\Temp\cckkJf35.s:136    .text.IO004_EnableOutputDriver:00000000 IO004_EnableOutputDriver
+C:\Users\SteurerE\AppData\Local\Temp\ccoYotk1.s:15     .text.IO004_Init:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoYotk1.s:20     .text.IO004_Init:00000000 IO004_Init
+C:\Users\SteurerE\AppData\Local\Temp\ccoYotk1.s:37     .text.IO004_Init:00000018 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccoYotk1.s:41     .text.IO004_DisableOutputDriver:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoYotk1.s:46     .text.IO004_DisableOutputDriver:00000000 IO004_DisableOutputDriver
+C:\Users\SteurerE\AppData\Local\Temp\ccoYotk1.s:131    .text.IO004_EnableOutputDriver:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoYotk1.s:136    .text.IO004_EnableOutputDriver:00000000 IO004_EnableOutputDriver
 
 UNDEFINED SYMBOLS
 IO004_Handle0

@@ -11,12 +11,13 @@
 #include <DAVE3.h>
 
 #define BlockCommutation_ISR IRQ_Hdlr_21
+#define BlockCommutationPeriodMatch_ISR IRQ_Hdlr_23
 #define ADCTrigger		 IRQ_Hdlr_26
 
 enum MotorState
 {
 	Stopped,
-	Starting,
+	StartUp,
 	Running
 };
 
@@ -26,6 +27,6 @@ uint8_t GetPhaseState();
 
 void StartMotor();
 void StopMotor();
-void SetReferenceCurrent(uint16_t ref);
+uint8_t SetReferenceCurrent(uint16_t ref);
 
 #endif /* BLOCKCOMMUTATION_H_ */

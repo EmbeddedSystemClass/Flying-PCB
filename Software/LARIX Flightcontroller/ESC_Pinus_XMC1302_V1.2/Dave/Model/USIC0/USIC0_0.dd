@@ -212,8 +212,8 @@
   <provided xsi:type="ResourceModel:BitField" name="LIMIT" URI="http://www.infineon.com/0.13.40/peripheral/usic/0/channel/0/rbctr/limit" maxValue="63" minValue="0" startPos="8" stopPos="13" accessPermission="rw">
     <defaultValue xsi:type="ResourceModel:IntegerValue" value="0"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../UART001/1.0.24/uart001_0.app#//@consumed.30"/>
-    <localValue xsi:type="ResourceModel:IntegerValue" value="1f"/>
-    <globalValue xsi:type="ResourceModel:IntegerValue" value="1f"/>
+    <localValue xsi:type="ResourceModel:IntegerValue" value="1"/>
+    <globalValue xsi:type="ResourceModel:IntegerValue" value="1"/>
     <toolTipHelpDescription>Limit For Interrupt Generation</toolTipHelpDescription>
   </provided>
   <provided xsi:type="ResourceModel:BitField" name="SIZE" URI="http://www.infineon.com/0.13.40/peripheral/usic/0/channel/0/rbctr_size" maxValue="7" minValue="0" startPos="24" stopPos="26" accessPermission="rw">

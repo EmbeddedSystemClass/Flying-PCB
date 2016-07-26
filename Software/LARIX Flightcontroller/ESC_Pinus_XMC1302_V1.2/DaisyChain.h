@@ -11,9 +11,13 @@
 #include "DaisyCodes.h"
 #include "BlockCommutation.h"
 
-#define DaisyWatchDog_ISR IRQ_Hdlr_22
+#define HARDWARE_BUFFER_SIZE 32
+
+#define DaisyWatchDog_ISR	IRQ_Hdlr_22
+#define DaisyrReset_ISR		IRQ_Hdlr_23
 
 void DaisyChain();
 void InitDaisyWatchDog();
+void InitDaisyReset();
 
 #endif /* DAISYCHAIN_H_ */

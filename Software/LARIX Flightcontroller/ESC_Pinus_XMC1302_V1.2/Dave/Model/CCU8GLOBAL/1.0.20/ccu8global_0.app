@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ResourceModel:App xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" name="CCU8GLOBAL" description="This is the global app &#xA; with which CCU8 &#xA; slices of the same module &#xA; are configured. " descriptionURL="/doc/html/group___c_c_u8_g_l_o_b_a_l.html" mode="SHARABLE" URI="http://www.infineon.com/1.0.20/app/ccu8global/0" dirty="true">
+<ResourceModel:App xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" name="CCU8GLOBAL" description="This is the global app &#xA; with which CCU8 &#xA; slices of the same module &#xA; are configured. " descriptionURL="/doc/html/group___c_c_u8_g_l_o_b_a_l.html" mode="SHARABLE" URI="http://www.infineon.com/1.0.20/app/ccu8global/0">
   <provided xsi:type="ResourceModel:VirtualSignal" name="Clock" evalFunction="" URI="http://www.infineon.com/1.0.20/app/ccu8global/0/ccu8global_clk_vs" requiredSignalResource="global/clk">
     <defaultValue xsi:type="ResourceModel:Blocked" value="Blocked"/>
     <localValue xsi:type="ResourceModel:StringValue" value="Blocked"/>

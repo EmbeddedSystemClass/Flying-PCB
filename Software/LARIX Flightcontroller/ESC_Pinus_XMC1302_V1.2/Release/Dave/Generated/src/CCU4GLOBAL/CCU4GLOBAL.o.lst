@@ -80,11 +80,11 @@
   84              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
 DEFINED SYMBOLS
                             *ABS*:00000000 CCU4GLOBAL.c
-C:\Users\TOGABL~1\AppData\Local\Temp\ccOl7kOb.s:15     .text.CCU4GLOBAL_Init:00000000 $t
-C:\Users\TOGABL~1\AppData\Local\Temp\ccOl7kOb.s:20     .text.CCU4GLOBAL_Init:00000000 CCU4GLOBAL_Init
-C:\Users\TOGABL~1\AppData\Local\Temp\ccOl7kOb.s:71     .text.CCU4GLOBAL_Init:00000058 $d
-C:\Users\TOGABL~1\AppData\Local\Temp\ccOl7kOb.s:78     .bss:00000000 $d
-C:\Users\TOGABL~1\AppData\Local\Temp\ccOl7kOb.s:82     .bss:00000000 CCU4InitCalled.5541
+C:\Users\SteurerE\AppData\Local\Temp\cckBW34I.s:15     .text.CCU4GLOBAL_Init:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cckBW34I.s:20     .text.CCU4GLOBAL_Init:00000000 CCU4GLOBAL_Init
+C:\Users\SteurerE\AppData\Local\Temp\cckBW34I.s:71     .text.CCU4GLOBAL_Init:00000058 $d
+C:\Users\SteurerE\AppData\Local\Temp\cckBW34I.s:78     .bss:00000000 $d
+C:\Users\SteurerE\AppData\Local\Temp\cckBW34I.s:82     .bss:00000000 CCU4InitCalled.5541
 
 UNDEFINED SYMBOLS
 CCU4Global_HandleArray

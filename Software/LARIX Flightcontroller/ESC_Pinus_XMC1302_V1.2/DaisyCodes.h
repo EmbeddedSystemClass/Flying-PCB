@@ -8,6 +8,8 @@
 #ifndef DAISYCODES_H_
 #define DAISYCODES_H_
 
+#define START_MOTOR				10
+#define STOP_MOTOR				11
 #define SET_REF_CURRENT			34
 
 #define DAISY_BUFFER_SIZE		13

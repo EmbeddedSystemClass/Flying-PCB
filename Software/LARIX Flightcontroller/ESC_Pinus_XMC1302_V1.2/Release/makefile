@@ -8,6 +8,7 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include UVBuild/subdir.mk
 -include Startup/subdir.mk
 -include Lib/subdir.mk
 -include Dave/Generated/src/UART001/subdir.mk
