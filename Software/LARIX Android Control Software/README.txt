@@ -1,4 +1,4 @@
-~New APP~
+~Android Control APP~
 
 To connect the LARIX Quadcopter with the Android Smartphone simply click on the quadcopter animation.
 Another click will disconnect the connection to the quadcopter.
