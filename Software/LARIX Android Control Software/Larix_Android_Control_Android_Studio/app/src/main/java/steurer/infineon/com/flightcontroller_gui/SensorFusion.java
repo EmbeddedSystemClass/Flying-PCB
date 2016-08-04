@@ -42,8 +42,7 @@ import java.util.TimerTask;
  *
  *
  */
-public class SensorFusion
-{
+public class SensorFusion {
 
     // angular speeds from gyro
     private float[] gyro = new float[3];
@@ -69,8 +68,7 @@ public class SensorFusion
     private float[] selectedOrientation = fusedOrientation;
 
 
-    public enum Mode
-    {
+    public enum Mode {
         ACC_MAG, GYRO, FUSION
     }
 
@@ -95,8 +93,7 @@ public class SensorFusion
     }
 
 
-    public SensorFusion(Handler handler, Runnable r)
-    {
+    public SensorFusion(Handler handler, Runnable r) {
 
         gyroOrientation[0] = 0.0f;
         gyroOrientation[1] = 0.0f;
@@ -144,8 +141,7 @@ public class SensorFusion
 
     }
 
-    public  void setMode(Mode mode)
-    {
+    public  void setMode(Mode mode) {
         Log.i("tag", "msg 0"+ mode);
         Log.i("tag", "msg 00000"+ Mode.ACC_MAG);
         switch (mode) {
@@ -169,8 +165,7 @@ public class SensorFusion
     }
 
     // calculates orientation angles from accelerometer and magnetometer output
-    public void calculateAccMagOrientation()
-    {
+    public void calculateAccMagOrientation(){
         if (SensorManager.getRotationMatrix(rotationMatrix, null, accel, magnet)) {
             SensorManager.getOrientation(rotationMatrix, accMagOrientation);
         }
@@ -181,8 +176,7 @@ public class SensorFusion
     // It calculates a rotation vector from the gyroscope angular speed values.
     private void getRotationVectorFromGyro(float[] gyroValues,
                                            float[] deltaRotationVector,
-                                           float timeFactor)
-    {
+                                           float timeFactor){
         float[] normValues = new float[3];
 
         // Calculate the angular speed of the sample
@@ -213,8 +207,7 @@ public class SensorFusion
 
     // This function performs the integration of the gyroscope data.
     // It writes the gyroscope based orientation into gyroOrientation.
-    public void gyroFunction(SensorEvent event)
-    {
+    public void gyroFunction(SensorEvent event){
         // don't start until first accelerometer/magnetometer orientation has been acquired
         if (accMagOrientation == null)
             return;
@@ -252,8 +245,7 @@ public class SensorFusion
         SensorManager.getOrientation(gyroMatrix, gyroOrientation);
     }
 
-    private float[] getRotationMatrixFromOrientation(float[] o)
-    {
+    private float[] getRotationMatrixFromOrientation(float[] o) {
         float[] xM = new float[9];
         float[] yM = new float[9];
         float[] zM = new float[9];
@@ -304,8 +296,7 @@ public class SensorFusion
         return resultMatrix;
     }
 
-    private float[] matrixMultiplication(float[] A, float[] B)
-    {
+    private float[] matrixMultiplication(float[] A, float[] B) {
         float[] result = new float[9];
 
         result[0] = A[0] * B[0] + A[1] * B[3] + A[2] * B[6];
@@ -323,8 +314,7 @@ public class SensorFusion
         return result;
     }
 
-    class calculateFusedOrientationTask extends TimerTask
-    {
+    class calculateFusedOrientationTask extends TimerTask {
         public void run() {
             float oneMinusCoeff = 1.0f - FILTER_COEFFICIENT;
 

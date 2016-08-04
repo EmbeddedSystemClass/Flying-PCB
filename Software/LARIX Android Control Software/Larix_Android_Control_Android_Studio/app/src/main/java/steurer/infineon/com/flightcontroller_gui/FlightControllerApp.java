@@ -18,8 +18,7 @@ public class FlightControllerApp extends Application
 
 
     @Override
-    public final void onCreate()
-    {
+    public final void onCreate(){
         super.onCreate();
         singleton = this;
     }
@@ -39,8 +38,7 @@ public class FlightControllerApp extends Application
 
 
     @Override
-    public final void onConfigurationChanged(Configuration newConfig)
-    {
+    public final void onConfigurationChanged(Configuration newConfig){
         super.onConfigurationChanged(newConfig);
     }
 

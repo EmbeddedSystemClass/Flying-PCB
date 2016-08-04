@@ -41,8 +41,7 @@ public class VisualisationView extends SurfaceView implements SurfaceHolder.Call
         private boolean mRun;
         private long mLastTimeMeasure;
 
-        public AnimationThread(SurfaceHolder holder, Context context, Handler handler)
-        {
+        public AnimationThread(SurfaceHolder holder, Context context, Handler handler){
             mAnimationThread = this;
             mSurfaceHolder = holder;
             mainActivity = (MainActivity) context;
@@ -58,8 +57,7 @@ public class VisualisationView extends SurfaceView implements SurfaceHolder.Call
             return measuredSize;
         }
 
-        public void setMeasuredSize(int measuredsizeX,int measuredsizeY)
-        {
+        public void setMeasuredSize(int measuredsizeX,int measuredsizeY) {
             this.measuredSize[0] = measuredsizeX;
             this.measuredSize[1] = measuredsizeY;
             mBackgroundImage = Bitmap.createScaledBitmap(mBackgroundImage,measuredsizeY,measuredsizeX,false);
@@ -104,9 +102,8 @@ public class VisualisationView extends SurfaceView implements SurfaceHolder.Call
             }
         }
 
-        private void doDraw(Canvas mCanvas,float[] sensorvalues)
-        {
-            if(updateTime()) {
+        private void doDraw(Canvas mCanvas,float[] sensorvalues) {
+            if(updateTime()){
                 if (mObject != null && mCanvas != null && mBackgroundImage != null){
                     mCanvas.drawBitmap(mBackgroundImage, 0, 0, null);
 
@@ -115,26 +112,22 @@ public class VisualisationView extends SurfaceView implements SurfaceHolder.Call
                     distRight = (int)(((-sensorvalues[0]+90.f) / 180.f) * (float)measuredSize[1]) + COPTER_SIZE / 2;
                     distBottom = (int)(((sensorvalues[1]+90.f) / 180.f) * (float)measuredSize[0])+ COPTER_SIZE / 2;
 
-                    if(distLeft <= 0)
-                    {
+                    if(distLeft <= 0){
                         distLeft = 0;
                         distRight = COPTER_SIZE;
                     }
 
-                    if(distRight >= mCanvas.getWidth())
-                    {
+                    if(distRight >= mCanvas.getWidth()){
                         distRight = mCanvas.getWidth();
                         distLeft = mCanvas.getWidth() - COPTER_SIZE;
                     }
 
-                    if(distTop <= 0)
-                    {
+                    if(distTop <= 0){
                         distTop = 0;
                         distBottom = COPTER_SIZE;
                     }
 
-                    if(distBottom >= mCanvas.getHeight())
-                    {
+                    if(distBottom >= mCanvas.getHeight()){
                         distBottom = mCanvas.getHeight();
                         distTop = mCanvas.getHeight() - COPTER_SIZE;
                     }
@@ -157,14 +150,12 @@ public class VisualisationView extends SurfaceView implements SurfaceHolder.Call
     private Context mContext;
     private float[] mStartPos;
 
-    public VisualisationView(Context context)
-    {
+    public VisualisationView(Context context){
         super(context);
     }
 
 
-    public VisualisationView(Context context, AttributeSet set)
-    {
+    public VisualisationView(Context context, AttributeSet set) {
         super(context,set);
         getHolder().addCallback(this);
         this.mContext = context;
@@ -180,8 +171,7 @@ public class VisualisationView extends SurfaceView implements SurfaceHolder.Call
      *  Check if user touched drone and connect to it if so...
      */
     @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
+    public boolean onTouchEvent(MotionEvent event) {
         switch(event.getAction()) {
             //press and release
             case MotionEvent.ACTION_UP:
@@ -204,8 +194,7 @@ public class VisualisationView extends SurfaceView implements SurfaceHolder.Call
     }
 
     @Override
-    protected void onMeasure(int wMeasureSpec,int hMeasureSpec)
-    {
+    protected void onMeasure(int wMeasureSpec,int hMeasureSpec) {
         int measuredWidth = measure(wMeasureSpec);
         int measuredHeight = measure(hMeasureSpec);
         if(mAnimationThread != null)
@@ -214,11 +203,8 @@ public class VisualisationView extends SurfaceView implements SurfaceHolder.Call
         setMeasuredDimension(measuredWidth, measuredHeight);
     }
 
-
-
     @Override
-    public void surfaceDestroyed(SurfaceHolder holder)
-    {
+    public void surfaceDestroyed(SurfaceHolder holder) {
         boolean retry = true;
         getThread().setRunning(false);
         while (retry) {
@@ -232,14 +218,11 @@ public class VisualisationView extends SurfaceView implements SurfaceHolder.Call
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width,
-                               int height)
-    {}
+                               int height) {}
 
     @Override
-    public void surfaceCreated(SurfaceHolder holder)
-    {
-        if (mAnimationThread.getState() != Thread.State.TERMINATED) //&& !mAnimationThread.isAlive()) {
-        {
+    public void surfaceCreated(SurfaceHolder holder){
+        if (mAnimationThread.getState() != Thread.State.TERMINATED){
             mAnimationThread.setRunning(true);
             mAnimationThread.start();
         } else {
@@ -256,8 +239,7 @@ public class VisualisationView extends SurfaceView implements SurfaceHolder.Call
         }
     }
 
-    private int measure(int measureSpec)
-    {
+    private int measure(int measureSpec){
         int result = 0;
         int specMode = MeasureSpec.getMode(measureSpec);
         int specSize = MeasureSpec.getSize(measureSpec);

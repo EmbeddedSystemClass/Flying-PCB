@@ -28,6 +28,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Se
     private static final String DEBUG_TAG = "DEBUG";
     private static final int ENABLE_BLUETOOTH = 1;
     private boolean mHeightControlActivated = false;
+    private boolean mSendBT = false;
     private View mViewholder;
     private SurfaceHolder mSurfaceholder;
     private SurfaceView mSurfaceView;
@@ -221,6 +222,19 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Se
     }
 
     /**
+     * check if new sensor-values should be send
+     * divides sending frequency by 2
+     * @return
+     */
+    private boolean shouldSend(){
+        if(mSendBT){
+            mSendBT = false;
+        }else{
+            mSendBT = true;
+        }
+        return mSendBT;
+    }
+    /**
      * will get called by sensorfusion-class
      * and informs about new fused data with a period of approx. 20ms
      * triggers also sending of data to drone
@@ -232,13 +246,15 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Se
                 mSensorValues[0] = mSensorFusion.getPitch();
                 mSensorValues[1] = -mSensorFusion.getRoll();
                 mSensorValues[2] = mSensorFusion.getAzimuth();
-                if (mDroneCommunicator != null && mDroneCommunicator.isConnected()) {
-                    mControlPacket.setRoll(mSensorValues[1]);
-                    mControlPacket.setPitch(mSensorValues[0]);
-                    mControlPacket.setAzimuth((float) mSeekBarYaw.getScaledValue());
-                    mControlPacket.setSpeed((byte) mSeekBarTrottle.getScaledValue());
-                    sendBTControlPacket(mControlPacket, DroneCommunicator.SEND_CONTROL_DATA);
-                }
+                    if (mDroneCommunicator != null && mDroneCommunicator.isConnected()) {
+                        if (shouldSend()) {
+                            mControlPacket.setRoll(mSensorValues[1]);
+                            mControlPacket.setPitch(mSensorValues[0]);
+                            mControlPacket.setAzimuth((float) mSeekBarYaw.getScaledValue());
+                            mControlPacket.setSpeed((byte) mSeekBarTrottle.getScaledValue());
+                            sendBTControlPacket(mControlPacket, DroneCommunicator.SEND_CONTROL_DATA);
+                        }
+                    }
             }
         }
     };
