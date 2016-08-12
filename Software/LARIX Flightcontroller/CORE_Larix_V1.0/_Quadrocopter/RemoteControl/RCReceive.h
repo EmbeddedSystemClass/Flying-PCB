@@ -17,7 +17,7 @@
 //-------------------------------------------------
 //Only Bluetooth-App-Control needed
 
-//#define BT_ONLY
+#define BT_ONLY
 //-------------------------------------------------
 
 
@@ -41,6 +41,7 @@
 #define FLIGHTMODE0			8498
 #define FLIGHTMODE1			9930
 
+void Bluetooth_Keep_Alive();	//# originally without this declaration
 void RC_Receive_Int_Handler();
 void BT_Receive_Int_Handler();
 void WatchRC(void* Temp);
