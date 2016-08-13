@@ -1534,186 +1534,186 @@
   65              		.thumb_func
   67              	NVIC002_EnableIRQ:
   68              	.LFB115:
-  69              		.file 2 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
-   1:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /*CODE_BLOCK_BEGIN[NVIC002.h]*/
-   2:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**************************************************************************//**
-   3:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
-   4:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * Copyright (C) 2014 Infineon Technologies AG. All rights reserved.
-   5:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
-   6:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * Infineon Technologies AG (Infineon) is supplying this software for use with 
-   7:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * Infineon's microcontrollers.  
-   8:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * This file can be freely distributed within development tools that are 
-   9:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * supporting such microcontrollers. 
-  10:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
-  11:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
-  12:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
-  13:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
-  14:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, 
-  15:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
-  16:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
-  17:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ********************************************************************************
-  18:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                                                                            **
-  19:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                                                                            **
-  20:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
-  21:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                                                                            **
-  22:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** COMPILER : Compiler Independent                                            **
-  23:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                                                                            **
-  24:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** AUTHOR   : App Developer                                                   **
-  25:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                                                                            **
-  26:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
-  27:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                                                                            **
-  28:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** MODIFICATION DATE : July 17, 2014                                          **
-  29:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** *******************************************************************************/
-  30:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
-  31:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /*******************************************************************************
-  32:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                       Author(s) Identity                                   **
-  33:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ********************************************************************************
-  34:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                                                                            **
-  35:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** Initials     Name                                                          ** 
-  36:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** ---------------------------------------------------------------------------**
-  37:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** SNR          App Developer                                                 **
-  38:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** *******************************************************************************/
-  39:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**
-  40:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @file NVIC002.h
-  41:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
-  42:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @brief  Header file for NVIC SRGeneral (NVIC002) App.
-  43:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
-  44:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  */
-  45:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  /* Revision History
-  46:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   * 18  Feb 2013   v1.0.12  Comments are added.
-  47:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   * 28  Nov 2013   v1.0.20  Updated as per coding guidelines
-  48:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   * 24  Feb 2014   v1.0.24  Modified all macros to STATIC INLINE
-  49:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   * 28  Feb 2014   v1.0.26  Reverted uc_id header file inclusion for backward 
-  50:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****                             compatibility with DAVE
-  51:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   * 17  Jul 2014   v1.0.28  Typecasted all the NodeIDs with IRQn_Type                            
-  52:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   */
-  53:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
-  54:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #ifndef NVIC002_H_
-  55:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #define NVIC002_H_
-  56:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
-  57:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #ifdef __cplusplus
-  58:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** extern "C" {
-  59:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #endif
-  60:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /******************************************************************************
-  61:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                      Include Files                                        **
-  62:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ******************************************************************************/
-  63:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
-  64:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include <uc_id.h>
-  65:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
-  66:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #if (__TARGET_DEVICE__ == XMC45)
-  67:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include <XMC4500.h>
-  68:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #elif (__TARGET_DEVICE__ == XMC44)
-  69:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include <XMC4400.h>
-  70:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #elif ((__TARGET_DEVICE__ == XMC42)||(__TARGET_DEVICE__ == XMC41))
-  71:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include <XMC4200.h>
-  72:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #elif (__TARGET_DEVICE__ == XMC13)
-  73:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include <XMC1300.h>
-  74:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #elif (__TARGET_DEVICE__ == XMC12)
-  75:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include <XMC1200.h>
-  76:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #elif (__TARGET_DEVICE__ == XMC11)
-  77:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include <XMC1100.h>
-  78:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #endif
-  79:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
-  80:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
-  81:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /* Include App config file */
-  82:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #ifdef DAVE_CE
-  83:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include "NVIC002_Conf.h"
-  84:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #endif 
-  85:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /******************************************************************************
-  86:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                      Global Macro Definitions                             **
-  87:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ******************************************************************************/
-  88:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
-  89:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /******************************************************************************
-  90:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                      Global Type Definitions                              **
-  91:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ******************************************************************************/
-  92:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**
-  93:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @ingroup NVIC002_datastructures
-  94:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @{
-  95:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  */
-  96:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
-  97:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**
-  98:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * Structure which holds the UI configuration mapped for the App
-  99:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *        instance.
- 100:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  Note: Sub-Priority is not available for TIMM Devices
- 101:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  */
- 102:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
- 103:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** typedef struct NVIC002_HandleType
- 104:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** {
- 105:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   /** Mapped NVIC Node */
- 106:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   uint8_t NodeID;     
- 107:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   /**  Node Interrupt Priority */
- 108:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   uint8_t Priority;    
- 109:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   /**  Node Interrupt SubPriority */
- 110:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   uint8_t SubPriority;  
- 111:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   /* Interrupt enable for Node */
- 112:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   uint8_t InterruptEnable;
- 113:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** }NVIC002_HandleType;
- 114:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
- 115:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**
- 116:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @}
- 117:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  */
- 118:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
- 119:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /*******************************************************************************
- 120:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                      Global Constant Declarations                          **
- 121:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** *******************************************************************************/
- 122:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
- 123:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
- 124:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /*******************************************************************************
- 125:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                      Extern Variables                                      **
- 126:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** *******************************************************************************/
- 127:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
- 128:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
- 129:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /*******************************************************************************
- 130:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** FUNCTION PROTOTYPES                                                        **
- 131:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** *******************************************************************************/
- 132:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
- 133:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**
- 134:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @ingroup NVIC002_apidoc
- 135:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @{
- 136:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  */
- 137:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
- 138:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**
- 139:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * This function is used to configure and initialize the NVIC002 App instances
- 140:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
- 141:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
- 142:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @param[in] None
- 143:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
- 144:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @return     void
- 145:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
- 146:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * <BR><P ALIGN="LEFT"><B>Example:</B>
- 147:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @code
- 148:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  #include <DAVE3.h>
- 149:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
- 150:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  int main(void)
- 151:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  {
- 152:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *    DAVE_Init(); // NVIC002_Init() is called within DAVE_Init()
- 153:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *    return 0;
- 154:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  }
- 155:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @endcode<BR> </p>
- 156:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
- 157:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  */
- 158:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** void  NVIC002_Init(void);
- 159:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
- 160:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**
- 161:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * This function is used to enable the IRQ
- 162:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
- 163:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @param[in]  Handle Instance Handle
- 164:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
- 165:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @return     void
- 166:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
- 167:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * <BR><P ALIGN="LEFT"><B>Example:</B>
- 168:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @code
- 169:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  #include <DAVE3.h>
- 170:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
- 171:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  int main(void)
- 172:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  {
- 173:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *    DAVE_Init(); // NVIC002_Init() is called within DAVE_Init()
- 174:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *    NVIC002_EnableIRQ(&NVIC002_Handle0);
- 175:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *    return 0;
- 176:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  }
- 177:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @endcode<BR> </p>
- 178:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  */
- 179:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** __STATIC_INLINE void NVIC002_EnableIRQ (const NVIC002_HandleType *const Handle) {
+  69              		.file 2 "E:\\GitHub\\Flying-PCB\\Software\\LARIX Flightcontroller\\CORE_Larix_V1.0\\Dave\\Generate
+   1:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /*CODE_BLOCK_BEGIN[NVIC002.h]*/
+   2:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**************************************************************************//**
+   3:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+   4:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * Copyright (C) 2014 Infineon Technologies AG. All rights reserved.
+   5:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+   6:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * Infineon Technologies AG (Infineon) is supplying this software for use with 
+   7:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * Infineon's microcontrollers.  
+   8:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * This file can be freely distributed within development tools that are 
+   9:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * supporting such microcontrollers. 
+  10:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+  11:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * THIS SOFTWARE IS PROVIDED "AS IS".  NO WARRANTIES, WHETHER EXPRESS, IMPLIED
+  12:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
+  13:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE APPLY TO THIS SOFTWARE.
+  14:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * INFINEON SHALL NOT, IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL, 
+  15:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * OR CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  16:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+  17:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ********************************************************************************
+  18:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                                                                            **
+  19:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                                                                            **
+  20:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** PLATFORM : Infineon XMC4000/XMC1000 Series                                 **
+  21:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                                                                            **
+  22:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** COMPILER : Compiler Independent                                            **
+  23:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                                                                            **
+  24:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** AUTHOR   : App Developer                                                   **
+  25:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                                                                            **
+  26:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** MAY BE CHANGED BY USER [yes/no]: Yes                                       **
+  27:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                                                                            **
+  28:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** MODIFICATION DATE : July 17, 2014                                          **
+  29:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** *******************************************************************************/
+  30:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+  31:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /*******************************************************************************
+  32:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                       Author(s) Identity                                   **
+  33:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ********************************************************************************
+  34:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                                                                            **
+  35:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** Initials     Name                                                          ** 
+  36:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** ---------------------------------------------------------------------------**
+  37:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** SNR          App Developer                                                 **
+  38:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** *******************************************************************************/
+  39:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**
+  40:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @file NVIC002.h
+  41:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+  42:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @brief  Header file for NVIC SRGeneral (NVIC002) App.
+  43:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+  44:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  */
+  45:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  /* Revision History
+  46:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   * 18  Feb 2013   v1.0.12  Comments are added.
+  47:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   * 28  Nov 2013   v1.0.20  Updated as per coding guidelines
+  48:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   * 24  Feb 2014   v1.0.24  Modified all macros to STATIC INLINE
+  49:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   * 28  Feb 2014   v1.0.26  Reverted uc_id header file inclusion for backward 
+  50:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****                             compatibility with DAVE
+  51:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   * 17  Jul 2014   v1.0.28  Typecasted all the NodeIDs with IRQn_Type                            
+  52:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   */
+  53:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+  54:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #ifndef NVIC002_H_
+  55:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #define NVIC002_H_
+  56:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+  57:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #ifdef __cplusplus
+  58:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** extern "C" {
+  59:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #endif
+  60:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /******************************************************************************
+  61:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                      Include Files                                        **
+  62:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ******************************************************************************/
+  63:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+  64:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include <uc_id.h>
+  65:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+  66:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #if (__TARGET_DEVICE__ == XMC45)
+  67:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include <XMC4500.h>
+  68:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #elif (__TARGET_DEVICE__ == XMC44)
+  69:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include <XMC4400.h>
+  70:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #elif ((__TARGET_DEVICE__ == XMC42)||(__TARGET_DEVICE__ == XMC41))
+  71:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include <XMC4200.h>
+  72:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #elif (__TARGET_DEVICE__ == XMC13)
+  73:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include <XMC1300.h>
+  74:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #elif (__TARGET_DEVICE__ == XMC12)
+  75:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include <XMC1200.h>
+  76:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #elif (__TARGET_DEVICE__ == XMC11)
+  77:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include <XMC1100.h>
+  78:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #endif
+  79:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+  80:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+  81:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /* Include App config file */
+  82:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #ifdef DAVE_CE
+  83:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #include "NVIC002_Conf.h"
+  84:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** #endif 
+  85:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /******************************************************************************
+  86:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                      Global Macro Definitions                             **
+  87:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ******************************************************************************/
+  88:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+  89:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /******************************************************************************
+  90:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                      Global Type Definitions                              **
+  91:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ******************************************************************************/
+  92:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**
+  93:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @ingroup NVIC002_datastructures
+  94:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @{
+  95:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  */
+  96:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+  97:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**
+  98:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * Structure which holds the UI configuration mapped for the App
+  99:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *        instance.
+ 100:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  Note: Sub-Priority is not available for TIMM Devices
+ 101:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  */
+ 102:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+ 103:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** typedef struct NVIC002_HandleType
+ 104:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** {
+ 105:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   /** Mapped NVIC Node */
+ 106:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   uint8_t NodeID;     
+ 107:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   /**  Node Interrupt Priority */
+ 108:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   uint8_t Priority;    
+ 109:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   /**  Node Interrupt SubPriority */
+ 110:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   uint8_t SubPriority;  
+ 111:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   /* Interrupt enable for Node */
+ 112:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****   uint8_t InterruptEnable;
+ 113:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** }NVIC002_HandleType;
+ 114:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+ 115:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**
+ 116:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @}
+ 117:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  */
+ 118:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+ 119:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /*******************************************************************************
+ 120:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                      Global Constant Declarations                          **
+ 121:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** *******************************************************************************/
+ 122:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+ 123:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+ 124:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /*******************************************************************************
+ 125:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** **                      Extern Variables                                      **
+ 126:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** *******************************************************************************/
+ 127:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+ 128:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+ 129:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /*******************************************************************************
+ 130:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** ** FUNCTION PROTOTYPES                                                        **
+ 131:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** *******************************************************************************/
+ 132:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+ 133:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**
+ 134:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @ingroup NVIC002_apidoc
+ 135:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @{
+ 136:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  */
+ 137:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+ 138:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**
+ 139:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * This function is used to configure and initialize the NVIC002 App instances
+ 140:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+ 141:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+ 142:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @param[in] None
+ 143:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+ 144:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @return     void
+ 145:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+ 146:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * <BR><P ALIGN="LEFT"><B>Example:</B>
+ 147:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @code
+ 148:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  #include <DAVE3.h>
+ 149:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+ 150:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  int main(void)
+ 151:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  {
+ 152:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *    DAVE_Init(); // NVIC002_Init() is called within DAVE_Init()
+ 153:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *    return 0;
+ 154:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  }
+ 155:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @endcode<BR> </p>
+ 156:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+ 157:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  */
+ 158:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** void  NVIC002_Init(void);
+ 159:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** 
+ 160:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** /**
+ 161:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * This function is used to enable the IRQ
+ 162:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+ 163:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @param[in]  Handle Instance Handle
+ 164:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+ 165:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @return     void
+ 166:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+ 167:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * <BR><P ALIGN="LEFT"><B>Example:</B>
+ 168:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @code
+ 169:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  #include <DAVE3.h>
+ 170:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *
+ 171:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  int main(void)
+ 172:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  {
+ 173:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *    DAVE_Init(); // NVIC002_Init() is called within DAVE_Init()
+ 174:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *    NVIC002_EnableIRQ(&NVIC002_Handle0);
+ 175:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *    return 0;
+ 176:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  *  }
+ 177:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  * @endcode<BR> </p>
+ 178:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****  */
+ 179:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** __STATIC_INLINE void NVIC002_EnableIRQ (const NVIC002_HandleType *const Handle) {
   70              		.loc 2 179 0
   71              		.cfi_startproc
   72              		@ args = 0, pretend = 0, frame = 8
@@ -1730,7 +1730,7 @@
   83              	.LCFI5:
   84              		.cfi_def_cfa_register 7
   85 0006 7860     		str	r0, [r7, #4]
- 180:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****     NVIC_EnableIRQ((IRQn_Type)(Handle->NodeID));
+ 180:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h ****     NVIC_EnableIRQ((IRQn_Type)(Handle->NodeID));
   86              		.loc 2 180 0
   87 0008 7B68     		ldr	r3, [r7, #4]
   88 000a 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
@@ -1738,7 +1738,7 @@
   90 000e 5BB2     		sxtb	r3, r3
   91 0010 1846     		mov	r0, r3
   92 0012 FFF7FEFF 		bl	NVIC_EnableIRQ
- 181:C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** }
+ 181:E:\GitHub\Flying-PCB\Software\LARIX Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\DAVESupport/../../inc/NVIC002\NVIC002.h **** }
   93              		.loc 2 181 0
   94 0016 07F10807 		add	r7, r7, #8
   95 001a BD46     		mov	sp, r7
@@ -5019,76 +5019,76 @@
  2849              	.Letext0:
  2850              		.file 4 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
  2851              		.file 5 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
- 2852              		.file 6 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
- 2853              		.file 7 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
- 2854              		.file 8 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
- 2855              		.file 9 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
- 2856              		.file 10 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAV
+ 2852              		.file 6 "E:\\GitHub\\Flying-PCB\\Software\\LARIX Flightcontroller\\CORE_Larix_V1.0\\Dave\\Generate
+ 2853              		.file 7 "E:\\GitHub\\Flying-PCB\\Software\\LARIX Flightcontroller\\CORE_Larix_V1.0\\Dave\\Generate
+ 2854              		.file 8 "E:\\GitHub\\Flying-PCB\\Software\\LARIX Flightcontroller\\CORE_Larix_V1.0\\Dave\\Generate
+ 2855              		.file 9 "E:\\GitHub\\Flying-PCB\\Software\\LARIX Flightcontroller\\CORE_Larix_V1.0\\Dave\\Generate
+ 2856              		.file 10 "E:\\GitHub\\Flying-PCB\\Software\\LARIX Flightcontroller\\CORE_Larix_V1.0\\Dave\\Generat
  2857              		.file 11 "../_Quadrocopter/Sensors/MPU9X50/MPU9150.h"
- 2858              		.file 12 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAV
- 2859              		.file 13 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAV
- 2860              		.file 14 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAV
+ 2858              		.file 12 "E:\\GitHub\\Flying-PCB\\Software\\LARIX Flightcontroller\\CORE_Larix_V1.0\\Dave\\Generat
+ 2859              		.file 13 "E:\\GitHub\\Flying-PCB\\Software\\LARIX Flightcontroller\\CORE_Larix_V1.0\\Dave\\Generat
+ 2860              		.file 14 "E:\\GitHub\\Flying-PCB\\Software\\LARIX Flightcontroller\\CORE_Larix_V1.0\\Dave\\Generat
 DEFINED SYMBOLS
                             *ABS*:00000000 MPU9150.c
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:20     .text.NVIC_EnableIRQ:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:24     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:63     .text.NVIC002_EnableIRQ:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:67     .text.NVIC002_EnableIRQ:00000000 NVIC002_EnableIRQ
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:104    .bss:00000000 Gscale
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:105    .bss:00000000 $d
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:109    .bss:00000001 Ascale
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:20     .text.NVIC_EnableIRQ:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:24     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:63     .text.NVIC002_EnableIRQ:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:67     .text.NVIC002_EnableIRQ:00000000 NVIC002_EnableIRQ
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:104    .bss:00000000 Gscale
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:105    .bss:00000000 $d
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:109    .bss:00000001 Ascale
                             *COM*:00000004 aRes
                             *COM*:00000004 gRes
                             *COM*:00000004 mRes
                             *COM*:00000006 accRaw
                             *COM*:00000006 gyroRaw
                             *COM*:00000006 magRaw
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:121    .bss:00000004 acc
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:127    .bss:00000010 gyro
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:133    .bss:0000001c mag
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:139    .bss:00000028 magCalibration
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:145    .bss:00000034 magbias
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:152    .data:00000000 q
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:149    .data:00000000 $d
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:162    .bss:00000040 eInt
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:168    .bss:0000004c lastUpdate
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:174    .bss:00000050 counterSensor
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:177    .text.MPU9150_Setup:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:182    .text.MPU9150_Setup:00000000 MPU9150_Setup
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:1397   .text.MPU9150_SelfTest:00000000 MPU9150_SelfTest
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:709    .text.MPU9150_Calibrate:00000000 MPU9150_Calibrate
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:250    .text.MPU9150_Init:00000000 MPU9150_Init
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:245    .text.MPU9150_Init:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:553    .text.MPU9150_InitAK8975A:00000000 MPU9150_InitAK8975A
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:548    .text.MPU9150_InitAK8975A:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:704    .text.MPU9150_Calibrate:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:1392   .text.MPU9150_SelfTest:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:1856   .text.MPU9150_SelfTest:000004c8 $d
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:1870   .text.getGres:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:1875   .text.getGres:00000000 getGres
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:1899   .text.getGres:00000018 $d
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:1905   .text.getGres:00000028 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:1948   .text.getAres:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:1953   .text.getAres:00000000 getAres
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:1977   .text.getAres:00000018 $d
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:1983   .text.getAres:00000028 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2022   .text.GetSensorCount:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2027   .text.GetSensorCount:00000000 GetSensorCount
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2054   .text.GetAngles:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2059   .text.GetAngles:00000000 GetAngles
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2212   .text.GetAngles:000001b0 $d
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2219   .text.GetMagData:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2224   .text.GetMagData:00000000 GetMagData
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2271   .text.GetGyroData:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2276   .text.GetGyroData:00000000 GetGyroData
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2328   .text.GetGyroData:00000068 $d
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2333   .text.GetAccData:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2338   .text.GetAccData:00000000 GetAccData
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2385   .text.ERU1_0_IRQHandler:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2390   .text.ERU1_0_IRQHandler:00000000 ERU1_0_IRQHandler
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2843   .text.ERU1_0_IRQHandler:000004e8 $d
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:121    .bss:00000004 acc
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:127    .bss:00000010 gyro
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:133    .bss:0000001c mag
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:139    .bss:00000028 magCalibration
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:145    .bss:00000034 magbias
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:152    .data:00000000 q
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:149    .data:00000000 $d
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:162    .bss:00000040 eInt
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:168    .bss:0000004c lastUpdate
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:174    .bss:00000050 counterSensor
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:177    .text.MPU9150_Setup:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:182    .text.MPU9150_Setup:00000000 MPU9150_Setup
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:1397   .text.MPU9150_SelfTest:00000000 MPU9150_SelfTest
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:709    .text.MPU9150_Calibrate:00000000 MPU9150_Calibrate
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:250    .text.MPU9150_Init:00000000 MPU9150_Init
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:245    .text.MPU9150_Init:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:553    .text.MPU9150_InitAK8975A:00000000 MPU9150_InitAK8975A
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:548    .text.MPU9150_InitAK8975A:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:704    .text.MPU9150_Calibrate:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:1392   .text.MPU9150_SelfTest:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:1856   .text.MPU9150_SelfTest:000004c8 $d
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:1870   .text.getGres:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:1875   .text.getGres:00000000 getGres
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:1899   .text.getGres:00000018 $d
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:1905   .text.getGres:00000028 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:1948   .text.getAres:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:1953   .text.getAres:00000000 getAres
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:1977   .text.getAres:00000018 $d
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:1983   .text.getAres:00000028 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2022   .text.GetSensorCount:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2027   .text.GetSensorCount:00000000 GetSensorCount
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2054   .text.GetAngles:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2059   .text.GetAngles:00000000 GetAngles
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2212   .text.GetAngles:000001b0 $d
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2219   .text.GetMagData:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2224   .text.GetMagData:00000000 GetMagData
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2271   .text.GetGyroData:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2276   .text.GetGyroData:00000000 GetGyroData
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2328   .text.GetGyroData:00000068 $d
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2333   .text.GetAccData:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2338   .text.GetAccData:00000000 GetAccData
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2385   .text.ERU1_0_IRQHandler:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2390   .text.ERU1_0_IRQHandler:00000000 ERU1_0_IRQHandler
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2843   .text.ERU1_0_IRQHandler:000004e8 $d
                      .debug_frame:00000010 $d
-C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2218   .text.GetAngles:000001bc $t
+C:\Users\Mya\AppData\Local\Temp\ccVQNxfH.s:2218   .text.GetAngles:000001bc $t
                            .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
                            .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
@@ -5162,7 +5162,7 @@ C:\Users\Krainesi\AppData\Local\Temp\ccsUgtUg.s:2218   .text.GetAngles:000001bc 
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
                            .group:00000000 wm4.CCU4Global_Conf.h.63.10a5fc586e1563647b9633c45b1b739e
                            .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
-                           .group:00000000 wm4.NVIC002_Conf.h.63.49528b5ba8318d62684d7423600f8092
+                           .group:00000000 wm4.NVIC002_Conf.h.63.85c8666caca8bd9e6c27dcbc8efe5043
                            .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
                            .group:00000000 wm4.I2C001_Conf.h.58.2b816ac2c964c55a6c88f9c406d78c9f
                            .group:00000000 wm4.ERU001_Conf.h.69.61c28b1ac8f55fb79ee064524d8b6415

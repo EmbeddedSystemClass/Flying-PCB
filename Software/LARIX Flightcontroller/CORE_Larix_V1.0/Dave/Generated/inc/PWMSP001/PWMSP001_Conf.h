@@ -74,6 +74,8 @@ extern const PWMSP001_HandleType PWMSP001_Handle2;
 
 extern const PWMSP001_HandleType PWMSP001_Handle3;
 
+extern const PWMSP001_HandleType PWMSP001_Handle4;
+
 /* Support for C++ codebase */
 #ifdef __cplusplus
 }

@@ -8,6 +8,7 @@
 #include "FIR_Filter.h"
 
 
+//# never called.
 struct structFIR FIR_FILTER(struct structFIR temp, float NewValue)
 {
 	//Neuen Wert in den Ringbuffer schreiben
@@ -16,7 +17,7 @@ struct structFIR FIR_FILTER(struct structFIR temp, float NewValue)
 	//Neuen Zeiger auf das Array berrechnen
 	temp.POS = ((temp.POS+1)%FIR_SIZE);
 
-	//Rückgabewert erstmal resetten
+	//Rï¿½ckgabewert erstmal resetten
 	temp.VALUE = 0;
 
 	//Eigentliches Werteberechnung durch Faltungsintegral
@@ -25,7 +26,7 @@ struct structFIR FIR_FILTER(struct structFIR temp, float NewValue)
 		temp.VALUE += (temp.FIR_COEFF[i] * temp.CIRC_BUFF[(temp.POS+i)%FIR_SIZE]);
 	}
 
-	//Rückgabewert des neuen Buffers
+	//Rï¿½ckgabewert des neuen Buffers
 	return temp;
 }
 
@@ -39,7 +40,7 @@ struct structFIR Initialize_FIR_Filter(struct structFIR temp, int type)
 	//Pointer im Circ-Buffer auf 0 setzen
 	temp.POS = 0;
 
-	//Filter-Koeffizienten erstellen und im Array befüllen
+	//Filter-Koeffizienten erstellen und im Array befï¿½llen
 	switch(type)
 	{
 	case MOVING_AVERAGE:

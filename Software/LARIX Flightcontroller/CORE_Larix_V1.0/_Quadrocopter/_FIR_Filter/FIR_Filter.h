@@ -1,5 +1,5 @@
 /*
- * FIR_Filter.h
+ * FIR_Filter.h		//#有限冲激响应滤波器
  *
  *  Created on: 30.01.2016
  *      Author: Heinz-Peter Liechtenecker

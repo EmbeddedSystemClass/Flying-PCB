@@ -8,7 +8,7 @@ Dave/Generated/src/IO002/IO002_Conf.d Dave/Generated/src/IO002/IO002_Conf.o: \
  C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cmFunc.h \
  C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cm4_simd.h \
  C:\DAVE-3.1.10\eclipse\/../CMSIS/Infineon/XMC4500_series/Include/system_XMC4500.h \
- C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\LIBS/types.h \
+ E:\GitHub\Flying-PCB\Software\LARIX\ Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\LIBS/types.h \
  ../Dave/Generated/src/IO002/../../inc/IO002/IO002_Conf.h \
  ../Dave/Generated/src/IO002/../../inc/IO002/IO002_Extern.h
 
@@ -28,7 +28,7 @@ C:\DAVE-3.1.10\eclipse\/../CMSIS/Include/core_cm4_simd.h:
 
 C:\DAVE-3.1.10\eclipse\/../CMSIS/Infineon/XMC4500_series/Include/system_XMC4500.h:
 
-C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\LIBS/types.h:
+E:\GitHub\Flying-PCB\Software\LARIX\ Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\LIBS/types.h:
 
 ../Dave/Generated/src/IO002/../../inc/IO002/IO002_Conf.h:
 

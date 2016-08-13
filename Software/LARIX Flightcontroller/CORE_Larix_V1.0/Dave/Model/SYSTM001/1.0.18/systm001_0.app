@@ -42,7 +42,7 @@
     <requiredResource uriString="" uriType="LOCALTYPE"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.18/app/systm001/0/syst">
-    <downWardmappedList xsi:type="ResourceModel:ResourceGroup" href="../../CPU/CPU_0.dd#//@provided.39"/>
+    <downWardmappedList xsi:type="ResourceModel:ResourceGroup" href="../../CPU/CPU_0.dd#//@provided.42"/>
     <requiredResource uriString="peripheral/cpu/0/systick" uriType="LOCALTYPE"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" evalFunction="function resourceCondition() {&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;var value1 = Solver.getSoftwareId().substring(0,1).compareTo(&quot;1&quot;);&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if((value1  == 0 )) {&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;  return false;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return true;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;}" URI="http://www.infineon.com/1.0.18/app/systm001/0/clockapp">
@@ -54,22 +54,22 @@
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.18/app/systm001/0/syst/csr" isSystemDefined="true">
     <localValue xsi:type="ResourceModel:IntegerValue" value="4"/>
-    <downWardmappedList xsi:type="ResourceModel:RegisterParameter" href="../../CPU/CPU_0.dd#//@provided.40"/>
+    <downWardmappedList xsi:type="ResourceModel:RegisterParameter" href="../../CPU/CPU_0.dd#//@provided.43"/>
     <globalValue xsi:type="ResourceModel:IntegerValue" value="4"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.18/app/systm001/0/syst/rvr" upWardMappingList="//@provided.0" isSystemDefined="true">
     <localValue xsi:type="ResourceModel:IntegerValue" value="fffffffffffffc17"/>
-    <downWardmappedList xsi:type="ResourceModel:RegisterParameter" href="../../CPU/CPU_0.dd#//@provided.41"/>
+    <downWardmappedList xsi:type="ResourceModel:RegisterParameter" href="../../CPU/CPU_0.dd#//@provided.44"/>
     <globalValue xsi:type="ResourceModel:IntegerValue" value="fffffffffffffc17"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.18/app/systm001/0/syst/cvr" isSystemDefined="true">
     <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
-    <downWardmappedList xsi:type="ResourceModel:RegisterParameter" href="../../CPU/CPU_0.dd#//@provided.42"/>
+    <downWardmappedList xsi:type="ResourceModel:RegisterParameter" href="../../CPU/CPU_0.dd#//@provided.45"/>
     <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.18/app/systm001/0/syst/calib" isSystemDefined="true">
     <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
-    <downWardmappedList xsi:type="ResourceModel:RegisterParameter" href="../../CPU/CPU_0.dd#//@provided.43"/>
+    <downWardmappedList xsi:type="ResourceModel:RegisterParameter" href="../../CPU/CPU_0.dd#//@provided.46"/>
     <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.18/app/systm001/0/syst/shpr3_pri_15" upWardMappingList="//@provided.2 //@provided.4" isSystemDefined="true">

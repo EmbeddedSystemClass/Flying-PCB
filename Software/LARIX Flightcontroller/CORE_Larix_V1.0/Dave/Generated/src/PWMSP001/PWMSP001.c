@@ -286,13 +286,13 @@ void PWMSP001_Init(void)
     }
   }
     
-      /* Configuration of Direct Output Pin 1.2 based on User configuration */
-      PORT1->PDR0  &= (uint32_t)(~(PORT1_PDR0_PD2_Msk));
-      PORT1->PDR0  |= (((uint32_t)0 << (uint32_t)PORT1_PDR0_PD2_Pos) & \
-                               (uint32_t)PORT1_PDR0_PD2_Msk);
-      PORT1->IOCR0  &= (uint32_t)(~(PORT_IOCR_PC2_PO_Msk));
-      PORT1->IOCR0  |= (((uint32_t)0 << (uint32_t)PORT_IOCR_PC2_PO_Pos) & \
-                                   (uint32_t)PORT_IOCR_PC2_PO_Msk);
+      /* Configuration of Direct Output Pin 1.3 based on User configuration */
+      PORT1->PDR0  &= (uint32_t)(~(PORT1_PDR0_PD3_Msk));
+      PORT1->PDR0  |= (((uint32_t)0 << (uint32_t)PORT1_PDR0_PD3_Pos) & \
+                               (uint32_t)PORT1_PDR0_PD3_Msk);
+      PORT1->IOCR0  &= (uint32_t)(~(PORT_IOCR_PC3_PO_Msk));
+      PORT1->IOCR0  |= (((uint32_t)0 << (uint32_t)PORT_IOCR_PC3_PO_Pos) & \
+                                   (uint32_t)PORT_IOCR_PC3_PO_Msk);
   Error = PWMSP001_lInit((PWMSP001_HandleType*) &PWMSP001_Handle1);
   /* Start the app if "Start after initialization" is checked */
   if(Error == (uint32_t)DAVEApp_SUCCESS)
@@ -304,13 +304,13 @@ void PWMSP001_Init(void)
     }
   }
     
-      /* Configuration of Direct Output Pin 1.3 based on User configuration */
-      PORT1->PDR0  &= (uint32_t)(~(PORT1_PDR0_PD3_Msk));
-      PORT1->PDR0  |= (((uint32_t)0 << (uint32_t)PORT1_PDR0_PD3_Pos) & \
-                               (uint32_t)PORT1_PDR0_PD3_Msk);
-      PORT1->IOCR0  &= (uint32_t)(~(PORT_IOCR_PC3_PO_Msk));
-      PORT1->IOCR0  |= (((uint32_t)0 << (uint32_t)PORT_IOCR_PC3_PO_Pos) & \
-                                   (uint32_t)PORT_IOCR_PC3_PO_Msk);
+      /* Configuration of Direct Output Pin 1.0 based on User configuration */
+      PORT1->PDR0  &= (uint32_t)(~(PORT1_PDR0_PD0_Msk));
+      PORT1->PDR0  |= (((uint32_t)0 << (uint32_t)PORT1_PDR0_PD0_Pos) & \
+                               (uint32_t)PORT1_PDR0_PD0_Msk);
+      PORT1->IOCR0  &= (uint32_t)(~(PORT_IOCR_PC0_PO_Msk));
+      PORT1->IOCR0  |= (((uint32_t)0 << (uint32_t)PORT_IOCR_PC0_PO_Pos) & \
+                                   (uint32_t)PORT_IOCR_PC0_PO_Msk);
   Error = PWMSP001_lInit((PWMSP001_HandleType*) &PWMSP001_Handle2);
   /* Start the app if "Start after initialization" is checked */
   if(Error == (uint32_t)DAVEApp_SUCCESS)
@@ -322,13 +322,13 @@ void PWMSP001_Init(void)
     }
   }
     
-      /* Configuration of Direct Output Pin 1.0 based on User configuration */
-      PORT1->PDR0  &= (uint32_t)(~(PORT1_PDR0_PD0_Msk));
-      PORT1->PDR0  |= (((uint32_t)0 << (uint32_t)PORT1_PDR0_PD0_Pos) & \
-                               (uint32_t)PORT1_PDR0_PD0_Msk);
-      PORT1->IOCR0  &= (uint32_t)(~(PORT_IOCR_PC0_PO_Msk));
-      PORT1->IOCR0  |= (((uint32_t)0 << (uint32_t)PORT_IOCR_PC0_PO_Pos) & \
-                                   (uint32_t)PORT_IOCR_PC0_PO_Msk);
+      /* Configuration of Direct Output Pin 1.1 based on User configuration */
+      PORT1->PDR0  &= (uint32_t)(~(PORT1_PDR0_PD1_Msk));
+      PORT1->PDR0  |= (((uint32_t)0 << (uint32_t)PORT1_PDR0_PD1_Pos) & \
+                               (uint32_t)PORT1_PDR0_PD1_Msk);
+      PORT1->IOCR0  &= (uint32_t)(~(PORT_IOCR_PC1_PO_Msk));
+      PORT1->IOCR0  |= (((uint32_t)0 << (uint32_t)PORT_IOCR_PC1_PO_Pos) & \
+                                   (uint32_t)PORT_IOCR_PC1_PO_Msk);
   Error = PWMSP001_lInit((PWMSP001_HandleType*) &PWMSP001_Handle3);
   /* Start the app if "Start after initialization" is checked */
   if(Error == (uint32_t)DAVEApp_SUCCESS)
@@ -346,6 +346,24 @@ void PWMSP001_Init(void)
                                (uint32_t)PORT2_PDR0_PD2_Msk);
       PORT2->IOCR0  &= (uint32_t)(~(PORT_IOCR_PC2_PO_Msk));
       PORT2->IOCR0  |= (((uint32_t)0 << (uint32_t)PORT_IOCR_PC2_PO_Pos) & \
+                                   (uint32_t)PORT_IOCR_PC2_PO_Msk);
+  Error = PWMSP001_lInit((PWMSP001_HandleType*) &PWMSP001_Handle4);
+  /* Start the app if "Start after initialization" is checked */
+  if(Error == (uint32_t)DAVEApp_SUCCESS)
+  {   
+    if (PWMSP001_Handle4.StartControl == (uint8_t)SET)
+    {
+      Error = PWMSP001_Start((PWMSP001_HandleType*) &PWMSP001_Handle4);
+      DBG002_N(Error != DAVEApp_SUCCESS);
+    }
+  }
+    
+      /* Configuration of Direct Output Pin 1.2 based on User configuration */
+      PORT1->PDR0  &= (uint32_t)(~(PORT1_PDR0_PD2_Msk));
+      PORT1->PDR0  |= (((uint32_t)0 << (uint32_t)PORT1_PDR0_PD2_Pos) & \
+                               (uint32_t)PORT1_PDR0_PD2_Msk);
+      PORT1->IOCR0  &= (uint32_t)(~(PORT_IOCR_PC2_PO_Msk));
+      PORT1->IOCR0  |= (((uint32_t)0 << (uint32_t)PORT_IOCR_PC2_PO_Pos) & \
                                    (uint32_t)PORT_IOCR_PC2_PO_Msk);
 }
 

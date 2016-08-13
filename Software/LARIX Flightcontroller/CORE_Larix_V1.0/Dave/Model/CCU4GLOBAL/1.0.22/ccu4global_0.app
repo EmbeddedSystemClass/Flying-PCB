@@ -3,6 +3,7 @@
   <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../../PWMSP001/1.0.34/pwmsp001_0.app#//@consumed.18"/>
   <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../../PWMSP001/1.0.34/pwmsp001_1.app#//@consumed.18"/>
   <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../../PWMSP001/1.0.34/pwmsp001_2.app#//@consumed.18"/>
+  <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../../PWMSP001/1.0.34/pwmsp001_4.app#//@consumed.18"/>
   <provided xsi:type="ResourceModel:VirtualSignal" name="Clock" evalFunction="" URI="http://www.infineon.com/1.0.22/app/ccu4global/0/ccu4global_clk_vs" requiredSignalResource="global/clk">
     <defaultValue xsi:type="ResourceModel:Blocked" value="Blocked"/>
     <localValue xsi:type="ResourceModel:StringValue" value="Blocked"/>
@@ -18,6 +19,7 @@
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../../PWMSP001/1.0.34/pwmsp001_0.app#//@consumed.79"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../../PWMSP001/1.0.34/pwmsp001_1.app#//@consumed.79"/>
     <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../../PWMSP001/1.0.34/pwmsp001_2.app#//@consumed.79"/>
+    <upWardMappingList xsi:type="ResourceModel:ProxyResource" href="../../PWMSP001/1.0.34/pwmsp001_4.app#//@consumed.79"/>
     <localValue xsi:type="ResourceModel:IntegerValue" value="78"/>
     <globalValue xsi:type="ResourceModel:IntegerValue" value="78"/>
     <toolTipHelpDescription>This displays the Clock frequency for the CCU and POSIF modules.</toolTipHelpDescription>

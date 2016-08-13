@@ -114,11 +114,11 @@ const PWMSP001_HandleType PWMSP001_Handle0 =
   .kMaxPeriodVal= 65535U,
   .kDitherSetting= 0U,
   .kDitherCompare = 0U,  
-  .FirstSlice=  PWMSP001_SLICE1 ,
-  .SecondSlice= PWMSP001_SLICE1,
+  .FirstSlice=  PWMSP001_SLICE0 ,
+  .SecondSlice= PWMSP001_SLICE0,
   .CC4yKernRegsPtr= (CCU4_GLOBAL_TypeDef*) CCU40_BASE,
-  .CC4yRegsPtr= (CCU4_CC4_TypeDef*)CCU40_CC41 ,
-  .CC4yRegs1Ptr= (CCU4_CC4_TypeDef*)CCU40_CC41,
+  .CC4yRegsPtr= (CCU4_CC4_TypeDef*)CCU40_CC40 ,
+  .CC4yRegs1Ptr= (CCU4_CC4_TypeDef*)CCU40_CC40,
   .DynamicDataType= &PWMSP001_DynamicData0,
   .StartControl = 0U,
   .InterruptControl = 0x4U,
@@ -157,11 +157,11 @@ const PWMSP001_HandleType PWMSP001_Handle1 =
   .kMaxPeriodVal= 65535U,
   .kDitherSetting= 0U,
   .kDitherCompare = 0U,  
-  .FirstSlice=  PWMSP001_SLICE0 ,
-  .SecondSlice= PWMSP001_SLICE0,
+  .FirstSlice=  PWMSP001_SLICE3 ,
+  .SecondSlice= PWMSP001_SLICE3,
   .CC4yKernRegsPtr= (CCU4_GLOBAL_TypeDef*) CCU40_BASE,
-  .CC4yRegsPtr= (CCU4_CC4_TypeDef*)CCU40_CC40 ,
-  .CC4yRegs1Ptr= (CCU4_CC4_TypeDef*)CCU40_CC40,
+  .CC4yRegsPtr= (CCU4_CC4_TypeDef*)CCU40_CC43 ,
+  .CC4yRegs1Ptr= (CCU4_CC4_TypeDef*)CCU40_CC43,
   .DynamicDataType= &PWMSP001_DynamicData1,
   .StartControl = 1U,
   .InterruptControl = 0x4U,
@@ -200,11 +200,11 @@ const PWMSP001_HandleType PWMSP001_Handle2 =
   .kMaxPeriodVal= 65535U,
   .kDitherSetting= 0U,
   .kDitherCompare = 0U,  
-  .FirstSlice=  PWMSP001_SLICE3 ,
-  .SecondSlice= PWMSP001_SLICE3,
+  .FirstSlice=  PWMSP001_SLICE2 ,
+  .SecondSlice= PWMSP001_SLICE2,
   .CC4yKernRegsPtr= (CCU4_GLOBAL_TypeDef*) CCU40_BASE,
-  .CC4yRegsPtr= (CCU4_CC4_TypeDef*)CCU40_CC43 ,
-  .CC4yRegs1Ptr= (CCU4_CC4_TypeDef*)CCU40_CC43,
+  .CC4yRegsPtr= (CCU4_CC4_TypeDef*)CCU40_CC42 ,
+  .CC4yRegs1Ptr= (CCU4_CC4_TypeDef*)CCU40_CC42,
   .DynamicDataType= &PWMSP001_DynamicData2,
   .StartControl = 0U,
   .InterruptControl = 0x4U,
@@ -253,6 +253,49 @@ const PWMSP001_HandleType PWMSP001_Handle3 =
   .InterruptControl = 0x5U,
   .SetCompareFuncPtr = PWMSP001_lSetCompareEdgeAlignTimerConcat,
   .SetDutyFuncPtr = PWMSP001_lSetDutyEdgeAlignTimerConcat,
+};  
+    
+PWMSP001_DynamicDataType PWMSP001_DynamicData4 =
+{
+  .StateType = PWMSP001_UNINITIALIZED
+};
+
+const PWMSP001_HandleType PWMSP001_Handle4 =
+{
+  .kTimerMode= 0U,
+  .CountingModeType = PWMSP001_EDGE_ALIGNED,
+  .kPassiveLevel= 0U,
+  .kExtStartTrig=  0U, 
+  .kExtStopTrig=  0U, 
+  .kStartEdge = PWMSP001_NO_TRIGGER,
+  .kStopEdge = PWMSP001_NO_TRIGGER,
+  .ExtStartConfigType = PWMSP001_START_TIMER,
+  .ExtStopConfigType = PWMSP001_STOP_TIMER,
+  .kTrapEnable= 0U,
+  .kTrapSync= 1U,
+  .kTrapExitControl= 0U,
+  .kTrapLevel= 1U,
+  
+  .kResolution = (float)2133.333,
+  .kCCUPrescalar= 8U,
+  .kTimerConcatenation = 0U,
+   /*During timer concatenation, 32-bit period and compare values from UI are 
+   taken. From this value lower 16-bit is loaded into the lower timer and higer 16-bit to higher timer.*/
+  .kCompareValue = 23437U,
+  .kPeriodVal = 46874U,
+  .kMaxPeriodVal= 65535U,
+  .kDitherSetting= 0U,
+  .kDitherCompare = 0U,  
+  .FirstSlice=  PWMSP001_SLICE1 ,
+  .SecondSlice= PWMSP001_SLICE1,
+  .CC4yKernRegsPtr= (CCU4_GLOBAL_TypeDef*) CCU40_BASE,
+  .CC4yRegsPtr= (CCU4_CC4_TypeDef*)CCU40_CC41 ,
+  .CC4yRegs1Ptr= (CCU4_CC4_TypeDef*)CCU40_CC41,
+  .DynamicDataType= &PWMSP001_DynamicData4,
+  .StartControl = 1U,
+  .InterruptControl = 0x4U,
+  .SetCompareFuncPtr = PWMSP001_lSetCompareEdgeAlign,
+  .SetDutyFuncPtr = PWMSP001_lSetDutyEdgeAlign,
 };  
   
 /*CODE_BLOCK_END*/

@@ -237,7 +237,7 @@
     <requiredResource uriString="app/usbld001/*" uriType="LOCALTYPE"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.18/app/usbcore001/0/nvic_node">
-    <downWardmappedList xsi:type="ResourceModel:ResourceGroup" href="../../CPU/CPU_0.dd#//@provided.44"/>
+    <downWardmappedList xsi:type="ResourceModel:ResourceGroup" href="../../CPU/CPU_0.dd#//@provided.47"/>
     <requiredResource uriString="peripheral/cpu/0/nvic/interrupt/*" uriType="LOCALTYPE"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.18/app/usbcore001/0/resetapp">
@@ -259,11 +259,11 @@
     <globalValue xsi:type="ResourceModel:IntegerValue" value="2"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.18/app/usbcore001/0/nvic_node/signal_in" isSystemDefined="true">
-    <downWardmappedList xsi:type="ResourceModel:SignalDeclaration" href="../../CPU/CPU_0.dd#//@provided.45"/>
+    <downWardmappedList xsi:type="ResourceModel:SignalDeclaration" href="../../CPU/CPU_0.dd#//@provided.48"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.18/app/usbcore001/0/nvic_node/ipr_pri" upWardMappingList="//@provided.47 //@provided.48" isSystemDefined="true">
     <localValue xsi:type="ResourceModel:IntegerValue" value="fc"/>
-    <downWardmappedList xsi:type="ResourceModel:BitField" href="../../CPU/CPU_0.dd#//@provided.46"/>
+    <downWardmappedList xsi:type="ResourceModel:BitField" href="../../CPU/CPU_0.dd#//@provided.49"/>
     <globalValue xsi:type="ResourceModel:IntegerValue" value="fc"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.18/app/usbcore001/0/usblld/usbld001_irwblknaksupport" upWardMappingList="//@provided.46" isSystemDefined="true">

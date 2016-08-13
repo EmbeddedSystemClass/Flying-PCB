@@ -555,7 +555,7 @@ specific interrupt signal otherwise there
     <requiredResource uriString="app/clk002/*" uriType="LOCALTYPE"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" name="UART Receive" evalFunction="function resourceCondition() {&#xD;&#xA;              var Res = Solver.getResource(&quot;uart001_OprModeTemp&quot;);&#xD;&#xA;              var value = Solver.getIntValue(Res);&#xD;&#xA;              if (value == 0) {&#xD;&#xA;                return true; &#xD;&#xA;              } &#xD;&#xA;              return false;&#xD;&#xA;            }" URI="http://www.infineon.com/1.0.24/app/uart001/2/uart_rxpin">
-    <downWardmappedList xsi:type="ResourceModel:ResourceGroup" href="../../P1/P1_1.dd#//@provided.16"/>
+    <downWardmappedList xsi:type="ResourceModel:ResourceGroup" href="../../P1/P1_1.dd#//@provided.19"/>
     <requiredResource uriString="port/p/1/pad/5" uriType="LOCALTYPE"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" name="UART Transmit" evalFunction="function resourceCondition() {&#xD;&#xA;&#x9;              var Res = Solver.getResource(&quot;uart001_OprModeTemp&quot;);&#xD;&#xA;&#x9;              var value = Solver.getIntValue(Res);&#xD;&#xA;&#x9;              if (value &lt;= 1) {&#xD;&#xA;&#x9;                return true; &#xD;&#xA;&#x9;              } &#xD;&#xA;&#x9;              return false;&#xD;&#xA;&#x9;        }" URI="http://www.infineon.com/1.0.24/app/uart001/2/uart_txpin">
@@ -731,11 +731,11 @@ specific interrupt signal otherwise there
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.24/app/uart001/2/uart_rxpin/iocr_pcr" isSystemDefined="true">
     <localValue xsi:type="ResourceModel:IntegerValue" value="0"/>
-    <downWardmappedList xsi:type="ResourceModel:BitField" href="../../P1/P1_1.dd#//@provided.17"/>
+    <downWardmappedList xsi:type="ResourceModel:BitField" href="../../P1/P1_1.dd#//@provided.20"/>
     <globalValue xsi:type="ResourceModel:IntegerValue" value="0"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.24/app/uart001/2/uart_rxpin/pad" isSystemDefined="true">
-    <downWardmappedList xsi:type="ResourceModel:SignalDeclaration" href="../../P1/P1_1.dd#//@provided.18"/>
+    <downWardmappedList xsi:type="ResourceModel:SignalDeclaration" href="../../P1/P1_1.dd#//@provided.21"/>
   </consumed>
   <consumed xsi:type="ResourceModel:ProxyResource" URI="http://www.infineon.com/1.0.24/app/uart001/2/uart_txpin/pad" isSystemDefined="true">
     <downWardmappedList xsi:type="ResourceModel:SignalDeclaration" href="../../P5/P5_5.dd#//@provided.16"/>

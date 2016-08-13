@@ -1,7 +1,7 @@
 Dave/Generated/src/USBCORE001/usbcore001_host.d Dave/Generated/src/USBCORE001/usbcore001_host.o: \
  ../Dave/Generated/src/USBCORE001/usbcore001_host.c \
  ../Dave/Generated/src/USBCORE001/../../src/USBLD001/Type_CM.h \
- C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\LIBS/types.h \
+ E:\GitHub\Flying-PCB\Software\LARIX\ Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\LIBS/types.h \
  ../Dave/Generated/src/USBCORE001/../../src/USBLD001/dwc_common_port/usb.h \
  ../Dave/Generated/src/USBCORE001/../../inc/USBCore001/usbcore001_host.h \
  ../Dave/Generated/src/USBCORE001/../../inc/USBCore001/usbcore001.h \
@@ -15,7 +15,7 @@ Dave/Generated/src/USBCORE001/usbcore001_host.d Dave/Generated/src/USBCORE001/us
 
 ../Dave/Generated/src/USBCORE001/../../src/USBLD001/Type_CM.h:
 
-C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\LIBS/types.h:
+E:\GitHub\Flying-PCB\Software\LARIX\ Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\LIBS/types.h:
 
 ../Dave/Generated/src/USBCORE001/../../src/USBLD001/dwc_common_port/usb.h:
 

@@ -24,6 +24,7 @@ _Quadrocopter/Sensors/MPU9X50/Filter \
 _Quadrocopter/Sensors/DPS310 \
 _Quadrocopter/RemoteControl \
 _Quadrocopter/RemoteControl/BluetoothProtocol \
+_Quadrocopter/Dev \
 _Quadrocopter/DaisyChain \
 _Quadrocopter/BatterySafety \
 _Quadrocopter/Attitude_Control \

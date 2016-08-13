@@ -1,7 +1,7 @@
 Dave/Generated/src/USBLD001/driver/dwc_otg_cil.d Dave/Generated/src/USBLD001/driver/dwc_otg_cil.o: \
  ../Dave/Generated/src/USBLD001/driver/dwc_otg_cil.c \
  ../Dave/Generated/src/USBLD001/driver/../type_CM.h \
- C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\LIBS/types.h \
+ E:\GitHub\Flying-PCB\Software\LARIX\ Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\LIBS/types.h \
  ../Dave/Generated/src/USBLD001/driver/../dwc_common_port/dwc_os.h \
  ../Dave/Generated/src/USBLD001/driver/dwc_otg_regs.h \
  ../Dave/Generated/src/USBLD001/driver/dwc_otg_core_if.h \
@@ -12,7 +12,7 @@ Dave/Generated/src/USBLD001/driver/dwc_otg_cil.d Dave/Generated/src/USBLD001/dri
 
 ../Dave/Generated/src/USBLD001/driver/../type_CM.h:
 
-C:\DAVE3_workspace\Pinus_Evaluierung_DAVE3\CORE_Larix_V1.0\Dave\Generated\inc\LIBS/types.h:
+E:\GitHub\Flying-PCB\Software\LARIX\ Flightcontroller\CORE_Larix_V1.0\Dave\Generated\inc\LIBS/types.h:
 
 ../Dave/Generated/src/USBLD001/driver/../dwc_common_port/dwc_os.h:
 

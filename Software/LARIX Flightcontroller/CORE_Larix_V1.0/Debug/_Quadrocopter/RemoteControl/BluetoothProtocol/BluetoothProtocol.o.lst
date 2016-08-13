@@ -298,8 +298,8 @@
   48:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 			{
   49:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 			if (packets_to_be_received == 0)
  249              		.loc 1 49 0
- 250 00de 40F20003 		movw	r3, #:lower16:packets_to_be_received.11158
- 251 00e2 C0F20003 		movt	r3, #:upper16:packets_to_be_received.11158
+ 250 00de 40F20003 		movw	r3, #:lower16:packets_to_be_received.11160
+ 251 00e2 C0F20003 		movt	r3, #:upper16:packets_to_be_received.11160
  252 00e6 1B68     		ldr	r3, [r3, #0]
  253 00e8 002B     		cmp	r3, #0
  254 00ea 07D1     		bne	.L9
@@ -309,15 +309,15 @@
  256 00ec FB68     		ldr	r3, [r7, #12]
  257 00ee 1B78     		ldrb	r3, [r3, #0]	@ zero_extendqisi2
  258 00f0 1A46     		mov	r2, r3
- 259 00f2 40F20003 		movw	r3, #:lower16:packets_to_be_received.11158
- 260 00f6 C0F20003 		movt	r3, #:upper16:packets_to_be_received.11158
+ 259 00f2 40F20003 		movw	r3, #:lower16:packets_to_be_received.11160
+ 260 00f6 C0F20003 		movt	r3, #:upper16:packets_to_be_received.11160
  261 00fa 1A60     		str	r2, [r3, #0]
  262              	.L9:
   52:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 			}
   53:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 			int current_val = packet_counter;
  263              		.loc 1 53 0
- 264 00fc 40F20003 		movw	r3, #:lower16:packet_counter.11157
- 265 0100 C0F20003 		movt	r3, #:upper16:packet_counter.11157
+ 264 00fc 40F20003 		movw	r3, #:lower16:packet_counter.11159
+ 265 0100 C0F20003 		movt	r3, #:upper16:packet_counter.11159
  266 0104 1B68     		ldr	r3, [r3, #0]
  267 0106 7B61     		str	r3, [r7, #20]
   54:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 			for (; packet_counter < (current_val + DATA_SIZE);
@@ -328,13 +328,13 @@
   56:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 			{
   57:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 				packet->cmd[packet_counter] = input_buffer[packet_counter
  271              		.loc 1 57 0
- 272 010a 40F20003 		movw	r3, #:lower16:packet_counter.11157
- 273 010e C0F20003 		movt	r3, #:upper16:packet_counter.11157
+ 272 010a 40F20003 		movw	r3, #:lower16:packet_counter.11159
+ 273 010e C0F20003 		movt	r3, #:upper16:packet_counter.11159
  274 0112 1A68     		ldr	r2, [r3, #0]
   58:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 						- current_val + PACKET_HEADER];
  275              		.loc 1 58 0
- 276 0114 40F20003 		movw	r3, #:lower16:packet_counter.11157
- 277 0118 C0F20003 		movt	r3, #:upper16:packet_counter.11157
+ 276 0114 40F20003 		movw	r3, #:lower16:packet_counter.11159
+ 277 0118 C0F20003 		movt	r3, #:upper16:packet_counter.11159
  278 011c 1968     		ldr	r1, [r3, #0]
  279 011e 7B69     		ldr	r3, [r7, #20]
  280 0120 CB1A     		subs	r3, r1, r3
@@ -348,20 +348,20 @@
  287 012e 9954     		strb	r1, [r3, r2]
   55:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 				packet_counter++)
  288              		.loc 1 55 0
- 289 0130 40F20003 		movw	r3, #:lower16:packet_counter.11157
- 290 0134 C0F20003 		movt	r3, #:upper16:packet_counter.11157
+ 289 0130 40F20003 		movw	r3, #:lower16:packet_counter.11159
+ 290 0134 C0F20003 		movt	r3, #:upper16:packet_counter.11159
  291 0138 1B68     		ldr	r3, [r3, #0]
  292 013a 03F10102 		add	r2, r3, #1
- 293 013e 40F20003 		movw	r3, #:lower16:packet_counter.11157
- 294 0142 C0F20003 		movt	r3, #:upper16:packet_counter.11157
+ 293 013e 40F20003 		movw	r3, #:lower16:packet_counter.11159
+ 294 0142 C0F20003 		movt	r3, #:upper16:packet_counter.11159
  295 0146 1A60     		str	r2, [r3, #0]
  296              	.L10:
   54:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 			for (; packet_counter < (current_val + DATA_SIZE);
  297              		.loc 1 54 0 discriminator 1
  298 0148 7B69     		ldr	r3, [r7, #20]
  299 014a 03F10E02 		add	r2, r3, #14
- 300 014e 40F20003 		movw	r3, #:lower16:packet_counter.11157
- 301 0152 C0F20003 		movt	r3, #:upper16:packet_counter.11157
+ 300 014e 40F20003 		movw	r3, #:lower16:packet_counter.11159
+ 301 0152 C0F20003 		movt	r3, #:upper16:packet_counter.11159
  302 0156 1B68     		ldr	r3, [r3, #0]
  303 0158 9A42     		cmp	r2, r3
  304 015a D6DC     		bgt	.L11
@@ -376,22 +376,22 @@
   62:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 			{ //all cmd-bytes are within this data-package
   63:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 				packet->character_count = packets_to_be_received;
  310              		.loc 1 63 0
- 311 0164 40F20003 		movw	r3, #:lower16:packets_to_be_received.11158
- 312 0168 C0F20003 		movt	r3, #:upper16:packets_to_be_received.11158
+ 311 0164 40F20003 		movw	r3, #:lower16:packets_to_be_received.11160
+ 312 0168 C0F20003 		movt	r3, #:upper16:packets_to_be_received.11160
  313 016c 1B68     		ldr	r3, [r3, #0]
  314 016e DAB2     		uxtb	r2, r3
  315 0170 7B68     		ldr	r3, [r7, #4]
  316 0172 83F82A20 		strb	r2, [r3, #42]
   64:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 				packet_counter = 0;
  317              		.loc 1 64 0
- 318 0176 40F20003 		movw	r3, #:lower16:packet_counter.11157
- 319 017a C0F20003 		movt	r3, #:upper16:packet_counter.11157
+ 318 0176 40F20003 		movw	r3, #:lower16:packet_counter.11159
+ 319 017a C0F20003 		movt	r3, #:upper16:packet_counter.11159
  320 017e 4FF00002 		mov	r2, #0
  321 0182 1A60     		str	r2, [r3, #0]
   65:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 				packets_to_be_received = 0;
  322              		.loc 1 65 0
- 323 0184 40F20003 		movw	r3, #:lower16:packets_to_be_received.11158
- 324 0188 C0F20003 		movt	r3, #:upper16:packets_to_be_received.11158
+ 323 0184 40F20003 		movw	r3, #:lower16:packets_to_be_received.11160
+ 324 0188 C0F20003 		movt	r3, #:upper16:packets_to_be_received.11160
  325 018c 4FF00002 		mov	r2, #0
  326 0190 1A60     		str	r2, [r3, #0]
   66:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 				//Cleanup Buffer//
@@ -505,8 +505,8 @@
   85:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 	} else {
   86:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 			packet_counter = 0; //if it happens between data-packages...
  414              		.loc 1 86 0
- 415 0238 40F20003 		movw	r3, #:lower16:packet_counter.11157
- 416 023c C0F20003 		movt	r3, #:upper16:packet_counter.11157
+ 415 0238 40F20003 		movw	r3, #:lower16:packet_counter.11159
+ 416 023c C0F20003 		movt	r3, #:upper16:packet_counter.11159
  417 0240 4FF00002 		mov	r2, #0
  418 0244 1A60     		str	r2, [r3, #0]
   87:../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.c **** 			//Cleanup Buffer//
@@ -532,30 +532,30 @@
  433              	.LFE121:
  435 0262 00BF     		.bss
  436              		.align	2
- 437              	packets_to_be_received.11158:
+ 437              	packets_to_be_received.11160:
  438 0000 00000000 		.space	4
  439              		.align	2
- 440              	packet_counter.11157:
+ 440              	packet_counter.11159:
  441 0004 00000000 		.space	4
  442              		.text
  443              	.Letext0:
  444              		.file 2 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
- 445              		.file 3 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
+ 445              		.file 3 "E:\\GitHub\\Flying-PCB\\Software\\LARIX Flightcontroller\\CORE_Larix_V1.0\\Dave\\Generate
  446              		.file 4 "../_Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.h"
  447              		.file 5 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
- 448              		.file 6 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
+ 448              		.file 6 "E:\\GitHub\\Flying-PCB\\Software\\LARIX Flightcontroller\\CORE_Larix_V1.0\\Dave\\Generate
 DEFINED SYMBOLS
                             *ABS*:00000000 BluetoothProtocol.c
                             *COM*:0000001c control_value
                             *COM*:0000002b dpacket
                             *COM*:00000004 ReadBufBT
-C:\Users\Krainesi\AppData\Local\Temp\ccW5Fayf.s:23     .text.initBluetoothStorage:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccW5Fayf.s:28     .text.initBluetoothStorage:00000000 initBluetoothStorage
-C:\Users\Krainesi\AppData\Local\Temp\ccW5Fayf.s:113    .text.maintainBluetoothInputBuffer:00000000 $t
-C:\Users\Krainesi\AppData\Local\Temp\ccW5Fayf.s:118    .text.maintainBluetoothInputBuffer:00000000 maintainBluetoothInputBuffer
-C:\Users\Krainesi\AppData\Local\Temp\ccW5Fayf.s:437    .bss:00000000 packets_to_be_received.11158
-C:\Users\Krainesi\AppData\Local\Temp\ccW5Fayf.s:440    .bss:00000004 packet_counter.11157
-C:\Users\Krainesi\AppData\Local\Temp\ccW5Fayf.s:436    .bss:00000000 $d
+C:\Users\Mya\AppData\Local\Temp\ccg7aKgn.s:23     .text.initBluetoothStorage:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccg7aKgn.s:28     .text.initBluetoothStorage:00000000 initBluetoothStorage
+C:\Users\Mya\AppData\Local\Temp\ccg7aKgn.s:113    .text.maintainBluetoothInputBuffer:00000000 $t
+C:\Users\Mya\AppData\Local\Temp\ccg7aKgn.s:118    .text.maintainBluetoothInputBuffer:00000000 maintainBluetoothInputBuffer
+C:\Users\Mya\AppData\Local\Temp\ccg7aKgn.s:437    .bss:00000000 packets_to_be_received.11160
+C:\Users\Mya\AppData\Local\Temp\ccg7aKgn.s:440    .bss:00000004 packet_counter.11159
+C:\Users\Mya\AppData\Local\Temp\ccg7aKgn.s:436    .bss:00000000 $d
                      .debug_frame:00000010 $d
                            .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
@@ -630,7 +630,7 @@ C:\Users\Krainesi\AppData\Local\Temp\ccW5Fayf.s:436    .bss:00000000 $d
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
                            .group:00000000 wm4.CCU4Global_Conf.h.63.10a5fc586e1563647b9633c45b1b739e
                            .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
-                           .group:00000000 wm4.NVIC002_Conf.h.63.49528b5ba8318d62684d7423600f8092
+                           .group:00000000 wm4.NVIC002_Conf.h.63.85c8666caca8bd9e6c27dcbc8efe5043
                            .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
                            .group:00000000 wm4.I2C001_Conf.h.58.2b816ac2c964c55a6c88f9c406d78c9f
                            .group:00000000 wm4.ERU001_Conf.h.69.61c28b1ac8f55fb79ee064524d8b6415

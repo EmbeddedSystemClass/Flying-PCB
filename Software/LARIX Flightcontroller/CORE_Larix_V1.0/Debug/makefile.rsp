@@ -7,6 +7,7 @@ _Quadrocopter/Sensors/MPU9X50/Filter/kalman.o
 _Quadrocopter/Sensors/DPS310/DPS310.o
 _Quadrocopter/RemoteControl/RCReceive.o
 _Quadrocopter/RemoteControl/BluetoothProtocol/BluetoothProtocol.o
+_Quadrocopter/Dev/Altitude_Control.o
 _Quadrocopter/DaisyChain/DaisyChain.o
 _Quadrocopter/BatterySafety/BatterySafety.o
 _Quadrocopter/Attitude_Control/AttitudeController.o

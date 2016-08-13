@@ -39,8 +39,8 @@
   43 0012 01       		.byte	1
   44 0013 00       		.byte	0
   45 0014 00C00040 		.word	1073790976
-  46 0018 00C20040 		.word	1073791488
-  47 001c 00C20040 		.word	1073791488
+  46 0018 00C10040 		.word	1073791232
+  47 001c 00C10040 		.word	1073791232
   48 0020 00       		.byte	0
   49 0021 00       		.byte	0
   50 0022 06       		.byte	6
@@ -53,8 +53,8 @@
   57 0034 00       		.byte	0
   58 0035 00       		.byte	0
   59 0036 00       		.byte	0
-  60 0037 01       		.byte	1
-  61 0038 01       		.byte	1
+  60 0037 00       		.byte	0
+  61 0038 00       		.byte	0
   62 0039 000000   		.space	3
   63 003c 00000000 		.word	PWMSP001_DynamicData0
   64 0040 00000000 		.word	PWMSP001_lSetCompareEdgeAlign
@@ -82,8 +82,8 @@
   90 005a 01       		.byte	1
   91 005b 00       		.byte	0
   92 005c 00C00040 		.word	1073790976
-  93 0060 00C10040 		.word	1073791232
-  94 0064 00C10040 		.word	1073791232
+  93 0060 00C40040 		.word	1073792000
+  94 0064 00C40040 		.word	1073792000
   95 0068 00       		.byte	0
   96 0069 00       		.byte	0
   97 006a 02       		.byte	2
@@ -96,8 +96,8 @@
  104 007c 00       		.byte	0
  105 007d 00       		.byte	0
  106 007e 00       		.byte	0
- 107 007f 00       		.byte	0
- 108 0080 00       		.byte	0
+ 107 007f 03       		.byte	3
+ 108 0080 03       		.byte	3
  109 0081 000000   		.space	3
  110 0084 00000000 		.word	PWMSP001_DynamicData1
  111 0088 00000000 		.word	PWMSP001_lSetCompareEdgeAlign
@@ -125,8 +125,8 @@
  137 00a2 01       		.byte	1
  138 00a3 00       		.byte	0
  139 00a4 00C00040 		.word	1073790976
- 140 00a8 00C40040 		.word	1073792000
- 141 00ac 00C40040 		.word	1073792000
+ 140 00a8 00C30040 		.word	1073791744
+ 141 00ac 00C30040 		.word	1073791744
  142 00b0 00       		.byte	0
  143 00b1 00       		.byte	0
  144 00b2 08       		.byte	8
@@ -139,8 +139,8 @@
  151 00c4 00       		.byte	0
  152 00c5 00       		.byte	0
  153 00c6 00       		.byte	0
- 154 00c7 03       		.byte	3
- 155 00c8 03       		.byte	3
+ 154 00c7 02       		.byte	2
+ 155 00c8 02       		.byte	2
  156 00c9 000000   		.space	3
  157 00cc 00000000 		.word	PWMSP001_DynamicData2
  158 00d0 00000000 		.word	PWMSP001_lSetCompareEdgeAlign
@@ -151,7 +151,7 @@
  165              	PWMSP001_DynamicData3:
  166 000c 00       		.space	1
  167              		.global	PWMSP001_Handle3
- 168 000d 000000   		.section	.rodata
+ 168              		.section	.rodata
  169              		.align	2
  172              	PWMSP001_Handle3:
  173 00d8 01       		.byte	1
@@ -188,26 +188,71 @@
  204 0114 00000000 		.word	PWMSP001_DynamicData3
  205 0118 00000000 		.word	PWMSP001_lSetCompareEdgeAlignTimerConcat
  206 011c 00000000 		.word	PWMSP001_lSetDutyEdgeAlignTimerConcat
- 207              		.text
- 208              	.Letext0:
- 209              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
- 210              		.file 2 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
- 211              		.file 3 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
- 212              		.file 4 "C:\\DAVE3_workspace\\Pinus_Evaluierung_DAVE3\\CORE_Larix_V1.0\\Dave\\Generated\\inc\\DAVE
- 213              		.file 5 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
- 214              		.file 6 "../Dave/Generated/src/PWMSP001/PWMSP001_Conf.c"
+ 207              		.global	PWMSP001_DynamicData4
+ 208              		.bss
+ 209 000d 000000   		.align	2
+ 212              	PWMSP001_DynamicData4:
+ 213 0010 00       		.space	1
+ 214              		.global	PWMSP001_Handle4
+ 215 0011 000000   		.section	.rodata
+ 216              		.align	2
+ 219              	PWMSP001_Handle4:
+ 220 0120 01       		.byte	1
+ 221 0121 01       		.byte	1
+ 222 0122 0000     		.space	2
+ 223 0124 54550545 		.word	1157977428
+ 224 0128 8D5B0000 		.word	23437
+ 225 012c 00       		.byte	0
+ 226 012d 00       		.byte	0
+ 227 012e 00       		.byte	0
+ 228 012f 00       		.byte	0
+ 229 0130 00       		.byte	0
+ 230 0131 00       		.byte	0
+ 231 0132 01       		.byte	1
+ 232 0133 00       		.byte	0
+ 233 0134 00C00040 		.word	1073790976
+ 234 0138 00C20040 		.word	1073791488
+ 235 013c 00C20040 		.word	1073791488
+ 236 0140 00       		.byte	0
+ 237 0141 00       		.byte	0
+ 238 0142 08       		.byte	8
+ 239 0143 00       		.byte	0
+ 240 0144 00       		.byte	0
+ 241 0145 000000   		.space	3
+ 242 0148 1AB70000 		.word	46874
+ 243 014c FFFF0000 		.word	65535
+ 244 0150 04000000 		.word	4
+ 245 0154 00       		.byte	0
+ 246 0155 00       		.byte	0
+ 247 0156 00       		.byte	0
+ 248 0157 01       		.byte	1
+ 249 0158 01       		.byte	1
+ 250 0159 000000   		.space	3
+ 251 015c 00000000 		.word	PWMSP001_DynamicData4
+ 252 0160 00000000 		.word	PWMSP001_lSetCompareEdgeAlign
+ 253 0164 00000000 		.word	PWMSP001_lSetDutyEdgeAlign
+ 254              		.text
+ 255              	.Letext0:
+ 256              		.file 1 "c:\\dave-3.1.10\\arm-gcc\\bin\\../lib/gcc/arm-none-eabi/4.7.4/../../../../arm-none-eabi/i
+ 257              		.file 2 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Infineon/XMC4500_series/Include/XMC4500.h"
+ 258              		.file 3 "E:\\GitHub\\Flying-PCB\\Software\\LARIX Flightcontroller\\CORE_Larix_V1.0\\Dave\\Generate
+ 259              		.file 4 "E:\\GitHub\\Flying-PCB\\Software\\LARIX Flightcontroller\\CORE_Larix_V1.0\\Dave\\Generate
+ 260              		.file 5 "C:\\DAVE-3.1.10\\eclipse\\/../CMSIS/Include/core_cm4.h"
+ 261              		.file 6 "../Dave/Generated/src/PWMSP001/PWMSP001_Conf.c"
 DEFINED SYMBOLS
                             *ABS*:00000000 PWMSP001_Conf.c
-C:\Users\Krainesi\AppData\Local\Temp\ccZO6A5m.s:24     .bss:00000000 PWMSP001_DynamicData0
-C:\Users\Krainesi\AppData\Local\Temp\ccZO6A5m.s:21     .bss:00000000 $d
-C:\Users\Krainesi\AppData\Local\Temp\ccZO6A5m.s:31     .rodata:00000000 PWMSP001_Handle0
-C:\Users\Krainesi\AppData\Local\Temp\ccZO6A5m.s:28     .rodata:00000000 $d
-C:\Users\Krainesi\AppData\Local\Temp\ccZO6A5m.s:71     .bss:00000004 PWMSP001_DynamicData1
-C:\Users\Krainesi\AppData\Local\Temp\ccZO6A5m.s:78     .rodata:00000048 PWMSP001_Handle1
-C:\Users\Krainesi\AppData\Local\Temp\ccZO6A5m.s:118    .bss:00000008 PWMSP001_DynamicData2
-C:\Users\Krainesi\AppData\Local\Temp\ccZO6A5m.s:125    .rodata:00000090 PWMSP001_Handle2
-C:\Users\Krainesi\AppData\Local\Temp\ccZO6A5m.s:165    .bss:0000000c PWMSP001_DynamicData3
-C:\Users\Krainesi\AppData\Local\Temp\ccZO6A5m.s:172    .rodata:000000d8 PWMSP001_Handle3
+C:\Users\Mya\AppData\Local\Temp\ccMpVMTJ.s:24     .bss:00000000 PWMSP001_DynamicData0
+C:\Users\Mya\AppData\Local\Temp\ccMpVMTJ.s:21     .bss:00000000 $d
+C:\Users\Mya\AppData\Local\Temp\ccMpVMTJ.s:31     .rodata:00000000 PWMSP001_Handle0
+C:\Users\Mya\AppData\Local\Temp\ccMpVMTJ.s:28     .rodata:00000000 $d
+C:\Users\Mya\AppData\Local\Temp\ccMpVMTJ.s:71     .bss:00000004 PWMSP001_DynamicData1
+C:\Users\Mya\AppData\Local\Temp\ccMpVMTJ.s:78     .rodata:00000048 PWMSP001_Handle1
+C:\Users\Mya\AppData\Local\Temp\ccMpVMTJ.s:118    .bss:00000008 PWMSP001_DynamicData2
+C:\Users\Mya\AppData\Local\Temp\ccMpVMTJ.s:125    .rodata:00000090 PWMSP001_Handle2
+C:\Users\Mya\AppData\Local\Temp\ccMpVMTJ.s:165    .bss:0000000c PWMSP001_DynamicData3
+C:\Users\Mya\AppData\Local\Temp\ccMpVMTJ.s:172    .rodata:000000d8 PWMSP001_Handle3
+C:\Users\Mya\AppData\Local\Temp\ccMpVMTJ.s:212    .bss:00000010 PWMSP001_DynamicData4
+C:\Users\Mya\AppData\Local\Temp\ccMpVMTJ.s:219    .rodata:00000120 PWMSP001_Handle4
                            .group:00000000 wm4.1.84cfd71c6d2dc0bd4021712beaa9efd8
                            .group:00000000 wm4.XMC4500.h.45.215f4b8c79f46c7645c15373868d08c0
                            .group:00000000 wm4.core_cm4.h.47.41af406cb4cda82c972f112a9cd0a024
@@ -281,7 +326,7 @@ C:\Users\Krainesi\AppData\Local\Temp\ccZO6A5m.s:172    .rodata:000000d8 PWMSP001
                            .group:00000000 wm4.UART001.h.109.3e835815a7a59791d8bd39655f4d4cc9
                            .group:00000000 wm4.CCU4Global_Conf.h.63.10a5fc586e1563647b9633c45b1b739e
                            .group:00000000 wm4.PWMSP001.h.57.29b732b86baf3e81f49153f5f495912e
-                           .group:00000000 wm4.NVIC002_Conf.h.63.49528b5ba8318d62684d7423600f8092
+                           .group:00000000 wm4.NVIC002_Conf.h.63.85c8666caca8bd9e6c27dcbc8efe5043
                            .group:00000000 wm4.I2C001.h.97.5277d52889d6c741e048ea45ee1277b5
                            .group:00000000 wm4.I2C001_Conf.h.58.2b816ac2c964c55a6c88f9c406d78c9f
                            .group:00000000 wm4.ERU001_Conf.h.69.61c28b1ac8f55fb79ee064524d8b6415

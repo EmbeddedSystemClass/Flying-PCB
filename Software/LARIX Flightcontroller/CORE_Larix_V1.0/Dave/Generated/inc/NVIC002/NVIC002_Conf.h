@@ -74,8 +74,8 @@ extern "C" {
 /* User defined function mapped to IRQ_Hdlr_90 */
 #define RC_RECEIVE_ISR    IRQ_Hdlr_90 
 
-/* User defined function mapped to IRQ_Hdlr_46 */
-#define Controller_CompareMatch_Int_Handler    IRQ_Hdlr_46 
+/* User defined function mapped to IRQ_Hdlr_45 */
+#define Controller_CompareMatch_Int_Handler    IRQ_Hdlr_45 
 
 /* User defined function mapped to IRQ_Hdlr_89 */
 #define DPS310_I2C_FORMAT_ERROR_ISR    IRQ_Hdlr_89 
@@ -83,14 +83,17 @@ extern "C" {
 /* User defined function mapped to IRQ_Hdlr_98 */
 #define MPU9X50_I2C_FORMAT_ERROR_ISR    IRQ_Hdlr_98 
 
-/* User defined function mapped to IRQ_Hdlr_45 */
-#define Timer_CompareMatch_Int_Handler    IRQ_Hdlr_45 
+/* User defined function mapped to IRQ_Hdlr_46 */
+#define Alt_Controller_Int_Handler    IRQ_Hdlr_46 
+
+/* User defined function mapped to IRQ_Hdlr_44 */
+#define Timer_CompareMatch_Int_Handler    IRQ_Hdlr_44 
 
 /* User defined function mapped to IRQ_Hdlr_5 */
 #define ERU_Event_Handler    IRQ_Hdlr_5 
 
-/* User defined function mapped to IRQ_Hdlr_44 */
-#define Mag_Calibration_Int_Handler    IRQ_Hdlr_44 
+/* User defined function mapped to IRQ_Hdlr_47 */
+#define Mag_Calibration_Int_Handler    IRQ_Hdlr_47 
 
 /* User defined function mapped to IRQ_Hdlr_87 */
 #define BT_RECEIVE_ISR    IRQ_Hdlr_87 
@@ -112,7 +115,7 @@ extern "C" {
  * @ingroup NVIC002_constants
  * @{
  */
-#define NVIC002_NUM_INSTANCES 12U
+#define NVIC002_NUM_INSTANCES 13U
 /**
   * @}
   */

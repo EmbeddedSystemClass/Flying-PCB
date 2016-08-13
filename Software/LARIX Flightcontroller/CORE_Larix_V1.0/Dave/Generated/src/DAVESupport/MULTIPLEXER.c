@@ -212,6 +212,10 @@ void DAVE_MUX_Init(void)
 
     WR_REG(CCU40_CC41->SRS, CCU4_CC4_SRS_CMSR_Msk, CCU4_CC4_SRS_CMSR_Pos, CCU_SR2);    
                        
+    // Configuring CCU40_CC42SRS  =  Service Request Selector
+
+    WR_REG(CCU40_CC42->SRS, CCU4_CC4_SRS_CMSR_Msk, CCU4_CC4_SRS_CMSR_Pos, CCU_SR3);    
+                       
     // Configuring CCU41_CC43SRS  =  Service Request Selector
 
     WR_REG(CCU41_CC43->SRS, CCU4_CC4_SRS_POSR_Msk, CCU4_CC4_SRS_POSR_Pos, CCU_SR1);    
@@ -232,6 +236,8 @@ void DAVE_MUX_Init(void)
   WR_REG(PORT0->IOCR0, 0xb800U, PORT_IOCR_PC1_PCR_Pos, 0x12U);                /*P0.1 : PORT0_IOCR0_PC1_PCR and PORT0_IOCR0_PC1_OE */					   
 					                         
   WR_REG(PORT1->IOCR0, 0xb8U, PORT_IOCR_PC0_PCR_Pos, 0x13U);                /*P1.0 : PORT1_IOCR0_PC0_PCR and PORT1_IOCR0_PC0_OE */					   
+					                         
+  WR_REG(PORT1->IOCR0, 0xb800U, PORT_IOCR_PC1_PCR_Pos, 0x13U);                /*P1.1 : PORT1_IOCR0_PC1_PCR and PORT1_IOCR0_PC1_OE */					   
 					                         
   WR_REG(PORT1->IOCR0, 0xb80000U, PORT_IOCR_PC2_PCR_Pos, 0x13U);                /*P1.2 : PORT1_IOCR0_PC2_PCR and PORT1_IOCR0_PC2_OE */					   
 					                         

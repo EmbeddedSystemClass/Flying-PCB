@@ -98,12 +98,12 @@ const NVIC002_HandleType NVIC002_Handle0 = {
    
 const NVIC002_HandleType NVIC002_Handle1 = {
    /* Mapped NVIC Node */
-  .NodeID      = 46 , 
+  .NodeID      = 45 , 
   /* Node Interrupt Priority */
   .Priority    = 15,  
   /* Node Interrupt SubPriority */
   .SubPriority = 0,
-  /* Interrupt enable for Node46 */
+  /* Interrupt enable for Node45 */
   .InterruptEnable = 1
 };
    
@@ -129,14 +129,25 @@ const NVIC002_HandleType NVIC002_Handle11 = {
   .InterruptEnable = 1
 };
    
+const NVIC002_HandleType NVIC002_Handle12 = {
+   /* Mapped NVIC Node */
+  .NodeID      = 46 , 
+  /* Node Interrupt Priority */
+  .Priority    = 20,  
+  /* Node Interrupt SubPriority */
+  .SubPriority = 0,
+  /* Interrupt enable for Node46 */
+  .InterruptEnable = 1
+};
+   
 const NVIC002_HandleType NVIC002_Handle2 = {
    /* Mapped NVIC Node */
-  .NodeID      = 45 , 
+  .NodeID      = 44 , 
   /* Node Interrupt Priority */
   .Priority    = 5,  
   /* Node Interrupt SubPriority */
   .SubPriority = 0,
-  /* Interrupt enable for Node45 */
+  /* Interrupt enable for Node44 */
   .InterruptEnable = 1
 };
    
@@ -153,12 +164,12 @@ const NVIC002_HandleType NVIC002_Handle3 = {
    
 const NVIC002_HandleType NVIC002_Handle4 = {
    /* Mapped NVIC Node */
-  .NodeID      = 44 , 
+  .NodeID      = 47 , 
   /* Node Interrupt Priority */
   .Priority    = 63,  
   /* Node Interrupt SubPriority */
   .SubPriority = 0,
-  /* Interrupt enable for Node44 */
+  /* Interrupt enable for Node47 */
   .InterruptEnable = 1
 };
    
@@ -222,6 +233,7 @@ const NVIC002_HandleType * NVIC002_HandleArray[NVIC002_NUM_INSTANCES] =
    &NVIC002_Handle1, 
    &NVIC002_Handle10, 
    &NVIC002_Handle11, 
+   &NVIC002_Handle12, 
    &NVIC002_Handle2, 
    &NVIC002_Handle3, 
    &NVIC002_Handle4, 
