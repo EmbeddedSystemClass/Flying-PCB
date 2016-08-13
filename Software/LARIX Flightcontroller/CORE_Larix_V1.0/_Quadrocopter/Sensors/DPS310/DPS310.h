@@ -100,6 +100,11 @@ extern float pressure;
 extern float temperature;
 extern struct structFIR PressureFIR;
 
+//#>>>>>>>>>>
+extern float ground_pressure;
+extern float ground_temperature;
+void DPS_EXT_INT_ISR();
+//#<<<<<<<<<<
 SensorError setupDPS310();
 SensorError setRegister(uint8_t DPS310Address, uint8_t registerAdress, uint8_t setValue);
 int32_t getTemperature();

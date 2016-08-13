@@ -37,6 +37,13 @@ void DPS_EXT_INT_ISR(void)
 	updateValues(&pressure, &temperature);
     I2Cdev_readByte((const I2C001Handle_type*)&DPS310_I2C_Handle,DPS310_Address,0x0A);
     PressureFIR = FIR_FILTER(PressureFIR, pressure);
+    //#>>>>>>>>>>
+    //# due to the unstable performance of DPS310, I assign ground pressure and temperature here
+    //# rather than in Initialize() to make sure they have legal values.
+    //# These sentences will be executed only once.
+    if(!(ground_pressure > 90000 && ground_pressure < 100000)) ground_pressure = pressure;
+    if(!(ground_temperature > 0 && ground_temperature < 50)) ground_temperature = temperature;
+    //#<<<<<<<<<<
 }
 
 SensorError setupDPS310()
@@ -113,20 +120,20 @@ void updateValues(float *Pcomp,float *Tcomp)
 	if (x08>>4 == 15)						// read pressure register only if values are ready (==13 if pressure measurement; ==15 if pressure & temperature measurement
 	{
 		// generate Praw
-		Praw = getPressure();				// 24bit two’s complement value out of reg 0-2
+		Praw = getPressure();				// 24bit twoï¿½s complement value out of reg 0-2
 		if (Praw > (pow(2, 23) - 1))		// convert to signed int
 		{
 			Praw = Praw - pow(2, 24);
 		}
 
 		// generate Traw
-		Traw = getTemperature();			// 24bit two’s complement value out of reg 3-5
+		Traw = getTemperature();			// 24bit twoï¿½s complement value out of reg 3-5
 		if (Traw > (pow(2, 23) - 1))		// convert to signed int
 		{
 			Traw = Traw - pow(2, 24);
 		}
 
-		// calculate physical temperature Tcomp [°C]
+		// calculate physical temperature Tcomp [ï¿½C]
 		Traw_sc = (float)Traw/kT;
 		*Tcomp = c0*0.5 + c1*Traw_sc;
 		// calculate physical pressure Pcomp [Pa]

@@ -17,6 +17,9 @@
 //
 //----------------------------------------------------------------------------
 
+//#>>>>>>>>>>
+//#include "_Quadrocopter/Dev/def.h"	//# user defined variables
+//#<<<<<<<<<<
 
 #include <DAVE3.h>			//Declarations from DAVE3 Code Generation (includes SFR declaration)
 #include <limits.h>
@@ -113,6 +116,14 @@ uint16_t counter_main=0;
 int8_t MonitorBuffer[14] = {0};
 int8_t MotorRunning=0;
 
+//#>>>>>>>>>>
+//# user defined variables
+float ground_pressure = 0;
+float ground_temperature = 0;
+float alt = 0;
+int alt_ctrl_cnt = 0;
+//#<<<<<<<<<<
+
 void Monitoring_Int_Handler();
 
 void Controller_CompareMatch_Int_Handler(void)
@@ -171,8 +182,25 @@ void Initialize()
 
 	//initialize FIR Filter
 	PressureFIR = Initialize_FIR_Filter(PressureFIR, MOVING_AVERAGE);
+	//#>>>>>>>>>>
+	//# record ground pressure and temperature
+	/*
+	int gnd_cnt = 0;
+	do {
+		ground_pressure = pressure;
+		ground_temperature = temperature;
+		delay(100);
+		//if(gnd_cnt++ > 10) break;
+	} while(!(pressure > 90000 && pressure < 100000) || !(temperature > 0 && temperature < 50));
+	*/
+	//#<<<<<<<<<<
 
 	delay(2000);
+	//#>>>>>>>>>>
+	//ground_pressure = pressure;
+	//ground_temperature = temperature;
+	//PWMSP001_Start(&PWMSP001_Handle4);
+	//#<<<<<<<<<<
 
 	PWMSP001_Start(&PWMSP001_Handle0);
 }
@@ -241,6 +269,14 @@ int main(void)
 				case '0':
 					sprintf(c, "VBat:%0.2f\n", VBat);
 					break;
+				//#>>>>>>>>>>
+				case 'a':
+					sprintf(c,"Ground Pressure:%0.2f, Ground Temperature:%0.2f\n",ground_pressure,ground_temperature);
+					break;
+				case 'b':
+					sprintf(c,"Altitude:%0.2f, alt_ctrl_cnt:%d\n",alt,alt_ctrl_cnt);
+					break;
+				//#<<<<<<<<<<
 			}
 			USBVC001_SendString((const char *)c);
 	    }
