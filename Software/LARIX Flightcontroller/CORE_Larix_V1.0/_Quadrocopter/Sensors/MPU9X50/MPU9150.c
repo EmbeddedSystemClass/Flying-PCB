@@ -370,7 +370,7 @@ uint16_t GetSensorCount()
 	return counterSensor;
 }
 
-void GetAngles(float* angles)
+void GetAngles(float* angles)	//# angle[0] is yaw_dot!!!
 {
 
 #if ATTITUDEALGORITHM == 1
@@ -388,6 +388,28 @@ void GetAngles(float* angles)
 	angles[2]=atan2(2.0f * (q[0] * q[1] + q[2] * q[3]), q[0] * q[0] - q[1] * q[1] - q[2] * q[2] + q[3] * q[3]) * RAD_TO_DEG;
 #endif
 }
+
+//#>>>>>>>>>>
+float YAW_OFFSET = 0;
+void GetYaw(float* yaw)
+{
+#if ATTITUDEALGORITHM == 1
+	/*
+	if (YAW_OFFSET == 0.0)
+		YAW_OFFSET = kalAngleZ;
+	*yaw = kalAngleZ-YAW_OFFSET;
+	*/
+	*yaw = kalAngleZ;
+#elif ATTITUDEALGORITHM == 2
+	/*
+	if (YAW_OFFSET == 0.0)
+			YAW_OFFSET = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]), q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]) * RAD_TO_DEG;
+	*yaw = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]), q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]) * RAD_TO_DEG - YAW_OFFSET;
+	*/
+	*yaw = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]), q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]) * RAD_TO_DEG;
+#endif
+}
+//#<<<<<<<<<<
 
 void GetMagData(float* pt)
 {
@@ -532,7 +554,7 @@ void ERU_Event_Handler(void)
 				}
 
 #elif ATTITUDEALGORITHM == 2
-
+							//# frames of axes mentioned below are established on the chip rather than on the board
 				// Sensors x (y)-axis of the accelerometer is aligned with the y (x)-axis of the magnetometer;
 				// the magnetometer z-axis (+ down) is opposite to z-axis (+ up) of accelerometer and gyro!
 				// We have to make some allowance for this orientation mismatch in feeding the output to the quaternion filter.

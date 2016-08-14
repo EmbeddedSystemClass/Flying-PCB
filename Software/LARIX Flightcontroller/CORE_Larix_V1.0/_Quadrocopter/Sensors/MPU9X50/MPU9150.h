@@ -160,6 +160,9 @@ void MPU9150_Init();
 void MPU9150_InitAK8975A(float * destination);
 
 void GetAngles(float* angles);
+//#>>>>>>>>>>
+void GetYaw(float* yaw);
+//#<<<<<<<<<<
 void GetAccData(float* pt);
 void GetGyroData(float* pt);
 void GetMagData(float* pt);

@@ -95,7 +95,7 @@ float yawD_dot = 0.0;
 float pitchD = 0.0;
 float rollD = 0.0;
 
-float YPR[3];
+float YPR[3];	//# yaw_dot, roll, pitch
 float sensorData[3];
 
 //DPS3100 Pressure-Sensor
@@ -122,6 +122,8 @@ float ground_pressure = 0;
 float ground_temperature = 0;
 float alt = 0;
 int alt_ctrl_cnt = 0;
+
+float yaw = 0;
 //#<<<<<<<<<<
 
 void Monitoring_Int_Handler();
@@ -129,6 +131,9 @@ void Monitoring_Int_Handler();
 void Controller_CompareMatch_Int_Handler(void)
 {
 	GetAngles(YPR);
+	//#>>>>>>>>>>
+	GetYaw(&yaw);
+	//#<<<<<<<<<<
 	GetRCData(&powerD, &height_control, &yawD_dot, &pitchD, &rollD);
 	//yaw control
 	AngleRateController(&yawD_dot, &YPR[0], &P_yaw, &u_yaw_dot);
@@ -244,7 +249,7 @@ int main(void)
 					PWMSP001_Start(&PWMSP001_Handle2);
 					break;
 				case '3':
-					sprintf(c, "Y:%1.2f P:%1.2f R:%1.2f\n", YPR[0], YPR[1], YPR[2]);
+					sprintf(c, "Y_dot:%1.2f P:%1.2f R:%1.2f\n", YPR[0], YPR[1], YPR[2]);
 					break;
 				case '4':
 					sprintf(c, "PWM1:%f PWM2:%f PWM3:%f PWM4:%f\n", PWM_percent[0], PWM_percent[1], PWM_percent[2], PWM_percent[3]);
@@ -275,6 +280,9 @@ int main(void)
 					break;
 				case 'b':
 					sprintf(c,"Altitude:%0.2f, alt_ctrl_cnt:%d\n",alt,alt_ctrl_cnt);
+					break;
+				case 'c':
+					sprintf(c,"Yaw:%1.2f\n",yaw);
 					break;
 				//#<<<<<<<<<<
 			}
