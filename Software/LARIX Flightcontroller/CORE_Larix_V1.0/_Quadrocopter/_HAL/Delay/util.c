@@ -25,6 +25,13 @@ uint32_t millis()
 	return timer_cnt;
 }
 
+//# accelerator and gyroscope have same coordinate system(right-front-up, relative to the chip)
+//# accel/gyro coordinate(x right y front z up) => rotate 135 degree(CW) => board coordinate(x front y left z up)
+//# CAUTIOUS! When put static, if Z-axis positive direction of accelerometer is consistent to gravity,
+//# accel value should be -G rather than G!!!!!!
+//# (when in free falling movement, accelerometer shows 0G,
+//# because inner measurement mechanism bears no external force, (gravity force is inner force).
+//# accelerometer value is calculated according to external force! When put static, external force is upward.)
 void transformation(float* values)
 {
   //transformation matrix
@@ -44,6 +51,8 @@ void transformation(float* values)
 	  values[i] = result[i];
 }
 
+//# magnetometer coordinate(front-right-down, relative to the chip) => board coordinate(front-left-up, relative to the board)
+//# reverse z-axis; (x,y) => rotate 135 degree(CW) => exchange x and y axis(swap col1 and col2 of transformation matrix above)
 void transformation_mag(float* values)
 {
   double calibration_matrix[3][3] =
