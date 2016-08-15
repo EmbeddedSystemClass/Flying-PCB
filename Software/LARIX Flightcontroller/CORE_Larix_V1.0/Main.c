@@ -195,25 +195,8 @@ void Initialize()
 
 	//initialize FIR Filter
 	PressureFIR = Initialize_FIR_Filter(PressureFIR, MOVING_AVERAGE);
-	//#>>>>>>>>>>
-	//# record ground pressure and temperature
-	/*
-	int gnd_cnt = 0;
-	do {
-		ground_pressure = pressure;
-		ground_temperature = temperature;
-		delay(100);
-		//if(gnd_cnt++ > 10) break;
-	} while(!(pressure > 90000 && pressure < 100000) || !(temperature > 0 && temperature < 50));
-	*/
-	//#<<<<<<<<<<
 
 	delay(2000);
-	//#>>>>>>>>>>
-	//ground_pressure = pressure;
-	//ground_temperature = temperature;
-	//PWMSP001_Start(&PWMSP001_Handle4);
-	//#<<<<<<<<<<
 
 	PWMSP001_Start(&PWMSP001_Handle0);
 }
