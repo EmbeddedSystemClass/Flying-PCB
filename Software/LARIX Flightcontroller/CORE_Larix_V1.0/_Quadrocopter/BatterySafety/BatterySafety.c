@@ -25,6 +25,15 @@ void ADC_Result_ISR()
 	VBat=VBat*(R1+R2)/R1;					//Umrechnung Spannungsteiler
 
 	//LED Anzeige
+	//#>>>>>>>>>>
+	//# if setupDPS() failed, turn off all 3 state LED
+	if(ret_setupDPS){
+		IO004_ResetPin(VBat_LED_Green);
+		IO004_ResetPin(VBat_LED_Yellow);
+		IO004_ResetPin(VBat_LED_Red);
+		return;
+	}
+	//#<<<<<<<<<<
 	if(VBat > 12.0)
 	{
 		IO004_SetPin(VBat_LED_Green);

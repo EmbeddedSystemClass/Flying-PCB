@@ -132,6 +132,8 @@ float mag_maxx = -500;
 float mag_maxy = -500;
 float mag_maxz = -500;
 float bias[3] = {0,0,0};
+
+int8_t ret_setupDPS = 0;	//# setupDPS() return value
 //#<<<<<<<<<<
 
 void Monitoring_Int_Handler();
@@ -190,7 +192,10 @@ void Initialize()
 	WatchRC_Init(); //Initialize RC watchdog
 
 	//initialize DPS310
-	setupDPS310();
+	//#>>>>>>>>>>
+	//setupDPS310();
+	ret_setupDPS = setupDPS310();
+	//#<<<<<<<<<<
 	getCoefficients();
 
 	//initialize FIR Filter

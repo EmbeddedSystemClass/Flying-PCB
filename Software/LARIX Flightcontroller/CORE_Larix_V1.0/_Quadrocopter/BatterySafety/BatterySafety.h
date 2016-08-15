@@ -14,7 +14,7 @@
 
 
 /*
- * The VBat Pin has to be connected to the right Pin of the Bat Safety Connector, also R13 must be min 30kOhm and C29(10µF) have to be mounted.
+ * The VBat Pin has to be connected to the right Pin of the Bat Safety Connector, also R13 must be min 30kOhm and C29(10ï¿½F) have to be mounted.
  */
 
 #include <DAVE3.h>
@@ -22,3 +22,7 @@
 #define VBat_LED_Green 	IO004_Handle0
 #define VBat_LED_Yellow IO004_Handle1
 #define VBat_LED_Red 	IO004_Handle2
+
+//#>>>>>>>>>>
+extern int8_t ret_setupDPS;
+//#<<<<<<<<<<
