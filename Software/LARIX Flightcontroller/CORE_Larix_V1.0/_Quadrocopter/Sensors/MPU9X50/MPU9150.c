@@ -390,24 +390,15 @@ void GetAngles(float* angles)	//# angle[0] is yaw_dot!!!
 }
 
 //#>>>>>>>>>>
-float YAW_OFFSET = 0;
-void GetYaw(float* yaw)
+//# use mag data to calculate heading
+//# CAUTIOUS: sin(),cos() use radians, not degrees!!!
+void GetHeading(float* heading, float* YPR)
 {
-#if ATTITUDEALGORITHM == 1
-	/*
-	if (YAW_OFFSET == 0.0)
-		YAW_OFFSET = kalAngleZ;
-	*yaw = kalAngleZ-YAW_OFFSET;
-	*/
-	*yaw = kalAngleZ;
-#elif ATTITUDEALGORITHM == 2
-	/*
-	if (YAW_OFFSET == 0.0)
-			YAW_OFFSET = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]), q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]) * RAD_TO_DEG;
-	*yaw = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]), q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]) * RAD_TO_DEG - YAW_OFFSET;
-	*/
-	*yaw = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]), q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]) * RAD_TO_DEG;
-#endif
+	float theta = YPR[1] / RAD_TO_DEG;
+	float phi = YPR[2] / RAD_TO_DEG;
+	float headY = mag[1]*cos(phi) - mag[2]*sin(phi);
+	float headX = mag[0]*cos(theta) + mag[1]*sin(theta)*sin(phi) + mag[2]*sin(theta)*cos(phi);
+	*heading = atan2(-headY,headX) * RAD_TO_DEG;
 }
 //#<<<<<<<<<<
 
@@ -501,6 +492,18 @@ void ERU_Event_Handler(void)
 					mag[0] = (float)magRaw[0]*mRes*magCalibration[0];
 					mag[1] = (float)magRaw[1]*mRes*magCalibration[1];
 					mag[2] = (float)magRaw[2]*mRes*magCalibration[2];
+					//#>>>>>>>>>>
+					//# calculate mag bias
+					if(mag[0] < mag_minx) mag_minx = mag[0];
+					if(mag[0] > mag_maxx) mag_maxx = mag[0];
+					if(mag[1] < mag_miny) mag_miny = mag[1];
+					if(mag[1] > mag_maxy) mag_maxy = mag[1];
+					if(mag[2] < mag_minz) mag_minz = mag[2];
+					if(mag[2] > mag_maxz) mag_maxz = mag[2];
+					bias[0] = 0.5 * (mag_minx + mag_maxx);
+					bias[1] = 0.5 * (mag_miny + mag_maxy);
+					bias[2] = 0.5 * (mag_minz + mag_maxz);
+					//#<<<<<<<<<<
 					transformation_mag(mag);
 				}
 				else

@@ -64,9 +64,13 @@ void transformation_mag(float* values)
 
   double bias[3] =
   {
+	/*
 	  -0.557,
 	  217.116,
 	  -446.63
+	  */
+	  //-25.105, 149.327, -183.874
+	  -25.312, 147.528, -187.343  //# my calibration at school of automation, NWPU
   };
   //calculation
   for (int i=0; i<3; ++i) values[i] = values[i] - bias[i];

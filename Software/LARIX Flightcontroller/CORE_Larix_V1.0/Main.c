@@ -123,7 +123,15 @@ float ground_temperature = 0;
 float alt = 0;
 int alt_ctrl_cnt = 0;
 
-float yaw = 0;
+float heading = 0;
+
+float mag_minx = 500;
+float mag_miny = 500;
+float mag_minz = 500;
+float mag_maxx = -500;
+float mag_maxy = -500;
+float mag_maxz = -500;
+float bias[3] = {0,0,0};
 //#<<<<<<<<<<
 
 void Monitoring_Int_Handler();
@@ -132,7 +140,7 @@ void Controller_CompareMatch_Int_Handler(void)
 {
 	GetAngles(YPR);
 	//#>>>>>>>>>>
-	GetYaw(&yaw);
+	GetHeading(&heading,YPR);
 	//#<<<<<<<<<<
 	GetRCData(&powerD, &height_control, &yawD_dot, &pitchD, &rollD);
 	//yaw control
@@ -249,7 +257,7 @@ int main(void)
 					PWMSP001_Start(&PWMSP001_Handle2);
 					break;
 				case '3':
-					sprintf(c, "Y_dot:%1.2f P:%1.2f R:%1.2f\n", YPR[0], YPR[1], YPR[2]);
+					sprintf(c, "Y_dot:%1.2f P:%1.2f R:%1.2f Heading:%1.2f\n", YPR[0], YPR[1], YPR[2], heading);
 					break;
 				case '4':
 					sprintf(c, "PWM1:%f PWM2:%f PWM3:%f PWM4:%f\n", PWM_percent[0], PWM_percent[1], PWM_percent[2], PWM_percent[3]);
@@ -276,13 +284,17 @@ int main(void)
 					break;
 				//#>>>>>>>>>>
 				case 'a':
-					sprintf(c,"Ground Pressure:%0.2f, Ground Temperature:%0.2f\n",ground_pressure,ground_temperature);
-					break;
-				case 'b':
 					sprintf(c,"Altitude:%0.2f, alt_ctrl_cnt:%d\n",alt,alt_ctrl_cnt);
 					break;
+				case 'b':
+					GetMagData(sensorData);
+					sprintf(c, "MagX:%f MagY:%f MagZ:%f\n", sensorData[0], sensorData[1], sensorData[2]);
+					break;
 				case 'c':
-					sprintf(c,"Yaw:%1.2f\n",yaw);
+					sprintf(c, "MagXbias:%f MagYbias:%f MagZbias:%f\n", bias[0], bias[1], bias[2]);
+					break;
+				case 'z':
+					sprintf(c,"Ground Pressure:%0.2f, Ground Temperature:%0.2f\n",ground_pressure,ground_temperature);
 					break;
 				//#<<<<<<<<<<
 			}

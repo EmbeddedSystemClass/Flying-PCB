@@ -153,6 +153,17 @@ enum Gscale {
   GFS_2000DPS
 };
 
+//#>>>>>>>>>>
+//# for calculating mag bias
+extern float mag_minx;
+extern float mag_miny;
+extern float mag_minz;
+extern float mag_maxx;
+extern float mag_maxy;
+extern float mag_maxz;
+extern float bias[3];
+//#<<<<<<<<<<
+
 void MPU9150_Setup();
 bool MPU9150_SelfTest();
 void MPU9150_Calibrate();
@@ -161,7 +172,7 @@ void MPU9150_InitAK8975A(float * destination);
 
 void GetAngles(float* angles);
 //#>>>>>>>>>>
-void GetYaw(float* yaw);
+void GetHeading(float* heading, float* YPR);
 //#<<<<<<<<<<
 void GetAccData(float* pt);
 void GetGyroData(float* pt);
