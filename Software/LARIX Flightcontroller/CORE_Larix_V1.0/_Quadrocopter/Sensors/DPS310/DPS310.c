@@ -43,6 +43,7 @@ void DPS_EXT_INT_ISR(void)
     //# These sentences will be executed only once.
     if(!(ground_pressure > 90000 && ground_pressure < 100000)) ground_pressure = pressure;
     if(!(ground_temperature > 0 && ground_temperature < 50)) ground_temperature = temperature;
+    DPS_ISR_cnt++;
     //#<<<<<<<<<<
 }
 

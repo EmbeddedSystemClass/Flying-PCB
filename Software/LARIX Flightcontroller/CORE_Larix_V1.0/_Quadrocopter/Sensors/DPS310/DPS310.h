@@ -103,6 +103,7 @@ extern struct structFIR PressureFIR;
 //#>>>>>>>>>>
 extern float ground_pressure;
 extern float ground_temperature;
+extern int16_t DPS_ISR_cnt;
 void DPS_EXT_INT_ISR();
 //#<<<<<<<<<<
 SensorError setupDPS310();
