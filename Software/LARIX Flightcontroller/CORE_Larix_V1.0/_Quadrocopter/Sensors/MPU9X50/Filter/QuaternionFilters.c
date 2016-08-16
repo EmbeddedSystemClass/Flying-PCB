@@ -21,7 +21,11 @@ void MadgwickQuaternionUpdate(float* q, float deltat, float ax, float ay, float 
 	float s1, s2, s3, s4;
 	float qDot1, qDot2, qDot3, qDot4;
 
-	float beta = sqrt(3.0f / 4.0f) * GYROMEASERROR;
+	//#>>>>>>>>>>
+	//# we change beta value in order to change Earth Frame from NWU to NED.
+	//float beta = sqrt(3.0f / 4.0f) * GYROMEASERROR;
+	float beta = 5;
+	//#<<<<<<<<<<
 
 	// Auxiliary variables to avoid repeated arithmetic
 	float _2q1mx;
