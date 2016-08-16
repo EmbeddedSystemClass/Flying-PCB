@@ -49,12 +49,6 @@ void transformation(float* values)
 
   for (int i=0; i<3; ++i)
 	  values[i] = result[i];
-  //#>>>>>>>>>>
-  //# we want to change Earth Frame from NWU to NED,
-  //# so we change accel/gyro/mag: front-left-up => front-right-down
-  values[1] *= -1;
-  values[2] *= -1;
-  //#<<<<<<<<<<
 }
 
 //# magnetometer coordinate(front-right-down, relative to the chip) => board coordinate(front-left-up, relative to the board)
@@ -85,10 +79,4 @@ void transformation_mag(float* values)
     for (int j=0; j<3; ++j)
       result[i] += calibration_matrix[i][j] * values[j];
   for (int i=0; i<3; ++i) values[i] = result[i];
-  //#>>>>>>>>>>
-  //# we want to change Earth Frame from NWU to NED,
-  //# so we change accel/gyro/mag: front-left-up => front-right-down
-  values[1] *= -1;
-  values[2] *= -1;
-  //#<<<<<<<<<<
 }
