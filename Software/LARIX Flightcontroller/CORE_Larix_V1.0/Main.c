@@ -19,6 +19,8 @@
 
 //#>>>>>>>>>>
 //#include "_Quadrocopter/Dev/def.h"	//# user defined variables
+#include "_Quadrocopter/Dev/AltitudeControl.h"
+#include "_Quadrocopter/Dev/imu.h"
 //#<<<<<<<<<<
 
 #include <DAVE3.h>			//Declarations from DAVE3 Code Generation (includes SFR declaration)
@@ -95,7 +97,7 @@ float yawD_dot = 0.0;
 float pitchD = 0.0;
 float rollD = 0.0;
 
-float YPR[3];	//# yaw_dot, roll, pitch
+float YPR[3];	//# yaw_dot, roll, pitch[deg]
 float sensorData[3];
 
 //DPS3100 Pressure-Sensor
@@ -125,6 +127,8 @@ float alt = 0;
 int alt_ctrl_cnt = 0;
 
 float heading = 0;
+float eulers[3];
+float euler_dot[3];
 
 float mag_minx = 500;
 float mag_miny = 500;
@@ -144,6 +148,7 @@ void Controller_CompareMatch_Int_Handler(void)
 	GetAngles(YPR);
 	//#>>>>>>>>>>
 	GetHeading(&heading,YPR);
+	InertialNavUpdate(0.01);
 	//#<<<<<<<<<<
 	GetRCData(&powerD, &height_control, &yawD_dot, &pitchD, &rollD);
 	//yaw control
@@ -255,7 +260,7 @@ int main(void)
 					sprintf(c, "eY:%f eP:%f eR:%f\n", yawD_dot-YPR[0], pitchD-YPR[1], rollD-YPR[2]);
 					break;
 				case '6':
-					sprintf(c, "TimerSensor:%d TimerMain:%d TimerRC:%d\n", (int)GetSensorCount(), (int)counter_main, (int)GetRCCount());
+					sprintf(c, "TimerSensor:%d TimerMain:%d TimerRC:%d TimerBaro:%d\n", (int)GetSensorCount(), (int)counter_main, (int)GetRCCount(),DPS_ISR_cnt);
 					break;
 				case '7':
 					GetGyroData(sensorData);
@@ -281,6 +286,16 @@ int main(void)
 					break;
 				case 'c':
 					sprintf(c, "MagXbias:%f MagYbias:%f MagZbias:%f\n", bias[0], bias[1], bias[2]);
+					break;
+				case 'd':
+					sprintf(c, "AccNorth:%.2f AccEast:%.2f AccUp:%.2f\n", accel_ef.x, accel_ef.y, accel_ef.z);
+					break;
+				case 'e':
+					//sprintf(c, "roll:%f pitch:%f yaw:%f\n", eulers[0], eulers[1], eulers[2]);
+					sprintf(c, "R:%1.2f P:%1.2f Y:%1.2f\n roll:%1.2f pitch:%1.2f yaw:%1.2f\n", YPR[2], YPR[1], heading,eulers[0], eulers[1], eulers[2]);
+					break;
+				case 'f':
+					sprintf(c, "position_z:%.2f velocity_z:%.2f accel_Z:%.2f\n", _position.z, _velocity.z, accel_ef.z);
 					break;
 				case 'z':
 					sprintf(c,"Ground Pressure:%0.2f, Ground Temperature:%0.2f\n",ground_pressure,ground_temperature);
