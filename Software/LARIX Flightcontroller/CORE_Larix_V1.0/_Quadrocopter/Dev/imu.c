@@ -56,9 +56,9 @@ void imuComputeRotationMatrix()
 
 	//# debug: Recalculate euler angles with rotation matrix and compare with YPR and heading.
 	//# If the difference is little, then the rotation matrix is correct.
-	eulers[0] = atan2f(rMat[2][1],rMat[2][2]) * RAD_TO_DEG;
-	eulers[1] = -asinf(rMat[2][0]) * RAD_TO_DEG;
-	eulers[2] = atan2f(rMat[1][0],rMat[0][0]) * RAD_TO_DEG;
+//	eulers[0] = atan2f(rMat[2][1],rMat[2][2]) * RAD_TO_DEG;
+//	eulers[1] = -asinf(rMat[2][0]) * RAD_TO_DEG;
+//	eulers[2] = atan2f(rMat[1][0],rMat[0][0]) * RAD_TO_DEG;
 }
 
 void imuTransformVectorBodyToEarth(float vb[3], float ve[3])	// 前左上 => 北西天
@@ -114,7 +114,7 @@ void InertialNavUpdate(float dt)	//# 50hz
 	accel_ef.z = acc_ef_temp[2] * GRAVITY;
 
 	// remove influence of gravity
-	accel_ef.z -= GRAVITY;
+	accel_ef.z -= GRAVITY * 1.012;		// just trying to zero accel_ef.z when put steady... After all local gravity is not exact GRAVITY.
 //    accel_ef.x *= 100.0f;
 //    accel_ef.y *= 100.0f;
 //    accel_ef.z *= 100.0f;

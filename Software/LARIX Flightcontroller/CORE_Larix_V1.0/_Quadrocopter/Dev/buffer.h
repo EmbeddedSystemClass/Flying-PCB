@@ -4,7 +4,7 @@
 #include <stdint.h>		// declare uint8_t
 #include <stdbool.h>	// declare bool
 
-#define SIZE 1 // 15
+#define SIZE 15 // 15
 
 typedef struct{
 	uint8_t num_items;
