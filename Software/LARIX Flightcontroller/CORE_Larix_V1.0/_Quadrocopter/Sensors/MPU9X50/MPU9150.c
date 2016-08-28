@@ -586,8 +586,8 @@ void ERU_Event_Handler(void)
 				// in the LSM9DS0 sensor. This rotation can be modified to allow any convenient orientation convention.
 				// This is ok by aircraft orientation standards!
 				// Pass gyro rate as rad/s
-				MadgwickQuaternionUpdate(q, dt, acc[0], acc[1], acc[2], gyro[0], gyro[1], gyro[2], mag[0], mag[1], mag[2]);
-				//MahonyQuaternionUpdate(q, eInt, dt, acc[0], acc[1], acc[2], gyro[0], gyro[1], gyro[2], mag[0], mag[1], mag[2]);
+				//MadgwickQuaternionUpdate(q, dt, acc[0], acc[1], acc[2], gyro[0], gyro[1], gyro[2], mag[0], mag[1], mag[2]);
+				MahonyQuaternionUpdate(q, eInt, dt, acc[0], acc[1], acc[2], gyro[0], gyro[1], gyro[2], mag[0], mag[1], mag[2]);
 
 #endif
 				counterSensor++;
