@@ -391,6 +391,8 @@ void GetAngles(float* angles)	//# angle[0] is yaw_dot!!!
 
 //#>>>>>>>>>>
 float headingAvg = 0;
+//# TODO: get magDeclination!
+float magneticDeclination = 0;
 //# use mag data to calculate heading
 //# CAUTIOUS: sin(),cos() use radians, not degrees!!!
 void GetHeading(float* heading, float* YPR)
@@ -399,7 +401,7 @@ void GetHeading(float* heading, float* YPR)
 	float phi = YPR[2] / RAD_TO_DEG;
 	float headY = mag[1]*cos(phi) - mag[2]*sin(phi);
 	float headX = mag[0]*cos(theta) + mag[1]*sin(theta)*sin(phi) + mag[2]*sin(theta)*cos(phi);
-	*heading = atan2(-headY,headX) * RAD_TO_DEG;
+	*heading = atan2(-headY,headX) * RAD_TO_DEG + magneticDeclination;
 
 	//# LPF
 	//# version 1
