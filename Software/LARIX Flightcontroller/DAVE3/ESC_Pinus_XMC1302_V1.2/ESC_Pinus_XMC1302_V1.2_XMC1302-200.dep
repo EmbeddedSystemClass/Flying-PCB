@@ -1,291 +1,0 @@
-Dependencies for Project 'ESC_Pinus_XMC1302_V1.2', Target 'XMC1302-200': (DO NOT MODIFY !)
-F (./Dave/Generated/src/ADCGLOB001/ADCGlob001.c)(0x56D80C62)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\adcglob001.o --omf_browse .\uvbuild\adcglob001.crf --depend .\uvbuild\adcglob001.d)
-I (Dave/Generated/inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1300.h)(0x52E210A8)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cm0.h)(0x51481A3C)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmInstr.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmFunc.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/system_XMC1300.h)(0x51ECDC66)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1000_RomFunctionTable.h)(0x51D58118)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/types.h)(0x5383FFFE)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x52FDD27E)
-I (Dave/Generated/inc/DAVESupport/../../inc/DAVESupport/MULTIPLEXER.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/LIBS.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/CCU8PWMLIB.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/MOTORLIB.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/CLK002/CLK002.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/CCU4GLOBAL/CCU4GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/ADCGLOB001/ADCGlob001_Conf.c)(0x56D80C62)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\adcglob001_conf.o --omf_browse .\uvbuild\adcglob001_conf.crf --depend .\uvbuild\adcglob001_conf.d)
-I (Dave/Generated/inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1300.h)(0x52E210A8)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cm0.h)(0x51481A3C)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmInstr.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmFunc.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/system_XMC1300.h)(0x51ECDC66)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1000_RomFunctionTable.h)(0x51D58118)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/types.h)(0x5383FFFE)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x52FDD27E)
-I (Dave/Generated/inc/DAVESupport/../../inc/DAVESupport/MULTIPLEXER.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/LIBS.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/CCU8PWMLIB.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/MOTORLIB.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/CLK002/CLK002.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/CCU4GLOBAL/CCU4GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/CCU4GLOBAL/CCU4GLOBAL.c)(0x55489734)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\ccu4global.o --omf_browse .\uvbuild\ccu4global.crf --depend .\uvbuild\ccu4global.d)
-I (./Dave/Generated/src/CCU4GLOBAL/../../inc/CCU4GLOBAL/CCU4GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/CCU4GLOBAL/CCU4GLOBAL_Conf.c)(0x56D80C62)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\ccu4global_conf.o --omf_browse .\uvbuild\ccu4global_conf.crf --depend .\uvbuild\ccu4global_conf.d)
-I (./Dave/Generated/src/CCU4GLOBAL/../../inc/CCU4Global/CCU4Global.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL.c)(0x55489734)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\ccu8global.o --omf_browse .\uvbuild\ccu8global.crf --depend .\uvbuild\ccu8global.d)
-I (./Dave/Generated/src/CCU8GLOBAL/../../inc/CCU8GLOBAL/CCU8GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/CCU8GLOBAL/CCU8GLOBAL_Conf.c)(0x56D80C61)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\ccu8global_conf.o --omf_browse .\uvbuild\ccu8global_conf.crf --depend .\uvbuild\ccu8global_conf.d)
-I (./Dave/Generated/src/CCU8GLOBAL/../../inc/CCU8GLOBAL/CCU8GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/CLK002/CLK002.c)(0x56D80C61)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\clk002.o --omf_browse .\uvbuild\clk002.crf --depend .\uvbuild\clk002.d)
-I (Dave/Generated/inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1300.h)(0x52E210A8)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cm0.h)(0x51481A3C)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmInstr.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmFunc.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/system_XMC1300.h)(0x51ECDC66)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1000_RomFunctionTable.h)(0x51D58118)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/types.h)(0x5383FFFE)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x52FDD27E)
-I (Dave/Generated/inc/DAVESupport/../../inc/DAVESupport/MULTIPLEXER.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/LIBS.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/CCU8PWMLIB.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/MOTORLIB.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/CLK002/CLK002.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/CCU4GLOBAL/CCU4GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/DAVESupport/DAVE3.c)(0x56D80C61)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\dave3.o --omf_browse .\uvbuild\dave3.crf --depend .\uvbuild\dave3.d)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1300.h)(0x52E210A8)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cm0.h)(0x51481A3C)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmInstr.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmFunc.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/system_XMC1300.h)(0x51ECDC66)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1000_RomFunctionTable.h)(0x51D58118)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/../../inc/LIBS/types.h)(0x5383FFFE)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x52FDD27E)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/../../inc/DAVESupport/MULTIPLEXER.h)(0x56D80C61)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/../../inc/LIBS/LIBS.h)(0x56D80C61)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/../../inc/LIBS/CCU8PWMLIB.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/../../inc/LIBS/MOTORLIB.h)(0x56D80C61)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/../../inc/CLK002/CLK002.h)(0x5383FFFE)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/../../inc/CCU4GLOBAL/CCU4GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/DAVESupport/MULTIPLEXER.c)(0x56D80C6B)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\multiplexer.o --omf_browse .\uvbuild\multiplexer.crf --depend .\uvbuild\multiplexer.d)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1300.h)(0x52E210A8)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cm0.h)(0x51481A3C)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmInstr.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmFunc.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/system_XMC1300.h)(0x51ECDC66)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1000_RomFunctionTable.h)(0x51D58118)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/../../inc/LIBS/types.h)(0x5383FFFE)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x52FDD27E)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/../../inc/DAVESupport/MULTIPLEXER.h)(0x56D80C61)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/../../inc/LIBS/LIBS.h)(0x56D80C61)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/../../inc/LIBS/CCU8PWMLIB.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/../../inc/LIBS/MOTORLIB.h)(0x56D80C61)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/../../inc/CLK002/CLK002.h)(0x5383FFFE)
-I (./Dave/Generated/src/DAVESupport/../../inc/DAVESupport/../../inc/CCU4GLOBAL/CCU4GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/IO004/IO004.c)(0x56D80C61)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\io004.o --omf_browse .\uvbuild\io004.crf --depend .\uvbuild\io004.d)
-I (Dave/Generated/inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1300.h)(0x52E210A8)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cm0.h)(0x51481A3C)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmInstr.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmFunc.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/system_XMC1300.h)(0x51ECDC66)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1000_RomFunctionTable.h)(0x51D58118)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/types.h)(0x5383FFFE)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x52FDD27E)
-I (Dave/Generated/inc/DAVESupport/../../inc/DAVESupport/MULTIPLEXER.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/LIBS.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/CCU8PWMLIB.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/MOTORLIB.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/CLK002/CLK002.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/CCU4GLOBAL/CCU4GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/IO004/IO004_Conf.c)(0x56D80C61)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\io004_conf.o --omf_browse .\uvbuild\io004_conf.crf --depend .\uvbuild\io004_conf.d)
-I (Dave/Generated/inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1300.h)(0x52E210A8)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cm0.h)(0x51481A3C)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmInstr.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmFunc.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/system_XMC1300.h)(0x51ECDC66)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1000_RomFunctionTable.h)(0x51D58118)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/types.h)(0x5383FFFE)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x52FDD27E)
-I (Dave/Generated/inc/DAVESupport/../../inc/DAVESupport/MULTIPLEXER.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/LIBS.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/CCU8PWMLIB.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/MOTORLIB.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/CLK002/CLK002.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/CCU4GLOBAL/CCU4GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/LIBS/CCU8PWMLIB.c)(0x5383FFFE)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\ccu8pwmlib.o --omf_browse .\uvbuild\ccu8pwmlib.crf --depend .\uvbuild\ccu8pwmlib.d)
-I (Dave/Generated/inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1300.h)(0x52E210A8)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cm0.h)(0x51481A3C)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmInstr.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmFunc.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/system_XMC1300.h)(0x51ECDC66)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1000_RomFunctionTable.h)(0x51D58118)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/types.h)(0x5383FFFE)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x52FDD27E)
-I (Dave/Generated/inc/DAVESupport/../../inc/DAVESupport/MULTIPLEXER.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/LIBS.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/CCU8PWMLIB.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/MOTORLIB.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/CLK002/CLK002.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/CCU4GLOBAL/CCU4GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/LIBS/MOTORLIB.c)(0x56D80C61)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\motorlib.o --omf_browse .\uvbuild\motorlib.crf --depend .\uvbuild\motorlib.d)
-I (Dave/Generated/inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1300.h)(0x52E210A8)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cm0.h)(0x51481A3C)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmInstr.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmFunc.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/system_XMC1300.h)(0x51ECDC66)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1000_RomFunctionTable.h)(0x51D58118)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/types.h)(0x5383FFFE)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x52FDD27E)
-I (Dave/Generated/inc/DAVESupport/../../inc/DAVESupport/MULTIPLEXER.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/LIBS.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/CCU8PWMLIB.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/MOTORLIB.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/CLK002/CLK002.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/CCU4GLOBAL/CCU4GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/MATHLIBS/FASTMATH01.c)(0x5548973C)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\fastmath01.o --omf_browse .\uvbuild\fastmath01.crf --depend .\uvbuild\fastmath01.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x52FDD27E)
-I (./Dave/Generated/src/MATHLIBS/../../inc/MATHLIBS/FASTMATH01.h)(0x5548973C)
-I (./Dave/Generated/src/MATHLIBS/../../inc/MATHLIBS/MATHLLD01.h)(0x5548973C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/MATHLIBS/MATH01.c)(0x5548973C)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\math01.o --omf_browse .\uvbuild\math01.crf --depend .\uvbuild\math01.d)
-I (./Dave/Generated/src/MATHLIBS/../../inc/MATHLIBS/MATH01.h)(0x5548973C)
-I (./Dave/Generated/src/MATHLIBS/../../inc/MATHLIBS/MATHLLD01.h)(0x5548973C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/MATHLIBS/MATHLLD01.c)(0x5548973C)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\mathlld01.o --omf_browse .\uvbuild\mathlld01.crf --depend .\uvbuild\mathlld01.d)
-I (./Dave/Generated/src/MATHLIBS/../../inc/MATHLIBS/MATHLLD01.h)(0x5548973C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/MATHLIBS/STDMATH01.c)(0x5548973C)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\stdmath01.o --omf_browse .\uvbuild\stdmath01.crf --depend .\uvbuild\stdmath01.d)
-I (./Dave/Generated/src/MATHLIBS/../../inc/MATHLIBS/STDMATH01.h)(0x5548973C)
-I (./Dave/Generated/src/MATHLIBS/../../inc/MATHLIBS/MATHLLD01.h)(0x5548973C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/NVIC002/NVIC002.c)(0x5548973C)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\nvic002.o --omf_browse .\uvbuild\nvic002.crf --depend .\uvbuild\nvic002.d)
-I (./Dave/Generated/src/NVIC002/../../inc/NVIC002/NVIC002.h)(0x5548973C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/NVIC002/NVIC002_Conf.c)(0x56D80C61)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\nvic002_conf.o --omf_browse .\uvbuild\nvic002_conf.crf --depend .\uvbuild\nvic002_conf.d)
-I (./Dave/Generated/src/NVIC002/../../inc/NVIC002/NVIC002.h)(0x5548973C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/UART001/UART001.c)(0x5384001E)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\uart001.o --omf_browse .\uvbuild\uart001.crf --depend .\uvbuild\uart001.d)
-I (./Dave/Generated/src/UART001/../../inc/UART001/UART001.h)(0x5384001E)
-I (./Dave/Generated/src/UART001/../../inc/UART001/Usic.h)(0x5384001E)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Dave/Generated/src/UART001/UART001_Conf.c)(0x56D80C61)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\uart001_conf.o --omf_browse .\uvbuild\uart001_conf.crf --depend .\uvbuild\uart001_conf.d)
-I (./Dave/Generated/src/UART001/../../inc/UART001/UART001.h)(0x5384001E)
-I (./Dave/Generated/src/UART001/../../inc/UART001/Usic.h)(0x5384001E)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./ADC.c)(0x56D9505B)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\adc.o --omf_browse .\uvbuild\adc.crf --depend .\uvbuild\adc.d)
-I (./ADC.h)(0x562C207C)
-I (Dave/Generated/inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1300.h)(0x52E210A8)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cm0.h)(0x51481A3C)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmInstr.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmFunc.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/system_XMC1300.h)(0x51ECDC66)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1000_RomFunctionTable.h)(0x51D58118)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/types.h)(0x5383FFFE)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x52FDD27E)
-I (Dave/Generated/inc/DAVESupport/../../inc/DAVESupport/MULTIPLEXER.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/LIBS.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/CCU8PWMLIB.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/MOTORLIB.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/CLK002/CLK002.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/CCU4GLOBAL/CCU4GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./BlockCommutation.c)(0x56D9506E)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\blockcommutation.o --omf_browse .\uvbuild\blockcommutation.crf --depend .\uvbuild\blockcommutation.d)
-I (./BlockCommutation.h)(0x56C434E8)
-I (Dave/Generated/inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1300.h)(0x52E210A8)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cm0.h)(0x51481A3C)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmInstr.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmFunc.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/system_XMC1300.h)(0x51ECDC66)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1000_RomFunctionTable.h)(0x51D58118)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/types.h)(0x5383FFFE)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x52FDD27E)
-I (Dave/Generated/inc/DAVESupport/../../inc/DAVESupport/MULTIPLEXER.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/LIBS.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/CCU8PWMLIB.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/MOTORLIB.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/CLK002/CLK002.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/CCU4GLOBAL/CCU4GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./DaisyChain.c)(0x56D941E1)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\daisychain.o --omf_browse .\uvbuild\daisychain.crf --depend .\uvbuild\daisychain.d)
-I (Dave/Generated/inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1300.h)(0x52E210A8)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cm0.h)(0x51481A3C)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmInstr.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmFunc.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/system_XMC1300.h)(0x51ECDC66)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1000_RomFunctionTable.h)(0x51D58118)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/types.h)(0x5383FFFE)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x52FDD27E)
-I (Dave/Generated/inc/DAVESupport/../../inc/DAVESupport/MULTIPLEXER.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/LIBS.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/CCU8PWMLIB.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/MOTORLIB.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/CLK002/CLK002.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/CCU4GLOBAL/CCU4GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Main.c)(0x56D9419B)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\main.o --omf_browse .\uvbuild\main.crf --depend .\uvbuild\main.d)
-I (Dave/Generated/inc/DAVESupport/DAVE3.h)(0x56D80C62)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1300.h)(0x52E210A8)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cm0.h)(0x51481A3C)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmInstr.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmFunc.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/system_XMC1300.h)(0x51ECDC66)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1000_RomFunctionTable.h)(0x51D58118)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/types.h)(0x5383FFFE)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x52FDD27E)
-I (Dave/Generated/inc/DAVESupport/../../inc/DAVESupport/MULTIPLEXER.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/LIBS.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/CCU8PWMLIB.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/LIBS/MOTORLIB.h)(0x56D80C61)
-I (Dave/Generated/inc/DAVESupport/../../inc/CLK002/CLK002.h)(0x5383FFFE)
-I (Dave/Generated/inc/DAVESupport/../../inc/CCU4GLOBAL/CCU4GLOBAL.h)(0x55489734)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/Include/uc_id.h)(0x5306B162)
-F (./Lib/System_LibcStubs.c)(0x53068F66)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\system_libcstubs.o --omf_browse .\uvbuild\system_libcstubs.crf --depend .\uvbuild\system_libcstubs.d)
-F (./Startup/startup_XMC1300_arm.s)(0x56DD365D)(--cpu Cortex-M0 -g --apcs=interwork --pd "__MICROLIB SETA 1" -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300--list .\startup_xmc1300_arm.lst --xref -o .\uvbuild\startup_xmc1300_arm.o --depend .\uvbuild\startup_xmc1300_arm.d)
-F (./Startup/system_XMC1300.c)(0x53068DB8)(-c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork -IC:/DAVE-3.1.10/CMSIS/Include -IC:/DAVE-3.1.10/CMSIS/Infineon/Include -IC:/DAVE-3.1.10/emWin/Start/GUI/inc -IC:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include -IDave/Generated/inc/MATHLIBS -IDave/Generated/inc/DAVESupport -IDave/Generated/inc/MOTORLIBS -IDave/Generated/inc/LIBS --c99-I C:\Keil_v5\ARM\RV31\INC-I C:\Keil_v5\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil_v5\ARM\Inc\Infineon\XMC1300-o .\uvbuild\system_xmc1300.o --omf_browse .\uvbuild\system_xmc1300.crf --depend .\uvbuild\system_xmc1300.d)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/system_XMC1300.h)(0x51ECDC66)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x52FDD27E)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1000_RomFunctionTable.h)(0x51D58118)
-I (C:/DAVE-3.1.10/CMSIS/Infineon/XMC1300_series/Include/XMC1300.h)(0x52E210A8)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cm0.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmInstr.h)(0x51481A3C)
-I (C:/DAVE-3.1.10/CMSIS/Include/core_cmFunc.h)(0x51481A3C)
