@@ -64,8 +64,8 @@ extern const ADC_MEASUREMENT_ISR_t backgnd_rs_intr_handle; /**< global ADC-NVIC 
 CONTROLLERPOLYNOMIALS polynoms;/**< global structure for controler polynomials*/
 
 //DPS3100 Pressure-Sensor
-float pressure = 0;/**< global variable for storing current pressure value*/
-float temperature = 0;/**< global variable for storing current temperature value*/
+float pressure = 0.0f;/**< global variable for storing current pressure value*/
+float temperature = 0.0f;/**< global variable for storing current temperature value*/
 struct structFIR PressureFIR;/**< global struct for filtering pressure values*/
 
 #ifdef Plexi
@@ -88,13 +88,13 @@ CONTROLLERPARAMETER parameter =
 		.T=0.002f,
 		.P_roll=125.0f,
 		.I_roll=0.0f,
-		.D_roll=4.0,
-		.N_roll=400.0,
-		.P_pitch=125.0,
-		.I_pitch=0.0,
-		.D_pitch=4.0,
-		.N_pitch=400.0,
-		.P_yaw=200.0
+		.D_roll=4.0f,
+		.N_roll=400.0f,
+		.P_pitch=125.0f,
+		.I_pitch=0.0f,
+		.D_pitch=4.0f,
+		.N_pitch=400.0f,
+		.P_yaw=200.0f
 };
 #endif
 
