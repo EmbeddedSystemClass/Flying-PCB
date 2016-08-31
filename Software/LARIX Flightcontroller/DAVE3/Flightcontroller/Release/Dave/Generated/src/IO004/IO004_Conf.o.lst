@@ -1,0 +1,44 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"IO004_Conf.c"
+  16              		.global	IO004_Handle2
+  17              		.global	IO004_Handle1
+  18              		.global	IO004_Handle0
+  19              		.section	.rodata
+  20              		.align	2
+  23              	IO004_Handle2:
+  24 0000 03       		.byte	3
+  25 0001 02       		.byte	2
+  26 0002 0000     		.space	2
+  27 0004 00830248 		.word	1208124160
+  30              	IO004_Handle1:
+  31 0008 03       		.byte	3
+  32 0009 01       		.byte	1
+  33 000a 0000     		.space	2
+  34 000c 00830248 		.word	1208124160
+  37              	IO004_Handle0:
+  38 0010 03       		.byte	3
+  39 0011 00       		.byte	0
+  40 0012 0000     		.space	2
+  41 0014 00830248 		.word	1208124160
+  42              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 IO004_Conf.c
+C:\Users\SteurerE\AppData\Local\Temp\ccA5TpaS.s:23     .rodata:00000000 IO004_Handle2
+C:\Users\SteurerE\AppData\Local\Temp\ccA5TpaS.s:30     .rodata:00000008 IO004_Handle1
+C:\Users\SteurerE\AppData\Local\Temp\ccA5TpaS.s:37     .rodata:00000010 IO004_Handle0
+C:\Users\SteurerE\AppData\Local\Temp\ccA5TpaS.s:20     .rodata:00000000 $d
+
+NO UNDEFINED SYMBOLS

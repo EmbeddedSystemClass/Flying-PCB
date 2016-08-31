@@ -1,0 +1,863 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ADCGroup001.c"
+  16              		.section	.text.ADCGROUP001_lInit,"ax",%progbits
+  17              		.align	1
+  18              		.global	ADCGROUP001_lInit
+  19              		.thumb
+  20              		.thumb_func
+  22              	ADCGROUP001_lInit:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 00F10C01 		add	r1, r0, #12
+  26 0004 0EC9     		ldmia	r1, {r1, r2, r3}
+  27 0006 70B5     		push	{r4, r5, r6, lr}
+  28 0008 0C78     		ldrb	r4, [r1, #0]	@ zero_extendqisi2
+  29 000a 002C     		cmp	r4, #0
+  30 000c 7FD1     		bne	.L1
+  31 000e 0478     		ldrb	r4, [r0, #0]	@ zero_extendqisi2
+  32 0010 4678     		ldrb	r6, [r0, #1]	@ zero_extendqisi2
+  33 0012 D2F88050 		ldr	r5, [r2, #128]
+  34 0016 1034     		adds	r4, r4, #16
+  35 0018 06FA04F4 		lsl	r4, r6, r4
+  36 001c 25F48035 		bic	r5, r5, #65536
+  37 0020 04F48034 		and	r4, r4, #65536
+  38 0024 2C43     		orrs	r4, r4, r5
+  39 0026 C2F88040 		str	r4, [r2, #128]
+  40 002a D3F88020 		ldr	r2, [r3, #128]
+  41 002e C47A     		ldrb	r4, [r0, #11]	@ zero_extendqisi2
+  42 0030 22F00302 		bic	r2, r2, #3
+  43 0034 04F00305 		and	r5, r4, #3
+  44 0038 45EA0204 		orr	r4, r5, r2
+  45 003c C3F88040 		str	r4, [r3, #128]
+  46 0040 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+  47 0042 D3F88050 		ldr	r5, [r3, #128]
+  48 0046 D401     		lsls	r4, r2, #7
+  49 0048 E2B2     		uxtb	r2, r4
+  50 004a 25F08005 		bic	r5, r5, #128
+  51 004e 2A43     		orrs	r2, r2, r5
+  52 0050 C3F88020 		str	r2, [r3, #128]
+  53 0054 D3F8B820 		ldr	r2, [r3, #184]
+  54 0058 8488     		ldrh	r4, [r0, #4]
+  55 005a 22F47F62 		bic	r2, r2, #4080
+  56 005e 2505     		lsls	r5, r4, #20
+  57 0060 22F00F04 		bic	r4, r2, #15
+  58 0064 44EA1555 		orr	r5, r4, r5, lsr #20
+  59 0068 C3F8B850 		str	r5, [r3, #184]
+  60 006c C288     		ldrh	r2, [r0, #6]
+  61 006e D3F8B840 		ldr	r4, [r3, #184]
+  62 0072 1504     		lsls	r5, r2, #16
+  63 0074 264A     		ldr	r2, .L4
+  64 0076 24F07F64 		bic	r4, r4, #267386880
+  65 007a 24F47024 		bic	r4, r4, #983040
+  66 007e 2A40     		ands	r2, r2, r5
+  67 0080 2243     		orrs	r2, r2, r4
+  68 0082 C3F8B820 		str	r2, [r3, #184]
+  69 0086 D3F8F021 		ldr	r2, [r3, #496]
+  70 008a 42F00044 		orr	r4, r2, #-2147483648
+  71 008e 427A     		ldrb	r2, [r0, #9]	@ zero_extendqisi2
+  72 0090 02F00702 		and	r2, r2, #7
+  73 0094 2243     		orrs	r2, r2, r4
+  74 0096 047A     		ldrb	r4, [r0, #8]	@ zero_extendqisi2
+  75 0098 2407     		lsls	r4, r4, #28
+  76 009a 04F08054 		and	r4, r4, #268435456
+  77 009e 2243     		orrs	r2, r2, r4
+  78 00a0 847A     		ldrb	r4, [r0, #10]	@ zero_extendqisi2
+  79 00a2 A406     		lsls	r4, r4, #26
+  80 00a4 04F04064 		and	r4, r4, #201326592
+  81 00a8 2243     		orrs	r2, r2, r4
+  82 00aa C3F8F021 		str	r2, [r3, #496]
+  83 00ae 827E     		ldrb	r2, [r0, #26]	@ zero_extendqisi2
+  84 00b0 D3F8A040 		ldr	r4, [r3, #160]
+  85 00b4 02F01F02 		and	r2, r2, #31
+  86 00b8 2243     		orrs	r2, r2, r4
+  87 00ba 047E     		ldrb	r4, [r0, #24]	@ zero_extendqisi2
+  88 00bc 2402     		lsls	r4, r4, #8
+  89 00be 04F4E064 		and	r4, r4, #1792
+  90 00c2 2243     		orrs	r2, r2, r4
+  91 00c4 047F     		ldrb	r4, [r0, #28]	@ zero_extendqisi2
+  92 00c6 2406     		lsls	r4, r4, #24
+  93 00c8 04F0E064 		and	r4, r4, #117440512
+  94 00cc 2243     		orrs	r2, r2, r4
+  95 00ce 847F     		ldrb	r4, [r0, #30]	@ zero_extendqisi2
+  96 00d0 2404     		lsls	r4, r4, #16
+  97 00d2 04F4F814 		and	r4, r4, #2031616
+  98 00d6 2243     		orrs	r2, r2, r4
+  99 00d8 C3F8A020 		str	r2, [r3, #160]
+ 100 00dc C27E     		ldrb	r2, [r0, #27]	@ zero_extendqisi2
+ 101 00de D3F8A440 		ldr	r4, [r3, #164]
+ 102 00e2 02F01F02 		and	r2, r2, #31
+ 103 00e6 2243     		orrs	r2, r2, r4
+ 104 00e8 447E     		ldrb	r4, [r0, #25]	@ zero_extendqisi2
+ 105 00ea 2402     		lsls	r4, r4, #8
+ 106 00ec 04F4E064 		and	r4, r4, #1792
+ 107 00f0 2243     		orrs	r2, r2, r4
+ 108 00f2 447F     		ldrb	r4, [r0, #29]	@ zero_extendqisi2
+ 109 00f4 C07F     		ldrb	r0, [r0, #31]	@ zero_extendqisi2
+ 110 00f6 2406     		lsls	r4, r4, #24
+ 111 00f8 04F0E064 		and	r4, r4, #117440512
+ 112 00fc 0004     		lsls	r0, r0, #16
+ 113 00fe 2243     		orrs	r2, r2, r4
+ 114 0100 00F4F810 		and	r0, r0, #2031616
+ 115 0104 0243     		orrs	r2, r2, r0
+ 116 0106 C3F8A420 		str	r2, [r3, #164]
+ 117 010a 0123     		movs	r3, #1
+ 118 010c 0B70     		strb	r3, [r1, #0]
+ 119              	.L1:
+ 120 010e 70BD     		pop	{r4, r5, r6, pc}
+ 121              	.L5:
+ 122              		.align	2
+ 123              	.L4:
+ 124 0110 0000FF0F 		.word	268369920
+ 126              		.section	.text.ADCGROUP001_Deinit,"ax",%progbits
+ 127              		.align	1
+ 128              		.global	ADCGROUP001_Deinit
+ 129              		.thumb
+ 130              		.thumb_func
+ 132              	ADCGROUP001_Deinit:
+ 133              		@ args = 0, pretend = 0, frame = 0
+ 134              		@ frame_needed = 0, uses_anonymous_args = 0
+ 135              		@ link register save eliminated.
+ 136 0000 C268     		ldr	r2, [r0, #12]
+ 137 0002 0169     		ldr	r1, [r0, #16]
+ 138 0004 4369     		ldr	r3, [r0, #20]
+ 139 0006 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 140 0008 0128     		cmp	r0, #1
+ 141 000a 14D1     		bne	.L8
+ 142 000c D1F88000 		ldr	r0, [r1, #128]
+ 143 0010 20F48030 		bic	r0, r0, #65536
+ 144 0014 C1F88000 		str	r0, [r1, #128]
+ 145 0018 0020     		movs	r0, #0
+ 146 001a 4FF00041 		mov	r1, #-2147483648
+ 147 001e C3F88000 		str	r0, [r3, #128]
+ 148 0022 C3F8B800 		str	r0, [r3, #184]
+ 149 0026 C3F8F011 		str	r1, [r3, #496]
+ 150 002a C3F8A000 		str	r0, [r3, #160]
+ 151 002e C3F8A400 		str	r0, [r3, #164]
+ 152 0032 1070     		strb	r0, [r2, #0]
+ 153 0034 7047     		bx	lr
+ 154              	.L8:
+ 155 0036 0120     		movs	r0, #1
+ 156 0038 7047     		bx	lr
+ 158              		.section	.text.ADCGROUP001_GetStartupCalStatus,"ax",%progbits
+ 159              		.align	1
+ 160              		.global	ADCGROUP001_GetStartupCalStatus
+ 161              		.thumb
+ 162              		.thumb_func
+ 164              	ADCGROUP001_GetStartupCalStatus:
+ 165              		@ args = 0, pretend = 0, frame = 0
+ 166              		@ frame_needed = 0, uses_anonymous_args = 0
+ 167              		@ link register save eliminated.
+ 168 0000 4269     		ldr	r2, [r0, #20]
+ 169              	.L10:
+ 170 0002 D2F88030 		ldr	r3, [r2, #128]
+ 171 0006 DB00     		lsls	r3, r3, #3
+ 172 0008 FBD4     		bmi	.L10
+ 173 000a 0020     		movs	r0, #0
+ 174 000c 7047     		bx	lr
+ 176              		.section	.text.ADCGROUP001_Init,"ax",%progbits
+ 177              		.align	1
+ 178              		.global	ADCGROUP001_Init
+ 179              		.thumb
+ 180              		.thumb_func
+ 182              	ADCGROUP001_Init:
+ 183              		@ args = 0, pretend = 0, frame = 0
+ 184              		@ frame_needed = 0, uses_anonymous_args = 0
+ 185 0000 08B5     		push	{r3, lr}
+ 186 0002 FFF7FEFF 		bl	ADCGLOB001_Init
+ 187 0006 0648     		ldr	r0, .L17
+ 188 0008 FFF7FEFF 		bl	ADCGROUP001_lInit
+ 189 000c FFF7FEFF 		bl	ADCGLOB001_StartUpCalibrationInit
+ 190 0010 20B9     		cbnz	r0, .L15
+ 191 0012 0348     		ldr	r0, .L17
+ 192 0014 BDE80840 		pop	{r3, lr}
+ 193 0018 FFF7FEBF 		b	ADCGROUP001_GetStartupCalStatus
+ 194              	.L15:
+ 195 001c 08BD     		pop	{r3, pc}
+ 196              	.L18:
+ 197 001e 00BF     		.align	2
+ 198              	.L17:
+ 199 0020 00000000 		.word	ADCGROUP001_Handle0
+ 201              		.section	.text.ADCGROUP001_SetGroupBound0,"ax",%progbits
+ 202              		.align	1
+ 203              		.global	ADCGROUP001_SetGroupBound0
+ 204              		.thumb
+ 205              		.thumb_func
+ 207              	ADCGROUP001_SetGroupBound0:
+ 208              		@ args = 0, pretend = 0, frame = 0
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210              		@ link register save eliminated.
+ 211 0000 C368     		ldr	r3, [r0, #12]
+ 212 0002 4269     		ldr	r2, [r0, #20]
+ 213 0004 1878     		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+ 214 0006 0128     		cmp	r0, #1
+ 215 0008 0FD1     		bne	.L21
+ 216 000a B1F5805F 		cmp	r1, #4096
+ 217 000e 0ED8     		bhi	.L22
+ 218 0010 D2F8B830 		ldr	r3, [r2, #184]
+ 219 0014 23F47F60 		bic	r0, r3, #4080
+ 220 0018 20F00F03 		bic	r3, r0, #15
+ 221 001c 0905     		lsls	r1, r1, #20
+ 222 001e 43EA1151 		orr	r1, r3, r1, lsr #20
+ 223 0022 C2F8B810 		str	r1, [r2, #184]
+ 224 0026 0020     		movs	r0, #0
+ 225 0028 7047     		bx	lr
+ 226              	.L21:
+ 227 002a 0120     		movs	r0, #1
+ 228 002c 7047     		bx	lr
+ 229              	.L22:
+ 230 002e 0220     		movs	r0, #2
+ 231 0030 7047     		bx	lr
+ 233              		.section	.text.ADCGROUP001_SetGroupBound1,"ax",%progbits
+ 234              		.align	1
+ 235              		.global	ADCGROUP001_SetGroupBound1
+ 236              		.thumb
+ 237              		.thumb_func
+ 239              	ADCGROUP001_SetGroupBound1:
+ 240              		@ args = 0, pretend = 0, frame = 0
+ 241              		@ frame_needed = 0, uses_anonymous_args = 0
+ 242              		@ link register save eliminated.
+ 243 0000 C368     		ldr	r3, [r0, #12]
+ 244 0002 4269     		ldr	r2, [r0, #20]
+ 245 0004 1878     		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+ 246 0006 0128     		cmp	r0, #1
+ 247 0008 10D1     		bne	.L25
+ 248 000a B1F5805F 		cmp	r1, #4096
+ 249 000e 0FD8     		bhi	.L26
+ 250 0010 D2F8B800 		ldr	r0, [r2, #184]
+ 251 0014 074B     		ldr	r3, .L27
+ 252 0016 0904     		lsls	r1, r1, #16
+ 253 0018 20F07F60 		bic	r0, r0, #267386880
+ 254 001c 0B40     		ands	r3, r3, r1
+ 255 001e 20F47021 		bic	r1, r0, #983040
+ 256 0022 0B43     		orrs	r3, r3, r1
+ 257 0024 C2F8B830 		str	r3, [r2, #184]
+ 258 0028 0020     		movs	r0, #0
+ 259 002a 7047     		bx	lr
+ 260              	.L25:
+ 261 002c 0120     		movs	r0, #1
+ 262 002e 7047     		bx	lr
+ 263              	.L26:
+ 264 0030 0220     		movs	r0, #2
+ 265 0032 7047     		bx	lr
+ 266              	.L28:
+ 267              		.align	2
+ 268              	.L27:
+ 269 0034 0000FF0F 		.word	268369920
+ 271              		.section	.text.ADCGROUP001_ActiveGroupServiceRequestNode,"ax",%progbits
+ 272              		.align	1
+ 273              		.global	ADCGROUP001_ActiveGroupServiceRequestNode
+ 274              		.thumb
+ 275              		.thumb_func
+ 277              	ADCGROUP001_ActiveGroupServiceRequestNode:
+ 278              		@ args = 0, pretend = 0, frame = 0
+ 279              		@ frame_needed = 0, uses_anonymous_args = 0
+ 280              		@ link register save eliminated.
+ 281 0000 C268     		ldr	r2, [r0, #12]
+ 282 0002 4369     		ldr	r3, [r0, #20]
+ 283 0004 1278     		ldrb	r2, [r2, #0]	@ zero_extendqisi2
+ 284 0006 012A     		cmp	r2, #1
+ 285 0008 10D1     		bne	.L31
+ 286 000a 0329     		cmp	r1, #3
+ 287 000c 10D8     		bhi	.L32
+ 288 000e D3F8C801 		ldr	r0, [r3, #456]
+ 289 0012 02FA01F1 		lsl	r1, r2, r1
+ 290 0016 20EA0102 		bic	r2, r0, r1
+ 291 001a C3F8C821 		str	r2, [r3, #456]
+ 292 001e D3F8C801 		ldr	r0, [r3, #456]
+ 293 0022 0143     		orrs	r1, r1, r0
+ 294 0024 C3F8C811 		str	r1, [r3, #456]
+ 295 0028 0020     		movs	r0, #0
+ 296 002a 7047     		bx	lr
+ 297              	.L31:
+ 298 002c 0120     		movs	r0, #1
+ 299 002e 7047     		bx	lr
+ 300              	.L32:
+ 301 0030 0220     		movs	r0, #2
+ 302 0032 7047     		bx	lr
+ 304              		.section	.text.ADCGROUP001_DeActiveGroupServiceRequestNode,"ax",%progbits
+ 305              		.align	1
+ 306              		.global	ADCGROUP001_DeActiveGroupServiceRequestNode
+ 307              		.thumb
+ 308              		.thumb_func
+ 310              	ADCGROUP001_DeActiveGroupServiceRequestNode:
+ 311              		@ args = 0, pretend = 0, frame = 0
+ 312              		@ frame_needed = 0, uses_anonymous_args = 0
+ 313              		@ link register save eliminated.
+ 314 0000 C268     		ldr	r2, [r0, #12]
+ 315 0002 4369     		ldr	r3, [r0, #20]
+ 316 0004 1278     		ldrb	r2, [r2, #0]	@ zero_extendqisi2
+ 317 0006 012A     		cmp	r2, #1
+ 318 0008 0BD1     		bne	.L35
+ 319 000a 0329     		cmp	r1, #3
+ 320 000c 0BD8     		bhi	.L36
+ 321 000e D3F8C801 		ldr	r0, [r3, #456]
+ 322 0012 02FA01F2 		lsl	r2, r2, r1
+ 323 0016 20EA0201 		bic	r1, r0, r2
+ 324 001a C3F8C811 		str	r1, [r3, #456]
+ 325 001e 0020     		movs	r0, #0
+ 326 0020 7047     		bx	lr
+ 327              	.L35:
+ 328 0022 0120     		movs	r0, #1
+ 329 0024 7047     		bx	lr
+ 330              	.L36:
+ 331 0026 0220     		movs	r0, #2
+ 332 0028 7047     		bx	lr
+ 334              		.section	.text.ADCGROUP001_ActiveSharedServiceRequestNode,"ax",%progbits
+ 335              		.align	1
+ 336              		.global	ADCGROUP001_ActiveSharedServiceRequestNode
+ 337              		.thumb
+ 338              		.thumb_func
+ 340              	ADCGROUP001_ActiveSharedServiceRequestNode:
+ 341              		@ args = 0, pretend = 0, frame = 0
+ 342              		@ frame_needed = 0, uses_anonymous_args = 0
+ 343              		@ link register save eliminated.
+ 344 0000 C268     		ldr	r2, [r0, #12]
+ 345 0002 4369     		ldr	r3, [r0, #20]
+ 346 0004 1278     		ldrb	r2, [r2, #0]	@ zero_extendqisi2
+ 347 0006 012A     		cmp	r2, #1
+ 348 0008 11D1     		bne	.L39
+ 349 000a 0329     		cmp	r1, #3
+ 350 000c 11D8     		bhi	.L40
+ 351 000e D3F8C801 		ldr	r0, [r3, #456]
+ 352 0012 0831     		adds	r1, r1, #8
+ 353 0014 02FA01F1 		lsl	r1, r2, r1
+ 354 0018 20EA0102 		bic	r2, r0, r1
+ 355 001c C3F8C821 		str	r2, [r3, #456]
+ 356 0020 D3F8C801 		ldr	r0, [r3, #456]
+ 357 0024 0143     		orrs	r1, r1, r0
+ 358 0026 C3F8C811 		str	r1, [r3, #456]
+ 359 002a 0020     		movs	r0, #0
+ 360 002c 7047     		bx	lr
+ 361              	.L39:
+ 362 002e 0120     		movs	r0, #1
+ 363 0030 7047     		bx	lr
+ 364              	.L40:
+ 365 0032 0220     		movs	r0, #2
+ 366 0034 7047     		bx	lr
+ 368              		.section	.text.ADCGROUP001_DeActiveSharedServiceRequestNode,"ax",%progbits
+ 369              		.align	1
+ 370              		.global	ADCGROUP001_DeActiveSharedServiceRequestNode
+ 371              		.thumb
+ 372              		.thumb_func
+ 374              	ADCGROUP001_DeActiveSharedServiceRequestNode:
+ 375              		@ args = 0, pretend = 0, frame = 0
+ 376              		@ frame_needed = 0, uses_anonymous_args = 0
+ 377              		@ link register save eliminated.
+ 378 0000 C268     		ldr	r2, [r0, #12]
+ 379 0002 4369     		ldr	r3, [r0, #20]
+ 380 0004 1278     		ldrb	r2, [r2, #0]	@ zero_extendqisi2
+ 381 0006 012A     		cmp	r2, #1
+ 382 0008 0CD1     		bne	.L43
+ 383 000a 0329     		cmp	r1, #3
+ 384 000c 0CD8     		bhi	.L44
+ 385 000e D3F8C801 		ldr	r0, [r3, #456]
+ 386 0012 0831     		adds	r1, r1, #8
+ 387 0014 02FA01F2 		lsl	r2, r2, r1
+ 388 0018 20EA0201 		bic	r1, r0, r2
+ 389 001c C3F8C811 		str	r1, [r3, #456]
+ 390 0020 0020     		movs	r0, #0
+ 391 0022 7047     		bx	lr
+ 392              	.L43:
+ 393 0024 0120     		movs	r0, #1
+ 394 0026 7047     		bx	lr
+ 395              	.L44:
+ 396 0028 0220     		movs	r0, #2
+ 397 002a 7047     		bx	lr
+ 399              		.section	.text.ADCGROUP001_EMUXStartSelection,"ax",%progbits
+ 400              		.align	1
+ 401              		.global	ADCGROUP001_EMUXStartSelection
+ 402              		.thumb
+ 403              		.thumb_func
+ 405              	ADCGROUP001_EMUXStartSelection:
+ 406              		@ args = 0, pretend = 0, frame = 0
+ 407              		@ frame_needed = 0, uses_anonymous_args = 0
+ 408              		@ link register save eliminated.
+ 409 0000 C268     		ldr	r2, [r0, #12]
+ 410 0002 4369     		ldr	r3, [r0, #20]
+ 411 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 412 0006 0128     		cmp	r0, #1
+ 413 0008 0CD1     		bne	.L47
+ 414 000a 0829     		cmp	r1, #8
+ 415 000c 0CD8     		bhi	.L48
+ 416 000e D3F8F021 		ldr	r2, [r3, #496]
+ 417 0012 01F00701 		and	r1, r1, #7
+ 418 0016 22F00700 		bic	r0, r2, #7
+ 419 001a 0143     		orrs	r1, r1, r0
+ 420 001c C3F8F011 		str	r1, [r3, #496]
+ 421 0020 0020     		movs	r0, #0
+ 422 0022 7047     		bx	lr
+ 423              	.L47:
+ 424 0024 0120     		movs	r0, #1
+ 425 0026 7047     		bx	lr
+ 426              	.L48:
+ 427 0028 0220     		movs	r0, #2
+ 428 002a 7047     		bx	lr
+ 430              		.section	.text.ADCGROUP001_GetEMUXStartSelection,"ax",%progbits
+ 431              		.align	1
+ 432              		.global	ADCGROUP001_GetEMUXStartSelection
+ 433              		.thumb
+ 434              		.thumb_func
+ 436              	ADCGROUP001_GetEMUXStartSelection:
+ 437              		@ args = 0, pretend = 0, frame = 0
+ 438              		@ frame_needed = 0, uses_anonymous_args = 0
+ 439              		@ link register save eliminated.
+ 440 0000 C268     		ldr	r2, [r0, #12]
+ 441 0002 4369     		ldr	r3, [r0, #20]
+ 442 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 443 0006 0128     		cmp	r0, #1
+ 444 0008 07D1     		bne	.L51
+ 445 000a 41B1     		cbz	r1, .L52
+ 446 000c D3F8F031 		ldr	r3, [r3, #496]
+ 447 0010 03F00702 		and	r2, r3, #7
+ 448 0014 0A70     		strb	r2, [r1, #0]
+ 449 0016 0020     		movs	r0, #0
+ 450 0018 7047     		bx	lr
+ 451              	.L51:
+ 452 001a 0120     		movs	r0, #1
+ 453 001c 7047     		bx	lr
+ 454              	.L52:
+ 455 001e 0220     		movs	r0, #2
+ 456 0020 7047     		bx	lr
+ 458              		.section	.text.ADCGROUP001_SetEMUXChannelSelect,"ax",%progbits
+ 459              		.align	1
+ 460              		.global	ADCGROUP001_SetEMUXChannelSelect
+ 461              		.thumb
+ 462              		.thumb_func
+ 464              	ADCGROUP001_SetEMUXChannelSelect:
+ 465              		@ args = 0, pretend = 0, frame = 0
+ 466              		@ frame_needed = 0, uses_anonymous_args = 0
+ 467              		@ link register save eliminated.
+ 468 0000 C268     		ldr	r2, [r0, #12]
+ 469 0002 4369     		ldr	r3, [r0, #20]
+ 470 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 471 0006 0128     		cmp	r0, #1
+ 472 0008 0DD1     		bne	.L55
+ 473 000a 2029     		cmp	r1, #32
+ 474 000c 0DD8     		bhi	.L56
+ 475 000e D3F8F021 		ldr	r2, [r3, #496]
+ 476 0012 0904     		lsls	r1, r1, #16
+ 477 0014 01F4F810 		and	r0, r1, #2031616
+ 478 0018 22F4F812 		bic	r2, r2, #2031616
+ 479 001c 1043     		orrs	r0, r0, r2
+ 480 001e C3F8F001 		str	r0, [r3, #496]
+ 481 0022 0020     		movs	r0, #0
+ 482 0024 7047     		bx	lr
+ 483              	.L55:
+ 484 0026 0120     		movs	r0, #1
+ 485 0028 7047     		bx	lr
+ 486              	.L56:
+ 487 002a 0220     		movs	r0, #2
+ 488 002c 7047     		bx	lr
+ 490              		.section	.text.ADCGROUP001_SetEMUXMode,"ax",%progbits
+ 491              		.align	1
+ 492              		.global	ADCGROUP001_SetEMUXMode
+ 493              		.thumb
+ 494              		.thumb_func
+ 496              	ADCGROUP001_SetEMUXMode:
+ 497              		@ args = 0, pretend = 0, frame = 0
+ 498              		@ frame_needed = 0, uses_anonymous_args = 0
+ 499              		@ link register save eliminated.
+ 500 0000 C268     		ldr	r2, [r0, #12]
+ 501 0002 4369     		ldr	r3, [r0, #20]
+ 502 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 503 0006 0128     		cmp	r0, #1
+ 504 0008 0FD1     		bne	.L59
+ 505 000a 0329     		cmp	r1, #3
+ 506 000c 0FD8     		bhi	.L60
+ 507 000e D3F8F021 		ldr	r2, [r3, #496]
+ 508 0012 8906     		lsls	r1, r1, #26
+ 509 0014 22F04060 		bic	r0, r2, #201326592
+ 510 0018 40F00042 		orr	r2, r0, #-2147483648
+ 511 001c 01F04060 		and	r0, r1, #201326592
+ 512 0020 0243     		orrs	r2, r2, r0
+ 513 0022 C3F8F021 		str	r2, [r3, #496]
+ 514 0026 0020     		movs	r0, #0
+ 515 0028 7047     		bx	lr
+ 516              	.L59:
+ 517 002a 0120     		movs	r0, #1
+ 518 002c 7047     		bx	lr
+ 519              	.L60:
+ 520 002e 0220     		movs	r0, #2
+ 521 0030 7047     		bx	lr
+ 523              		.section	.text.ADCGROUP001_SetEMUXCodeScheme,"ax",%progbits
+ 524              		.align	1
+ 525              		.global	ADCGROUP001_SetEMUXCodeScheme
+ 526              		.thumb
+ 527              		.thumb_func
+ 529              	ADCGROUP001_SetEMUXCodeScheme:
+ 530              		@ args = 0, pretend = 0, frame = 0
+ 531              		@ frame_needed = 0, uses_anonymous_args = 0
+ 532              		@ link register save eliminated.
+ 533 0000 C268     		ldr	r2, [r0, #12]
+ 534 0002 4369     		ldr	r3, [r0, #20]
+ 535 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 536 0006 0128     		cmp	r0, #1
+ 537 0008 0FD1     		bne	.L63
+ 538 000a 0129     		cmp	r1, #1
+ 539 000c 0FD8     		bhi	.L64
+ 540 000e D3F8F021 		ldr	r2, [r3, #496]
+ 541 0012 0907     		lsls	r1, r1, #28
+ 542 0014 22F08050 		bic	r0, r2, #268435456
+ 543 0018 40F00042 		orr	r2, r0, #-2147483648
+ 544 001c 01F08050 		and	r0, r1, #268435456
+ 545 0020 0243     		orrs	r2, r2, r0
+ 546 0022 C3F8F021 		str	r2, [r3, #496]
+ 547 0026 0020     		movs	r0, #0
+ 548 0028 7047     		bx	lr
+ 549              	.L63:
+ 550 002a 0120     		movs	r0, #1
+ 551 002c 7047     		bx	lr
+ 552              	.L64:
+ 553 002e 0220     		movs	r0, #2
+ 554 0030 7047     		bx	lr
+ 556              		.section	.text.ADCGROUP001_SetGroupClass0SampleTime,"ax",%progbits
+ 557              		.align	1
+ 558              		.global	ADCGROUP001_SetGroupClass0SampleTime
+ 559              		.thumb
+ 560              		.thumb_func
+ 562              	ADCGROUP001_SetGroupClass0SampleTime:
+ 563              		@ args = 0, pretend = 0, frame = 0
+ 564              		@ frame_needed = 0, uses_anonymous_args = 0
+ 565              		@ link register save eliminated.
+ 566 0000 C268     		ldr	r2, [r0, #12]
+ 567 0002 4369     		ldr	r3, [r0, #20]
+ 568 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 569 0006 0128     		cmp	r0, #1
+ 570 0008 0AD1     		bne	.L67
+ 571 000a 1F29     		cmp	r1, #31
+ 572 000c 0AD8     		bhi	.L68
+ 573 000e D3F8A020 		ldr	r2, [r3, #160]
+ 574 0012 22F01F00 		bic	r0, r2, #31
+ 575 0016 0143     		orrs	r1, r1, r0
+ 576 0018 C3F8A010 		str	r1, [r3, #160]
+ 577 001c 0020     		movs	r0, #0
+ 578 001e 7047     		bx	lr
+ 579              	.L67:
+ 580 0020 0120     		movs	r0, #1
+ 581 0022 7047     		bx	lr
+ 582              	.L68:
+ 583 0024 0220     		movs	r0, #2
+ 584 0026 7047     		bx	lr
+ 586              		.section	.text.ADCGROUP001_SetGroupClass1SampleTime,"ax",%progbits
+ 587              		.align	1
+ 588              		.global	ADCGROUP001_SetGroupClass1SampleTime
+ 589              		.thumb
+ 590              		.thumb_func
+ 592              	ADCGROUP001_SetGroupClass1SampleTime:
+ 593              		@ args = 0, pretend = 0, frame = 0
+ 594              		@ frame_needed = 0, uses_anonymous_args = 0
+ 595              		@ link register save eliminated.
+ 596 0000 C268     		ldr	r2, [r0, #12]
+ 597 0002 4369     		ldr	r3, [r0, #20]
+ 598 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 599 0006 0128     		cmp	r0, #1
+ 600 0008 0AD1     		bne	.L71
+ 601 000a 1F29     		cmp	r1, #31
+ 602 000c 0AD8     		bhi	.L72
+ 603 000e D3F8A420 		ldr	r2, [r3, #164]
+ 604 0012 22F01F00 		bic	r0, r2, #31
+ 605 0016 0143     		orrs	r1, r1, r0
+ 606 0018 C3F8A410 		str	r1, [r3, #164]
+ 607 001c 0020     		movs	r0, #0
+ 608 001e 7047     		bx	lr
+ 609              	.L71:
+ 610 0020 0120     		movs	r0, #1
+ 611 0022 7047     		bx	lr
+ 612              	.L72:
+ 613 0024 0220     		movs	r0, #2
+ 614 0026 7047     		bx	lr
+ 616              		.section	.text.ADCGROUP001_SetGroupClass0EmuxSampleTime,"ax",%progbits
+ 617              		.align	1
+ 618              		.global	ADCGROUP001_SetGroupClass0EmuxSampleTime
+ 619              		.thumb
+ 620              		.thumb_func
+ 622              	ADCGROUP001_SetGroupClass0EmuxSampleTime:
+ 623              		@ args = 0, pretend = 0, frame = 0
+ 624              		@ frame_needed = 0, uses_anonymous_args = 0
+ 625              		@ link register save eliminated.
+ 626 0000 C268     		ldr	r2, [r0, #12]
+ 627 0002 4369     		ldr	r3, [r0, #20]
+ 628 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 629 0006 0128     		cmp	r0, #1
+ 630 0008 0DD1     		bne	.L75
+ 631 000a 1F29     		cmp	r1, #31
+ 632 000c 0DD8     		bhi	.L76
+ 633 000e D3F8A020 		ldr	r2, [r3, #160]
+ 634 0012 0904     		lsls	r1, r1, #16
+ 635 0014 01F4F810 		and	r0, r1, #2031616
+ 636 0018 22F4F812 		bic	r2, r2, #2031616
+ 637 001c 1043     		orrs	r0, r0, r2
+ 638 001e C3F8A000 		str	r0, [r3, #160]
+ 639 0022 0020     		movs	r0, #0
+ 640 0024 7047     		bx	lr
+ 641              	.L75:
+ 642 0026 0120     		movs	r0, #1
+ 643 0028 7047     		bx	lr
+ 644              	.L76:
+ 645 002a 0220     		movs	r0, #2
+ 646 002c 7047     		bx	lr
+ 648              		.section	.text.ADCGROUP001_SetGroupClass1EmuxSampleTime,"ax",%progbits
+ 649              		.align	1
+ 650              		.global	ADCGROUP001_SetGroupClass1EmuxSampleTime
+ 651              		.thumb
+ 652              		.thumb_func
+ 654              	ADCGROUP001_SetGroupClass1EmuxSampleTime:
+ 655              		@ args = 0, pretend = 0, frame = 0
+ 656              		@ frame_needed = 0, uses_anonymous_args = 0
+ 657              		@ link register save eliminated.
+ 658 0000 C268     		ldr	r2, [r0, #12]
+ 659 0002 4369     		ldr	r3, [r0, #20]
+ 660 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 661 0006 0128     		cmp	r0, #1
+ 662 0008 0DD1     		bne	.L79
+ 663 000a 1F29     		cmp	r1, #31
+ 664 000c 0DD8     		bhi	.L80
+ 665 000e D3F8A420 		ldr	r2, [r3, #164]
+ 666 0012 0904     		lsls	r1, r1, #16
+ 667 0014 01F4F810 		and	r0, r1, #2031616
+ 668 0018 22F4F812 		bic	r2, r2, #2031616
+ 669 001c 1043     		orrs	r0, r0, r2
+ 670 001e C3F8A400 		str	r0, [r3, #164]
+ 671 0022 0020     		movs	r0, #0
+ 672 0024 7047     		bx	lr
+ 673              	.L79:
+ 674 0026 0120     		movs	r0, #1
+ 675 0028 7047     		bx	lr
+ 676              	.L80:
+ 677 002a 0220     		movs	r0, #2
+ 678 002c 7047     		bx	lr
+ 680              		.section	.text.ADCGROUP001_SetGroupClass0ConvMode,"ax",%progbits
+ 681              		.align	1
+ 682              		.global	ADCGROUP001_SetGroupClass0ConvMode
+ 683              		.thumb
+ 684              		.thumb_func
+ 686              	ADCGROUP001_SetGroupClass0ConvMode:
+ 687              		@ args = 0, pretend = 0, frame = 0
+ 688              		@ frame_needed = 0, uses_anonymous_args = 0
+ 689              		@ link register save eliminated.
+ 690 0000 C268     		ldr	r2, [r0, #12]
+ 691 0002 4369     		ldr	r3, [r0, #20]
+ 692 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 693 0006 0128     		cmp	r0, #1
+ 694 0008 0FD1     		bne	.L84
+ 695 000a 0229     		cmp	r1, #2
+ 696 000c 01D9     		bls	.L83
+ 697 000e 0529     		cmp	r1, #5
+ 698 0010 0DD1     		bne	.L85
+ 699              	.L83:
+ 700 0012 D3F8A020 		ldr	r2, [r3, #160]
+ 701 0016 0902     		lsls	r1, r1, #8
+ 702 0018 01F4E060 		and	r0, r1, #1792
+ 703 001c 22F4E062 		bic	r2, r2, #1792
+ 704 0020 1043     		orrs	r0, r0, r2
+ 705 0022 C3F8A000 		str	r0, [r3, #160]
+ 706 0026 0020     		movs	r0, #0
+ 707 0028 7047     		bx	lr
+ 708              	.L84:
+ 709 002a 0120     		movs	r0, #1
+ 710 002c 7047     		bx	lr
+ 711              	.L85:
+ 712 002e 0220     		movs	r0, #2
+ 713 0030 7047     		bx	lr
+ 715              		.section	.text.ADCGROUP001_SetGroupClass1ConvMode,"ax",%progbits
+ 716              		.align	1
+ 717              		.global	ADCGROUP001_SetGroupClass1ConvMode
+ 718              		.thumb
+ 719              		.thumb_func
+ 721              	ADCGROUP001_SetGroupClass1ConvMode:
+ 722              		@ args = 0, pretend = 0, frame = 0
+ 723              		@ frame_needed = 0, uses_anonymous_args = 0
+ 724              		@ link register save eliminated.
+ 725 0000 C268     		ldr	r2, [r0, #12]
+ 726 0002 4369     		ldr	r3, [r0, #20]
+ 727 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 728 0006 0128     		cmp	r0, #1
+ 729 0008 0FD1     		bne	.L89
+ 730 000a 0229     		cmp	r1, #2
+ 731 000c 01D9     		bls	.L88
+ 732 000e 0529     		cmp	r1, #5
+ 733 0010 0DD1     		bne	.L90
+ 734              	.L88:
+ 735 0012 D3F8A420 		ldr	r2, [r3, #164]
+ 736 0016 0902     		lsls	r1, r1, #8
+ 737 0018 01F4E060 		and	r0, r1, #1792
+ 738 001c 22F4E062 		bic	r2, r2, #1792
+ 739 0020 1043     		orrs	r0, r0, r2
+ 740 0022 C3F8A400 		str	r0, [r3, #164]
+ 741 0026 0020     		movs	r0, #0
+ 742 0028 7047     		bx	lr
+ 743              	.L89:
+ 744 002a 0120     		movs	r0, #1
+ 745 002c 7047     		bx	lr
+ 746              	.L90:
+ 747 002e 0220     		movs	r0, #2
+ 748 0030 7047     		bx	lr
+ 750              		.section	.text.ADCGROUP001_SetGroupClass0EmuxConvMode,"ax",%progbits
+ 751              		.align	1
+ 752              		.global	ADCGROUP001_SetGroupClass0EmuxConvMode
+ 753              		.thumb
+ 754              		.thumb_func
+ 756              	ADCGROUP001_SetGroupClass0EmuxConvMode:
+ 757              		@ args = 0, pretend = 0, frame = 0
+ 758              		@ frame_needed = 0, uses_anonymous_args = 0
+ 759              		@ link register save eliminated.
+ 760 0000 C268     		ldr	r2, [r0, #12]
+ 761 0002 4369     		ldr	r3, [r0, #20]
+ 762 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 763 0006 0128     		cmp	r0, #1
+ 764 0008 0FD1     		bne	.L94
+ 765 000a 0229     		cmp	r1, #2
+ 766 000c 01D9     		bls	.L93
+ 767 000e 0529     		cmp	r1, #5
+ 768 0010 0DD1     		bne	.L95
+ 769              	.L93:
+ 770 0012 D3F8A020 		ldr	r2, [r3, #160]
+ 771 0016 0906     		lsls	r1, r1, #24
+ 772 0018 01F0E060 		and	r0, r1, #117440512
+ 773 001c 22F0E062 		bic	r2, r2, #117440512
+ 774 0020 1043     		orrs	r0, r0, r2
+ 775 0022 C3F8A000 		str	r0, [r3, #160]
+ 776 0026 0020     		movs	r0, #0
+ 777 0028 7047     		bx	lr
+ 778              	.L94:
+ 779 002a 0120     		movs	r0, #1
+ 780 002c 7047     		bx	lr
+ 781              	.L95:
+ 782 002e 0220     		movs	r0, #2
+ 783 0030 7047     		bx	lr
+ 785              		.section	.text.ADCGROUP001_SetGroupClass1EmuxConvMode,"ax",%progbits
+ 786              		.align	1
+ 787              		.global	ADCGROUP001_SetGroupClass1EmuxConvMode
+ 788              		.thumb
+ 789              		.thumb_func
+ 791              	ADCGROUP001_SetGroupClass1EmuxConvMode:
+ 792              		@ args = 0, pretend = 0, frame = 0
+ 793              		@ frame_needed = 0, uses_anonymous_args = 0
+ 794              		@ link register save eliminated.
+ 795 0000 C268     		ldr	r2, [r0, #12]
+ 796 0002 4369     		ldr	r3, [r0, #20]
+ 797 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 798 0006 0128     		cmp	r0, #1
+ 799 0008 0FD1     		bne	.L99
+ 800 000a 0229     		cmp	r1, #2
+ 801 000c 01D9     		bls	.L98
+ 802 000e 0529     		cmp	r1, #5
+ 803 0010 0DD1     		bne	.L100
+ 804              	.L98:
+ 805 0012 D3F8A420 		ldr	r2, [r3, #164]
+ 806 0016 0906     		lsls	r1, r1, #24
+ 807 0018 01F0E060 		and	r0, r1, #117440512
+ 808 001c 22F0E062 		bic	r2, r2, #117440512
+ 809 0020 1043     		orrs	r0, r0, r2
+ 810 0022 C3F8A400 		str	r0, [r3, #164]
+ 811 0026 0020     		movs	r0, #0
+ 812 0028 7047     		bx	lr
+ 813              	.L99:
+ 814 002a 0120     		movs	r0, #1
+ 815 002c 7047     		bx	lr
+ 816              	.L100:
+ 817 002e 0220     		movs	r0, #2
+ 818 0030 7047     		bx	lr
+ 820              		.section	.text.ADCGROUP001_SetEMUXSampleTimeControl,"ax",%progbits
+ 821              		.align	1
+ 822              		.global	ADCGROUP001_SetEMUXSampleTimeControl
+ 823              		.thumb
+ 824              		.thumb_func
+ 826              	ADCGROUP001_SetEMUXSampleTimeControl:
+ 827              		@ args = 0, pretend = 0, frame = 0
+ 828              		@ frame_needed = 0, uses_anonymous_args = 0
+ 829              		@ link register save eliminated.
+ 830 0000 C268     		ldr	r2, [r0, #12]
+ 831 0002 4369     		ldr	r3, [r0, #20]
+ 832 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 833 0006 0128     		cmp	r0, #1
+ 834 0008 0FD1     		bne	.L103
+ 835 000a 0129     		cmp	r1, #1
+ 836 000c 0FD8     		bhi	.L104
+ 837 000e D3F8F021 		ldr	r2, [r3, #496]
+ 838 0012 4907     		lsls	r1, r1, #29
+ 839 0014 22F00050 		bic	r0, r2, #536870912
+ 840 0018 40F00042 		orr	r2, r0, #-2147483648
+ 841 001c 01F00050 		and	r0, r1, #536870912
+ 842 0020 0243     		orrs	r2, r2, r0
+ 843 0022 C3F8F021 		str	r2, [r3, #496]
+ 844 0026 0020     		movs	r0, #0
+ 845 0028 7047     		bx	lr
+ 846              	.L103:
+ 847 002a 0120     		movs	r0, #1
+ 848 002c 7047     		bx	lr
+ 849              	.L104:
+ 850 002e 0220     		movs	r0, #2
+ 851 0030 7047     		bx	lr
+ 853              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 ADCGroup001.c
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:17     .text.ADCGROUP001_lInit:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:22     .text.ADCGROUP001_lInit:00000000 ADCGROUP001_lInit
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:124    .text.ADCGROUP001_lInit:00000110 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:127    .text.ADCGROUP001_Deinit:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:132    .text.ADCGROUP001_Deinit:00000000 ADCGROUP001_Deinit
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:159    .text.ADCGROUP001_GetStartupCalStatus:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:164    .text.ADCGROUP001_GetStartupCalStatus:00000000 ADCGROUP001_GetStartupCalStatus
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:177    .text.ADCGROUP001_Init:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:182    .text.ADCGROUP001_Init:00000000 ADCGROUP001_Init
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:199    .text.ADCGROUP001_Init:00000020 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:202    .text.ADCGROUP001_SetGroupBound0:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:207    .text.ADCGROUP001_SetGroupBound0:00000000 ADCGROUP001_SetGroupBound0
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:234    .text.ADCGROUP001_SetGroupBound1:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:239    .text.ADCGROUP001_SetGroupBound1:00000000 ADCGROUP001_SetGroupBound1
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:269    .text.ADCGROUP001_SetGroupBound1:00000034 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:272    .text.ADCGROUP001_ActiveGroupServiceRequestNode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:277    .text.ADCGROUP001_ActiveGroupServiceRequestNode:00000000 ADCGROUP001_ActiveGroupServiceRequestNode
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:305    .text.ADCGROUP001_DeActiveGroupServiceRequestNode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:310    .text.ADCGROUP001_DeActiveGroupServiceRequestNode:00000000 ADCGROUP001_DeActiveGroupServiceRequestNode
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:335    .text.ADCGROUP001_ActiveSharedServiceRequestNode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:340    .text.ADCGROUP001_ActiveSharedServiceRequestNode:00000000 ADCGROUP001_ActiveSharedServiceRequestNode
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:369    .text.ADCGROUP001_DeActiveSharedServiceRequestNode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:374    .text.ADCGROUP001_DeActiveSharedServiceRequestNode:00000000 ADCGROUP001_DeActiveSharedServiceRequestNode
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:400    .text.ADCGROUP001_EMUXStartSelection:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:405    .text.ADCGROUP001_EMUXStartSelection:00000000 ADCGROUP001_EMUXStartSelection
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:431    .text.ADCGROUP001_GetEMUXStartSelection:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:436    .text.ADCGROUP001_GetEMUXStartSelection:00000000 ADCGROUP001_GetEMUXStartSelection
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:459    .text.ADCGROUP001_SetEMUXChannelSelect:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:464    .text.ADCGROUP001_SetEMUXChannelSelect:00000000 ADCGROUP001_SetEMUXChannelSelect
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:491    .text.ADCGROUP001_SetEMUXMode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:496    .text.ADCGROUP001_SetEMUXMode:00000000 ADCGROUP001_SetEMUXMode
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:524    .text.ADCGROUP001_SetEMUXCodeScheme:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:529    .text.ADCGROUP001_SetEMUXCodeScheme:00000000 ADCGROUP001_SetEMUXCodeScheme
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:557    .text.ADCGROUP001_SetGroupClass0SampleTime:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:562    .text.ADCGROUP001_SetGroupClass0SampleTime:00000000 ADCGROUP001_SetGroupClass0SampleTime
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:587    .text.ADCGROUP001_SetGroupClass1SampleTime:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:592    .text.ADCGROUP001_SetGroupClass1SampleTime:00000000 ADCGROUP001_SetGroupClass1SampleTime
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:617    .text.ADCGROUP001_SetGroupClass0EmuxSampleTime:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:622    .text.ADCGROUP001_SetGroupClass0EmuxSampleTime:00000000 ADCGROUP001_SetGroupClass0EmuxSampleTime
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:649    .text.ADCGROUP001_SetGroupClass1EmuxSampleTime:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:654    .text.ADCGROUP001_SetGroupClass1EmuxSampleTime:00000000 ADCGROUP001_SetGroupClass1EmuxSampleTime
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:681    .text.ADCGROUP001_SetGroupClass0ConvMode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:686    .text.ADCGROUP001_SetGroupClass0ConvMode:00000000 ADCGROUP001_SetGroupClass0ConvMode
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:716    .text.ADCGROUP001_SetGroupClass1ConvMode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:721    .text.ADCGROUP001_SetGroupClass1ConvMode:00000000 ADCGROUP001_SetGroupClass1ConvMode
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:751    .text.ADCGROUP001_SetGroupClass0EmuxConvMode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:756    .text.ADCGROUP001_SetGroupClass0EmuxConvMode:00000000 ADCGROUP001_SetGroupClass0EmuxConvMode
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:786    .text.ADCGROUP001_SetGroupClass1EmuxConvMode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:791    .text.ADCGROUP001_SetGroupClass1EmuxConvMode:00000000 ADCGROUP001_SetGroupClass1EmuxConvMode
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:821    .text.ADCGROUP001_SetEMUXSampleTimeControl:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccEZB3Wg.s:826    .text.ADCGROUP001_SetEMUXSampleTimeControl:00000000 ADCGROUP001_SetEMUXSampleTimeControl
+
+UNDEFINED SYMBOLS
+ADCGLOB001_Init
+ADCGLOB001_StartUpCalibrationInit
+ADCGROUP001_Handle0

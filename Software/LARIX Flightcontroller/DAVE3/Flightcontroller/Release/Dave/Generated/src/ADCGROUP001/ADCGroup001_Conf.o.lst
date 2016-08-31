@@ -1,0 +1,53 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ADCGroup001_Conf.c"
+  16              		.global	ADCGROUP001_Handle0
+  17              		.global	ADCGROUP001_DynamicHandle0
+  18              		.section	.rodata
+  19              		.align	2
+  22              	ADCGROUP001_Handle0:
+  23 0000 02       		.byte	2
+  24 0001 00       		.byte	0
+  25 0002 00       		.byte	0
+  26 0003 00       		.space	1
+  27 0004 0000     		.short	0
+  28 0006 0000     		.short	0
+  29 0008 00       		.byte	0
+  30 0009 00       		.byte	0
+  31 000a 00       		.byte	0
+  32 000b 03       		.byte	3
+  33 000c 00000000 		.word	ADCGROUP001_DynamicHandle0
+  34 0010 00400040 		.word	1073758208
+  35 0014 004C0040 		.word	1073761280
+  36 0018 00       		.byte	0
+  37 0019 00       		.byte	0
+  38 001a 00       		.byte	0
+  39 001b 00       		.byte	0
+  40 001c 00       		.byte	0
+  41 001d 00       		.byte	0
+  42 001e 00       		.byte	0
+  43 001f 00       		.byte	0
+  44              		.bss
+  47              	ADCGROUP001_DynamicHandle0:
+  48 0000 00       		.space	1
+  49              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 ADCGroup001_Conf.c
+C:\Users\SteurerE\AppData\Local\Temp\cc1X7Nsb.s:22     .rodata:00000000 ADCGROUP001_Handle0
+C:\Users\SteurerE\AppData\Local\Temp\cc1X7Nsb.s:47     .bss:00000000 ADCGROUP001_DynamicHandle0
+C:\Users\SteurerE\AppData\Local\Temp\cc1X7Nsb.s:19     .rodata:00000000 $d
+C:\Users\SteurerE\AppData\Local\Temp\cc1X7Nsb.s:48     .bss:00000000 $d
+
+NO UNDEFINED SYMBOLS

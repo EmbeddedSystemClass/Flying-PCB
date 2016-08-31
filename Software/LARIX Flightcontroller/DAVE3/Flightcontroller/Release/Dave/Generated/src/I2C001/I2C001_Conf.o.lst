@@ -1,0 +1,61 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"I2C001_Conf.c"
+  16              		.global	I2C001_Handle1
+  17              		.global	I2C001_Handle0
+  18              		.section	.rodata
+  19              		.align	2
+  22              	I2C001_Handle1:
+  23 0000 01       		.byte	1
+  24 0001 000000   		.space	3
+  25 0004 00020340 		.word	1073938944
+  26 0008 90010000 		.word	400
+  27 000c 01       		.byte	1
+  28 000d 00       		.byte	0
+  29 000e 01       		.byte	1
+  30 000f 01       		.byte	1
+  31 0010 00       		.byte	0
+  32 0011 00       		.byte	0
+  33 0012 00       		.byte	0
+  34 0013 00       		.byte	0
+  35 0014 00       		.byte	0
+  36 0015 01       		.byte	1
+  37 0016 00       		.byte	0
+  38 0017 00       		.space	1
+  41              	I2C001_Handle0:
+  42 0018 04       		.byte	4
+  43 0019 000000   		.space	3
+  44 001c 00400248 		.word	1208107008
+  45 0020 90010000 		.word	400
+  46 0024 01       		.byte	1
+  47 0025 00       		.byte	0
+  48 0026 05       		.byte	5
+  49 0027 05       		.byte	5
+  50 0028 00       		.byte	0
+  51 0029 00       		.byte	0
+  52 002a 00       		.byte	0
+  53 002b 00       		.byte	0
+  54 002c 00       		.byte	0
+  55 002d 01       		.byte	1
+  56 002e 00       		.byte	0
+  57 002f 00       		.space	1
+  58              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 I2C001_Conf.c
+C:\Users\SteurerE\AppData\Local\Temp\ccErY5Eh.s:22     .rodata:00000000 I2C001_Handle1
+C:\Users\SteurerE\AppData\Local\Temp\ccErY5Eh.s:41     .rodata:00000018 I2C001_Handle0
+C:\Users\SteurerE\AppData\Local\Temp\ccErY5Eh.s:19     .rodata:00000000 $d
+
+NO UNDEFINED SYMBOLS

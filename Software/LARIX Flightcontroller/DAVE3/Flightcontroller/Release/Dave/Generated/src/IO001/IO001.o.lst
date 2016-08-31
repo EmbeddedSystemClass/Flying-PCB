@@ -1,0 +1,152 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"IO001.c"
+  16              		.section	.text.IO001_Init,"ax",%progbits
+  17              		.align	1
+  18              		.global	IO001_Init
+  19              		.thumb
+  20              		.thumb_func
+  22              	IO001_Init:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 044B     		ldr	r3, .L2
+  27 0002 5868     		ldr	r0, [r3, #4]
+  28 0004 026E     		ldr	r2, [r0, #96]
+  29 0006 22F02001 		bic	r1, r2, #32
+  30 000a 0166     		str	r1, [r0, #96]
+  31 000c 4369     		ldr	r3, [r0, #20]
+  32 000e 4361     		str	r3, [r0, #20]
+  33 0010 7047     		bx	lr
+  34              	.L3:
+  35 0012 00BF     		.align	2
+  36              	.L2:
+  37 0014 00000000 		.word	IO001_Handle0
+  39              		.section	.text.IO001_EnableDigitalInput,"ax",%progbits
+  40              		.align	1
+  41              		.global	IO001_EnableDigitalInput
+  42              		.thumb
+  43              		.thumb_func
+  45              	IO001_EnableDigitalInput:
+  46              		@ args = 0, pretend = 0, frame = 0
+  47              		@ frame_needed = 0, uses_anonymous_args = 0
+  48 0000 10B5     		push	{r4, lr}
+  49 0002 4368     		ldr	r3, [r0, #4]
+  50 0004 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+  51 0006 1C6E     		ldr	r4, [r3, #96]
+  52 0008 0120     		movs	r0, #1
+  53 000a 00FA02F0 		lsl	r0, r0, r2
+  54 000e 24EA0000 		bic	r0, r4, r0
+  55 0012 032A     		cmp	r2, #3
+  56 0014 1866     		str	r0, [r3, #96]
+  57 0016 10D8     		bhi	.L5
+  58 0018 D000     		lsls	r0, r2, #3
+  59 001a 1C69     		ldr	r4, [r3, #16]
+  60 001c C21C     		adds	r2, r0, #3
+  61 001e 1F20     		movs	r0, #31
+  62 0020 00FA02F0 		lsl	r0, r0, r2
+  63 0024 24EA0000 		bic	r0, r4, r0
+  64 0028 1861     		str	r0, [r3, #16]
+  65 002a 1869     		ldr	r0, [r3, #16]
+  66 002c 01F01F01 		and	r1, r1, #31
+  67 0030 01FA02F2 		lsl	r2, r1, r2
+  68 0034 0243     		orrs	r2, r2, r0
+  69 0036 1A61     		str	r2, [r3, #16]
+  70 0038 10BD     		pop	{r4, pc}
+  71              	.L5:
+  72 003a 101F     		subs	r0, r2, #4
+  73 003c C0B2     		uxtb	r0, r0
+  74 003e 0328     		cmp	r0, #3
+  75 0040 10D8     		bhi	.L7
+  76 0042 C000     		lsls	r0, r0, #3
+  77 0044 5C69     		ldr	r4, [r3, #20]
+  78 0046 C21C     		adds	r2, r0, #3
+  79 0048 1F20     		movs	r0, #31
+  80 004a 00FA02F0 		lsl	r0, r0, r2
+  81 004e 24EA0000 		bic	r0, r4, r0
+  82 0052 5861     		str	r0, [r3, #20]
+  83 0054 5869     		ldr	r0, [r3, #20]
+  84 0056 01F01F01 		and	r1, r1, #31
+  85 005a 01FA02F2 		lsl	r2, r1, r2
+  86 005e 0243     		orrs	r2, r2, r0
+  87 0060 5A61     		str	r2, [r3, #20]
+  88 0062 10BD     		pop	{r4, pc}
+  89              	.L7:
+  90 0064 A2F10800 		sub	r0, r2, #8
+  91 0068 C0B2     		uxtb	r0, r0
+  92 006a 0328     		cmp	r0, #3
+  93 006c 10D8     		bhi	.L8
+  94 006e C000     		lsls	r0, r0, #3
+  95 0070 9C69     		ldr	r4, [r3, #24]
+  96 0072 C21C     		adds	r2, r0, #3
+  97 0074 1F20     		movs	r0, #31
+  98 0076 00FA02F0 		lsl	r0, r0, r2
+  99 007a 24EA0000 		bic	r0, r4, r0
+ 100 007e 9861     		str	r0, [r3, #24]
+ 101 0080 9869     		ldr	r0, [r3, #24]
+ 102 0082 01F01F01 		and	r1, r1, #31
+ 103 0086 01FA02F2 		lsl	r2, r1, r2
+ 104 008a 0243     		orrs	r2, r2, r0
+ 105 008c 9A61     		str	r2, [r3, #24]
+ 106 008e 10BD     		pop	{r4, pc}
+ 107              	.L8:
+ 108 0090 0C3A     		subs	r2, r2, #12
+ 109 0092 D2B2     		uxtb	r2, r2
+ 110 0094 032A     		cmp	r2, #3
+ 111 0096 0FD8     		bhi	.L4
+ 112 0098 D000     		lsls	r0, r2, #3
+ 113 009a DC69     		ldr	r4, [r3, #28]
+ 114 009c C21C     		adds	r2, r0, #3
+ 115 009e 1F20     		movs	r0, #31
+ 116 00a0 00FA02F0 		lsl	r0, r0, r2
+ 117 00a4 24EA0000 		bic	r0, r4, r0
+ 118 00a8 D861     		str	r0, [r3, #28]
+ 119 00aa D869     		ldr	r0, [r3, #28]
+ 120 00ac 01F01F01 		and	r1, r1, #31
+ 121 00b0 01FA02F2 		lsl	r2, r1, r2
+ 122 00b4 0243     		orrs	r2, r2, r0
+ 123 00b6 DA61     		str	r2, [r3, #28]
+ 124              	.L4:
+ 125 00b8 10BD     		pop	{r4, pc}
+ 127              		.section	.text.IO001_DisableDigitalInput,"ax",%progbits
+ 128              		.align	1
+ 129              		.global	IO001_DisableDigitalInput
+ 130              		.thumb
+ 131              		.thumb_func
+ 133              	IO001_DisableDigitalInput:
+ 134              		@ args = 0, pretend = 0, frame = 0
+ 135              		@ frame_needed = 0, uses_anonymous_args = 0
+ 136              		@ link register save eliminated.
+ 137 0000 4368     		ldr	r3, [r0, #4]
+ 138 0002 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+ 139 0004 196E     		ldr	r1, [r3, #96]
+ 140 0006 0120     		movs	r0, #1
+ 141 0008 00FA02F2 		lsl	r2, r0, r2
+ 142 000c 0A43     		orrs	r2, r2, r1
+ 143 000e 1A66     		str	r2, [r3, #96]
+ 144 0010 7047     		bx	lr
+ 146              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 IO001.c
+C:\Users\SteurerE\AppData\Local\Temp\ccoBo2y2.s:17     .text.IO001_Init:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoBo2y2.s:22     .text.IO001_Init:00000000 IO001_Init
+C:\Users\SteurerE\AppData\Local\Temp\ccoBo2y2.s:37     .text.IO001_Init:00000014 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccoBo2y2.s:40     .text.IO001_EnableDigitalInput:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoBo2y2.s:45     .text.IO001_EnableDigitalInput:00000000 IO001_EnableDigitalInput
+C:\Users\SteurerE\AppData\Local\Temp\ccoBo2y2.s:128    .text.IO001_DisableDigitalInput:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoBo2y2.s:133    .text.IO001_DisableDigitalInput:00000000 IO001_DisableDigitalInput
+
+UNDEFINED SYMBOLS
+IO001_Handle0

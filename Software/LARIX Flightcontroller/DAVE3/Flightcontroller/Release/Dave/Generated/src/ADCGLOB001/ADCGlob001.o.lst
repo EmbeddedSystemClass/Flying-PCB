@@ -1,0 +1,743 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ADCGlob001.c"
+  16              		.section	.text.ADCGLOB001_Init,"ax",%progbits
+  17              		.align	1
+  18              		.global	ADCGLOB001_Init
+  19              		.thumb
+  20              		.thumb_func
+  22              	ADCGLOB001_Init:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 38B5     		push	{r3, r4, r5, lr}
+  26 0002 2A4C     		ldr	r4, .L4
+  27 0004 6568     		ldr	r5, [r4, #4]
+  28 0006 2B78     		ldrb	r3, [r5, #0]	@ zero_extendqisi2
+  29 0008 002B     		cmp	r3, #0
+  30 000a 4DD1     		bne	.L1
+  31 000c 0120     		movs	r0, #1
+  32 000e FFF7FEFF 		bl	RESET001_DeassertReset
+  33 0012 2068     		ldr	r0, [r4, #0]
+  34 0014 237B     		ldrb	r3, [r4, #12]	@ zero_extendqisi2
+  35 0016 0268     		ldr	r2, [r0, #0]
+  36 0018 22F00101 		bic	r1, r2, #1
+  37 001c 03F01F02 		and	r2, r3, #31
+  38 0020 637B     		ldrb	r3, [r4, #13]	@ zero_extendqisi2
+  39 0022 0160     		str	r1, [r0, #0]
+  40 0024 42F40041 		orr	r1, r2, #32768
+  41 0028 1A02     		lsls	r2, r3, #8
+  42 002a 02F44073 		and	r3, r2, #768
+  43 002e 1943     		orrs	r1, r1, r3
+  44 0030 C0F88010 		str	r1, [r0, #128]
+  45 0034 D0F88020 		ldr	r2, [r0, #128]
+  46 0038 217D     		ldrb	r1, [r4, #20]	@ zero_extendqisi2
+  47 003a 22F40043 		bic	r3, r2, #32768
+  48 003e 0A06     		lsls	r2, r1, #24
+  49 0040 217C     		ldrb	r1, [r4, #16]	@ zero_extendqisi2
+  50 0042 C0F88030 		str	r3, [r0, #128]
+  51 0046 02F0E063 		and	r3, r2, #117440512
+  52 004a 0A04     		lsls	r2, r1, #16
+  53 004c 02F4F811 		and	r1, r2, #2031616
+  54 0050 A27B     		ldrb	r2, [r4, #14]	@ zero_extendqisi2
+  55 0052 0B43     		orrs	r3, r3, r1
+  56 0054 02F01F01 		and	r1, r2, #31
+  57 0058 A27C     		ldrb	r2, [r4, #18]	@ zero_extendqisi2
+  58 005a 0B43     		orrs	r3, r3, r1
+  59 005c 1102     		lsls	r1, r2, #8
+  60 005e 01F4E062 		and	r2, r1, #1792
+  61 0062 1343     		orrs	r3, r3, r2
+  62 0064 C0F8A030 		str	r3, [r0, #160]
+  63 0068 637D     		ldrb	r3, [r4, #21]	@ zero_extendqisi2
+  64 006a 627C     		ldrb	r2, [r4, #17]	@ zero_extendqisi2
+  65 006c 1906     		lsls	r1, r3, #24
+  66 006e 01F0E063 		and	r3, r1, #117440512
+  67 0072 1104     		lsls	r1, r2, #16
+  68 0074 01F4F812 		and	r2, r1, #2031616
+  69 0078 E17B     		ldrb	r1, [r4, #15]	@ zero_extendqisi2
+  70 007a 1343     		orrs	r3, r3, r2
+  71 007c 01F01F02 		and	r2, r1, #31
+  72 0080 E17C     		ldrb	r1, [r4, #19]	@ zero_extendqisi2
+  73 0082 1343     		orrs	r3, r3, r2
+  74 0084 0A02     		lsls	r2, r1, #8
+  75 0086 02F4E061 		and	r1, r2, #1792
+  76 008a 0B43     		orrs	r3, r3, r1
+  77 008c C0F8A430 		str	r3, [r0, #164]
+  78 0090 6389     		ldrh	r3, [r4, #10]
+  79 0092 074A     		ldr	r2, .L4+4
+  80 0094 1904     		lsls	r1, r3, #16
+  81 0096 2389     		ldrh	r3, [r4, #8]
+  82 0098 0A40     		ands	r2, r2, r1
+  83 009a 1905     		lsls	r1, r3, #20
+  84 009c 42EA1152 		orr	r2, r2, r1, lsr #20
+  85 00a0 C0F8B820 		str	r2, [r0, #184]
+  86 00a4 0120     		movs	r0, #1
+  87 00a6 2870     		strb	r0, [r5, #0]
+  88              	.L1:
+  89 00a8 38BD     		pop	{r3, r4, r5, pc}
+  90              	.L5:
+  91 00aa 00BF     		.align	2
+  92              	.L4:
+  93 00ac 00000000 		.word	ADCGLOB001_Handle0
+  94 00b0 0000FF0F 		.word	268369920
+  96              		.section	.text.ADCGLOB001_DeInit,"ax",%progbits
+  97              		.align	1
+  98              		.global	ADCGLOB001_DeInit
+  99              		.thumb
+ 100              		.thumb_func
+ 102              	ADCGLOB001_DeInit:
+ 103              		@ args = 0, pretend = 0, frame = 0
+ 104              		@ frame_needed = 0, uses_anonymous_args = 0
+ 105              		@ link register save eliminated.
+ 106 0000 4268     		ldr	r2, [r0, #4]
+ 107 0002 1378     		ldrb	r3, [r2, #0]	@ zero_extendqisi2
+ 108 0004 012B     		cmp	r3, #1
+ 109 0006 19D1     		bne	.L8
+ 110 0008 0068     		ldr	r0, [r0, #0]
+ 111 000a 0168     		ldr	r1, [r0, #0]
+ 112 000c 21F00103 		bic	r3, r1, #1
+ 113 0010 0B49     		ldr	r1, .L9
+ 114 0012 0360     		str	r3, [r0, #0]
+ 115 0014 C0F88010 		str	r1, [r0, #128]
+ 116 0018 D0F88030 		ldr	r3, [r0, #128]
+ 117 001c 23F40041 		bic	r1, r3, #32768
+ 118 0020 084B     		ldr	r3, .L9+4
+ 119 0022 C0F88010 		str	r1, [r0, #128]
+ 120 0026 4FF0F021 		mov	r1, #-268374016
+ 121 002a C0F8A030 		str	r3, [r0, #160]
+ 122 002e C0F8A430 		str	r3, [r0, #164]
+ 123 0032 C0F8B810 		str	r1, [r0, #184]
+ 124 0036 0020     		movs	r0, #0
+ 125 0038 1070     		strb	r0, [r2, #0]
+ 126 003a 7047     		bx	lr
+ 127              	.L8:
+ 128 003c 0120     		movs	r0, #1
+ 129 003e 7047     		bx	lr
+ 130              	.L10:
+ 131              		.align	2
+ 132              	.L9:
+ 133 0040 60FCFFFF 		.word	-928
+ 134 0044 E0F8E0F8 		.word	-119473952
+ 136              		.section	.text.ADCGLOB001_CLKRequestDisable,"ax",%progbits
+ 137              		.align	1
+ 138              		.global	ADCGLOB001_CLKRequestDisable
+ 139              		.thumb
+ 140              		.thumb_func
+ 142              	ADCGLOB001_CLKRequestDisable:
+ 143              		@ args = 0, pretend = 0, frame = 0
+ 144              		@ frame_needed = 0, uses_anonymous_args = 0
+ 145              		@ link register save eliminated.
+ 146 0000 4368     		ldr	r3, [r0, #4]
+ 147 0002 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 148 0004 0129     		cmp	r1, #1
+ 149 0006 06D1     		bne	.L13
+ 150 0008 0068     		ldr	r0, [r0, #0]
+ 151 000a 0268     		ldr	r2, [r0, #0]
+ 152 000c 42F00103 		orr	r3, r2, #1
+ 153 0010 0360     		str	r3, [r0, #0]
+ 154 0012 0020     		movs	r0, #0
+ 155 0014 7047     		bx	lr
+ 156              	.L13:
+ 157 0016 0120     		movs	r0, #1
+ 158 0018 7047     		bx	lr
+ 160              		.section	.text.ADCGLOB001_CLKRequestEnable,"ax",%progbits
+ 161              		.align	1
+ 162              		.global	ADCGLOB001_CLKRequestEnable
+ 163              		.thumb
+ 164              		.thumb_func
+ 166              	ADCGLOB001_CLKRequestEnable:
+ 167              		@ args = 0, pretend = 0, frame = 0
+ 168              		@ frame_needed = 0, uses_anonymous_args = 0
+ 169              		@ link register save eliminated.
+ 170 0000 4368     		ldr	r3, [r0, #4]
+ 171 0002 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 172 0004 0129     		cmp	r1, #1
+ 173 0006 06D1     		bne	.L16
+ 174 0008 0068     		ldr	r0, [r0, #0]
+ 175 000a 0268     		ldr	r2, [r0, #0]
+ 176 000c 22F00103 		bic	r3, r2, #1
+ 177 0010 0360     		str	r3, [r0, #0]
+ 178 0012 0020     		movs	r0, #0
+ 179 0014 7047     		bx	lr
+ 180              	.L16:
+ 181 0016 0120     		movs	r0, #1
+ 182 0018 7047     		bx	lr
+ 184              		.section	.text.ADCGLOB001_SetStartUpCalibration,"ax",%progbits
+ 185              		.align	1
+ 186              		.global	ADCGLOB001_SetStartUpCalibration
+ 187              		.thumb
+ 188              		.thumb_func
+ 190              	ADCGLOB001_SetStartUpCalibration:
+ 191              		@ args = 0, pretend = 0, frame = 0
+ 192              		@ frame_needed = 0, uses_anonymous_args = 0
+ 193              		@ link register save eliminated.
+ 194 0000 4368     		ldr	r3, [r0, #4]
+ 195 0002 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 196 0004 0129     		cmp	r1, #1
+ 197 0006 08D1     		bne	.L19
+ 198 0008 0068     		ldr	r0, [r0, #0]
+ 199 000a D0F88020 		ldr	r2, [r0, #128]
+ 200 000e 42F00043 		orr	r3, r2, #-2147483648
+ 201 0012 C0F88030 		str	r3, [r0, #128]
+ 202 0016 0020     		movs	r0, #0
+ 203 0018 7047     		bx	lr
+ 204              	.L19:
+ 205 001a 0120     		movs	r0, #1
+ 206 001c 7047     		bx	lr
+ 208              		.section	.text.ADCGLOB001_StartUpCalibrationInit,"ax",%progbits
+ 209              		.align	1
+ 210              		.global	ADCGLOB001_StartUpCalibrationInit
+ 211              		.thumb
+ 212              		.thumb_func
+ 214              	ADCGLOB001_StartUpCalibrationInit:
+ 215              		@ args = 0, pretend = 0, frame = 0
+ 216              		@ frame_needed = 0, uses_anonymous_args = 0
+ 217              		@ link register save eliminated.
+ 218 0000 094B     		ldr	r3, .L24
+ 219 0002 5A68     		ldr	r2, [r3, #4]
+ 220 0004 1078     		ldrb	r0, [r2, #0]	@ zero_extendqisi2
+ 221 0006 0128     		cmp	r0, #1
+ 222 0008 0AD1     		bne	.L22
+ 223 000a 997D     		ldrb	r1, [r3, #22]	@ zero_extendqisi2
+ 224 000c 0129     		cmp	r1, #1
+ 225 000e 09D1     		bne	.L23
+ 226 0010 1B68     		ldr	r3, [r3, #0]
+ 227 0012 D3F88020 		ldr	r2, [r3, #128]
+ 228 0016 42F00040 		orr	r0, r2, #-2147483648
+ 229 001a C3F88000 		str	r0, [r3, #128]
+ 230 001e 01E0     		b	.L23
+ 231              	.L22:
+ 232 0020 0120     		movs	r0, #1
+ 233 0022 7047     		bx	lr
+ 234              	.L23:
+ 235 0024 0020     		movs	r0, #0
+ 236 0026 7047     		bx	lr
+ 237              	.L25:
+ 238              		.align	2
+ 239              	.L24:
+ 240 0028 00000000 		.word	ADCGLOB001_Handle0
+ 242              		.section	.text.ADCGLOB001_EnableSleepModeControl,"ax",%progbits
+ 243              		.align	1
+ 244              		.global	ADCGLOB001_EnableSleepModeControl
+ 245              		.thumb
+ 246              		.thumb_func
+ 248              	ADCGLOB001_EnableSleepModeControl:
+ 249              		@ args = 0, pretend = 0, frame = 0
+ 250              		@ frame_needed = 0, uses_anonymous_args = 0
+ 251              		@ link register save eliminated.
+ 252 0000 4368     		ldr	r3, [r0, #4]
+ 253 0002 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 254 0004 0129     		cmp	r1, #1
+ 255 0006 06D1     		bne	.L28
+ 256 0008 0068     		ldr	r0, [r0, #0]
+ 257 000a 0268     		ldr	r2, [r0, #0]
+ 258 000c 22F00803 		bic	r3, r2, #8
+ 259 0010 0360     		str	r3, [r0, #0]
+ 260 0012 0020     		movs	r0, #0
+ 261 0014 7047     		bx	lr
+ 262              	.L28:
+ 263 0016 0120     		movs	r0, #1
+ 264 0018 7047     		bx	lr
+ 266              		.section	.text.ADCGLOB001_DisregardSleepModeControl,"ax",%progbits
+ 267              		.align	1
+ 268              		.global	ADCGLOB001_DisregardSleepModeControl
+ 269              		.thumb
+ 270              		.thumb_func
+ 272              	ADCGLOB001_DisregardSleepModeControl:
+ 273              		@ args = 0, pretend = 0, frame = 0
+ 274              		@ frame_needed = 0, uses_anonymous_args = 0
+ 275              		@ link register save eliminated.
+ 276 0000 4368     		ldr	r3, [r0, #4]
+ 277 0002 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 278 0004 0129     		cmp	r1, #1
+ 279 0006 06D1     		bne	.L31
+ 280 0008 0068     		ldr	r0, [r0, #0]
+ 281 000a 0268     		ldr	r2, [r0, #0]
+ 282 000c 42F00803 		orr	r3, r2, #8
+ 283 0010 0360     		str	r3, [r0, #0]
+ 284 0012 0020     		movs	r0, #0
+ 285 0014 7047     		bx	lr
+ 286              	.L31:
+ 287 0016 0120     		movs	r0, #1
+ 288 0018 7047     		bx	lr
+ 290              		.section	.text.ADCGLOB001_SetGlobClass0ConvMode,"ax",%progbits
+ 291              		.align	1
+ 292              		.global	ADCGLOB001_SetGlobClass0ConvMode
+ 293              		.thumb
+ 294              		.thumb_func
+ 296              	ADCGLOB001_SetGlobClass0ConvMode:
+ 297              		@ args = 0, pretend = 0, frame = 0
+ 298              		@ frame_needed = 0, uses_anonymous_args = 0
+ 299              		@ link register save eliminated.
+ 300 0000 4368     		ldr	r3, [r0, #4]
+ 301 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 302 0004 012A     		cmp	r2, #1
+ 303 0006 10D1     		bne	.L35
+ 304 0008 0229     		cmp	r1, #2
+ 305 000a 01D9     		bls	.L34
+ 306 000c 0529     		cmp	r1, #5
+ 307 000e 0ED1     		bne	.L36
+ 308              	.L34:
+ 309 0010 0068     		ldr	r0, [r0, #0]
+ 310 0012 D0F8A030 		ldr	r3, [r0, #160]
+ 311 0016 0902     		lsls	r1, r1, #8
+ 312 0018 23F4E062 		bic	r2, r3, #1792
+ 313 001c 01F4E061 		and	r1, r1, #1792
+ 314 0020 1143     		orrs	r1, r1, r2
+ 315 0022 C0F8A010 		str	r1, [r0, #160]
+ 316 0026 0020     		movs	r0, #0
+ 317 0028 7047     		bx	lr
+ 318              	.L35:
+ 319 002a 0120     		movs	r0, #1
+ 320 002c 7047     		bx	lr
+ 321              	.L36:
+ 322 002e 0220     		movs	r0, #2
+ 323 0030 7047     		bx	lr
+ 325              		.section	.text.ADCGLOB001_SetGlobClass0SampleTime,"ax",%progbits
+ 326              		.align	1
+ 327              		.global	ADCGLOB001_SetGlobClass0SampleTime
+ 328              		.thumb
+ 329              		.thumb_func
+ 331              	ADCGLOB001_SetGlobClass0SampleTime:
+ 332              		@ args = 0, pretend = 0, frame = 0
+ 333              		@ frame_needed = 0, uses_anonymous_args = 0
+ 334              		@ link register save eliminated.
+ 335 0000 4368     		ldr	r3, [r0, #4]
+ 336 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 337 0004 012A     		cmp	r2, #1
+ 338 0006 0BD1     		bne	.L39
+ 339 0008 1F29     		cmp	r1, #31
+ 340 000a 0BD8     		bhi	.L40
+ 341 000c 0068     		ldr	r0, [r0, #0]
+ 342 000e D0F8A030 		ldr	r3, [r0, #160]
+ 343 0012 23F01F02 		bic	r2, r3, #31
+ 344 0016 1143     		orrs	r1, r1, r2
+ 345 0018 C0F8A010 		str	r1, [r0, #160]
+ 346 001c 0020     		movs	r0, #0
+ 347 001e 7047     		bx	lr
+ 348              	.L39:
+ 349 0020 0120     		movs	r0, #1
+ 350 0022 7047     		bx	lr
+ 351              	.L40:
+ 352 0024 0220     		movs	r0, #2
+ 353 0026 7047     		bx	lr
+ 355              		.section	.text.ADCGLOB001_SetGlobClass0EmuxConvMode,"ax",%progbits
+ 356              		.align	1
+ 357              		.global	ADCGLOB001_SetGlobClass0EmuxConvMode
+ 358              		.thumb
+ 359              		.thumb_func
+ 361              	ADCGLOB001_SetGlobClass0EmuxConvMode:
+ 362              		@ args = 0, pretend = 0, frame = 0
+ 363              		@ frame_needed = 0, uses_anonymous_args = 0
+ 364              		@ link register save eliminated.
+ 365 0000 4368     		ldr	r3, [r0, #4]
+ 366 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 367 0004 012A     		cmp	r2, #1
+ 368 0006 10D1     		bne	.L44
+ 369 0008 0229     		cmp	r1, #2
+ 370 000a 01D9     		bls	.L43
+ 371 000c 0529     		cmp	r1, #5
+ 372 000e 0ED1     		bne	.L45
+ 373              	.L43:
+ 374 0010 0068     		ldr	r0, [r0, #0]
+ 375 0012 D0F8A030 		ldr	r3, [r0, #160]
+ 376 0016 0906     		lsls	r1, r1, #24
+ 377 0018 23F0E062 		bic	r2, r3, #117440512
+ 378 001c 01F0E061 		and	r1, r1, #117440512
+ 379 0020 1143     		orrs	r1, r1, r2
+ 380 0022 C0F8A010 		str	r1, [r0, #160]
+ 381 0026 0020     		movs	r0, #0
+ 382 0028 7047     		bx	lr
+ 383              	.L44:
+ 384 002a 0120     		movs	r0, #1
+ 385 002c 7047     		bx	lr
+ 386              	.L45:
+ 387 002e 0220     		movs	r0, #2
+ 388 0030 7047     		bx	lr
+ 390              		.section	.text.ADCGLOB001_SetGlobClass0EmuxSampleTime,"ax",%progbits
+ 391              		.align	1
+ 392              		.global	ADCGLOB001_SetGlobClass0EmuxSampleTime
+ 393              		.thumb
+ 394              		.thumb_func
+ 396              	ADCGLOB001_SetGlobClass0EmuxSampleTime:
+ 397              		@ args = 0, pretend = 0, frame = 0
+ 398              		@ frame_needed = 0, uses_anonymous_args = 0
+ 399              		@ link register save eliminated.
+ 400 0000 4368     		ldr	r3, [r0, #4]
+ 401 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 402 0004 012A     		cmp	r2, #1
+ 403 0006 0ED1     		bne	.L48
+ 404 0008 1F29     		cmp	r1, #31
+ 405 000a 0ED8     		bhi	.L49
+ 406 000c 0068     		ldr	r0, [r0, #0]
+ 407 000e D0F8A030 		ldr	r3, [r0, #160]
+ 408 0012 0904     		lsls	r1, r1, #16
+ 409 0014 23F4F812 		bic	r2, r3, #2031616
+ 410 0018 01F4F811 		and	r1, r1, #2031616
+ 411 001c 1143     		orrs	r1, r1, r2
+ 412 001e C0F8A010 		str	r1, [r0, #160]
+ 413 0022 0020     		movs	r0, #0
+ 414 0024 7047     		bx	lr
+ 415              	.L48:
+ 416 0026 0120     		movs	r0, #1
+ 417 0028 7047     		bx	lr
+ 418              	.L49:
+ 419 002a 0220     		movs	r0, #2
+ 420 002c 7047     		bx	lr
+ 422              		.section	.text.ADCGLOB001_SetGlobClass1ConvMode,"ax",%progbits
+ 423              		.align	1
+ 424              		.global	ADCGLOB001_SetGlobClass1ConvMode
+ 425              		.thumb
+ 426              		.thumb_func
+ 428              	ADCGLOB001_SetGlobClass1ConvMode:
+ 429              		@ args = 0, pretend = 0, frame = 0
+ 430              		@ frame_needed = 0, uses_anonymous_args = 0
+ 431              		@ link register save eliminated.
+ 432 0000 4368     		ldr	r3, [r0, #4]
+ 433 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 434 0004 012A     		cmp	r2, #1
+ 435 0006 10D1     		bne	.L53
+ 436 0008 0229     		cmp	r1, #2
+ 437 000a 01D9     		bls	.L52
+ 438 000c 0529     		cmp	r1, #5
+ 439 000e 0ED1     		bne	.L54
+ 440              	.L52:
+ 441 0010 0068     		ldr	r0, [r0, #0]
+ 442 0012 D0F8A430 		ldr	r3, [r0, #164]
+ 443 0016 0902     		lsls	r1, r1, #8
+ 444 0018 23F4E062 		bic	r2, r3, #1792
+ 445 001c 01F4E061 		and	r1, r1, #1792
+ 446 0020 1143     		orrs	r1, r1, r2
+ 447 0022 C0F8A410 		str	r1, [r0, #164]
+ 448 0026 0020     		movs	r0, #0
+ 449 0028 7047     		bx	lr
+ 450              	.L53:
+ 451 002a 0120     		movs	r0, #1
+ 452 002c 7047     		bx	lr
+ 453              	.L54:
+ 454 002e 0220     		movs	r0, #2
+ 455 0030 7047     		bx	lr
+ 457              		.section	.text.ADCGLOB001_SetGlobClass1SampleTime,"ax",%progbits
+ 458              		.align	1
+ 459              		.global	ADCGLOB001_SetGlobClass1SampleTime
+ 460              		.thumb
+ 461              		.thumb_func
+ 463              	ADCGLOB001_SetGlobClass1SampleTime:
+ 464              		@ args = 0, pretend = 0, frame = 0
+ 465              		@ frame_needed = 0, uses_anonymous_args = 0
+ 466              		@ link register save eliminated.
+ 467 0000 4368     		ldr	r3, [r0, #4]
+ 468 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 469 0004 012A     		cmp	r2, #1
+ 470 0006 0BD1     		bne	.L57
+ 471 0008 1F29     		cmp	r1, #31
+ 472 000a 0BD8     		bhi	.L58
+ 473 000c 0068     		ldr	r0, [r0, #0]
+ 474 000e D0F8A430 		ldr	r3, [r0, #164]
+ 475 0012 23F01F02 		bic	r2, r3, #31
+ 476 0016 1143     		orrs	r1, r1, r2
+ 477 0018 C0F8A410 		str	r1, [r0, #164]
+ 478 001c 0020     		movs	r0, #0
+ 479 001e 7047     		bx	lr
+ 480              	.L57:
+ 481 0020 0120     		movs	r0, #1
+ 482 0022 7047     		bx	lr
+ 483              	.L58:
+ 484 0024 0220     		movs	r0, #2
+ 485 0026 7047     		bx	lr
+ 487              		.section	.text.ADCGLOB001_SetGlobClass1EmuxConvMode,"ax",%progbits
+ 488              		.align	1
+ 489              		.global	ADCGLOB001_SetGlobClass1EmuxConvMode
+ 490              		.thumb
+ 491              		.thumb_func
+ 493              	ADCGLOB001_SetGlobClass1EmuxConvMode:
+ 494              		@ args = 0, pretend = 0, frame = 0
+ 495              		@ frame_needed = 0, uses_anonymous_args = 0
+ 496              		@ link register save eliminated.
+ 497 0000 4368     		ldr	r3, [r0, #4]
+ 498 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 499 0004 012A     		cmp	r2, #1
+ 500 0006 10D1     		bne	.L62
+ 501 0008 0229     		cmp	r1, #2
+ 502 000a 01D9     		bls	.L61
+ 503 000c 0529     		cmp	r1, #5
+ 504 000e 0ED1     		bne	.L63
+ 505              	.L61:
+ 506 0010 0068     		ldr	r0, [r0, #0]
+ 507 0012 D0F8A430 		ldr	r3, [r0, #164]
+ 508 0016 0906     		lsls	r1, r1, #24
+ 509 0018 23F0E062 		bic	r2, r3, #117440512
+ 510 001c 01F0E061 		and	r1, r1, #117440512
+ 511 0020 1143     		orrs	r1, r1, r2
+ 512 0022 C0F8A410 		str	r1, [r0, #164]
+ 513 0026 0020     		movs	r0, #0
+ 514 0028 7047     		bx	lr
+ 515              	.L62:
+ 516 002a 0120     		movs	r0, #1
+ 517 002c 7047     		bx	lr
+ 518              	.L63:
+ 519 002e 0220     		movs	r0, #2
+ 520 0030 7047     		bx	lr
+ 522              		.section	.text.ADCGLOB001_SetGlobClass1EmuxSampleTime,"ax",%progbits
+ 523              		.align	1
+ 524              		.global	ADCGLOB001_SetGlobClass1EmuxSampleTime
+ 525              		.thumb
+ 526              		.thumb_func
+ 528              	ADCGLOB001_SetGlobClass1EmuxSampleTime:
+ 529              		@ args = 0, pretend = 0, frame = 0
+ 530              		@ frame_needed = 0, uses_anonymous_args = 0
+ 531              		@ link register save eliminated.
+ 532 0000 4368     		ldr	r3, [r0, #4]
+ 533 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 534 0004 012A     		cmp	r2, #1
+ 535 0006 0ED1     		bne	.L66
+ 536 0008 1F29     		cmp	r1, #31
+ 537 000a 0ED8     		bhi	.L67
+ 538 000c 0068     		ldr	r0, [r0, #0]
+ 539 000e D0F8A430 		ldr	r3, [r0, #164]
+ 540 0012 0904     		lsls	r1, r1, #16
+ 541 0014 23F4F812 		bic	r2, r3, #2031616
+ 542 0018 01F4F811 		and	r1, r1, #2031616
+ 543 001c 1143     		orrs	r1, r1, r2
+ 544 001e C0F8A410 		str	r1, [r0, #164]
+ 545 0022 0020     		movs	r0, #0
+ 546 0024 7047     		bx	lr
+ 547              	.L66:
+ 548 0026 0120     		movs	r0, #1
+ 549 0028 7047     		bx	lr
+ 550              	.L67:
+ 551 002a 0220     		movs	r0, #2
+ 552 002c 7047     		bx	lr
+ 554              		.section	.text.ADCGLOB001_GetDisableBitStatus,"ax",%progbits
+ 555              		.align	1
+ 556              		.global	ADCGLOB001_GetDisableBitStatus
+ 557              		.thumb
+ 558              		.thumb_func
+ 560              	ADCGLOB001_GetDisableBitStatus:
+ 561              		@ args = 0, pretend = 0, frame = 0
+ 562              		@ frame_needed = 0, uses_anonymous_args = 0
+ 563              		@ link register save eliminated.
+ 564 0000 4368     		ldr	r3, [r0, #4]
+ 565 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 566 0004 012A     		cmp	r2, #1
+ 567 0006 06D1     		bne	.L70
+ 568 0008 0068     		ldr	r0, [r0, #0]
+ 569 000a 0368     		ldr	r3, [r0, #0]
+ 570 000c C3F34002 		ubfx	r2, r3, #1, #1
+ 571 0010 0A70     		strb	r2, [r1, #0]
+ 572 0012 0020     		movs	r0, #0
+ 573 0014 7047     		bx	lr
+ 574              	.L70:
+ 575 0016 0120     		movs	r0, #1
+ 576 0018 7047     		bx	lr
+ 578              		.section	.text.ADCGLOB001_GetIdValue,"ax",%progbits
+ 579              		.align	1
+ 580              		.global	ADCGLOB001_GetIdValue
+ 581              		.thumb
+ 582              		.thumb_func
+ 584              	ADCGLOB001_GetIdValue:
+ 585              		@ args = 0, pretend = 0, frame = 0
+ 586              		@ frame_needed = 0, uses_anonymous_args = 0
+ 587              		@ link register save eliminated.
+ 588 0000 4368     		ldr	r3, [r0, #4]
+ 589 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 590 0004 012A     		cmp	r2, #1
+ 591 0006 04D1     		bne	.L73
+ 592 0008 0068     		ldr	r0, [r0, #0]
+ 593 000a 8368     		ldr	r3, [r0, #8]
+ 594 000c 0020     		movs	r0, #0
+ 595 000e 0B60     		str	r3, [r1, #0]
+ 596 0010 7047     		bx	lr
+ 597              	.L73:
+ 598 0012 0120     		movs	r0, #1
+ 599 0014 7047     		bx	lr
+ 601              		.section	.text.ADCGLOB001_GTFRConvtrDiagnoGrp,"ax",%progbits
+ 602              		.align	1
+ 603              		.global	ADCGLOB001_GTFRConvtrDiagnoGrp
+ 604              		.thumb
+ 605              		.thumb_func
+ 607              	ADCGLOB001_GTFRConvtrDiagnoGrp:
+ 608              		@ args = 0, pretend = 0, frame = 0
+ 609              		@ frame_needed = 0, uses_anonymous_args = 0
+ 610              		@ link register save eliminated.
+ 611 0000 4368     		ldr	r3, [r0, #4]
+ 612 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 613 0004 012A     		cmp	r2, #1
+ 614 0006 1DD1     		bne	.L76
+ 615 0008 0F29     		cmp	r1, #15
+ 616 000a 1DD8     		bhi	.L77
+ 617 000c 0068     		ldr	r0, [r0, #0]
+ 618 000e D0F86031 		ldr	r3, [r0, #352]
+ 619 0012 23F40042 		bic	r2, r3, #32768
+ 620 0016 22F0F003 		bic	r3, r2, #240
+ 621 001a 43F40042 		orr	r2, r3, #32768
+ 622 001e C0F86021 		str	r2, [r0, #352]
+ 623 0022 D0F86031 		ldr	r3, [r0, #352]
+ 624 0026 0901     		lsls	r1, r1, #4
+ 625 0028 43F40042 		orr	r2, r3, #32768
+ 626 002c CBB2     		uxtb	r3, r1
+ 627 002e 1A43     		orrs	r2, r2, r3
+ 628 0030 C0F86021 		str	r2, [r0, #352]
+ 629 0034 D0F86011 		ldr	r1, [r0, #352]
+ 630 0038 21F40043 		bic	r3, r1, #32768
+ 631 003c C0F86031 		str	r3, [r0, #352]
+ 632 0040 0020     		movs	r0, #0
+ 633 0042 7047     		bx	lr
+ 634              	.L76:
+ 635 0044 0120     		movs	r0, #1
+ 636 0046 7047     		bx	lr
+ 637              	.L77:
+ 638 0048 0220     		movs	r0, #2
+ 639 004a 7047     		bx	lr
+ 641              		.section	.text.ADCGLOB001_GTFRConvtrDiagnoEnable,"ax",%progbits
+ 642              		.align	1
+ 643              		.global	ADCGLOB001_GTFRConvtrDiagnoEnable
+ 644              		.thumb
+ 645              		.thumb_func
+ 647              	ADCGLOB001_GTFRConvtrDiagnoEnable:
+ 648              		@ args = 0, pretend = 0, frame = 0
+ 649              		@ frame_needed = 0, uses_anonymous_args = 0
+ 650              		@ link register save eliminated.
+ 651 0000 4368     		ldr	r3, [r0, #4]
+ 652 0002 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 653 0004 0129     		cmp	r1, #1
+ 654 0006 0ED1     		bne	.L80
+ 655 0008 0068     		ldr	r0, [r0, #0]
+ 656 000a D0F86021 		ldr	r2, [r0, #352]
+ 657 000e 42F40143 		orr	r3, r2, #33024
+ 658 0012 C0F86031 		str	r3, [r0, #352]
+ 659 0016 D0F86011 		ldr	r1, [r0, #352]
+ 660 001a 21F40042 		bic	r2, r1, #32768
+ 661 001e C0F86021 		str	r2, [r0, #352]
+ 662 0022 0020     		movs	r0, #0
+ 663 0024 7047     		bx	lr
+ 664              	.L80:
+ 665 0026 0120     		movs	r0, #1
+ 666 0028 7047     		bx	lr
+ 668              		.section	.text.ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect,"ax",%progbits
+ 669              		.align	1
+ 670              		.global	ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect
+ 671              		.thumb
+ 672              		.thumb_func
+ 674              	ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect:
+ 675              		@ args = 0, pretend = 0, frame = 0
+ 676              		@ frame_needed = 0, uses_anonymous_args = 0
+ 677              		@ link register save eliminated.
+ 678 0000 4368     		ldr	r3, [r0, #4]
+ 679 0002 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 680 0004 012A     		cmp	r2, #1
+ 681 0006 1CD1     		bne	.L83
+ 682 0008 0329     		cmp	r1, #3
+ 683 000a 1CD8     		bhi	.L84
+ 684 000c 0068     		ldr	r0, [r0, #0]
+ 685 000e D0F86031 		ldr	r3, [r0, #352]
+ 686 0012 23F40642 		bic	r2, r3, #34304
+ 687 0016 42F40043 		orr	r3, r2, #32768
+ 688 001a C0F86031 		str	r3, [r0, #352]
+ 689 001e D0F86021 		ldr	r2, [r0, #352]
+ 690 0022 4902     		lsls	r1, r1, #9
+ 691 0024 42F40043 		orr	r3, r2, #32768
+ 692 0028 01F4C062 		and	r2, r1, #1536
+ 693 002c 1343     		orrs	r3, r3, r2
+ 694 002e C0F86031 		str	r3, [r0, #352]
+ 695 0032 D0F86011 		ldr	r1, [r0, #352]
+ 696 0036 21F40042 		bic	r2, r1, #32768
+ 697 003a C0F86021 		str	r2, [r0, #352]
+ 698 003e 0020     		movs	r0, #0
+ 699 0040 7047     		bx	lr
+ 700              	.L83:
+ 701 0042 0120     		movs	r0, #1
+ 702 0044 7047     		bx	lr
+ 703              	.L84:
+ 704 0046 0220     		movs	r0, #2
+ 705 0048 7047     		bx	lr
+ 707              		.section	.text.ADCGLOB001_GTFRPullDwnDiagnoEnable,"ax",%progbits
+ 708              		.align	1
+ 709              		.global	ADCGLOB001_GTFRPullDwnDiagnoEnable
+ 710              		.thumb
+ 711              		.thumb_func
+ 713              	ADCGLOB001_GTFRPullDwnDiagnoEnable:
+ 714              		@ args = 0, pretend = 0, frame = 0
+ 715              		@ frame_needed = 0, uses_anonymous_args = 0
+ 716              		@ link register save eliminated.
+ 717 0000 4368     		ldr	r3, [r0, #4]
+ 718 0002 1978     		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 719 0004 0129     		cmp	r1, #1
+ 720 0006 0ED1     		bne	.L87
+ 721 0008 0068     		ldr	r0, [r0, #0]
+ 722 000a D0F86021 		ldr	r2, [r0, #352]
+ 723 000e 42F40103 		orr	r3, r2, #8454144
+ 724 0012 C0F86031 		str	r3, [r0, #352]
+ 725 0016 D0F86011 		ldr	r1, [r0, #352]
+ 726 001a 21F40002 		bic	r2, r1, #8388608
+ 727 001e C0F86021 		str	r2, [r0, #352]
+ 728 0022 0020     		movs	r0, #0
+ 729 0024 7047     		bx	lr
+ 730              	.L87:
+ 731 0026 0120     		movs	r0, #1
+ 732 0028 7047     		bx	lr
+ 734              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 ADCGlob001.c
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:17     .text.ADCGLOB001_Init:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:22     .text.ADCGLOB001_Init:00000000 ADCGLOB001_Init
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:93     .text.ADCGLOB001_Init:000000ac $d
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:97     .text.ADCGLOB001_DeInit:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:102    .text.ADCGLOB001_DeInit:00000000 ADCGLOB001_DeInit
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:133    .text.ADCGLOB001_DeInit:00000040 $d
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:137    .text.ADCGLOB001_CLKRequestDisable:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:142    .text.ADCGLOB001_CLKRequestDisable:00000000 ADCGLOB001_CLKRequestDisable
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:161    .text.ADCGLOB001_CLKRequestEnable:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:166    .text.ADCGLOB001_CLKRequestEnable:00000000 ADCGLOB001_CLKRequestEnable
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:185    .text.ADCGLOB001_SetStartUpCalibration:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:190    .text.ADCGLOB001_SetStartUpCalibration:00000000 ADCGLOB001_SetStartUpCalibration
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:209    .text.ADCGLOB001_StartUpCalibrationInit:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:214    .text.ADCGLOB001_StartUpCalibrationInit:00000000 ADCGLOB001_StartUpCalibrationInit
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:240    .text.ADCGLOB001_StartUpCalibrationInit:00000028 $d
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:243    .text.ADCGLOB001_EnableSleepModeControl:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:248    .text.ADCGLOB001_EnableSleepModeControl:00000000 ADCGLOB001_EnableSleepModeControl
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:267    .text.ADCGLOB001_DisregardSleepModeControl:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:272    .text.ADCGLOB001_DisregardSleepModeControl:00000000 ADCGLOB001_DisregardSleepModeControl
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:291    .text.ADCGLOB001_SetGlobClass0ConvMode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:296    .text.ADCGLOB001_SetGlobClass0ConvMode:00000000 ADCGLOB001_SetGlobClass0ConvMode
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:326    .text.ADCGLOB001_SetGlobClass0SampleTime:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:331    .text.ADCGLOB001_SetGlobClass0SampleTime:00000000 ADCGLOB001_SetGlobClass0SampleTime
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:356    .text.ADCGLOB001_SetGlobClass0EmuxConvMode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:361    .text.ADCGLOB001_SetGlobClass0EmuxConvMode:00000000 ADCGLOB001_SetGlobClass0EmuxConvMode
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:391    .text.ADCGLOB001_SetGlobClass0EmuxSampleTime:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:396    .text.ADCGLOB001_SetGlobClass0EmuxSampleTime:00000000 ADCGLOB001_SetGlobClass0EmuxSampleTime
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:423    .text.ADCGLOB001_SetGlobClass1ConvMode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:428    .text.ADCGLOB001_SetGlobClass1ConvMode:00000000 ADCGLOB001_SetGlobClass1ConvMode
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:458    .text.ADCGLOB001_SetGlobClass1SampleTime:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:463    .text.ADCGLOB001_SetGlobClass1SampleTime:00000000 ADCGLOB001_SetGlobClass1SampleTime
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:488    .text.ADCGLOB001_SetGlobClass1EmuxConvMode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:493    .text.ADCGLOB001_SetGlobClass1EmuxConvMode:00000000 ADCGLOB001_SetGlobClass1EmuxConvMode
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:523    .text.ADCGLOB001_SetGlobClass1EmuxSampleTime:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:528    .text.ADCGLOB001_SetGlobClass1EmuxSampleTime:00000000 ADCGLOB001_SetGlobClass1EmuxSampleTime
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:555    .text.ADCGLOB001_GetDisableBitStatus:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:560    .text.ADCGLOB001_GetDisableBitStatus:00000000 ADCGLOB001_GetDisableBitStatus
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:579    .text.ADCGLOB001_GetIdValue:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:584    .text.ADCGLOB001_GetIdValue:00000000 ADCGLOB001_GetIdValue
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:602    .text.ADCGLOB001_GTFRConvtrDiagnoGrp:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:607    .text.ADCGLOB001_GTFRConvtrDiagnoGrp:00000000 ADCGLOB001_GTFRConvtrDiagnoGrp
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:642    .text.ADCGLOB001_GTFRConvtrDiagnoEnable:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:647    .text.ADCGLOB001_GTFRConvtrDiagnoEnable:00000000 ADCGLOB001_GTFRConvtrDiagnoEnable
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:669    .text.ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:674    .text.ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect:00000000 ADCGLOB001_GTFRConvtrDiagnoPullDevicesSelect
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:708    .text.ADCGLOB001_GTFRPullDwnDiagnoEnable:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cczHq9Md.s:713    .text.ADCGLOB001_GTFRPullDwnDiagnoEnable:00000000 ADCGLOB001_GTFRPullDwnDiagnoEnable
+
+UNDEFINED SYMBOLS
+RESET001_DeassertReset
+ADCGLOB001_Handle0

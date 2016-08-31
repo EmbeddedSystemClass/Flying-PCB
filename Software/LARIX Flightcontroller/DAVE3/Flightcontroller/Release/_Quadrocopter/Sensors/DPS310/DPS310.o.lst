@@ -1,0 +1,956 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"DPS310.c"
+  16              		.global	__aeabi_i2d
+  17              		.global	__aeabi_dcmpgt
+  18              		.global	__aeabi_dsub
+  19              		.global	__aeabi_d2iz
+  20              		.section	.text.getCoefficients,"ax",%progbits
+  21              		.align	1
+  22              		.global	getCoefficients
+  23              		.thumb
+  24              		.thumb_func
+  26              	getCoefficients:
+  27              		@ args = 0, pretend = 0, frame = 0
+  28              		@ frame_needed = 0, uses_anonymous_args = 0
+  29 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  30 0002 EE21     		movs	r1, #238
+  31 0004 1022     		movs	r2, #16
+  32 0006 AE48     		ldr	r0, .L69+24
+  33 0008 AE4E     		ldr	r6, .L69+28
+  34 000a FFF7FEFF 		bl	I2Cdev_readByte
+  35 000e 1122     		movs	r2, #17
+  36 0010 0446     		mov	r4, r0
+  37 0012 EE21     		movs	r1, #238
+  38 0014 AA48     		ldr	r0, .L69+24
+  39 0016 FFF7FEFF 		bl	I2Cdev_readByte
+  40 001a 40F30F10 		sbfx	r0, r0, #4, #16
+  41 001e 40EA0417 		orr	r7, r0, r4, lsl #4
+  42 0022 3846     		mov	r0, r7
+  43 0024 FFF7FEFF 		bl	__aeabi_i2d
+  44 0028 9FA3     		adr	r3, .L69
+  45 002a D3E90023 		ldrd	r2, [r3]
+  46 002e 0446     		mov	r4, r0
+  47 0030 0D46     		mov	r5, r1
+  48 0032 FFF7FEFF 		bl	__aeabi_dcmpgt
+  49 0036 08B9     		cbnz	r0, .L2
+  50 0038 3760     		str	r7, [r6, #0]
+  51 003a 08E0     		b	.L3
+  52              	.L2:
+  53 003c 0022     		movs	r2, #0
+  54 003e A24B     		ldr	r3, .L69+32
+  55 0040 2046     		mov	r0, r4
+  56 0042 2946     		mov	r1, r5
+  57 0044 FFF7FEFF 		bl	__aeabi_dsub
+  58 0048 FFF7FEFF 		bl	__aeabi_d2iz
+  59 004c 3060     		str	r0, [r6, #0]
+  60              	.L3:
+  61 004e EE21     		movs	r1, #238
+  62 0050 1122     		movs	r2, #17
+  63 0052 9B48     		ldr	r0, .L69+24
+  64 0054 9B4E     		ldr	r6, .L69+28
+  65 0056 FFF7FEFF 		bl	I2Cdev_readByte
+  66 005a 1222     		movs	r2, #18
+  67 005c 0746     		mov	r7, r0
+  68 005e EE21     		movs	r1, #238
+  69 0060 9748     		ldr	r0, .L69+24
+  70 0062 FFF7FEFF 		bl	I2Cdev_readByte
+  71 0066 3902     		lsls	r1, r7, #8
+  72 0068 01F47067 		and	r7, r1, #3840
+  73 006c 0743     		orrs	r7, r7, r0
+  74 006e 3846     		mov	r0, r7
+  75 0070 FFF7FEFF 		bl	__aeabi_i2d
+  76 0074 8CA3     		adr	r3, .L69
+  77 0076 D3E90023 		ldrd	r2, [r3]
+  78 007a 0446     		mov	r4, r0
+  79 007c 0D46     		mov	r5, r1
+  80 007e FFF7FEFF 		bl	__aeabi_dcmpgt
+  81 0082 08B9     		cbnz	r0, .L4
+  82 0084 7760     		str	r7, [r6, #4]
+  83 0086 08E0     		b	.L5
+  84              	.L4:
+  85 0088 0022     		movs	r2, #0
+  86 008a 8F4B     		ldr	r3, .L69+32
+  87 008c 2046     		mov	r0, r4
+  88 008e 2946     		mov	r1, r5
+  89 0090 FFF7FEFF 		bl	__aeabi_dsub
+  90 0094 FFF7FEFF 		bl	__aeabi_d2iz
+  91 0098 7060     		str	r0, [r6, #4]
+  92              	.L5:
+  93 009a EE21     		movs	r1, #238
+  94 009c 1322     		movs	r2, #19
+  95 009e 8848     		ldr	r0, .L69+24
+  96 00a0 884E     		ldr	r6, .L69+28
+  97 00a2 FFF7FEFF 		bl	I2Cdev_readByte
+  98 00a6 EE21     		movs	r1, #238
+  99 00a8 0746     		mov	r7, r0
+ 100 00aa 1422     		movs	r2, #20
+ 101 00ac 8448     		ldr	r0, .L69+24
+ 102 00ae FFF7FEFF 		bl	I2Cdev_readByte
+ 103 00b2 3A03     		lsls	r2, r7, #12
+ 104 00b4 42EA0017 		orr	r7, r2, r0, lsl #4
+ 105 00b8 EE21     		movs	r1, #238
+ 106 00ba 1522     		movs	r2, #21
+ 107 00bc 8048     		ldr	r0, .L69+24
+ 108 00be FFF7FEFF 		bl	I2Cdev_readByte
+ 109 00c2 40F30F13 		sbfx	r3, r0, #4, #16
+ 110 00c6 1F43     		orrs	r7, r7, r3
+ 111 00c8 3846     		mov	r0, r7
+ 112 00ca FFF7FEFF 		bl	__aeabi_i2d
+ 113 00ce 78A3     		adr	r3, .L69+8
+ 114 00d0 D3E90023 		ldrd	r2, [r3]
+ 115 00d4 0446     		mov	r4, r0
+ 116 00d6 0D46     		mov	r5, r1
+ 117 00d8 FFF7FEFF 		bl	__aeabi_dcmpgt
+ 118 00dc 08B9     		cbnz	r0, .L6
+ 119 00de B760     		str	r7, [r6, #8]
+ 120 00e0 08E0     		b	.L7
+ 121              	.L6:
+ 122 00e2 0022     		movs	r2, #0
+ 123 00e4 794B     		ldr	r3, .L69+36
+ 124 00e6 2046     		mov	r0, r4
+ 125 00e8 2946     		mov	r1, r5
+ 126 00ea FFF7FEFF 		bl	__aeabi_dsub
+ 127 00ee FFF7FEFF 		bl	__aeabi_d2iz
+ 128 00f2 B060     		str	r0, [r6, #8]
+ 129              	.L7:
+ 130 00f4 EE21     		movs	r1, #238
+ 131 00f6 1522     		movs	r2, #21
+ 132 00f8 7148     		ldr	r0, .L69+24
+ 133 00fa 724E     		ldr	r6, .L69+28
+ 134 00fc FFF7FEFF 		bl	I2Cdev_readByte
+ 135 0100 EE21     		movs	r1, #238
+ 136 0102 0446     		mov	r4, r0
+ 137 0104 1622     		movs	r2, #22
+ 138 0106 6E48     		ldr	r0, .L69+24
+ 139 0108 FFF7FEFF 		bl	I2Cdev_readByte
+ 140 010c EE21     		movs	r1, #238
+ 141 010e 0746     		mov	r7, r0
+ 142 0110 1722     		movs	r2, #23
+ 143 0112 6B48     		ldr	r0, .L69+24
+ 144 0114 FFF7FEFF 		bl	I2Cdev_readByte
+ 145 0118 2104     		lsls	r1, r4, #16
+ 146 011a 01F47022 		and	r2, r1, #983040
+ 147 011e 40EA0720 		orr	r0, r0, r7, lsl #8
+ 148 0122 40EA0207 		orr	r7, r0, r2
+ 149 0126 3846     		mov	r0, r7
+ 150 0128 FFF7FEFF 		bl	__aeabi_i2d
+ 151 012c 60A3     		adr	r3, .L69+8
+ 152 012e D3E90023 		ldrd	r2, [r3]
+ 153 0132 0446     		mov	r4, r0
+ 154 0134 0D46     		mov	r5, r1
+ 155 0136 FFF7FEFF 		bl	__aeabi_dcmpgt
+ 156 013a 08B9     		cbnz	r0, .L8
+ 157 013c F760     		str	r7, [r6, #12]
+ 158 013e 08E0     		b	.L9
+ 159              	.L8:
+ 160 0140 0022     		movs	r2, #0
+ 161 0142 624B     		ldr	r3, .L69+36
+ 162 0144 2046     		mov	r0, r4
+ 163 0146 2946     		mov	r1, r5
+ 164 0148 FFF7FEFF 		bl	__aeabi_dsub
+ 165 014c FFF7FEFF 		bl	__aeabi_d2iz
+ 166 0150 F060     		str	r0, [r6, #12]
+ 167              	.L9:
+ 168 0152 EE21     		movs	r1, #238
+ 169 0154 1822     		movs	r2, #24
+ 170 0156 5A48     		ldr	r0, .L69+24
+ 171 0158 5A4E     		ldr	r6, .L69+28
+ 172 015a FFF7FEFF 		bl	I2Cdev_readByte
+ 173 015e 1922     		movs	r2, #25
+ 174 0160 0746     		mov	r7, r0
+ 175 0162 EE21     		movs	r1, #238
+ 176 0164 5648     		ldr	r0, .L69+24
+ 177 0166 FFF7FEFF 		bl	I2Cdev_readByte
+ 178 016a 40EA0727 		orr	r7, r0, r7, lsl #8
+ 179 016e 3846     		mov	r0, r7
+ 180 0170 FFF7FEFF 		bl	__aeabi_i2d
+ 181 0174 50A3     		adr	r3, .L69+16
+ 182 0176 D3E90023 		ldrd	r2, [r3]
+ 183 017a 0446     		mov	r4, r0
+ 184 017c 0D46     		mov	r5, r1
+ 185 017e FFF7FEFF 		bl	__aeabi_dcmpgt
+ 186 0182 08B9     		cbnz	r0, .L10
+ 187 0184 3761     		str	r7, [r6, #16]
+ 188 0186 08E0     		b	.L11
+ 189              	.L10:
+ 190 0188 0022     		movs	r2, #0
+ 191 018a 514B     		ldr	r3, .L69+40
+ 192 018c 2046     		mov	r0, r4
+ 193 018e 2946     		mov	r1, r5
+ 194 0190 FFF7FEFF 		bl	__aeabi_dsub
+ 195 0194 FFF7FEFF 		bl	__aeabi_d2iz
+ 196 0198 3061     		str	r0, [r6, #16]
+ 197              	.L11:
+ 198 019a EE21     		movs	r1, #238
+ 199 019c 1A22     		movs	r2, #26
+ 200 019e 4848     		ldr	r0, .L69+24
+ 201 01a0 484E     		ldr	r6, .L69+28
+ 202 01a2 FFF7FEFF 		bl	I2Cdev_readByte
+ 203 01a6 1B22     		movs	r2, #27
+ 204 01a8 0746     		mov	r7, r0
+ 205 01aa EE21     		movs	r1, #238
+ 206 01ac 4448     		ldr	r0, .L69+24
+ 207 01ae FFF7FEFF 		bl	I2Cdev_readByte
+ 208 01b2 40EA0727 		orr	r7, r0, r7, lsl #8
+ 209 01b6 3846     		mov	r0, r7
+ 210 01b8 FFF7FEFF 		bl	__aeabi_i2d
+ 211 01bc 3EA3     		adr	r3, .L69+16
+ 212 01be D3E90023 		ldrd	r2, [r3]
+ 213 01c2 0446     		mov	r4, r0
+ 214 01c4 0D46     		mov	r5, r1
+ 215 01c6 FFF7FEFF 		bl	__aeabi_dcmpgt
+ 216 01ca 08B9     		cbnz	r0, .L12
+ 217 01cc 7761     		str	r7, [r6, #20]
+ 218 01ce 08E0     		b	.L13
+ 219              	.L12:
+ 220 01d0 0022     		movs	r2, #0
+ 221 01d2 3F4B     		ldr	r3, .L69+40
+ 222 01d4 2046     		mov	r0, r4
+ 223 01d6 2946     		mov	r1, r5
+ 224 01d8 FFF7FEFF 		bl	__aeabi_dsub
+ 225 01dc FFF7FEFF 		bl	__aeabi_d2iz
+ 226 01e0 7061     		str	r0, [r6, #20]
+ 227              	.L13:
+ 228 01e2 EE21     		movs	r1, #238
+ 229 01e4 1C22     		movs	r2, #28
+ 230 01e6 3648     		ldr	r0, .L69+24
+ 231 01e8 364E     		ldr	r6, .L69+28
+ 232 01ea FFF7FEFF 		bl	I2Cdev_readByte
+ 233 01ee 1D22     		movs	r2, #29
+ 234 01f0 0746     		mov	r7, r0
+ 235 01f2 EE21     		movs	r1, #238
+ 236 01f4 3248     		ldr	r0, .L69+24
+ 237 01f6 FFF7FEFF 		bl	I2Cdev_readByte
+ 238 01fa 40EA0727 		orr	r7, r0, r7, lsl #8
+ 239 01fe 3846     		mov	r0, r7
+ 240 0200 FFF7FEFF 		bl	__aeabi_i2d
+ 241 0204 2CA3     		adr	r3, .L69+16
+ 242 0206 D3E90023 		ldrd	r2, [r3]
+ 243 020a 0446     		mov	r4, r0
+ 244 020c 0D46     		mov	r5, r1
+ 245 020e FFF7FEFF 		bl	__aeabi_dcmpgt
+ 246 0212 08B9     		cbnz	r0, .L14
+ 247 0214 B761     		str	r7, [r6, #24]
+ 248 0216 08E0     		b	.L15
+ 249              	.L14:
+ 250 0218 0022     		movs	r2, #0
+ 251 021a 2D4B     		ldr	r3, .L69+40
+ 252 021c 2046     		mov	r0, r4
+ 253 021e 2946     		mov	r1, r5
+ 254 0220 FFF7FEFF 		bl	__aeabi_dsub
+ 255 0224 FFF7FEFF 		bl	__aeabi_d2iz
+ 256 0228 B061     		str	r0, [r6, #24]
+ 257              	.L15:
+ 258 022a EE21     		movs	r1, #238
+ 259 022c 1E22     		movs	r2, #30
+ 260 022e 2448     		ldr	r0, .L69+24
+ 261 0230 244E     		ldr	r6, .L69+28
+ 262 0232 FFF7FEFF 		bl	I2Cdev_readByte
+ 263 0236 1F22     		movs	r2, #31
+ 264 0238 0746     		mov	r7, r0
+ 265 023a EE21     		movs	r1, #238
+ 266 023c 2048     		ldr	r0, .L69+24
+ 267 023e FFF7FEFF 		bl	I2Cdev_readByte
+ 268 0242 40EA0727 		orr	r7, r0, r7, lsl #8
+ 269 0246 3846     		mov	r0, r7
+ 270 0248 FFF7FEFF 		bl	__aeabi_i2d
+ 271 024c 1AA3     		adr	r3, .L69+16
+ 272 024e D3E90023 		ldrd	r2, [r3]
+ 273 0252 0446     		mov	r4, r0
+ 274 0254 0D46     		mov	r5, r1
+ 275 0256 FFF7FEFF 		bl	__aeabi_dcmpgt
+ 276 025a 08B9     		cbnz	r0, .L16
+ 277 025c F761     		str	r7, [r6, #28]
+ 278 025e 08E0     		b	.L17
+ 279              	.L16:
+ 280 0260 0022     		movs	r2, #0
+ 281 0262 1B4B     		ldr	r3, .L69+40
+ 282 0264 2046     		mov	r0, r4
+ 283 0266 2946     		mov	r1, r5
+ 284 0268 FFF7FEFF 		bl	__aeabi_dsub
+ 285 026c FFF7FEFF 		bl	__aeabi_d2iz
+ 286 0270 F061     		str	r0, [r6, #28]
+ 287              	.L17:
+ 288 0272 EE21     		movs	r1, #238
+ 289 0274 2022     		movs	r2, #32
+ 290 0276 1248     		ldr	r0, .L69+24
+ 291 0278 124E     		ldr	r6, .L69+28
+ 292 027a FFF7FEFF 		bl	I2Cdev_readByte
+ 293 027e 2122     		movs	r2, #33
+ 294 0280 0746     		mov	r7, r0
+ 295 0282 EE21     		movs	r1, #238
+ 296 0284 0E48     		ldr	r0, .L69+24
+ 297 0286 FFF7FEFF 		bl	I2Cdev_readByte
+ 298 028a 40EA0727 		orr	r7, r0, r7, lsl #8
+ 299 028e 3846     		mov	r0, r7
+ 300 0290 FFF7FEFF 		bl	__aeabi_i2d
+ 301 0294 08A3     		adr	r3, .L69+16
+ 302 0296 D3E90023 		ldrd	r2, [r3]
+ 303 029a 0446     		mov	r4, r0
+ 304 029c 0D46     		mov	r5, r1
+ 305 029e FFF7FEFF 		bl	__aeabi_dcmpgt
+ 306 02a2 B8B9     		cbnz	r0, .L18
+ 307 02a4 3762     		str	r7, [r6, #32]
+ 308 02a6 1EE0     		b	.L19
+ 309              	.L70:
+ 310              		.align	3
+ 311              	.L69:
+ 312 02a8 00000000 		.word	0
+ 313 02ac 00FC9F40 		.word	1084226560
+ 314 02b0 00000000 		.word	0
+ 315 02b4 FCFF1F41 		.word	1092616188
+ 316 02b8 00000000 		.word	0
+ 317 02bc C0FFDF40 		.word	1088421824
+ 318 02c0 00000000 		.word	I2C001_Handle1
+ 319 02c4 00000000 		.word	.LANCHOR0
+ 320 02c8 0000B040 		.word	1085276160
+ 321 02cc 00003041 		.word	1093664768
+ 322 02d0 0000F040 		.word	1089470464
+ 323              	.L18:
+ 324 02d4 0022     		movs	r2, #0
+ 325 02d6 404B     		ldr	r3, .L71
+ 326 02d8 2046     		mov	r0, r4
+ 327 02da 2946     		mov	r1, r5
+ 328 02dc FFF7FEFF 		bl	__aeabi_dsub
+ 329 02e0 FFF7FEFF 		bl	__aeabi_d2iz
+ 330 02e4 3062     		str	r0, [r6, #32]
+ 331              	.L19:
+ 332 02e6 3068     		ldr	r0, [r6, #0]
+ 333 02e8 3C4B     		ldr	r3, .L71+4
+ 334 02ea 78B1     		cbz	r0, .L20
+ 335 02ec 5968     		ldr	r1, [r3, #4]
+ 336 02ee 69B1     		cbz	r1, .L20
+ 337 02f0 9A68     		ldr	r2, [r3, #8]
+ 338 02f2 5AB1     		cbz	r2, .L20
+ 339 02f4 D868     		ldr	r0, [r3, #12]
+ 340 02f6 48B1     		cbz	r0, .L20
+ 341 02f8 1969     		ldr	r1, [r3, #16]
+ 342 02fa 39B1     		cbz	r1, .L20
+ 343 02fc 5A69     		ldr	r2, [r3, #20]
+ 344 02fe 2AB1     		cbz	r2, .L20
+ 345 0300 9869     		ldr	r0, [r3, #24]
+ 346 0302 18B1     		cbz	r0, .L20
+ 347 0304 D969     		ldr	r1, [r3, #28]
+ 348 0306 09B1     		cbz	r1, .L20
+ 349 0308 1B6A     		ldr	r3, [r3, #32]
+ 350 030a 9BB9     		cbnz	r3, .L21
+ 351              	.L20:
+ 352 030c 3348     		ldr	r0, .L71+4
+ 353 030e 344A     		ldr	r2, .L71+8
+ 354 0310 3449     		ldr	r1, .L71+12
+ 355 0312 8260     		str	r2, [r0, #8]
+ 356 0314 344A     		ldr	r2, .L71+16
+ 357 0316 C160     		str	r1, [r0, #12]
+ 358 0318 0262     		str	r2, [r0, #32]
+ 359 031a 2732     		adds	r2, r2, #39
+ 360 031c 40F23161 		movw	r1, #1585
+ 361 0320 0261     		str	r2, [r0, #16]
+ 362 0322 324A     		ldr	r2, .L71+20
+ 363 0324 324B     		ldr	r3, .L71+24
+ 364 0326 4161     		str	r1, [r0, #20]
+ 365 0328 CD21     		movs	r1, #205
+ 366 032a 80E80600 		stmia	r0, {r1, r2}
+ 367 032e 8361     		str	r3, [r0, #24]
+ 368 0330 7523     		movs	r3, #117
+ 369 0332 C361     		str	r3, [r0, #28]
+ 370              	.L21:
+ 371 0334 2F48     		ldr	r0, .L71+28
+ 372 0336 EE21     		movs	r1, #238
+ 373 0338 0622     		movs	r2, #6
+ 374 033a FFF7FEFF 		bl	I2Cdev_readByte
+ 375 033e 00F00F00 		and	r0, r0, #15
+ 376 0342 0728     		cmp	r0, #7
+ 377 0344 1ED8     		bhi	.L22
+ 378 0346 DFE800F0 		tbb	[pc, r0]
+ 379              	.L31:
+ 380 034a 04       		.byte	(.L23-.L31)/2
+ 381 034b 07       		.byte	(.L24-.L31)/2
+ 382 034c 0A       		.byte	(.L25-.L31)/2
+ 383 034d 0D       		.byte	(.L26-.L31)/2
+ 384 034e 10       		.byte	(.L27-.L31)/2
+ 385 034f 13       		.byte	(.L28-.L31)/2
+ 386 0350 16       		.byte	(.L29-.L31)/2
+ 387 0351 19       		.byte	(.L30-.L31)/2
+ 388              		.align	1
+ 389              	.L23:
+ 390 0352 4FF40022 		mov	r2, #524288
+ 391 0356 13E0     		b	.L66
+ 392              	.L24:
+ 393 0358 4FF4C012 		mov	r2, #1572864
+ 394 035c 10E0     		b	.L66
+ 395              	.L25:
+ 396 035e 4FF46012 		mov	r2, #3670016
+ 397 0362 0DE0     		b	.L66
+ 398              	.L26:
+ 399 0364 4FF4F002 		mov	r2, #7864320
+ 400 0368 0AE0     		b	.L66
+ 401              	.L27:
+ 402 036a 4FF47832 		mov	r2, #253952
+ 403 036e 07E0     		b	.L66
+ 404              	.L28:
+ 405 0370 4FF4FC22 		mov	r2, #516096
+ 406 0374 04E0     		b	.L66
+ 407              	.L29:
+ 408 0376 4FF47E22 		mov	r2, #1040384
+ 409 037a 01E0     		b	.L66
+ 410              	.L30:
+ 411 037c 4FF4FF12 		mov	r2, #2088960
+ 412              	.L66:
+ 413 0380 1649     		ldr	r1, .L71+4
+ 414 0382 4A62     		str	r2, [r1, #36]
+ 415              	.L22:
+ 416 0384 1B48     		ldr	r0, .L71+28
+ 417 0386 EE21     		movs	r1, #238
+ 418 0388 0722     		movs	r2, #7
+ 419 038a FFF7FEFF 		bl	I2Cdev_readByte
+ 420 038e 00F00F00 		and	r0, r0, #15
+ 421 0392 0728     		cmp	r0, #7
+ 422 0394 1ED8     		bhi	.L1
+ 423 0396 DFE800F0 		tbb	[pc, r0]
+ 424              	.L41:
+ 425 039a 04       		.byte	(.L33-.L41)/2
+ 426 039b 07       		.byte	(.L34-.L41)/2
+ 427 039c 0A       		.byte	(.L35-.L41)/2
+ 428 039d 0D       		.byte	(.L36-.L41)/2
+ 429 039e 10       		.byte	(.L37-.L41)/2
+ 430 039f 13       		.byte	(.L38-.L41)/2
+ 431 03a0 16       		.byte	(.L39-.L41)/2
+ 432 03a1 19       		.byte	(.L40-.L41)/2
+ 433              		.align	1
+ 434              	.L33:
+ 435 03a2 4FF40022 		mov	r2, #524288
+ 436 03a6 13E0     		b	.L67
+ 437              	.L34:
+ 438 03a8 4FF4C012 		mov	r2, #1572864
+ 439 03ac 10E0     		b	.L67
+ 440              	.L35:
+ 441 03ae 4FF46012 		mov	r2, #3670016
+ 442 03b2 0DE0     		b	.L67
+ 443              	.L36:
+ 444 03b4 4FF4F002 		mov	r2, #7864320
+ 445 03b8 0AE0     		b	.L67
+ 446              	.L37:
+ 447 03ba 4FF47832 		mov	r2, #253952
+ 448 03be 07E0     		b	.L67
+ 449              	.L38:
+ 450 03c0 4FF4FC22 		mov	r2, #516096
+ 451 03c4 04E0     		b	.L67
+ 452              	.L39:
+ 453 03c6 4FF47E22 		mov	r2, #1040384
+ 454 03ca 01E0     		b	.L67
+ 455              	.L40:
+ 456 03cc 4FF4FF12 		mov	r2, #2088960
+ 457              	.L67:
+ 458 03d0 024B     		ldr	r3, .L71+4
+ 459 03d2 9A62     		str	r2, [r3, #40]
+ 460              	.L1:
+ 461 03d4 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 462              	.L72:
+ 463 03d6 00BF     		.align	2
+ 464              	.L71:
+ 465 03d8 0000F040 		.word	1089470464
+ 466 03dc 00000000 		.word	.LANCHOR0
+ 467 03e0 633E0100 		.word	81507
+ 468 03e4 25FEFEFF 		.word	-66011
+ 469 03e8 96F7FFFF 		.word	-2154
+ 470 03ec FEFEFFFF 		.word	-258
+ 471 03f0 F5CAFFFF 		.word	-13579
+ 472 03f4 00000000 		.word	I2C001_Handle1
+ 474              		.section	.text.getPressure,"ax",%progbits
+ 475              		.align	1
+ 476              		.global	getPressure
+ 477              		.thumb
+ 478              		.thumb_func
+ 480              	getPressure:
+ 481              		@ args = 0, pretend = 0, frame = 0
+ 482              		@ frame_needed = 0, uses_anonymous_args = 0
+ 483 0000 70B5     		push	{r4, r5, r6, lr}
+ 484 0002 0B4C     		ldr	r4, .L74
+ 485 0004 EE21     		movs	r1, #238
+ 486 0006 0022     		movs	r2, #0
+ 487 0008 2046     		mov	r0, r4
+ 488 000a FFF7FEFF 		bl	I2Cdev_readByte
+ 489 000e EE21     		movs	r1, #238
+ 490 0010 0122     		movs	r2, #1
+ 491 0012 0546     		mov	r5, r0
+ 492 0014 2046     		mov	r0, r4
+ 493 0016 FFF7FEFF 		bl	I2Cdev_readByte
+ 494 001a EE21     		movs	r1, #238
+ 495 001c 0646     		mov	r6, r0
+ 496 001e 0222     		movs	r2, #2
+ 497 0020 2046     		mov	r0, r4
+ 498 0022 FFF7FEFF 		bl	I2Cdev_readByte
+ 499 0026 3602     		lsls	r6, r6, #8
+ 500 0028 46EA0545 		orr	r5, r6, r5, lsl #16
+ 501 002c 2843     		orrs	r0, r0, r5
+ 502 002e 70BD     		pop	{r4, r5, r6, pc}
+ 503              	.L75:
+ 504              		.align	2
+ 505              	.L74:
+ 506 0030 00000000 		.word	I2C001_Handle1
+ 508              		.section	.text.getTemperature,"ax",%progbits
+ 509              		.align	1
+ 510              		.global	getTemperature
+ 511              		.thumb
+ 512              		.thumb_func
+ 514              	getTemperature:
+ 515              		@ args = 0, pretend = 0, frame = 0
+ 516              		@ frame_needed = 0, uses_anonymous_args = 0
+ 517 0000 70B5     		push	{r4, r5, r6, lr}
+ 518 0002 0B4C     		ldr	r4, .L77
+ 519 0004 EE21     		movs	r1, #238
+ 520 0006 0322     		movs	r2, #3
+ 521 0008 2046     		mov	r0, r4
+ 522 000a FFF7FEFF 		bl	I2Cdev_readByte
+ 523 000e EE21     		movs	r1, #238
+ 524 0010 0422     		movs	r2, #4
+ 525 0012 0546     		mov	r5, r0
+ 526 0014 2046     		mov	r0, r4
+ 527 0016 FFF7FEFF 		bl	I2Cdev_readByte
+ 528 001a EE21     		movs	r1, #238
+ 529 001c 0646     		mov	r6, r0
+ 530 001e 0522     		movs	r2, #5
+ 531 0020 2046     		mov	r0, r4
+ 532 0022 FFF7FEFF 		bl	I2Cdev_readByte
+ 533 0026 3602     		lsls	r6, r6, #8
+ 534 0028 46EA0545 		orr	r5, r6, r5, lsl #16
+ 535 002c 2843     		orrs	r0, r0, r5
+ 536 002e 70BD     		pop	{r4, r5, r6, pc}
+ 537              	.L78:
+ 538              		.align	2
+ 539              	.L77:
+ 540 0030 00000000 		.word	I2C001_Handle1
+ 542              		.global	__aeabi_dmul
+ 543              		.global	__aeabi_f2d
+ 544              		.global	__aeabi_dadd
+ 545              		.global	__aeabi_d2f
+ 546              		.section	.text.updateValues,"ax",%progbits
+ 547              		.align	1
+ 548              		.global	updateValues
+ 549              		.thumb
+ 550              		.thumb_func
+ 552              	updateValues:
+ 553              		@ args = 0, pretend = 0, frame = 0
+ 554              		@ frame_needed = 0, uses_anonymous_args = 0
+ 555 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 556 0004 0822     		movs	r2, #8
+ 557 0006 2DED028B 		fstmfdd	sp!, {d8}
+ 558 000a 8046     		mov	r8, r0
+ 559 000c 0F46     		mov	r7, r1
+ 560 000e 5148     		ldr	r0, .L85
+ 561 0010 EE21     		movs	r1, #238
+ 562 0012 FFF7FEFF 		bl	I2Cdev_readByte
+ 563 0016 C0F30310 		ubfx	r0, r0, #4, #4
+ 564 001a 0F28     		cmp	r0, #15
+ 565 001c 40F09680 		bne	.L79
+ 566 0020 FFF7FEFF 		bl	getPressure
+ 567 0024 8146     		mov	r9, r0
+ 568 0026 FFF7FEFF 		bl	__aeabi_i2d
+ 569 002a 4FF04042 		mov	r2, #-1073741824
+ 570 002e 4A4B     		ldr	r3, .L85+4
+ 571 0030 4A4E     		ldr	r6, .L85+8
+ 572 0032 0446     		mov	r4, r0
+ 573 0034 0D46     		mov	r5, r1
+ 574 0036 FFF7FEFF 		bl	__aeabi_dcmpgt
+ 575 003a 10B9     		cbnz	r0, .L81
+ 576 003c C6F82C90 		str	r9, [r6, #44]
+ 577 0040 08E0     		b	.L82
+ 578              	.L81:
+ 579 0042 0022     		movs	r2, #0
+ 580 0044 464B     		ldr	r3, .L85+12
+ 581 0046 2046     		mov	r0, r4
+ 582 0048 2946     		mov	r1, r5
+ 583 004a FFF7FEFF 		bl	__aeabi_dsub
+ 584 004e FFF7FEFF 		bl	__aeabi_d2iz
+ 585 0052 F062     		str	r0, [r6, #44]
+ 586              	.L82:
+ 587 0054 FFF7FEFF 		bl	getTemperature
+ 588 0058 8146     		mov	r9, r0
+ 589 005a FFF7FEFF 		bl	__aeabi_i2d
+ 590 005e 4FF04042 		mov	r2, #-1073741824
+ 591 0062 3D4B     		ldr	r3, .L85+4
+ 592 0064 3D4E     		ldr	r6, .L85+8
+ 593 0066 0446     		mov	r4, r0
+ 594 0068 0D46     		mov	r5, r1
+ 595 006a FFF7FEFF 		bl	__aeabi_dcmpgt
+ 596 006e 10B9     		cbnz	r0, .L83
+ 597 0070 C6F83090 		str	r9, [r6, #48]
+ 598 0074 08E0     		b	.L84
+ 599              	.L83:
+ 600 0076 0022     		movs	r2, #0
+ 601 0078 394B     		ldr	r3, .L85+12
+ 602 007a 2046     		mov	r0, r4
+ 603 007c 2946     		mov	r1, r5
+ 604 007e FFF7FEFF 		bl	__aeabi_dsub
+ 605 0082 FFF7FEFF 		bl	__aeabi_d2iz
+ 606 0086 3063     		str	r0, [r6, #48]
+ 607              	.L84:
+ 608 0088 D6ED0C4A 		flds	s9, [r6, #48]	@ int
+ 609 008c 96ED0A5A 		flds	s10, [r6, #40]	@ int
+ 610 0090 B8EEE48A 		fsitos	s16, s9
+ 611 0094 F8EE457A 		fuitos	s15, s10
+ 612 0098 3068     		ldr	r0, [r6, #0]
+ 613 009a 88EE278A 		fdivs	s16, s16, s15
+ 614 009e 86ED0D8A 		fsts	s16, [r6, #52]
+ 615 00a2 FFF7FEFF 		bl	__aeabi_i2d
+ 616 00a6 0022     		movs	r2, #0
+ 617 00a8 2E4B     		ldr	r3, .L85+16
+ 618 00aa FFF7FEFF 		bl	__aeabi_dmul
+ 619 00ae 96ED016A 		flds	s12, [r6, #4]	@ int
+ 620 00b2 B8EEC60A 		fsitos	s0, s12
+ 621 00b6 0446     		mov	r4, r0
+ 622 00b8 60EE080A 		fmuls	s1, s0, s16
+ 623 00bc 0D46     		mov	r5, r1
+ 624 00be 10EE900A 		fmrs	r0, s1
+ 625 00c2 FFF7FEFF 		bl	__aeabi_f2d
+ 626 00c6 0246     		mov	r2, r0
+ 627 00c8 0B46     		mov	r3, r1
+ 628 00ca 2046     		mov	r0, r4
+ 629 00cc 2946     		mov	r1, r5
+ 630 00ce FFF7FEFF 		bl	__aeabi_dadd
+ 631 00d2 FFF7FEFF 		bl	__aeabi_d2f
+ 632 00d6 D6ED0B6A 		flds	s13, [r6, #44]	@ int
+ 633 00da 96ED091A 		flds	s2, [r6, #36]	@ int
+ 634 00de B8EEE67A 		fsitos	s14, s13
+ 635 00e2 F8EE411A 		fuitos	s3, s2
+ 636 00e6 96ED085A 		flds	s10, [r6, #32]	@ int
+ 637 00ea 87EE212A 		fdivs	s4, s14, s3
+ 638 00ee 3860     		str	r0, [r7, #0]	@ float
+ 639 00f0 D6ED064A 		flds	s9, [r6, #24]	@ int
+ 640 00f4 B8EEC56A 		fsitos	s12, s10
+ 641 00f8 F8EEE47A 		fsitos	s15, s9
+ 642 00fc 42EE067A 		fmacs	s15, s4, s12
+ 643 0100 D6ED033A 		flds	s7, [r6, #12]	@ int
+ 644 0104 B8EEE34A 		fsitos	s8, s7
+ 645 0108 02EE274A 		fmacs	s8, s4, s15
+ 646 010c D6ED022A 		flds	s5, [r6, #8]	@ int
+ 647 0110 96ED040A 		flds	s0, [r6, #16]	@ int
+ 648 0114 B8EEE23A 		fsitos	s6, s5
+ 649 0118 02EE043A 		fmacs	s6, s4, s8
+ 650 011c D6ED0D5A 		flds	s11, [r6, #52]
+ 651 0120 D6ED071A 		flds	s3, [r6, #28]	@ int
+ 652 0124 F8EEC00A 		fsitos	s1, s0
+ 653 0128 D6ED056A 		flds	s13, [r6, #20]	@ int
+ 654 012c 05EEA03A 		fmacs	s6, s11, s1
+ 655 0130 25EE827A 		fmuls	s14, s11, s4
+ 656 0134 F8EEE15A 		fsitos	s11, s3
+ 657 0138 B8EEE61A 		fsitos	s2, s13
+ 658 013c 02EE251A 		fmacs	s2, s4, s11
+ 659 0140 86ED0E2A 		fsts	s4, [r6, #56]
+ 660 0144 07EE013A 		fmacs	s6, s14, s2
+ 661 0148 88ED003A 		fsts	s6, [r8, #0]
+ 662              	.L79:
+ 663 014c BDEC028B 		fldmfdd	sp!, {d8}
+ 664 0150 BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 665              	.L86:
+ 666              		.align	2
+ 667              	.L85:
+ 668 0154 00000000 		.word	I2C001_Handle1
+ 669 0158 FFFF5F41 		.word	1096810495
+ 670 015c 00000000 		.word	.LANCHOR0
+ 671 0160 00007041 		.word	1097859072
+ 672 0164 0000E03F 		.word	1071644672
+ 674              		.section	.text.ERU1_3_IRQHandler,"ax",%progbits
+ 675              		.align	1
+ 676              		.global	ERU1_3_IRQHandler
+ 677              		.thumb
+ 678              		.thumb_func
+ 680              	ERU1_3_IRQHandler:
+ 681              		@ args = 0, pretend = 0, frame = 56
+ 682              		@ frame_needed = 0, uses_anonymous_args = 0
+ 683 0000 70B5     		push	{r4, r5, r6, lr}
+ 684 0002 154D     		ldr	r5, .L88
+ 685 0004 1549     		ldr	r1, .L88+4
+ 686 0006 164C     		ldr	r4, .L88+8
+ 687 0008 9AB0     		sub	sp, sp, #104
+ 688 000a 2846     		mov	r0, r5
+ 689 000c FFF7FEFF 		bl	updateValues
+ 690 0010 EE21     		movs	r1, #238
+ 691 0012 0A22     		movs	r2, #10
+ 692 0014 1348     		ldr	r0, .L88+12
+ 693 0016 FFF7FEFF 		bl	I2Cdev_readByte
+ 694 001a 2B68     		ldr	r3, [r5, #0]	@ float
+ 695 001c 04F10C06 		add	r6, r4, #12
+ 696 0020 0B93     		str	r3, [sp, #44]	@ float
+ 697 0022 0FCE     		ldmia	r6!, {r0, r1, r2, r3}
+ 698 0024 6D46     		mov	r5, sp
+ 699 0026 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 700 0028 0FCE     		ldmia	r6!, {r0, r1, r2, r3}
+ 701 002a 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+ 702 002c 96E80700 		ldmia	r6, {r0, r1, r2}
+ 703 0030 85E80700 		stmia	r5, {r0, r1, r2}
+ 704 0034 0CA8     		add	r0, sp, #48
+ 705 0036 94E80E00 		ldmia	r4, {r1, r2, r3}
+ 706 003a 0CAD     		add	r5, sp, #48
+ 707 003c FFF7FEFF 		bl	FIR_FILTER
+ 708 0040 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 709 0042 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 710 0044 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 711 0046 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 712 0048 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 713 004a 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 714 004c 95E80300 		ldmia	r5, {r0, r1}
+ 715 0050 84E80300 		stmia	r4, {r0, r1}
+ 716 0054 1AB0     		add	sp, sp, #104
+ 717 0056 70BD     		pop	{r4, r5, r6, pc}
+ 718              	.L89:
+ 719              		.align	2
+ 720              	.L88:
+ 721 0058 00000000 		.word	pressure
+ 722 005c 00000000 		.word	temperature
+ 723 0060 00000000 		.word	PressureFIR
+ 724 0064 00000000 		.word	I2C001_Handle1
+ 726              		.section	.text.setRegister,"ax",%progbits
+ 727              		.align	1
+ 728              		.global	setRegister
+ 729              		.thumb
+ 730              		.thumb_func
+ 732              	setRegister:
+ 733              		@ args = 0, pretend = 0, frame = 0
+ 734              		@ frame_needed = 0, uses_anonymous_args = 0
+ 735 0000 70B5     		push	{r4, r5, r6, lr}
+ 736 0002 0646     		mov	r6, r0
+ 737 0004 0C46     		mov	r4, r1
+ 738 0006 1546     		mov	r5, r2
+ 739 0008 3146     		mov	r1, r6
+ 740 000a 2246     		mov	r2, r4
+ 741 000c 2B46     		mov	r3, r5
+ 742 000e 0A48     		ldr	r0, .L94
+ 743 0010 FFF7FEFF 		bl	I2Cdev_writeByte
+ 744 0014 0848     		ldr	r0, .L94
+ 745 0016 3146     		mov	r1, r6
+ 746 0018 2246     		mov	r2, r4
+ 747 001a FFF7FEFF 		bl	I2Cdev_readByte
+ 748 001e C0B2     		uxtb	r0, r0
+ 749 0020 8542     		cmp	r5, r0
+ 750 0022 06D0     		beq	.L93
+ 751 0024 063C     		subs	r4, r4, #6
+ 752 0026 E4B2     		uxtb	r4, r4
+ 753 0028 032C     		cmp	r4, #3
+ 754 002a 02D8     		bhi	.L93
+ 755 002c 034B     		ldr	r3, .L94+4
+ 756 002e 185D     		ldrb	r0, [r3, r4]	@ zero_extendqisi2
+ 757 0030 70BD     		pop	{r4, r5, r6, pc}
+ 758              	.L93:
+ 759 0032 0020     		movs	r0, #0
+ 760 0034 70BD     		pop	{r4, r5, r6, pc}
+ 761              	.L95:
+ 762 0036 00BF     		.align	2
+ 763              	.L94:
+ 764 0038 00000000 		.word	I2C001_Handle1
+ 765 003c 00000000 		.word	.LANCHOR1
+ 767              		.section	.text.setupDPS310,"ax",%progbits
+ 768              		.align	1
+ 769              		.global	setupDPS310
+ 770              		.thumb
+ 771              		.thumb_func
+ 773              	setupDPS310:
+ 774              		@ args = 0, pretend = 0, frame = 0
+ 775              		@ frame_needed = 0, uses_anonymous_args = 0
+ 776 0000 10B5     		push	{r4, lr}
+ 777 0002 FFF7FEFF 		bl	SYSTM001_GetTime
+ 778 0006 0446     		mov	r4, r0
+ 779              	.L97:
+ 780 0008 FFF7FEFF 		bl	SYSTM001_GetTime
+ 781 000c 001B     		subs	r0, r0, r4
+ 782 000e 0B28     		cmp	r0, #11
+ 783 0010 FAD9     		bls	.L97
+ 784 0012 EE21     		movs	r1, #238
+ 785 0014 0C22     		movs	r2, #12
+ 786 0016 0923     		movs	r3, #9
+ 787 0018 1D48     		ldr	r0, .L105
+ 788 001a FFF7FEFF 		bl	I2Cdev_writeByte
+ 789 001e FFF7FEFF 		bl	SYSTM001_GetTime
+ 790 0022 0446     		mov	r4, r0
+ 791              	.L98:
+ 792 0024 FFF7FEFF 		bl	SYSTM001_GetTime
+ 793 0028 011B     		subs	r1, r0, r4
+ 794 002a 2729     		cmp	r1, #39
+ 795 002c FAD9     		bls	.L98
+ 796 002e EE20     		movs	r0, #238
+ 797 0030 0621     		movs	r1, #6
+ 798 0032 4522     		movs	r2, #69
+ 799 0034 FFF7FEFF 		bl	setRegister
+ 800 0038 0446     		mov	r4, r0
+ 801 003a 30BB     		cbnz	r0, .L99
+ 802 003c EE21     		movs	r1, #238
+ 803 003e 2822     		movs	r2, #40
+ 804 0040 1348     		ldr	r0, .L105
+ 805 0042 FFF7FEFF 		bl	I2Cdev_readByte
+ 806 0046 C0F3C712 		ubfx	r2, r0, #7, #8
+ 807 004a 012A     		cmp	r2, #1
+ 808 004c 4FF0EE00 		mov	r0, #238
+ 809 0050 4FF00701 		mov	r1, #7
+ 810 0054 01D1     		bne	.L100
+ 811 0056 C222     		movs	r2, #194
+ 812 0058 00E0     		b	.L104
+ 813              	.L100:
+ 814 005a 4222     		movs	r2, #66
+ 815              	.L104:
+ 816 005c FFF7FEFF 		bl	setRegister
+ 817 0060 0446     		mov	r4, r0
+ 818 0062 90B9     		cbnz	r0, .L99
+ 819 0064 EE20     		movs	r0, #238
+ 820 0066 0821     		movs	r1, #8
+ 821 0068 C722     		movs	r2, #199
+ 822 006a FFF7FEFF 		bl	setRegister
+ 823 006e 0446     		mov	r4, r0
+ 824 0070 58B9     		cbnz	r0, .L99
+ 825 0072 EE20     		movs	r0, #238
+ 826 0074 0921     		movs	r1, #9
+ 827 0076 2522     		movs	r2, #37
+ 828 0078 FFF7FEFF 		bl	setRegister
+ 829 007c 0446     		mov	r4, r0
+ 830 007e 20B9     		cbnz	r0, .L99
+ 831 0080 0348     		ldr	r0, .L105
+ 832 0082 EE21     		movs	r1, #238
+ 833 0084 0A22     		movs	r2, #10
+ 834 0086 FFF7FEFF 		bl	I2Cdev_readByte
+ 835              	.L99:
+ 836 008a 2046     		mov	r0, r4
+ 837 008c 10BD     		pop	{r4, pc}
+ 838              	.L106:
+ 839 008e 00BF     		.align	2
+ 840              	.L105:
+ 841 0090 00000000 		.word	I2C001_Handle1
+ 843              		.global	kT
+ 844              		.global	kP
+ 845              		.global	c1
+ 846              		.global	c0
+ 847              		.global	c21
+ 848              		.global	c11
+ 849              		.global	c01
+ 850              		.global	c30
+ 851              		.global	c20
+ 852              		.global	c10
+ 853              		.global	c00
+ 854              		.global	Tcomp
+ 855              		.global	Pcomp
+ 856              		.global	Traw_sc
+ 857              		.global	Praw_sc
+ 858              		.global	Traw
+ 859              		.global	Praw
+ 860              		.section	.rodata
+ 861              		.set	.LANCHOR1,. + 0
+ 864              	CSWTCH.57:
+ 865 0000 01       		.byte	1
+ 866 0001 02       		.byte	2
+ 867 0002 03       		.byte	3
+ 868 0003 04       		.byte	4
+ 869              		.bss
+ 870              		.align	2
+ 871              		.set	.LANCHOR0,. + 0
+ 874              	c0:
+ 875 0000 00000000 		.space	4
+ 878              	c1:
+ 879 0004 00000000 		.space	4
+ 882              	c00:
+ 883 0008 00000000 		.space	4
+ 886              	c10:
+ 887 000c 00000000 		.space	4
+ 890              	c01:
+ 891 0010 00000000 		.space	4
+ 894              	c11:
+ 895 0014 00000000 		.space	4
+ 898              	c20:
+ 899 0018 00000000 		.space	4
+ 902              	c21:
+ 903 001c 00000000 		.space	4
+ 906              	c30:
+ 907 0020 00000000 		.space	4
+ 910              	kP:
+ 911 0024 00000000 		.space	4
+ 914              	kT:
+ 915 0028 00000000 		.space	4
+ 918              	Praw:
+ 919 002c 00000000 		.space	4
+ 922              	Traw:
+ 923 0030 00000000 		.space	4
+ 926              	Traw_sc:
+ 927 0034 00000000 		.space	4
+ 930              	Praw_sc:
+ 931 0038 00000000 		.space	4
+ 934              	Tcomp:
+ 935 003c 00000000 		.space	4
+ 938              	Pcomp:
+ 939 0040 00000000 		.space	4
+ 940              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 DPS310.c
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:21     .text.getCoefficients:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:26     .text.getCoefficients:00000000 getCoefficients
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:312    .text.getCoefficients:000002a8 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:324    .text.getCoefficients:000002d4 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:380    .text.getCoefficients:0000034a $d
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:388    .text.getCoefficients:00000352 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:425    .text.getCoefficients:0000039a $d
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:433    .text.getCoefficients:000003a2 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:465    .text.getCoefficients:000003d8 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:475    .text.getPressure:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:480    .text.getPressure:00000000 getPressure
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:506    .text.getPressure:00000030 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:509    .text.getTemperature:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:514    .text.getTemperature:00000000 getTemperature
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:540    .text.getTemperature:00000030 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:547    .text.updateValues:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:552    .text.updateValues:00000000 updateValues
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:668    .text.updateValues:00000154 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:675    .text.ERU1_3_IRQHandler:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:680    .text.ERU1_3_IRQHandler:00000000 ERU1_3_IRQHandler
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:721    .text.ERU1_3_IRQHandler:00000058 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:727    .text.setRegister:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:732    .text.setRegister:00000000 setRegister
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:764    .text.setRegister:00000038 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:768    .text.setupDPS310:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:773    .text.setupDPS310:00000000 setupDPS310
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:841    .text.setupDPS310:00000090 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:914    .bss:00000028 kT
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:910    .bss:00000024 kP
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:878    .bss:00000004 c1
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:874    .bss:00000000 c0
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:902    .bss:0000001c c21
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:894    .bss:00000014 c11
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:890    .bss:00000010 c01
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:906    .bss:00000020 c30
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:898    .bss:00000018 c20
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:886    .bss:0000000c c10
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:882    .bss:00000008 c00
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:934    .bss:0000003c Tcomp
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:938    .bss:00000040 Pcomp
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:926    .bss:00000034 Traw_sc
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:930    .bss:00000038 Praw_sc
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:922    .bss:00000030 Traw
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:918    .bss:0000002c Praw
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:864    .rodata:00000000 CSWTCH.57
+C:\Users\SteurerE\AppData\Local\Temp\ccV6A9fX.s:870    .bss:00000000 $d
+
+UNDEFINED SYMBOLS
+__aeabi_i2d
+__aeabi_dcmpgt
+__aeabi_dsub
+__aeabi_d2iz
+I2Cdev_readByte
+I2C001_Handle1
+__aeabi_dmul
+__aeabi_f2d
+__aeabi_dadd
+__aeabi_d2f
+FIR_FILTER
+pressure
+temperature
+PressureFIR
+I2Cdev_writeByte
+SYSTM001_GetTime

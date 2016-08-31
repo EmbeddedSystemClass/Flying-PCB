@@ -1,0 +1,515 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"I2C001.c"
+  16              		.section	.text.I2C001_lConfigureBitRate,"ax",%progbits
+  17              		.align	1
+  18              		.global	I2C001_lConfigureBitRate
+  19              		.thumb
+  20              		.thumb_func
+  22              	I2C001_lConfigureBitRate:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 07EE900A 		fmsr	s15, r0	@ int
+  27 0004 9FED2C0A 		flds	s0, .L20
+  28 0008 B8EE677A 		fuitos	s14, s15
+  29 000c 9FED2B1A 		flds	s2, .L20+4
+  30 0010 67EE000A 		fmuls	s1, s14, s0
+  31 0014 F7EE006A 		fconsts	s13, #112
+  32 0018 F4EEC10A 		fcmpes	s1, s2
+  33 001c F1EE10FA 		fmstat
+  34 0020 94BF     		ite	ls
+  35 0022 9FED276A 		fldsls	s12, .L20+8
+  36 0026 9FED276A 		fldshi	s12, .L20+12
+  37 002a 86EE206A 		fdivs	s12, s12, s1
+  38 002e F0EE415A 		fcpys	s11, s2
+  39 0032 B4EEE66A 		fcmpes	s12, s13
+  40 0036 F1EE10FA 		fmstat
+  41 003a DFED231A 		flds	s3, .L20+16
+  42 003e 09D9     		bls	.L10
+  43 0040 36EE662A 		fsubs	s4, s12, s13
+  44 0044 B4EE612A 		fcmps	s4, s3
+  45 0048 F1EE10FA 		fmstat
+  46 004c C8BF     		it	gt
+  47 004e B0EE612A 		fcpysgt	s4, s3
+  48 0052 01E0     		b	.L5
+  49              	.L10:
+  50 0054 9FED1D2A 		flds	s4, .L20+20
+  51              	.L5:
+  52 0058 F4EEE50A 		fcmpes	s1, s11
+  53 005c F1EE10FA 		fmstat
+  54 0060 94BF     		ite	ls
+  55 0062 B2EE044A 		fconstsls	s8, #36
+  56 0066 B3EE094A 		fconstshi	s8, #57
+  57 006a 60EE843A 		fmuls	s7, s1, s8
+  58 006e DFED184A 		flds	s9, .L20+24
+  59 0072 9FED185A 		flds	s10, .L20+28
+  60 0076 23EEA44A 		fmuls	s8, s7, s9
+  61 007a FCEEC22A 		ftouizs	s5, s4
+  62 007e C4EE057A 		fdivs	s15, s8, s10
+  63 0082 B8EE627A 		fuitos	s14, s5
+  64 0086 9FED143A 		flds	s6, .L20+32
+  65 008a 37EE260A 		fadds	s0, s14, s13
+  66 008e DFED0E5A 		flds	s11, .L20+16
+  67 0092 67EE800A 		fmuls	s1, s15, s0
+  68 0096 C1ED002A 		fsts	s5, [r1, #0]	@ int
+  69 009a 80EE831A 		fdivs	s2, s1, s6
+  70 009e B4EE611A 		fcmps	s2, s3
+  71 00a2 F1EE10FA 		fmstat
+  72 00a6 C8BF     		it	gt
+  73 00a8 B0EE651A 		fcpysgt	s2, s11
+  74 00ac BCEEC16A 		ftouizs	s12, s2
+  75 00b0 82ED006A 		fsts	s12, [r2, #0]	@ int
+  76 00b4 7047     		bx	lr
+  77              	.L21:
+  78 00b6 00BF     		.align	2
+  79              	.L20:
+  80 00b8 00007A44 		.word	1148846080
+  81 00bc 0050C347 		.word	1203982336
+  82 00c0 5ED0B24A 		.word	1253232734
+  83 00c4 180D0F4A 		.word	1242500376
+  84 00c8 00C07F44 		.word	1149222912
+  85 00cc 00000000 		.word	0
+  86 00d0 00008044 		.word	1149239296
+  87 00d4 00247449 		.word	1232348160
+  88 00d8 0000F042 		.word	1123024896
+  90              		.section	.text.I2C001_lInit,"ax",%progbits
+  91              		.align	1
+  92              		.global	I2C001_lInit
+  93              		.thumb
+  94              		.thumb_func
+  96              	I2C001_lInit:
+  97              		@ args = 0, pretend = 0, frame = 8
+  98              		@ frame_needed = 0, uses_anonymous_args = 0
+  99 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 100 0002 4468     		ldr	r4, [r0, #4]
+ 101 0004 0546     		mov	r5, r0
+ 102 0006 206C     		ldr	r0, [r4, #64]
+ 103 0008 20F00401 		bic	r1, r0, #4
+ 104 000c 2164     		str	r1, [r4, #64]
+ 105 000e E268     		ldr	r2, [r4, #12]
+ 106 0010 A868     		ldr	r0, [r5, #8]
+ 107 0012 0023     		movs	r3, #0
+ 108 0014 0093     		str	r3, [sp, #0]
+ 109 0016 0193     		str	r3, [sp, #4]
+ 110 0018 42F00303 		orr	r3, r2, #3
+ 111 001c E360     		str	r3, [r4, #12]
+ 112 001e 6946     		mov	r1, sp
+ 113 0020 01AA     		add	r2, sp, #4
+ 114 0022 FFF7FEFF 		bl	I2C001_lConfigureBitRate
+ 115 0026 2069     		ldr	r0, [r4, #16]
+ 116 0028 019A     		ldr	r2, [sp, #4]
+ 117 002a 40F40041 		orr	r1, r0, #32768
+ 118 002e 9305     		lsls	r3, r2, #22
+ 119 0030 41EA9350 		orr	r0, r1, r3, lsr #22
+ 120 0034 2061     		str	r0, [r4, #16]
+ 121 0036 AA68     		ldr	r2, [r5, #8]
+ 122 0038 6069     		ldr	r0, [r4, #20]
+ 123 003a 0099     		ldr	r1, [sp, #0]
+ 124 003c 2E4B     		ldr	r3, .L57
+ 125 003e 642A     		cmp	r2, #100
+ 126 0040 94BF     		ite	ls
+ 127 0042 40F41050 		orrls	r0, r0, #9216
+ 128 0046 40F4C040 		orrhi	r0, r0, #24576
+ 129 004a 0904     		lsls	r1, r1, #16
+ 130 004c 0B40     		ands	r3, r3, r1
+ 131 004e 1843     		orrs	r0, r0, r3
+ 132 0050 6061     		str	r0, [r4, #20]
+ 133 0052 616B     		ldr	r1, [r4, #52]
+ 134 0054 294B     		ldr	r3, .L57+4
+ 135 0056 41EA0300 		orr	r0, r1, r3
+ 136 005a 6063     		str	r0, [r4, #52]
+ 137 005c A16B     		ldr	r1, [r4, #56]
+ 138 005e 41F4A063 		orr	r3, r1, #1280
+ 139 0062 A363     		str	r3, [r4, #56]
+ 140 0064 E06B     		ldr	r0, [r4, #60]
+ 141 0066 642A     		cmp	r2, #100
+ 142 0068 88BF     		it	hi
+ 143 006a 40F40030 		orrhi	r0, r0, #131072
+ 144 006e E063     		str	r0, [r4, #60]
+ 145 0070 2A7C     		ldrb	r2, [r5, #16]	@ zero_extendqisi2
+ 146 0072 1AB1     		cbz	r2, .L27
+ 147 0074 E16B     		ldr	r1, [r4, #60]
+ 148 0076 41F48023 		orr	r3, r1, #262144
+ 149 007a E363     		str	r3, [r4, #60]
+ 150              	.L27:
+ 151 007c 687C     		ldrb	r0, [r5, #17]	@ zero_extendqisi2
+ 152 007e 18B1     		cbz	r0, .L28
+ 153 0080 E26B     		ldr	r2, [r4, #60]
+ 154 0082 42F40021 		orr	r1, r2, #524288
+ 155 0086 E163     		str	r1, [r4, #60]
+ 156              	.L28:
+ 157 0088 AB7C     		ldrb	r3, [r5, #18]	@ zero_extendqisi2
+ 158 008a 1BB1     		cbz	r3, .L29
+ 159 008c E06B     		ldr	r0, [r4, #60]
+ 160 008e 40F48012 		orr	r2, r0, #1048576
+ 161 0092 E263     		str	r2, [r4, #60]
+ 162              	.L29:
+ 163 0094 E97C     		ldrb	r1, [r5, #19]	@ zero_extendqisi2
+ 164 0096 19B1     		cbz	r1, .L30
+ 165 0098 E36B     		ldr	r3, [r4, #60]
+ 166 009a 43F40010 		orr	r0, r3, #2097152
+ 167 009e E063     		str	r0, [r4, #60]
+ 168              	.L30:
+ 169 00a0 2A7D     		ldrb	r2, [r5, #20]	@ zero_extendqisi2
+ 170 00a2 1AB1     		cbz	r2, .L31
+ 171 00a4 E16B     		ldr	r1, [r4, #60]
+ 172 00a6 41F48003 		orr	r3, r1, #4194304
+ 173 00aa E363     		str	r3, [r4, #60]
+ 174              	.L31:
+ 175 00ac 687D     		ldrb	r0, [r5, #21]	@ zero_extendqisi2
+ 176 00ae 18B1     		cbz	r0, .L32
+ 177 00b0 E26B     		ldr	r2, [r4, #60]
+ 178 00b2 42F08071 		orr	r1, r2, #16777216
+ 179 00b6 E163     		str	r1, [r4, #60]
+ 180              	.L32:
+ 181 00b8 AB7D     		ldrb	r3, [r5, #22]	@ zero_extendqisi2
+ 182 00ba 1BB1     		cbz	r3, .L33
+ 183 00bc E06B     		ldr	r0, [r4, #60]
+ 184 00be 40F08042 		orr	r2, r0, #1073741824
+ 185 00c2 E263     		str	r2, [r4, #60]
+ 186              	.L33:
+ 187 00c4 2B7B     		ldrb	r3, [r5, #12]	@ zero_extendqisi2
+ 188 00c6 D4F80811 		ldr	r1, [r4, #264]
+ 189 00ca 1802     		lsls	r0, r3, #8
+ 190 00cc 00F47C52 		and	r2, r0, #16128
+ 191 00d0 0A43     		orrs	r2, r2, r1
+ 192 00d2 C4F80821 		str	r2, [r4, #264]
+ 193 00d6 6B7B     		ldrb	r3, [r5, #13]	@ zero_extendqisi2
+ 194 00d8 D4F80C11 		ldr	r1, [r4, #268]
+ 195 00dc 1A02     		lsls	r2, r3, #8
+ 196 00de 41F08050 		orr	r0, r1, #268435456
+ 197 00e2 02F47C51 		and	r1, r2, #16128
+ 198 00e6 0843     		orrs	r0, r0, r1
+ 199 00e8 C4F80C01 		str	r0, [r4, #268]
+ 200 00ec 236C     		ldr	r3, [r4, #64]
+ 201 00ee 43F00402 		orr	r2, r3, #4
+ 202 00f2 2264     		str	r2, [r4, #64]
+ 203 00f4 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 204              	.L58:
+ 205 00f6 00BF     		.align	2
+ 206              	.L57:
+ 207 00f8 0000FF03 		.word	67043328
+ 208 00fc 03033F07 		.word	121570051
+ 210              		.section	.text.I2C001_Init,"ax",%progbits
+ 211              		.align	1
+ 212              		.global	I2C001_Init
+ 213              		.thumb
+ 214              		.thumb_func
+ 216              	I2C001_Init:
+ 217              		@ args = 0, pretend = 0, frame = 0
+ 218              		@ frame_needed = 0, uses_anonymous_args = 0
+ 219 0000 08B5     		push	{r3, lr}
+ 220 0002 2448     		ldr	r0, .L60
+ 221 0004 FFF7FEFF 		bl	RESET001_DeassertReset
+ 222 0008 2348     		ldr	r0, .L60+4
+ 223 000a FFF7FEFF 		bl	I2C001_lInit
+ 224 000e 234B     		ldr	r3, .L60+8
+ 225 0010 1A6C     		ldr	r2, [r3, #64]
+ 226 0012 22F4E060 		bic	r0, r2, #1792
+ 227 0016 1864     		str	r0, [r3, #64]
+ 228 0018 196C     		ldr	r1, [r3, #64]
+ 229 001a 1964     		str	r1, [r3, #64]
+ 230 001c 1A69     		ldr	r2, [r3, #16]
+ 231 001e 42F44000 		orr	r0, r2, #12582912
+ 232 0022 1861     		str	r0, [r3, #16]
+ 233 0024 5968     		ldr	r1, [r3, #4]
+ 234 0026 41F00402 		orr	r2, r1, #4
+ 235 002a 5A60     		str	r2, [r3, #4]
+ 236 002c 186C     		ldr	r0, [r3, #64]
+ 237 002e 20F00701 		bic	r1, r0, #7
+ 238 0032 1964     		str	r1, [r3, #64]
+ 239 0034 1A6C     		ldr	r2, [r3, #64]
+ 240 0036 1A64     		str	r2, [r3, #64]
+ 241 0038 1869     		ldr	r0, [r3, #16]
+ 242 003a 40F0C001 		orr	r1, r0, #192
+ 243 003e 1961     		str	r1, [r3, #16]
+ 244 0040 5A68     		ldr	r2, [r3, #4]
+ 245 0042 42F00100 		orr	r0, r2, #1
+ 246 0046 5860     		str	r0, [r3, #4]
+ 247 0048 4FF40060 		mov	r0, #2048
+ 248 004c FFF7FEFF 		bl	RESET001_DeassertReset
+ 249 0050 1348     		ldr	r0, .L60+12
+ 250 0052 FFF7FEFF 		bl	I2C001_lInit
+ 251 0056 134B     		ldr	r3, .L60+16
+ 252 0058 196C     		ldr	r1, [r3, #64]
+ 253 005a 21F4E022 		bic	r2, r1, #458752
+ 254 005e 1A64     		str	r2, [r3, #64]
+ 255 0060 186C     		ldr	r0, [r3, #64]
+ 256 0062 1864     		str	r0, [r3, #64]
+ 257 0064 5969     		ldr	r1, [r3, #20]
+ 258 0066 41F0C002 		orr	r2, r1, #192
+ 259 006a 5A61     		str	r2, [r3, #20]
+ 260 006c 5868     		ldr	r0, [r3, #4]
+ 261 006e 40F01001 		orr	r1, r0, #16
+ 262 0072 5960     		str	r1, [r3, #4]
+ 263 0074 1A6C     		ldr	r2, [r3, #64]
+ 264 0076 22F4E000 		bic	r0, r2, #7340032
+ 265 007a 1864     		str	r0, [r3, #64]
+ 266 007c 196C     		ldr	r1, [r3, #64]
+ 267 007e 1964     		str	r1, [r3, #64]
+ 268 0080 5A69     		ldr	r2, [r3, #20]
+ 269 0082 42F44040 		orr	r0, r2, #49152
+ 270 0086 5861     		str	r0, [r3, #20]
+ 271 0088 5968     		ldr	r1, [r3, #4]
+ 272 008a 41F02002 		orr	r2, r1, #32
+ 273 008e 5A60     		str	r2, [r3, #4]
+ 274 0090 08BD     		pop	{r3, pc}
+ 275              	.L61:
+ 276 0092 00BF     		.align	2
+ 277              	.L60:
+ 278 0094 00010010 		.word	268435712
+ 279 0098 00000000 		.word	I2C001_Handle0
+ 280 009c 00850248 		.word	1208124672
+ 281 00a0 00000000 		.word	I2C001_Handle1
+ 282 00a4 00820248 		.word	1208123904
+ 284              		.section	.text.I2C001_DeInit,"ax",%progbits
+ 285              		.align	1
+ 286              		.global	I2C001_DeInit
+ 287              		.thumb
+ 288              		.thumb_func
+ 290              	I2C001_DeInit:
+ 291              		@ args = 0, pretend = 0, frame = 0
+ 292              		@ frame_needed = 0, uses_anonymous_args = 0
+ 293              		@ link register save eliminated.
+ 294 0000 7047     		bx	lr
+ 296              		.section	.text.I2C001_Configure,"ax",%progbits
+ 297              		.align	1
+ 298              		.global	I2C001_Configure
+ 299              		.thumb
+ 300              		.thumb_func
+ 302              	I2C001_Configure:
+ 303              		@ args = 0, pretend = 0, frame = 8
+ 304              		@ frame_needed = 0, uses_anonymous_args = 0
+ 305 0000 37B5     		push	{r0, r1, r2, r4, r5, lr}
+ 306 0002 4468     		ldr	r4, [r0, #4]
+ 307 0004 206C     		ldr	r0, [r4, #64]
+ 308 0006 0D46     		mov	r5, r1
+ 309 0008 20F00401 		bic	r1, r0, #4
+ 310 000c 0023     		movs	r3, #0
+ 311 000e 2164     		str	r1, [r4, #64]
+ 312 0010 2846     		mov	r0, r5
+ 313 0012 6946     		mov	r1, sp
+ 314 0014 01AA     		add	r2, sp, #4
+ 315 0016 0093     		str	r3, [sp, #0]
+ 316 0018 0193     		str	r3, [sp, #4]
+ 317 001a FFF7FEFF 		bl	I2C001_lConfigureBitRate
+ 318 001e 2269     		ldr	r2, [r4, #16]
+ 319 0020 22F47F73 		bic	r3, r2, #1020
+ 320 0024 23F00300 		bic	r0, r3, #3
+ 321 0028 2061     		str	r0, [r4, #16]
+ 322 002a 019A     		ldr	r2, [sp, #4]
+ 323 002c 2169     		ldr	r1, [r4, #16]
+ 324 002e 9305     		lsls	r3, r2, #22
+ 325 0030 41EA9350 		orr	r0, r1, r3, lsr #22
+ 326 0034 2061     		str	r0, [r4, #16]
+ 327 0036 6169     		ldr	r1, [r4, #20]
+ 328 0038 104A     		ldr	r2, .L70
+ 329 003a 009B     		ldr	r3, [sp, #0]
+ 330 003c 0A40     		ands	r2, r2, r1
+ 331 003e 6261     		str	r2, [r4, #20]
+ 332 0040 6069     		ldr	r0, [r4, #20]
+ 333 0042 0F4A     		ldr	r2, .L70+4
+ 334 0044 642D     		cmp	r5, #100
+ 335 0046 94BF     		ite	ls
+ 336 0048 40F41050 		orrls	r0, r0, #9216
+ 337 004c 40F4C040 		orrhi	r0, r0, #24576
+ 338 0050 1904     		lsls	r1, r3, #16
+ 339 0052 0A40     		ands	r2, r2, r1
+ 340 0054 40EA0203 		orr	r3, r0, r2
+ 341 0058 6361     		str	r3, [r4, #20]
+ 342 005a E06B     		ldr	r0, [r4, #60]
+ 343 005c 20F40031 		bic	r1, r0, #131072
+ 344 0060 E163     		str	r1, [r4, #60]
+ 345 0062 E26B     		ldr	r2, [r4, #60]
+ 346 0064 642D     		cmp	r5, #100
+ 347 0066 88BF     		it	hi
+ 348 0068 42F40032 		orrhi	r2, r2, #131072
+ 349 006c E263     		str	r2, [r4, #60]
+ 350 006e 236C     		ldr	r3, [r4, #64]
+ 351 0070 43F00400 		orr	r0, r3, #4
+ 352 0074 2064     		str	r0, [r4, #64]
+ 353 0076 0020     		movs	r0, #0
+ 354 0078 3EBD     		pop	{r1, r2, r3, r4, r5, pc}
+ 355              	.L71:
+ 356 007a 00BF     		.align	2
+ 357              	.L70:
+ 358 007c FF8000FC 		.word	-67075841
+ 359 0080 0000FF03 		.word	67043328
+ 361              		.section	.text.I2C001_ReadData,"ax",%progbits
+ 362              		.align	1
+ 363              		.global	I2C001_ReadData
+ 364              		.thumb
+ 365              		.thumb_func
+ 367              	I2C001_ReadData:
+ 368              		@ args = 0, pretend = 0, frame = 0
+ 369              		@ frame_needed = 0, uses_anonymous_args = 0
+ 370              		@ link register save eliminated.
+ 371 0000 4368     		ldr	r3, [r0, #4]
+ 372 0002 D3F81421 		ldr	r2, [r3, #276]
+ 373 0006 1207     		lsls	r2, r2, #28
+ 374 0008 05D4     		bmi	.L74
+ 375 000a D3F81C01 		ldr	r0, [r3, #284]
+ 376 000e C3B2     		uxtb	r3, r0
+ 377 0010 0B80     		strh	r3, [r1, #0]	@ movhi
+ 378 0012 0120     		movs	r0, #1
+ 379 0014 7047     		bx	lr
+ 380              	.L74:
+ 381 0016 0020     		movs	r0, #0
+ 382 0018 7047     		bx	lr
+ 384              		.section	.text.I2C001_WriteData,"ax",%progbits
+ 385              		.align	1
+ 386              		.global	I2C001_WriteData
+ 387              		.thumb
+ 388              		.thumb_func
+ 390              	I2C001_WriteData:
+ 391              		@ args = 0, pretend = 0, frame = 0
+ 392              		@ frame_needed = 0, uses_anonymous_args = 0
+ 393              		@ link register save eliminated.
+ 394 0000 4368     		ldr	r3, [r0, #4]
+ 395 0002 986C     		ldr	r0, [r3, #72]
+ 396 0004 10F00200 		ands	r0, r0, #2
+ 397 0008 0BD1     		bne	.L77
+ 398 000a D3F81421 		ldr	r2, [r3, #276]
+ 399 000e D204     		lsls	r2, r2, #19
+ 400 0010 08D4     		bmi	.L76
+ 401 0012 4878     		ldrb	r0, [r1, #1]	@ zero_extendqisi2
+ 402 0014 0978     		ldrb	r1, [r1, #0]	@ zero_extendqisi2
+ 403 0016 41EA0022 		orr	r2, r1, r0, lsl #8
+ 404 001a C3F88021 		str	r2, [r3, #384]
+ 405 001e 0120     		movs	r0, #1
+ 406 0020 7047     		bx	lr
+ 407              	.L77:
+ 408 0022 0020     		movs	r0, #0
+ 409              	.L76:
+ 410 0024 7047     		bx	lr
+ 412              		.section	.text.I2C001_GetFlagStatus,"ax",%progbits
+ 413              		.align	1
+ 414              		.global	I2C001_GetFlagStatus
+ 415              		.thumb
+ 416              		.thumb_func
+ 418              	I2C001_GetFlagStatus:
+ 419              		@ args = 0, pretend = 0, frame = 0
+ 420              		@ frame_needed = 0, uses_anonymous_args = 0
+ 421              		@ link register save eliminated.
+ 422 0000 0429     		cmp	r1, #4
+ 423 0002 4368     		ldr	r3, [r0, #4]
+ 424 0004 05D8     		bhi	.L80
+ 425 0006 0A31     		adds	r1, r1, #10
+ 426 0008 0122     		movs	r2, #1
+ 427 000a 9B6C     		ldr	r3, [r3, #72]
+ 428 000c 02FA01F2 		lsl	r2, r2, r1
+ 429 0010 16E0     		b	.L87
+ 430              	.L80:
+ 431 0012 0629     		cmp	r1, #6
+ 432 0014 03D1     		bne	.L82
+ 433 0016 9B6C     		ldr	r3, [r3, #72]
+ 434 0018 03F02002 		and	r2, r3, #32
+ 435 001c 11E0     		b	.L81
+ 436              	.L82:
+ 437 001e 0529     		cmp	r1, #5
+ 438 0020 03D1     		bne	.L83
+ 439 0022 996C     		ldr	r1, [r3, #72]
+ 440 0024 01F00202 		and	r2, r1, #2
+ 441 0028 0BE0     		b	.L81
+ 442              	.L83:
+ 443 002a 0829     		cmp	r1, #8
+ 444 002c D3F81431 		ldr	r3, [r3, #276]
+ 445 0030 4FF00102 		mov	r2, #1
+ 446 0034 01D8     		bhi	.L84
+ 447 0036 C81F     		subs	r0, r1, #7
+ 448 0038 00E0     		b	.L88
+ 449              	.L84:
+ 450 003a 481E     		subs	r0, r1, #1
+ 451              	.L88:
+ 452 003c 02FA00F2 		lsl	r2, r2, r0
+ 453              	.L87:
+ 454 0040 1A40     		ands	r2, r2, r3
+ 455              	.L81:
+ 456 0042 002A     		cmp	r2, #0
+ 457 0044 14BF     		ite	ne
+ 458 0046 0320     		movne	r0, #3
+ 459 0048 0220     		moveq	r0, #2
+ 460 004a 7047     		bx	lr
+ 462              		.section	.text.I2C001_ClearFlag,"ax",%progbits
+ 463              		.align	1
+ 464              		.global	I2C001_ClearFlag
+ 465              		.thumb
+ 466              		.thumb_func
+ 468              	I2C001_ClearFlag:
+ 469              		@ args = 0, pretend = 0, frame = 0
+ 470              		@ frame_needed = 0, uses_anonymous_args = 0
+ 471              		@ link register save eliminated.
+ 472 0000 0429     		cmp	r1, #4
+ 473 0002 4368     		ldr	r3, [r0, #4]
+ 474 0004 05D8     		bhi	.L90
+ 475 0006 0A31     		adds	r1, r1, #10
+ 476 0008 0120     		movs	r0, #1
+ 477 000a 00FA01F2 		lsl	r2, r0, r1
+ 478 000e DA64     		str	r2, [r3, #76]
+ 479 0010 7047     		bx	lr
+ 480              	.L90:
+ 481 0012 0629     		cmp	r1, #6
+ 482 0014 01D1     		bne	.L92
+ 483 0016 2022     		movs	r2, #32
+ 484 0018 0CE0     		b	.L95
+ 485              	.L92:
+ 486 001a 0529     		cmp	r1, #5
+ 487 001c 01D1     		bne	.L93
+ 488 001e 0222     		movs	r2, #2
+ 489 0020 08E0     		b	.L95
+ 490              	.L93:
+ 491 0022 0829     		cmp	r1, #8
+ 492 0024 4FF00102 		mov	r2, #1
+ 493 0028 01D8     		bhi	.L94
+ 494 002a 0739     		subs	r1, r1, #7
+ 495 002c 00E0     		b	.L96
+ 496              	.L94:
+ 497 002e 0139     		subs	r1, r1, #1
+ 498              	.L96:
+ 499 0030 02FA01F2 		lsl	r2, r2, r1
+ 500              	.L95:
+ 501 0034 DA64     		str	r2, [r3, #76]
+ 502 0036 7047     		bx	lr
+ 504              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 I2C001.c
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:17     .text.I2C001_lConfigureBitRate:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:22     .text.I2C001_lConfigureBitRate:00000000 I2C001_lConfigureBitRate
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:80     .text.I2C001_lConfigureBitRate:000000b8 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:91     .text.I2C001_lInit:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:96     .text.I2C001_lInit:00000000 I2C001_lInit
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:207    .text.I2C001_lInit:000000f8 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:211    .text.I2C001_Init:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:216    .text.I2C001_Init:00000000 I2C001_Init
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:278    .text.I2C001_Init:00000094 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:285    .text.I2C001_DeInit:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:290    .text.I2C001_DeInit:00000000 I2C001_DeInit
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:297    .text.I2C001_Configure:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:302    .text.I2C001_Configure:00000000 I2C001_Configure
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:358    .text.I2C001_Configure:0000007c $d
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:362    .text.I2C001_ReadData:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:367    .text.I2C001_ReadData:00000000 I2C001_ReadData
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:385    .text.I2C001_WriteData:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:390    .text.I2C001_WriteData:00000000 I2C001_WriteData
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:413    .text.I2C001_GetFlagStatus:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:418    .text.I2C001_GetFlagStatus:00000000 I2C001_GetFlagStatus
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:463    .text.I2C001_ClearFlag:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccoHRqxd.s:468    .text.I2C001_ClearFlag:00000000 I2C001_ClearFlag
+
+UNDEFINED SYMBOLS
+RESET001_DeassertReset
+I2C001_Handle0
+I2C001_Handle1

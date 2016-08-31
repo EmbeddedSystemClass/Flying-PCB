@@ -1,0 +1,207 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"BluetoothProtocol.c"
+  16              		.section	.text.initBluetoothStorage,"ax",%progbits
+  17              		.align	1
+  18              		.global	initBluetoothStorage
+  19              		.thumb
+  20              		.thumb_func
+  22              	initBluetoothStorage:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 10B5     		push	{r4, lr}
+  26 0002 2020     		movs	r0, #32
+  27 0004 FFF7FEFF 		bl	malloc
+  28 0008 0F4B     		ldr	r3, .L2
+  29 000a 104C     		ldr	r4, .L2+4
+  30 000c 1860     		str	r0, [r3, #0]
+  31 000e 0120     		movs	r0, #1
+  32 0010 FFF7FEFF 		bl	malloc
+  33 0014 2060     		str	r0, [r4, #0]
+  34 0016 0120     		movs	r0, #1
+  35 0018 FFF7FEFF 		bl	malloc
+  36 001c 6060     		str	r0, [r4, #4]
+  37 001e 0120     		movs	r0, #1
+  38 0020 FFF7FEFF 		bl	malloc
+  39 0024 A060     		str	r0, [r4, #8]
+  40 0026 0420     		movs	r0, #4
+  41 0028 FFF7FEFF 		bl	malloc
+  42 002c 2061     		str	r0, [r4, #16]
+  43 002e 0420     		movs	r0, #4
+  44 0030 FFF7FEFF 		bl	malloc
+  45 0034 6061     		str	r0, [r4, #20]
+  46 0036 0420     		movs	r0, #4
+  47 0038 FFF7FEFF 		bl	malloc
+  48 003c E060     		str	r0, [r4, #12]
+  49 003e 0420     		movs	r0, #4
+  50 0040 FFF7FEFF 		bl	malloc
+  51 0044 A061     		str	r0, [r4, #24]
+  52 0046 10BD     		pop	{r4, pc}
+  53              	.L3:
+  54              		.align	2
+  55              	.L2:
+  56 0048 00000000 		.word	ReadBufBT
+  57 004c 00000000 		.word	control_value
+  59              		.section	.text.maintainBluetoothInputBuffer,"ax",%progbits
+  60              		.align	1
+  61              		.global	maintainBluetoothInputBuffer
+  62              		.thumb
+  63              		.thumb_func
+  65              	maintainBluetoothInputBuffer:
+  66              		@ args = 0, pretend = 0, frame = 0
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  69 0002 8478     		ldrb	r4, [r0, #2]	@ zero_extendqisi2
+  70 0004 4578     		ldrb	r5, [r0, #1]	@ zero_extendqisi2
+  71 0006 0378     		ldrb	r3, [r0, #0]	@ zero_extendqisi2
+  72 0008 44EA0525 		orr	r5, r4, r5, lsl #8
+  73 000c 5D40     		eors	r5, r5, r3
+  74 000e 0446     		mov	r4, r0
+  75 0010 00F10C06 		add	r6, r0, #12
+  76 0014 0346     		mov	r3, r0
+  77              	.L5:
+  78 0016 1F79     		ldrb	r7, [r3, #4]	@ zero_extendqisi2
+  79 0018 93F803C0 		ldrb	ip, [r3, #3]	@ zero_extendqisi2
+  80 001c 3F04     		lsls	r7, r7, #16
+  81 001e 47EA0C67 		orr	r7, r7, ip, lsl #24
+  82 0022 93F806C0 		ldrb	ip, [r3, #6]	@ zero_extendqisi2
+  83 0026 47EA0C07 		orr	r7, r7, ip
+  84 002a 93F805C0 		ldrb	ip, [r3, #5]	@ zero_extendqisi2
+  85 002e 0433     		adds	r3, r3, #4
+  86 0030 47EA0C27 		orr	r7, r7, ip, lsl #8
+  87 0034 B342     		cmp	r3, r6
+  88 0036 85EA0705 		eor	r5, r5, r7
+  89 003a ECD1     		bne	.L5
+  90 003c 0023     		movs	r3, #0
+  91              	.L6:
+  92 003e C618     		adds	r6, r0, r3
+  93 0040 C3F10307 		rsb	r7, r3, #3
+  94 0044 96F80FC0 		ldrb	ip, [r6, #15]	@ zero_extendqisi2
+  95 0048 8E69     		ldr	r6, [r1, #24]
+  96 004a 0133     		adds	r3, r3, #1
+  97 004c 042B     		cmp	r3, #4
+  98 004e 06F807C0 		strb	ip, [r6, r7]
+  99 0052 F4D1     		bne	.L6
+ 100 0054 8B69     		ldr	r3, [r1, #24]
+ 101 0056 0860     		str	r0, [r1, #0]
+ 102 0058 1B68     		ldr	r3, [r3, #0]
+ 103 005a AB42     		cmp	r3, r5
+ 104 005c 3DD1     		bne	.L7
+ 105 005e 0378     		ldrb	r3, [r0, #0]	@ zero_extendqisi2
+ 106 0060 2BB3     		cbz	r3, .L8
+ 107 0062 2249     		ldr	r1, .L20
+ 108 0064 0C68     		ldr	r4, [r1, #0]
+ 109 0066 04B9     		cbnz	r4, .L9
+ 110 0068 0B60     		str	r3, [r1, #0]
+ 111              	.L9:
+ 112 006a 4968     		ldr	r1, [r1, #4]
+ 113 006c 0B46     		mov	r3, r1
+ 114              	.L10:
+ 115 006e 01F10D04 		add	r4, r1, #13
+ 116 0072 9C42     		cmp	r4, r3
+ 117 0074 05DB     		blt	.L19
+ 118              	.L11:
+ 119 0076 441A     		subs	r4, r0, r1
+ 120 0078 E418     		adds	r4, r4, r3
+ 121 007a 6478     		ldrb	r4, [r4, #1]	@ zero_extendqisi2
+ 122 007c D454     		strb	r4, [r2, r3]
+ 123 007e 0133     		adds	r3, r3, #1
+ 124 0080 F5E7     		b	.L10
+ 125              	.L19:
+ 126 0082 1A4C     		ldr	r4, .L20
+ 127 0084 6360     		str	r3, [r4, #4]
+ 128 0086 0378     		ldrb	r3, [r0, #0]	@ zero_extendqisi2
+ 129 0088 0E2B     		cmp	r3, #14
+ 130 008a 0AD8     		bhi	.L12
+ 131 008c 2168     		ldr	r1, [r4, #0]
+ 132 008e 82F82A10 		strb	r1, [r2, #42]
+ 133 0092 0021     		movs	r1, #0
+ 134 0094 1322     		movs	r2, #19
+ 135 0096 6160     		str	r1, [r4, #4]
+ 136 0098 2160     		str	r1, [r4, #0]
+ 137 009a FFF7FEFF 		bl	memset
+ 138 009e 0120     		movs	r0, #1
+ 139 00a0 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 140              	.L12:
+ 141 00a2 0021     		movs	r1, #0
+ 142 00a4 1322     		movs	r2, #19
+ 143 00a6 FFF7FEFF 		bl	memset
+ 144 00aa 0220     		movs	r0, #2
+ 145 00ac F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 146              	.L8:
+ 147 00ae 4B68     		ldr	r3, [r1, #4]
+ 148 00b0 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+ 149 00b2 1A70     		strb	r2, [r3, #0]
+ 150 00b4 8B68     		ldr	r3, [r1, #8]
+ 151 00b6 8078     		ldrb	r0, [r0, #2]	@ zero_extendqisi2
+ 152 00b8 1870     		strb	r0, [r3, #0]
+ 153 00ba 0323     		movs	r3, #3
+ 154              	.L14:
+ 155 00bc E078     		ldrb	r0, [r4, #3]	@ zero_extendqisi2
+ 156 00be CA68     		ldr	r2, [r1, #12]
+ 157 00c0 D054     		strb	r0, [r2, r3]
+ 158 00c2 E079     		ldrb	r0, [r4, #7]	@ zero_extendqisi2
+ 159 00c4 0A69     		ldr	r2, [r1, #16]
+ 160 00c6 D054     		strb	r0, [r2, r3]
+ 161 00c8 E07A     		ldrb	r0, [r4, #11]	@ zero_extendqisi2
+ 162 00ca 4A69     		ldr	r2, [r1, #20]
+ 163 00cc D054     		strb	r0, [r2, r3]
+ 164 00ce 013B     		subs	r3, r3, #1
+ 165 00d0 0134     		adds	r4, r4, #1
+ 166 00d2 5A1C     		adds	r2, r3, #1
+ 167 00d4 F2D1     		bne	.L14
+ 168 00d6 0020     		movs	r0, #0
+ 169 00d8 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 170              	.L7:
+ 171 00da 044A     		ldr	r2, .L20
+ 172 00dc 0021     		movs	r1, #0
+ 173 00de 5160     		str	r1, [r2, #4]
+ 174 00e0 1322     		movs	r2, #19
+ 175 00e2 FFF7FEFF 		bl	memset
+ 176 00e6 4FF0FF30 		mov	r0, #-1
+ 177 00ea F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 178              	.L21:
+ 179              		.align	2
+ 180              	.L20:
+ 181 00ec 00000000 		.word	.LANCHOR0
+ 183              		.comm	ReadBufBT,4,4
+ 184              		.comm	dpacket,43,1
+ 185              		.comm	control_value,28,4
+ 186              		.bss
+ 187              		.align	2
+ 188              		.set	.LANCHOR0,. + 0
+ 191              	packets_to_be_received.11158:
+ 192 0000 00000000 		.space	4
+ 195              	packet_counter.11157:
+ 196 0004 00000000 		.space	4
+ 197              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 BluetoothProtocol.c
+C:\Users\SteurerE\AppData\Local\Temp\ccH5ngZM.s:17     .text.initBluetoothStorage:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccH5ngZM.s:22     .text.initBluetoothStorage:00000000 initBluetoothStorage
+C:\Users\SteurerE\AppData\Local\Temp\ccH5ngZM.s:56     .text.initBluetoothStorage:00000048 $d
+                            *COM*:00000004 ReadBufBT
+                            *COM*:0000001c control_value
+C:\Users\SteurerE\AppData\Local\Temp\ccH5ngZM.s:60     .text.maintainBluetoothInputBuffer:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccH5ngZM.s:65     .text.maintainBluetoothInputBuffer:00000000 maintainBluetoothInputBuffer
+C:\Users\SteurerE\AppData\Local\Temp\ccH5ngZM.s:181    .text.maintainBluetoothInputBuffer:000000ec $d
+                            *COM*:0000002b dpacket
+C:\Users\SteurerE\AppData\Local\Temp\ccH5ngZM.s:187    .bss:00000000 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccH5ngZM.s:191    .bss:00000000 packets_to_be_received.11158
+C:\Users\SteurerE\AppData\Local\Temp\ccH5ngZM.s:195    .bss:00000004 packet_counter.11157
+
+UNDEFINED SYMBOLS
+malloc
+memset

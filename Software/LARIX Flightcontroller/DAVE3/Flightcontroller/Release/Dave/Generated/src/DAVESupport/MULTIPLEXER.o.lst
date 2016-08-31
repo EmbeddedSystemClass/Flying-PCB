@@ -1,0 +1,272 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"MULTIPLEXER.c"
+  16              		.section	.text.DAVE_MUX_Init,"ax",%progbits
+  17              		.align	1
+  18              		.global	DAVE_MUX_Init
+  19              		.thumb
+  20              		.thumb_func
+  22              	DAVE_MUX_Init:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 C14B     		ldr	r3, .L2
+  26 0002 5A69     		ldr	r2, [r3, #20]
+  27 0004 42F00100 		orr	r0, r2, #1
+  28 0008 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+  29 000c 5861     		str	r0, [r3, #20]
+  30 000e 5969     		ldr	r1, [r3, #20]
+  31 0010 BE48     		ldr	r0, .L2+4
+  32 0012 21F07004 		bic	r4, r1, #112
+  33 0016 44F03005 		orr	r5, r4, #48
+  34 001a 5D61     		str	r5, [r3, #20]
+  35 001c DE69     		ldr	r6, [r3, #28]
+  36 001e 46F00107 		orr	r7, r6, #1
+  37 0022 DF61     		str	r7, [r3, #28]
+  38 0024 D0F840C0 		ldr	ip, [r0, #64]
+  39 0028 036C     		ldr	r3, [r0, #64]
+  40 002a 23F00F02 		bic	r2, r3, #15
+  41 002e 0264     		str	r2, [r0, #64]
+  42 0030 B74A     		ldr	r2, .L2+8
+  43 0032 D2F84080 		ldr	r8, [r2, #64]
+  44 0036 116C     		ldr	r1, [r2, #64]
+  45 0038 21F00F04 		bic	r4, r1, #15
+  46 003c 1464     		str	r4, [r2, #64]
+  47 003e B54C     		ldr	r4, .L2+12
+  48 0040 B549     		ldr	r1, .L2+16
+  49 0042 276C     		ldr	r7, [r4, #64]
+  50 0044 256C     		ldr	r5, [r4, #64]
+  51 0046 25F00F06 		bic	r6, r5, #15
+  52 004a 2664     		str	r6, [r4, #64]
+  53 004c 0E6C     		ldr	r6, [r1, #64]
+  54 004e 0B6C     		ldr	r3, [r1, #64]
+  55 0050 23F00F05 		bic	r5, r3, #15
+  56 0054 B14B     		ldr	r3, .L2+20
+  57 0056 0D64     		str	r5, [r1, #64]
+  58 0058 1D6C     		ldr	r5, [r3, #64]
+  59 005a D3F84090 		ldr	r9, [r3, #64]
+  60 005e 29F00F09 		bic	r9, r9, #15
+  61 0062 C3F84090 		str	r9, [r3, #64]
+  62 0066 D0F80C91 		ldr	r9, [r0, #268]
+  63 006a 49F08049 		orr	r9, r9, #1073741824
+  64 006e C0F80C91 		str	r9, [r0, #268]
+  65 0072 D0F80C91 		ldr	r9, [r0, #268]
+  66 0076 29F4E029 		bic	r9, r9, #458752
+  67 007a 49F44039 		orr	r9, r9, #196608
+  68 007e C0F80C91 		str	r9, [r0, #268]
+  69 0082 D0F80C91 		ldr	r9, [r0, #268]
+  70 0086 29F0E069 		bic	r9, r9, #117440512
+  71 008a 29F03F09 		bic	r9, r9, #63
+  72 008e 49F0A069 		orr	r9, r9, #83886080
+  73 0092 C0F80C91 		str	r9, [r0, #268]
+  74 0096 D2F81C90 		ldr	r9, [r2, #28]
+  75 009a 29F00709 		bic	r9, r9, #7
+  76 009e 49F00109 		orr	r9, r9, #1
+  77 00a2 C2F81C90 		str	r9, [r2, #28]
+  78 00a6 D2F81890 		ldr	r9, [r2, #24]
+  79 00aa 29F4E029 		bic	r9, r9, #458752
+  80 00ae 49F4A029 		orr	r9, r9, #327680
+  81 00b2 C2F81890 		str	r9, [r2, #24]
+  82 00b6 D2F80891 		ldr	r9, [r2, #264]
+  83 00ba 29F0E069 		bic	r9, r9, #117440512
+  84 00be 29F03F09 		bic	r9, r9, #63
+  85 00c2 49F08079 		orr	r9, r9, #16777216
+  86 00c6 49F02209 		orr	r9, r9, #34
+  87 00ca C2F80891 		str	r9, [r2, #264]
+  88 00ce D2F80C91 		ldr	r9, [r2, #268]
+  89 00d2 29F0E069 		bic	r9, r9, #117440512
+  90 00d6 29F03F09 		bic	r9, r9, #63
+  91 00da 49F08079 		orr	r9, r9, #16777216
+  92 00de 49F02009 		orr	r9, r9, #32
+  93 00e2 C2F80C91 		str	r9, [r2, #268]
+  94 00e6 D4F80C91 		ldr	r9, [r4, #268]
+  95 00ea 49F08049 		orr	r9, r9, #1073741824
+  96 00ee C4F80C91 		str	r9, [r4, #268]
+  97 00f2 D4F80C91 		ldr	r9, [r4, #268]
+  98 00f6 29F0E069 		bic	r9, r9, #117440512
+  99 00fa 29F03F09 		bic	r9, r9, #63
+ 100 00fe 49F0A069 		orr	r9, r9, #83886080
+ 101 0102 C4F80C91 		str	r9, [r4, #268]
+ 102 0106 D1F81C90 		ldr	r9, [r1, #28]
+ 103 010a 29F00709 		bic	r9, r9, #7
+ 104 010e 49F00309 		orr	r9, r9, #3
+ 105 0112 C1F81C90 		str	r9, [r1, #28]
+ 106 0116 D1F80891 		ldr	r9, [r1, #264]
+ 107 011a 29F0E069 		bic	r9, r9, #117440512
+ 108 011e 29F03F09 		bic	r9, r9, #63
+ 109 0122 49F08069 		orr	r9, r9, #67108864
+ 110 0126 49F03009 		orr	r9, r9, #48
+ 111 012a C1F80891 		str	r9, [r1, #264]
+ 112 012e D1F80C91 		ldr	r9, [r1, #268]
+ 113 0132 29F0E069 		bic	r9, r9, #117440512
+ 114 0136 29F03F09 		bic	r9, r9, #63
+ 115 013a 49F08069 		orr	r9, r9, #67108864
+ 116 013e 49F02009 		orr	r9, r9, #32
+ 117 0142 C1F80C91 		str	r9, [r1, #268]
+ 118 0146 D3F81C90 		ldr	r9, [r3, #28]
+ 119 014a 29F00709 		bic	r9, r9, #7
+ 120 014e 49F00109 		orr	r9, r9, #1
+ 121 0152 C3F81C90 		str	r9, [r3, #28]
+ 122 0156 D3F81890 		ldr	r9, [r3, #24]
+ 123 015a 29F4E029 		bic	r9, r9, #458752
+ 124 015e 49F40039 		orr	r9, r9, #131072
+ 125 0162 C3F81890 		str	r9, [r3, #24]
+ 126 0166 D3F80891 		ldr	r9, [r3, #264]
+ 127 016a 29F0E069 		bic	r9, r9, #117440512
+ 128 016e 29F03F09 		bic	r9, r9, #63
+ 129 0172 49F0A069 		orr	r9, r9, #83886080
+ 130 0176 49F02009 		orr	r9, r9, #32
+ 131 017a C3F80891 		str	r9, [r3, #264]
+ 132 017e D3F80C91 		ldr	r9, [r3, #268]
+ 133 0182 29F0E069 		bic	r9, r9, #117440512
+ 134 0186 29F03F09 		bic	r9, r9, #63
+ 135 018a 49F0A069 		orr	r9, r9, #83886080
+ 136 018e C3F80C91 		str	r9, [r3, #268]
+ 137 0192 D0F84090 		ldr	r9, [r0, #64]
+ 138 0196 0CF00F0C 		and	ip, ip, #15
+ 139 019a 29F00F09 		bic	r9, r9, #15
+ 140 019e 49EA0C0C 		orr	ip, r9, ip
+ 141 01a2 C0F840C0 		str	ip, [r0, #64]
+ 142 01a6 106C     		ldr	r0, [r2, #64]
+ 143 01a8 20F00F0C 		bic	ip, r0, #15
+ 144 01ac 08F00F00 		and	r0, r8, #15
+ 145 01b0 4CEA0000 		orr	r0, ip, r0
+ 146 01b4 1064     		str	r0, [r2, #64]
+ 147 01b6 226C     		ldr	r2, [r4, #64]
+ 148 01b8 22F00F00 		bic	r0, r2, #15
+ 149 01bc 07F00F02 		and	r2, r7, #15
+ 150 01c0 1043     		orrs	r0, r0, r2
+ 151 01c2 2064     		str	r0, [r4, #64]
+ 152 01c4 0A6C     		ldr	r2, [r1, #64]
+ 153 01c6 22F00F00 		bic	r0, r2, #15
+ 154 01ca 06F00F02 		and	r2, r6, #15
+ 155 01ce 1043     		orrs	r0, r0, r2
+ 156 01d0 0864     		str	r0, [r1, #64]
+ 157 01d2 196C     		ldr	r1, [r3, #64]
+ 158 01d4 05F00F02 		and	r2, r5, #15
+ 159 01d8 21F00F00 		bic	r0, r1, #15
+ 160 01dc 40EA0201 		orr	r1, r0, r2
+ 161 01e0 1964     		str	r1, [r3, #64]
+ 162 01e2 4F4B     		ldr	r3, .L2+24
+ 163 01e4 D3F8A800 		ldr	r0, [r3, #168]
+ 164 01e8 20F00C02 		bic	r2, r0, #12
+ 165 01ec 42F00401 		orr	r1, r2, #4
+ 166 01f0 C3F8A810 		str	r1, [r3, #168]
+ 167 01f4 D3F8A801 		ldr	r0, [r3, #424]
+ 168 01f8 20F00C02 		bic	r2, r0, #12
+ 169 01fc 42F00801 		orr	r1, r2, #8
+ 170 0200 C3F8A811 		str	r1, [r3, #424]
+ 171 0204 03F58643 		add	r3, r3, #17152
+ 172 0208 D3F8A800 		ldr	r0, [r3, #168]
+ 173 020c 20F00302 		bic	r2, r0, #3
+ 174 0210 42F00101 		orr	r1, r2, #1
+ 175 0214 C3F8A810 		str	r1, [r3, #168]
+ 176 0218 424B     		ldr	r3, .L2+28
+ 177 021a 1869     		ldr	r0, [r3, #16]
+ 178 021c 20F43842 		bic	r2, r0, #47104
+ 179 0220 42F41041 		orr	r1, r2, #36864
+ 180 0224 1961     		str	r1, [r3, #16]
+ 181 0226 D3F81001 		ldr	r0, [r3, #272]
+ 182 022a 20F0B802 		bic	r2, r0, #184
+ 183 022e 42F09801 		orr	r1, r2, #152
+ 184 0232 C3F81011 		str	r1, [r3, #272]
+ 185 0236 D3F81001 		ldr	r0, [r3, #272]
+ 186 023a 20F43802 		bic	r2, r0, #12058624
+ 187 023e 42F41801 		orr	r1, r2, #9961472
+ 188 0242 C3F81011 		str	r1, [r3, #272]
+ 189 0246 D3F81001 		ldr	r0, [r3, #272]
+ 190 024a 20F03842 		bic	r2, r0, #-1207959552
+ 191 024e 42F01841 		orr	r1, r2, #-1744830464
+ 192 0252 C3F81011 		str	r1, [r3, #272]
+ 193 0256 03F50073 		add	r3, r3, #512
+ 194 025a 1869     		ldr	r0, [r3, #16]
+ 195 025c 20F43802 		bic	r2, r0, #12058624
+ 196 0260 42F41801 		orr	r1, r2, #9961472
+ 197 0264 1961     		str	r1, [r3, #16]
+ 198 0266 5869     		ldr	r0, [r3, #20]
+ 199 0268 20F0B802 		bic	r2, r0, #184
+ 200 026c 42F09001 		orr	r1, r2, #144
+ 201 0270 5961     		str	r1, [r3, #20]
+ 202 0272 5869     		ldr	r0, [r3, #20]
+ 203 0274 20F43842 		bic	r2, r0, #47104
+ 204 0278 42F41041 		orr	r1, r2, #36864
+ 205 027c 5961     		str	r1, [r3, #20]
+ 206 027e D869     		ldr	r0, [r3, #28]
+ 207 0280 20F43802 		bic	r2, r0, #12058624
+ 208 0284 42F41001 		orr	r1, r2, #9437184
+ 209 0288 D961     		str	r1, [r3, #28]
+ 210 028a D3F81001 		ldr	r0, [r3, #272]
+ 211 028e 40F08002 		orr	r2, r0, #128
+ 212 0292 C3F81021 		str	r2, [r3, #272]
+ 213 0296 D3F81011 		ldr	r1, [r3, #272]
+ 214 029a 41F40040 		orr	r0, r1, #32768
+ 215 029e C3F81001 		str	r0, [r3, #272]
+ 216 02a2 D3F81021 		ldr	r2, [r3, #272]
+ 217 02a6 42F40001 		orr	r1, r2, #8388608
+ 218 02aa C3F81011 		str	r1, [r3, #272]
+ 219 02ae D3F81003 		ldr	r0, [r3, #784]
+ 220 02b2 20F0B802 		bic	r2, r0, #184
+ 221 02b6 42F08801 		orr	r1, r2, #136
+ 222 02ba C3F81013 		str	r1, [r3, #784]
+ 223 02be D3F81003 		ldr	r0, [r3, #784]
+ 224 02c2 20F43842 		bic	r2, r0, #47104
+ 225 02c6 42F40841 		orr	r1, r2, #34816
+ 226 02ca C3F81013 		str	r1, [r3, #784]
+ 227 02ce D3F81003 		ldr	r0, [r3, #784]
+ 228 02d2 20F43802 		bic	r2, r0, #12058624
+ 229 02d6 42F40801 		orr	r1, r2, #8912896
+ 230 02da C3F81013 		str	r1, [r3, #784]
+ 231 02de 124B     		ldr	r3, .L2+32
+ 232 02e0 D3F8B000 		ldr	r0, [r3, #176]
+ 233 02e4 20F01F02 		bic	r2, r0, #31
+ 234 02e8 42F00101 		orr	r1, r2, #1
+ 235 02ec C3F8B010 		str	r1, [r3, #176]
+ 236 02f0 4FF04023 		mov	r3, #1073758208
+ 237 02f4 D3F84001 		ldr	r0, [r3, #320]
+ 238 02f8 20F47022 		bic	r2, r0, #983040
+ 239 02fc 42F40031 		orr	r1, r2, #131072
+ 240 0300 C3F84011 		str	r1, [r3, #320]
+ 241 0304 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 242              	.L3:
+ 243              		.align	2
+ 244              	.L2:
+ 245 0308 00400440 		.word	1074020352
+ 246 030c 00000340 		.word	1073938432
+ 247 0310 00020340 		.word	1073938944
+ 248 0314 00000248 		.word	1208090624
+ 249 0318 00020248 		.word	1208091136
+ 250 031c 00400248 		.word	1208107008
+ 251 0320 00C10040 		.word	1073791232
+ 252 0324 00800248 		.word	1208123392
+ 253 0328 004C0040 		.word	1073761280
+ 255              		.section	.text.DAVE_MUX_PreInit,"ax",%progbits
+ 256              		.align	1
+ 257              		.global	DAVE_MUX_PreInit
+ 258              		.thumb
+ 259              		.thumb_func
+ 261              	DAVE_MUX_PreInit:
+ 262              		@ args = 0, pretend = 0, frame = 0
+ 263              		@ frame_needed = 0, uses_anonymous_args = 0
+ 264              		@ link register save eliminated.
+ 265 0000 7047     		bx	lr
+ 267              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 MULTIPLEXER.c
+C:\Users\SteurerE\AppData\Local\Temp\ccaYlRCG.s:17     .text.DAVE_MUX_Init:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccaYlRCG.s:22     .text.DAVE_MUX_Init:00000000 DAVE_MUX_Init
+C:\Users\SteurerE\AppData\Local\Temp\ccaYlRCG.s:245    .text.DAVE_MUX_Init:00000308 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccaYlRCG.s:256    .text.DAVE_MUX_PreInit:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccaYlRCG.s:261    .text.DAVE_MUX_PreInit:00000000 DAVE_MUX_PreInit
+
+NO UNDEFINED SYMBOLS

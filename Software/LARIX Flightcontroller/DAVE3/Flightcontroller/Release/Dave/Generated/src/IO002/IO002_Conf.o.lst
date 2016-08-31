@@ -1,0 +1,79 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"IO002_Conf.c"
+  16              		.global	IO002_HandleArr
+  17              		.global	IO002_Handle1
+  18              		.global	IO002_Handle0
+  19              		.section	.rodata
+  20              		.align	2
+  23              	IO002_Handle1:
+  24 0000 01       		.byte	1
+  25 0001 0F       		.byte	15
+  26 0002 0000     		.space	2
+  27 0004 00000000 		.word	0
+  28 0008 00000000 		.word	0
+  29 000c 00000000 		.word	0
+  30 0010 00000000 		.word	0
+  31 0014 00000000 		.word	0
+  32 0018 00000000 		.word	0
+  33 001c 00000000 		.word	0
+  34 0020 00000000 		.word	0
+  35 0024 00000000 		.word	0
+  36 0028 00000000 		.space	8
+  36      00000000 
+  37 0030 00000070 		.word	1879048192
+  38 0034 1C000000 		.word	28
+  39 0038 00000000 		.space	8
+  39      00000000 
+  40 0040 00810248 		.word	1208123648
+  41 0044 00000000 		.space	4
+  42 0048 44810248 		.word	1208123716
+  45              	IO002_Handle0:
+  46 004c 00       		.byte	0
+  47 004d 05       		.byte	5
+  48 004e 0000     		.space	2
+  49 0050 00000000 		.word	0
+  50 0054 00000000 		.word	0
+  51 0058 00000000 		.word	0
+  52 005c 00000000 		.word	0
+  53 0060 00000000 		.word	0
+  54 0064 00000000 		.word	0
+  55 0068 00000000 		.word	0
+  56 006c 00000000 		.word	0
+  57 0070 00000000 		.word	0
+  58 0074 00007000 		.word	7340032
+  59 0078 14000000 		.word	20
+  60 007c 00000000 		.space	16
+  60      00000000 
+  60      00000000 
+  60      00000000 
+  61 008c 00800248 		.word	1208123392
+  62 0090 40800248 		.word	1208123456
+  63 0094 00000000 		.space	4
+  64              		.data
+  65              		.align	2
+  68              	IO002_HandleArr:
+  69 0000 00000000 		.word	IO002_Handle0
+  70 0004 00000000 		.word	IO002_Handle1
+  71              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 IO002_Conf.c
+C:\Users\SteurerE\AppData\Local\Temp\cccDr2G1.s:68     .data:00000000 IO002_HandleArr
+C:\Users\SteurerE\AppData\Local\Temp\cccDr2G1.s:23     .rodata:00000000 IO002_Handle1
+C:\Users\SteurerE\AppData\Local\Temp\cccDr2G1.s:45     .rodata:0000004c IO002_Handle0
+C:\Users\SteurerE\AppData\Local\Temp\cccDr2G1.s:20     .rodata:00000000 $d
+C:\Users\SteurerE\AppData\Local\Temp\cccDr2G1.s:65     .data:00000000 $d
+
+NO UNDEFINED SYMBOLS

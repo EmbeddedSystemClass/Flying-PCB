@@ -1,0 +1,68 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"CCU4GLOBAL.c"
+  16              		.section	.text.CCU4GLOBAL_Init,"ax",%progbits
+  17              		.align	1
+  18              		.global	CCU4GLOBAL_Init
+  19              		.thumb
+  20              		.thumb_func
+  22              	CCU4GLOBAL_Init:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 70B5     		push	{r4, r5, r6, lr}
+  26 0002 0C4C     		ldr	r4, .L4
+  27 0004 2368     		ldr	r3, [r4, #0]
+  28 0006 A3B9     		cbnz	r3, .L1
+  29 0008 0B4D     		ldr	r5, .L4+4
+  30 000a 2E68     		ldr	r6, [r5, #0]
+  31 000c B068     		ldr	r0, [r6, #8]
+  32 000e FFF7FEFF 		bl	RESET001_DeassertReset
+  33 0012 3068     		ldr	r0, [r6, #0]
+  34 0014 6D68     		ldr	r5, [r5, #4]
+  35 0016 C268     		ldr	r2, [r0, #12]
+  36 0018 42F48071 		orr	r1, r2, #256
+  37 001c C160     		str	r1, [r0, #12]
+  38 001e A868     		ldr	r0, [r5, #8]
+  39 0020 FFF7FEFF 		bl	RESET001_DeassertReset
+  40 0024 2B68     		ldr	r3, [r5, #0]
+  41 0026 D868     		ldr	r0, [r3, #12]
+  42 0028 0121     		movs	r1, #1
+  43 002a 40F48072 		orr	r2, r0, #256
+  44 002e DA60     		str	r2, [r3, #12]
+  45 0030 2160     		str	r1, [r4, #0]
+  46              	.L1:
+  47 0032 70BD     		pop	{r4, r5, r6, pc}
+  48              	.L5:
+  49              		.align	2
+  50              	.L4:
+  51 0034 00000000 		.word	.LANCHOR0
+  52 0038 00000000 		.word	CCU4Global_HandleArray
+  54              		.bss
+  55              		.align	2
+  56              		.set	.LANCHOR0,. + 0
+  59              	CCU4InitCalled.6331:
+  60 0000 00000000 		.space	4
+  61              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 CCU4GLOBAL.c
+C:\Users\SteurerE\AppData\Local\Temp\ccsrcAKB.s:17     .text.CCU4GLOBAL_Init:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccsrcAKB.s:22     .text.CCU4GLOBAL_Init:00000000 CCU4GLOBAL_Init
+C:\Users\SteurerE\AppData\Local\Temp\ccsrcAKB.s:51     .text.CCU4GLOBAL_Init:00000034 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccsrcAKB.s:55     .bss:00000000 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccsrcAKB.s:59     .bss:00000000 CCU4InitCalled.6331
+
+UNDEFINED SYMBOLS
+RESET001_DeassertReset
+CCU4Global_HandleArray

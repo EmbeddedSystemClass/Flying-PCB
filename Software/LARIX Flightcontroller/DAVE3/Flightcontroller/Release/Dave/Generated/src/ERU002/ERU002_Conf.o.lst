@@ -1,0 +1,45 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ERU002_Conf.c"
+  16              		.global	ERU002_HandleArray
+  17              		.global	ERU002_Handle1
+  18              		.global	ERU002_Handle0
+  19              		.section	.rodata
+  20              		.align	2
+  23              	ERU002_Handle1:
+  24 0000 00400440 		.word	1074020352
+  25 0004 03000000 		.word	3
+  26 0008 01000000 		.word	1
+  27 000c 00000000 		.word	0
+  30              	ERU002_Handle0:
+  31 0010 00400440 		.word	1074020352
+  32 0014 00000000 		.word	0
+  33 0018 01000000 		.word	1
+  34 001c 00000000 		.word	0
+  35              		.data
+  36              		.align	2
+  39              	ERU002_HandleArray:
+  40 0000 00000000 		.word	ERU002_Handle0
+  41 0004 00000000 		.word	ERU002_Handle1
+  42              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 ERU002_Conf.c
+C:\Users\SteurerE\AppData\Local\Temp\ccUpxZT8.s:39     .data:00000000 ERU002_HandleArray
+C:\Users\SteurerE\AppData\Local\Temp\ccUpxZT8.s:23     .rodata:00000000 ERU002_Handle1
+C:\Users\SteurerE\AppData\Local\Temp\ccUpxZT8.s:30     .rodata:00000010 ERU002_Handle0
+C:\Users\SteurerE\AppData\Local\Temp\ccUpxZT8.s:20     .rodata:00000000 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccUpxZT8.s:36     .data:00000000 $d
+
+NO UNDEFINED SYMBOLS

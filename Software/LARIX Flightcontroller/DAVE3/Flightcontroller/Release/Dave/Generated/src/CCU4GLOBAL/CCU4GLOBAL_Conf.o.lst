@@ -1,0 +1,43 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"CCU4GLOBAL_Conf.c"
+  16              		.global	CCU4Global_HandleArray
+  17              		.global	CCU4Global_Handle1
+  18              		.global	CCU4Global_Handle0
+  19              		.section	.rodata
+  20              		.align	2
+  23              	CCU4Global_Handle1:
+  24 0000 00000140 		.word	1073807360
+  25 0004 01000000 		.word	1
+  26 0008 08000000 		.word	8
+  29              	CCU4Global_Handle0:
+  30 000c 00C00040 		.word	1073790976
+  31 0010 00000000 		.word	0
+  32 0014 04000000 		.word	4
+  33              		.data
+  34              		.align	2
+  37              	CCU4Global_HandleArray:
+  38 0000 00000000 		.word	CCU4Global_Handle0
+  39 0004 00000000 		.word	CCU4Global_Handle1
+  40              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 CCU4GLOBAL_Conf.c
+C:\Users\SteurerE\AppData\Local\Temp\ccw1Unxl.s:37     .data:00000000 CCU4Global_HandleArray
+C:\Users\SteurerE\AppData\Local\Temp\ccw1Unxl.s:23     .rodata:00000000 CCU4Global_Handle1
+C:\Users\SteurerE\AppData\Local\Temp\ccw1Unxl.s:29     .rodata:0000000c CCU4Global_Handle0
+C:\Users\SteurerE\AppData\Local\Temp\ccw1Unxl.s:20     .rodata:00000000 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccw1Unxl.s:34     .data:00000000 $d
+
+NO UNDEFINED SYMBOLS

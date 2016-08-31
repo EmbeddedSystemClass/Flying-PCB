@@ -1,0 +1,55 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ERU001_Conf.c"
+  16              		.global	ERU001_HandleArray
+  17              		.global	ERU001_Handle1
+  18              		.global	ERU001_Handle0
+  19              		.section	.rodata
+  20              		.align	2
+  23              	ERU001_Handle1:
+  24 0000 00400440 		.word	1074020352
+  25 0004 01       		.byte	1
+  26 0005 01       		.byte	1
+  27 0006 00       		.byte	0
+  28 0007 01       		.byte	1
+  29 0008 00       		.byte	0
+  30 0009 00       		.byte	0
+  31 000a 00       		.byte	0
+  32 000b 00       		.space	1
+  35              	ERU001_Handle0:
+  36 000c 00400440 		.word	1074020352
+  37 0010 03       		.byte	3
+  38 0011 01       		.byte	1
+  39 0012 01       		.byte	1
+  40 0013 00       		.byte	0
+  41 0014 00       		.byte	0
+  42 0015 00       		.byte	0
+  43 0016 00       		.byte	0
+  44 0017 00       		.space	1
+  45              		.data
+  46              		.align	2
+  49              	ERU001_HandleArray:
+  50 0000 00000000 		.word	ERU001_Handle0
+  51 0004 00000000 		.word	ERU001_Handle1
+  52              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 ERU001_Conf.c
+C:\Users\SteurerE\AppData\Local\Temp\ccGiFTxF.s:49     .data:00000000 ERU001_HandleArray
+C:\Users\SteurerE\AppData\Local\Temp\ccGiFTxF.s:23     .rodata:00000000 ERU001_Handle1
+C:\Users\SteurerE\AppData\Local\Temp\ccGiFTxF.s:35     .rodata:0000000c ERU001_Handle0
+C:\Users\SteurerE\AppData\Local\Temp\ccGiFTxF.s:20     .rodata:00000000 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccGiFTxF.s:46     .data:00000000 $d
+
+NO UNDEFINED SYMBOLS

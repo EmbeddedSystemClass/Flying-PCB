@@ -1,0 +1,123 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"NVIC002_Conf.c"
+  16              		.global	NVIC002_HandleArray
+  17              		.global	NVIC002_Handle9
+  18              		.global	NVIC002_Handle8
+  19              		.global	NVIC002_Handle7
+  20              		.global	NVIC002_Handle6
+  21              		.global	NVIC002_Handle5
+  22              		.global	NVIC002_Handle4
+  23              		.global	NVIC002_Handle3
+  24              		.global	NVIC002_Handle2
+  25              		.global	NVIC002_Handle11
+  26              		.global	NVIC002_Handle10
+  27              		.global	NVIC002_Handle1
+  28              		.global	NVIC002_Handle0
+  29              		.section	.rodata
+  32              	NVIC002_Handle9:
+  33 0000 08       		.byte	8
+  34 0001 0F       		.byte	15
+  35 0002 00       		.byte	0
+  36 0003 01       		.byte	1
+  39              	NVIC002_Handle8:
+  40 0004 10       		.byte	16
+  41 0005 1E       		.byte	30
+  42 0006 00       		.byte	0
+  43 0007 01       		.byte	1
+  46              	NVIC002_Handle7:
+  47 0008 30       		.byte	48
+  48 0009 19       		.byte	25
+  49 000a 00       		.byte	0
+  50 000b 01       		.byte	1
+  53              	NVIC002_Handle6:
+  54 000c 31       		.byte	49
+  55 000d 14       		.byte	20
+  56 000e 00       		.byte	0
+  57 000f 01       		.byte	1
+  60              	NVIC002_Handle5:
+  61 0010 57       		.byte	87
+  62 0011 0F       		.byte	15
+  63 0012 00       		.byte	0
+  64 0013 01       		.byte	1
+  67              	NVIC002_Handle4:
+  68 0014 2C       		.byte	44
+  69 0015 3F       		.byte	63
+  70 0016 00       		.byte	0
+  71 0017 01       		.byte	1
+  74              	NVIC002_Handle3:
+  75 0018 05       		.byte	5
+  76 0019 0A       		.byte	10
+  77 001a 00       		.byte	0
+  78 001b 00       		.byte	0
+  81              	NVIC002_Handle2:
+  82 001c 2D       		.byte	45
+  83 001d 05       		.byte	5
+  84 001e 00       		.byte	0
+  85 001f 01       		.byte	1
+  88              	NVIC002_Handle11:
+  89 0020 62       		.byte	98
+  90 0021 3F       		.byte	63
+  91 0022 00       		.byte	0
+  92 0023 01       		.byte	1
+  95              	NVIC002_Handle10:
+  96 0024 59       		.byte	89
+  97 0025 3F       		.byte	63
+  98 0026 00       		.byte	0
+  99 0027 01       		.byte	1
+ 102              	NVIC002_Handle1:
+ 103 0028 2E       		.byte	46
+ 104 0029 0F       		.byte	15
+ 105 002a 00       		.byte	0
+ 106 002b 01       		.byte	1
+ 109              	NVIC002_Handle0:
+ 110 002c 5A       		.byte	90
+ 111 002d 14       		.byte	20
+ 112 002e 00       		.byte	0
+ 113 002f 01       		.byte	1
+ 114              		.data
+ 115              		.align	2
+ 118              	NVIC002_HandleArray:
+ 119 0000 00000000 		.word	NVIC002_Handle0
+ 120 0004 00000000 		.word	NVIC002_Handle1
+ 121 0008 00000000 		.word	NVIC002_Handle10
+ 122 000c 00000000 		.word	NVIC002_Handle11
+ 123 0010 00000000 		.word	NVIC002_Handle2
+ 124 0014 00000000 		.word	NVIC002_Handle3
+ 125 0018 00000000 		.word	NVIC002_Handle4
+ 126 001c 00000000 		.word	NVIC002_Handle5
+ 127 0020 00000000 		.word	NVIC002_Handle6
+ 128 0024 00000000 		.word	NVIC002_Handle7
+ 129 0028 00000000 		.word	NVIC002_Handle8
+ 130 002c 00000000 		.word	NVIC002_Handle9
+ 131              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 NVIC002_Conf.c
+C:\Users\SteurerE\AppData\Local\Temp\cc9XGBFc.s:118    .data:00000000 NVIC002_HandleArray
+C:\Users\SteurerE\AppData\Local\Temp\cc9XGBFc.s:32     .rodata:00000000 NVIC002_Handle9
+C:\Users\SteurerE\AppData\Local\Temp\cc9XGBFc.s:39     .rodata:00000004 NVIC002_Handle8
+C:\Users\SteurerE\AppData\Local\Temp\cc9XGBFc.s:46     .rodata:00000008 NVIC002_Handle7
+C:\Users\SteurerE\AppData\Local\Temp\cc9XGBFc.s:53     .rodata:0000000c NVIC002_Handle6
+C:\Users\SteurerE\AppData\Local\Temp\cc9XGBFc.s:60     .rodata:00000010 NVIC002_Handle5
+C:\Users\SteurerE\AppData\Local\Temp\cc9XGBFc.s:67     .rodata:00000014 NVIC002_Handle4
+C:\Users\SteurerE\AppData\Local\Temp\cc9XGBFc.s:74     .rodata:00000018 NVIC002_Handle3
+C:\Users\SteurerE\AppData\Local\Temp\cc9XGBFc.s:81     .rodata:0000001c NVIC002_Handle2
+C:\Users\SteurerE\AppData\Local\Temp\cc9XGBFc.s:88     .rodata:00000020 NVIC002_Handle11
+C:\Users\SteurerE\AppData\Local\Temp\cc9XGBFc.s:95     .rodata:00000024 NVIC002_Handle10
+C:\Users\SteurerE\AppData\Local\Temp\cc9XGBFc.s:102    .rodata:00000028 NVIC002_Handle1
+C:\Users\SteurerE\AppData\Local\Temp\cc9XGBFc.s:109    .rodata:0000002c NVIC002_Handle0
+C:\Users\SteurerE\AppData\Local\Temp\cc9XGBFc.s:115    .data:00000000 $d
+
+NO UNDEFINED SYMBOLS

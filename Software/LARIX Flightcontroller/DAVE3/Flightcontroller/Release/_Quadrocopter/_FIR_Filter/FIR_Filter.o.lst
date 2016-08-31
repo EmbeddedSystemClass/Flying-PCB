@@ -1,0 +1,131 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"FIR_Filter.c"
+  16              		.section	.text.FIR_FILTER,"ax",%progbits
+  17              		.align	1
+  18              		.global	FIR_FILTER
+  19              		.thumb
+  20              		.thumb_func
+  22              	FIR_FILTER:
+  23              		@ args = 64, pretend = 16, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 84B0     		sub	sp, sp, #16
+  26 0002 70B5     		push	{r4, r5, r6, lr}
+  27 0004 05AC     		add	r4, sp, #20
+  28 0006 84E80E00 		stmia	r4, {r1, r2, r3}
+  29 000a 129A     		ldr	r2, [sp, #72]
+  30 000c 04A9     		add	r1, sp, #16
+  31 000e 01EB8203 		add	r3, r1, r2, lsl #2
+  32 0012 551C     		adds	r5, r2, #1
+  33 0014 0624     		movs	r4, #6
+  34 0016 0646     		mov	r6, r0
+  35 0018 1398     		ldr	r0, [sp, #76]	@ float
+  36 001a 95FBF4F2 		sdiv	r2, r5, r4
+  37 001e DFED177A 		flds	s15, .L5
+  38 0022 5860     		str	r0, [r3, #4]	@ float
+  39 0024 04FB1252 		mls	r2, r4, r2, r5
+  40 0028 0AA9     		add	r1, sp, #40
+  41 002a 0023     		movs	r3, #0
+  42              	.L2:
+  43 002c 9C18     		adds	r4, r3, r2
+  44 002e 0620     		movs	r0, #6
+  45 0030 94FBF0F5 		sdiv	r5, r4, r0
+  46 0034 00FB1540 		mls	r0, r0, r5, r4
+  47 0038 04AC     		add	r4, sp, #16
+  48 003a 0431     		adds	r1, r1, #4
+  49 003c 04EB8005 		add	r5, r4, r0, lsl #2
+  50 0040 D1ED006A 		flds	s13, [r1, #0]
+  51 0044 95ED017A 		flds	s14, [r5, #4]
+  52 0048 0133     		adds	r3, r3, #1
+  53 004a 062B     		cmp	r3, #6
+  54 004c 46EE877A 		fmacs	s15, s13, s14
+  55 0050 ECD1     		bne	.L2
+  56 0052 05AD     		add	r5, sp, #20
+  57 0054 1292     		str	r2, [sp, #72]
+  58 0056 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+  59 0058 3446     		mov	r4, r6
+  60 005a 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+  61 005c 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+  62 005e 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+  63 0060 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+  64 0062 CDED117A 		fsts	s15, [sp, #68]
+  65 0066 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+  66 0068 95E80300 		ldmia	r5, {r0, r1}
+  67 006c 84E80300 		stmia	r4, {r0, r1}
+  68 0070 3046     		mov	r0, r6
+  69 0072 BDE87040 		pop	{r4, r5, r6, lr}
+  70 0076 04B0     		add	sp, sp, #16
+  71 0078 7047     		bx	lr
+  72              	.L6:
+  73 007a 00BF     		.align	2
+  74              	.L5:
+  75 007c 00000000 		.word	0
+  77              		.section	.text.Initialize_FIR_Filter,"ax",%progbits
+  78              		.align	1
+  79              		.global	Initialize_FIR_Filter
+  80              		.thumb
+  81              		.thumb_func
+  83              	Initialize_FIR_Filter:
+  84              		@ args = 64, pretend = 16, frame = 0
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86 0000 84B0     		sub	sp, sp, #16
+  87 0002 70B5     		push	{r4, r5, r6, lr}
+  88 0004 05AD     		add	r5, sp, #20
+  89 0006 85E80E00 		stmia	r5, {r1, r2, r3}
+  90 000a 0646     		mov	r6, r0
+  91 000c 0F48     		ldr	r0, .L8
+  92 000e 0023     		movs	r3, #0
+  93 0010 0D90     		str	r0, [sp, #52]	@ float
+  94 0012 0E90     		str	r0, [sp, #56]	@ float
+  95 0014 0F90     		str	r0, [sp, #60]	@ float
+  96 0016 1090     		str	r0, [sp, #64]	@ float
+  97 0018 0993     		str	r3, [sp, #36]	@ float
+  98 001a 0A93     		str	r3, [sp, #40]	@ float
+  99 001c 0B90     		str	r0, [sp, #44]	@ float
+ 100 001e 0C90     		str	r0, [sp, #48]	@ float
+ 101 0020 0593     		str	r3, [sp, #20]	@ float
+ 102 0022 0693     		str	r3, [sp, #24]	@ float
+ 103 0024 0793     		str	r3, [sp, #28]	@ float
+ 104 0026 0893     		str	r3, [sp, #32]	@ float
+ 105 0028 0021     		movs	r1, #0
+ 106 002a 1291     		str	r1, [sp, #72]
+ 107 002c 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 108 002e 3446     		mov	r4, r6
+ 109 0030 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 110 0032 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 111 0034 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 112 0036 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 113 0038 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 114 003a 95E80300 		ldmia	r5, {r0, r1}
+ 115 003e 84E80300 		stmia	r4, {r0, r1}
+ 116 0042 3046     		mov	r0, r6
+ 117 0044 BDE87040 		pop	{r4, r5, r6, lr}
+ 118 0048 04B0     		add	sp, sp, #16
+ 119 004a 7047     		bx	lr
+ 120              	.L9:
+ 121              		.align	2
+ 122              	.L8:
+ 123 004c ABAA2A3E 		.word	1042983595
+ 125              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 FIR_Filter.c
+C:\Users\SteurerE\AppData\Local\Temp\cc3ASYXq.s:17     .text.FIR_FILTER:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cc3ASYXq.s:22     .text.FIR_FILTER:00000000 FIR_FILTER
+C:\Users\SteurerE\AppData\Local\Temp\cc3ASYXq.s:75     .text.FIR_FILTER:0000007c $d
+C:\Users\SteurerE\AppData\Local\Temp\cc3ASYXq.s:78     .text.Initialize_FIR_Filter:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cc3ASYXq.s:83     .text.Initialize_FIR_Filter:00000000 Initialize_FIR_Filter
+C:\Users\SteurerE\AppData\Local\Temp\cc3ASYXq.s:123    .text.Initialize_FIR_Filter:0000004c $d
+
+NO UNDEFINED SYMBOLS

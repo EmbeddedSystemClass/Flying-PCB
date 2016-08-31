@@ -1,0 +1,113 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ADC001_Conf.c"
+  16              		.global	ADC001_Handle0
+  17              		.global	ADC001_ChannelHandlePtr
+  18              		.global	ADC001_ChannelAAHandle
+  19              		.global	ADC001_DynamicHandle
+  20              		.section	.rodata
+  21              		.align	2
+  24              	ADC001_Handle0:
+  25 0000 00       		.space	1
+  26 0001 01       		.byte	1
+  27 0002 00       		.byte	0
+  28 0003 00       		.byte	0
+  29 0004 01       		.byte	1
+  30 0005 00       		.byte	0
+  31 0006 01       		.byte	1
+  32 0007 00       		.byte	0
+  33 0008 00       		.byte	0
+  34 0009 00       		.byte	0
+  35 000a 00       		.byte	0
+  36 000b 00       		.byte	0
+  37 000c 00       		.byte	0
+  38 000d 00       		.byte	0
+  39 000e 00       		.byte	0
+  40 000f 00       		.byte	0
+  41 0010 00       		.byte	0
+  42 0011 00       		.byte	0
+  43 0012 00       		.byte	0
+  44 0013 00       		.byte	0
+  45 0014 00       		.byte	0
+  46 0015 00       		.byte	0
+  47 0016 00       		.byte	0
+  48 0017 00       		.byte	0
+  49 0018 00       		.byte	0
+  50 0019 00       		.byte	0
+  51 001a 01       		.byte	1
+  52 001b 00       		.byte	0
+  53 001c 00       		.byte	0
+  54 001d 00       		.byte	0
+  55 001e 00       		.byte	0
+  56 001f 00       		.byte	0
+  57 0020 00       		.byte	0
+  58 0021 00       		.byte	0
+  59 0022 00       		.byte	0
+  60 0023 00       		.byte	0
+  61 0024 00       		.byte	0
+  62 0025 00       		.byte	0
+  63 0026 00       		.byte	0
+  64 0027 00       		.byte	0
+  65 0028 00       		.byte	0
+  66 0029 00       		.byte	0
+  67 002a 00       		.byte	0
+  68 002b 00       		.byte	0
+  69 002c 01       		.byte	1
+  70 002d 00       		.byte	0
+  71 002e 01       		.byte	1
+  72 002f 00       		.space	1
+  73 0030 00       		.byte	0
+  74 0031 00       		.byte	0
+  75 0032 00       		.byte	0
+  76 0033 01       		.byte	1
+  77 0034 01       		.byte	1
+  78 0035 00       		.byte	0
+  79 0036 00       		.byte	0
+  80 0037 00       		.byte	0
+  81 0038 01       		.byte	1
+  82 0039 00       		.byte	0
+  83 003a 02       		.byte	2
+  84 003b 00       		.space	1
+  85 003c 00000000 		.word	ADC001_DynamicHandle
+  86 0040 00400040 		.word	1073758208
+  87 0044 00440040 		.word	1073759232
+  88 0048 00480040 		.word	1073760256
+  89 004c 004C0040 		.word	1073761280
+  90 0050 00500040 		.word	1073762304
+  93              	ADC001_ChannelAAHandle:
+  94 0054 02       		.byte	2
+  95 0055 00       		.byte	0
+  96 0056 01       		.byte	1
+  97 0057 00       		.data
+  98              		.align	2
+ 101              	ADC001_ChannelHandlePtr:
+ 102 0000 00000000 		.word	ADC001_ChannelAAHandle
+ 103              		.bss
+ 104              		.align	1
+ 107              	ADC001_DynamicHandle:
+ 108 0000 00000000 		.space	6
+ 108      0000
+ 109              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 ADC001_Conf.c
+C:\Users\SteurerE\AppData\Local\Temp\ccNAhvYQ.s:24     .rodata:00000000 ADC001_Handle0
+C:\Users\SteurerE\AppData\Local\Temp\ccNAhvYQ.s:101    .data:00000000 ADC001_ChannelHandlePtr
+C:\Users\SteurerE\AppData\Local\Temp\ccNAhvYQ.s:93     .rodata:00000054 ADC001_ChannelAAHandle
+C:\Users\SteurerE\AppData\Local\Temp\ccNAhvYQ.s:107    .bss:00000000 ADC001_DynamicHandle
+C:\Users\SteurerE\AppData\Local\Temp\ccNAhvYQ.s:21     .rodata:00000000 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccNAhvYQ.s:98     .data:00000000 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccNAhvYQ.s:104    .bss:00000000 $d
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,1332 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"ADC001.c"
+  16              		.section	.text.ADC001_lInit,"ax",%progbits
+  17              		.align	1
+  18              		.global	ADC001_lInit
+  19              		.thumb
+  20              		.thumb_func
+  22              	ADC001_lInit:
+  23              		@ args = 0, pretend = 0, frame = 16
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  26 0002 046D     		ldr	r4, [r0, #80]
+  27 0004 C56B     		ldr	r5, [r0, #60]
+  28 0006 436C     		ldr	r3, [r0, #68]
+  29 0008 816C     		ldr	r1, [r0, #72]
+  30 000a C26C     		ldr	r2, [r0, #76]
+  31 000c 85B0     		sub	sp, sp, #20
+  32 000e 0394     		str	r4, [sp, #12]
+  33 0010 2C79     		ldrb	r4, [r5, #4]	@ zero_extendqisi2
+  34 0012 0093     		str	r3, [sp, #0]
+  35 0014 0191     		str	r1, [sp, #4]
+  36 0016 0292     		str	r2, [sp, #8]
+  37 0018 036C     		ldr	r3, [r0, #64]
+  38 001a 002C     		cmp	r4, #0
+  39 001c 40F08A80 		bne	.L1
+  40              	.L2:
+  41 0020 4178     		ldrb	r1, [r0, #1]	@ zero_extendqisi2
+  42 0022 A142     		cmp	r1, r4
+  43 0024 2AD9     		bls	.L10
+  44              	.L4:
+  45 0026 444E     		ldr	r6, .L11
+  46 0028 56F82470 		ldr	r7, [r6, r4, lsl #2]
+  47 002c 3A78     		ldrb	r2, [r7, #0]	@ zero_extendqisi2
+  48 002e 04A9     		add	r1, sp, #16
+  49 0030 01EB8206 		add	r6, r1, r2, lsl #2
+  50 0034 7978     		ldrb	r1, [r7, #1]	@ zero_extendqisi2
+  51 0036 56F8102C 		ldr	r2, [r6, #-16]
+  52 003a 90F83A60 		ldrb	r6, [r0, #58]	@ zero_extendqisi2
+  53 003e 8031     		adds	r1, r1, #128
+  54 0040 06F00306 		and	r6, r6, #3
+  55 0044 52F82170 		ldr	r7, [r2, r1, lsl #2]
+  56 0048 27F00307 		bic	r7, r7, #3
+  57 004c 3743     		orrs	r7, r7, r6
+  58 004e 42F82170 		str	r7, [r2, r1, lsl #2]
+  59 0052 52F82160 		ldr	r6, [r2, r1, lsl #2]
+  60 0056 46F48017 		orr	r7, r6, #1048576
+  61 005a 42F82170 		str	r7, [r2, r1, lsl #2]
+  62 005e 52F82160 		ldr	r6, [r2, r1, lsl #2]
+  63 0062 26F40017 		bic	r7, r6, #2097152
+  64 0066 90F83760 		ldrb	r6, [r0, #55]	@ zero_extendqisi2
+  65 006a 7605     		lsls	r6, r6, #21
+  66 006c 06F40016 		and	r6, r6, #2097152
+  67 0070 3E43     		orrs	r6, r6, r7
+  68 0072 0134     		adds	r4, r4, #1
+  69 0074 42F82160 		str	r6, [r2, r1, lsl #2]
+  70 0078 E4B2     		uxtb	r4, r4
+  71 007a D1E7     		b	.L2
+  72              	.L10:
+  73 007c 90F83420 		ldrb	r2, [r0, #52]	@ zero_extendqisi2
+  74 0080 D3F88012 		ldr	r1, [r3, #640]
+  75 0084 1206     		lsls	r2, r2, #24
+  76 0086 21F08071 		bic	r1, r1, #16777216
+  77 008a 02F08072 		and	r2, r2, #16777216
+  78 008e 0A43     		orrs	r2, r2, r1
+  79 0090 C3F88022 		str	r2, [r3, #640]
+  80 0094 D3F88022 		ldr	r2, [r3, #640]
+  81 0098 90F83810 		ldrb	r1, [r0, #56]	@ zero_extendqisi2
+  82 009c 22F00042 		bic	r2, r2, #-2147483648
+  83 00a0 42EAC171 		orr	r1, r2, r1, lsl #31
+  84 00a4 C3F88012 		str	r1, [r3, #640]
+  85 00a8 8278     		ldrb	r2, [r0, #2]	@ zero_extendqisi2
+  86 00aa C3F88021 		str	r2, [r3, #384]
+  87 00ae C178     		ldrb	r1, [r0, #3]	@ zero_extendqisi2
+  88 00b0 C3F88411 		str	r1, [r3, #388]
+  89 00b4 0279     		ldrb	r2, [r0, #4]	@ zero_extendqisi2
+  90 00b6 C3F88821 		str	r2, [r3, #392]
+  91 00ba 4179     		ldrb	r1, [r0, #5]	@ zero_extendqisi2
+  92 00bc C3F88C11 		str	r1, [r3, #396]
+  93 00c0 D3F80022 		ldr	r2, [r3, #512]
+  94 00c4 90F83110 		ldrb	r1, [r0, #49]	@ zero_extendqisi2
+  95 00c8 42F40042 		orr	r2, r2, #32768
+  96 00cc 42EA4132 		orr	r2, r2, r1, lsl #13
+  97 00d0 C3F80022 		str	r2, [r3, #512]
+  98 00d4 D3F80422 		ldr	r2, [r3, #516]
+  99 00d8 90F83310 		ldrb	r1, [r0, #51]	@ zero_extendqisi2
+ 100 00dc 0A43     		orrs	r2, r2, r1
+ 101 00de 90F83210 		ldrb	r1, [r0, #50]	@ zero_extendqisi2
+ 102 00e2 42EA8102 		orr	r2, r2, r1, lsl #2
+ 103 00e6 90F83610 		ldrb	r1, [r0, #54]	@ zero_extendqisi2
+ 104 00ea 42EA0112 		orr	r2, r2, r1, lsl #4
+ 105 00ee 90F83910 		ldrb	r1, [r0, #57]	@ zero_extendqisi2
+ 106 00f2 42EAC102 		orr	r2, r2, r1, lsl #3
+ 107 00f6 C3F80422 		str	r2, [r3, #516]
+ 108 00fa 0023     		movs	r3, #0
+ 109              	.L6:
+ 110 00fc C118     		adds	r1, r0, r3
+ 111 00fe 91F82A20 		ldrb	r2, [r1, #42]	@ zero_extendqisi2
+ 112 0102 012A     		cmp	r2, #1
+ 113 0104 11D1     		bne	.L5
+ 114 0106 5DF82320 		ldr	r2, [sp, r3, lsl #2]
+ 115 010a 90F83510 		ldrb	r1, [r0, #53]	@ zero_extendqisi2
+ 116 010e 90F82E60 		ldrb	r6, [r0, #46]	@ zero_extendqisi2
+ 117 0112 D2F88440 		ldr	r4, [r2, #132]
+ 118 0116 C902     		lsls	r1, r1, #11
+ 119 0118 41EA8661 		orr	r1, r1, r6, lsl #26
+ 120 011c 2143     		orrs	r1, r1, r4
+ 121 011e 90F83040 		ldrb	r4, [r0, #48]	@ zero_extendqisi2
+ 122 0122 41EA0421 		orr	r1, r1, r4, lsl #8
+ 123 0126 C2F88410 		str	r1, [r2, #132]
+ 124              	.L5:
+ 125 012a 0133     		adds	r3, r3, #1
+ 126 012c 042B     		cmp	r3, #4
+ 127 012e E5D1     		bne	.L6
+ 128 0130 0120     		movs	r0, #1
+ 129 0132 2871     		strb	r0, [r5, #4]
+ 130              	.L1:
+ 131 0134 05B0     		add	sp, sp, #20
+ 132 0136 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 133              	.L12:
+ 134              		.align	2
+ 135              	.L11:
+ 136 0138 00000000 		.word	ADC001_ChannelHandlePtr
+ 138              		.section	.text.ADC001_Init,"ax",%progbits
+ 139              		.align	1
+ 140              		.global	ADC001_Init
+ 141              		.thumb
+ 142              		.thumb_func
+ 144              	ADC001_Init:
+ 145              		@ args = 0, pretend = 0, frame = 0
+ 146              		@ frame_needed = 0, uses_anonymous_args = 0
+ 147 0000 08B5     		push	{r3, lr}
+ 148 0002 FFF7FEFF 		bl	ADCGLOB001_Init
+ 149 0006 0248     		ldr	r0, .L14
+ 150 0008 BDE80840 		pop	{r3, lr}
+ 151 000c FFF7FEBF 		b	ADC001_lInit
+ 152              	.L15:
+ 153              		.align	2
+ 154              	.L14:
+ 155 0010 00000000 		.word	ADC001_Handle0
+ 157              		.section	.text.ADC001_Deinit,"ax",%progbits
+ 158              		.align	1
+ 159              		.global	ADC001_Deinit
+ 160              		.thumb
+ 161              		.thumb_func
+ 163              	ADC001_Deinit:
+ 164              		@ args = 0, pretend = 0, frame = 16
+ 165              		@ frame_needed = 0, uses_anonymous_args = 0
+ 166 0000 7FB5     		push	{r0, r1, r2, r3, r4, r5, r6, lr}
+ 167 0002 436C     		ldr	r3, [r0, #68]
+ 168 0004 816C     		ldr	r1, [r0, #72]
+ 169 0006 0093     		str	r3, [sp, #0]
+ 170 0008 0191     		str	r1, [sp, #4]
+ 171 000a 036D     		ldr	r3, [r0, #80]
+ 172 000c C16B     		ldr	r1, [r0, #60]
+ 173 000e 0393     		str	r3, [sp, #12]
+ 174 0010 0B79     		ldrb	r3, [r1, #4]	@ zero_extendqisi2
+ 175 0012 C26C     		ldr	r2, [r0, #76]
+ 176 0014 012B     		cmp	r3, #1
+ 177 0016 0292     		str	r2, [sp, #8]
+ 178 0018 026C     		ldr	r2, [r0, #64]
+ 179 001a 01D0     		beq	.L22
+ 180 001c 0120     		movs	r0, #1
+ 181 001e 33E0     		b	.L18
+ 182              	.L22:
+ 183 0020 0023     		movs	r3, #0
+ 184              	.L17:
+ 185 0022 4478     		ldrb	r4, [r0, #1]	@ zero_extendqisi2
+ 186 0024 9C42     		cmp	r4, r3
+ 187 0026 10D9     		bls	.L24
+ 188              	.L19:
+ 189 0028 184D     		ldr	r5, .L25
+ 190 002a 55F82340 		ldr	r4, [r5, r3, lsl #2]
+ 191 002e 2578     		ldrb	r5, [r4, #0]	@ zero_extendqisi2
+ 192 0030 6478     		ldrb	r4, [r4, #1]	@ zero_extendqisi2
+ 193 0032 04AE     		add	r6, sp, #16
+ 194 0034 06EB8505 		add	r5, r6, r5, lsl #2
+ 195 0038 8034     		adds	r4, r4, #128
+ 196 003a 55F8105C 		ldr	r5, [r5, #-16]
+ 197 003e 0026     		movs	r6, #0
+ 198 0040 0133     		adds	r3, r3, #1
+ 199 0042 45F82460 		str	r6, [r5, r4, lsl #2]
+ 200 0046 DBB2     		uxtb	r3, r3
+ 201 0048 EBE7     		b	.L17
+ 202              	.L24:
+ 203 004a 114C     		ldr	r4, .L25+4
+ 204 004c 0023     		movs	r3, #0
+ 205 004e C2F88032 		str	r3, [r2, #640]
+ 206 0052 C2F88031 		str	r3, [r2, #384]
+ 207 0056 C2F88431 		str	r3, [r2, #388]
+ 208 005a C2F88831 		str	r3, [r2, #392]
+ 209 005e C2F88C31 		str	r3, [r2, #396]
+ 210 0062 C2F80042 		str	r4, [r2, #512]
+ 211 0066 C2F80432 		str	r3, [r2, #516]
+ 212              	.L21:
+ 213 006a C218     		adds	r2, r0, r3
+ 214 006c 92F82A20 		ldrb	r2, [r2, #42]	@ zero_extendqisi2
+ 215 0070 012A     		cmp	r2, #1
+ 216 0072 04D1     		bne	.L20
+ 217 0074 5DF82320 		ldr	r2, [sp, r3, lsl #2]
+ 218 0078 0024     		movs	r4, #0
+ 219 007a C2F88440 		str	r4, [r2, #132]
+ 220              	.L20:
+ 221 007e 0133     		adds	r3, r3, #1
+ 222 0080 042B     		cmp	r3, #4
+ 223 0082 F2D1     		bne	.L21
+ 224 0084 0020     		movs	r0, #0
+ 225 0086 0871     		strb	r0, [r1, #4]
+ 226              	.L18:
+ 227 0088 04B0     		add	sp, sp, #16
+ 228 008a 70BD     		pop	{r4, r5, r6, pc}
+ 229              	.L26:
+ 230              		.align	2
+ 231              	.L25:
+ 232 008c 00000000 		.word	ADC001_ChannelHandlePtr
+ 233 0090 00808000 		.word	8421376
+ 235              		.section	.text.ADC001_SelectInputClass,"ax",%progbits
+ 236              		.align	1
+ 237              		.global	ADC001_SelectInputClass
+ 238              		.thumb
+ 239              		.thumb_func
+ 241              	ADC001_SelectInputClass:
+ 242              		@ args = 0, pretend = 0, frame = 16
+ 243              		@ frame_needed = 0, uses_anonymous_args = 0
+ 244 0000 30B5     		push	{r4, r5, lr}
+ 245 0002 436C     		ldr	r3, [r0, #68]
+ 246 0004 826C     		ldr	r2, [r0, #72]
+ 247 0006 85B0     		sub	sp, sp, #20
+ 248 0008 0093     		str	r3, [sp, #0]
+ 249 000a C36C     		ldr	r3, [r0, #76]
+ 250 000c 0192     		str	r2, [sp, #4]
+ 251 000e 0293     		str	r3, [sp, #8]
+ 252 0010 026D     		ldr	r2, [r0, #80]
+ 253 0012 C36B     		ldr	r3, [r0, #60]
+ 254 0014 0392     		str	r2, [sp, #12]
+ 255 0016 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 256 0018 012A     		cmp	r2, #1
+ 257 001a 1FD1     		bne	.L31
+ 258 001c 8B1E     		subs	r3, r1, #2
+ 259 001e 012B     		cmp	r3, #1
+ 260 0020 01D9     		bls	.L32
+ 261 0022 0220     		movs	r0, #2
+ 262 0024 1BE0     		b	.L28
+ 263              	.L32:
+ 264 0026 0023     		movs	r3, #0
+ 265              	.L29:
+ 266 0028 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+ 267 002a 9A42     		cmp	r2, r3
+ 268 002c 14D9     		bls	.L33
+ 269              	.L30:
+ 270 002e 0D4C     		ldr	r4, .L34
+ 271 0030 54F82340 		ldr	r4, [r4, r3, lsl #2]
+ 272 0034 2278     		ldrb	r2, [r4, #0]	@ zero_extendqisi2
+ 273 0036 6478     		ldrb	r4, [r4, #1]	@ zero_extendqisi2
+ 274 0038 04AD     		add	r5, sp, #16
+ 275 003a 05EB8202 		add	r2, r5, r2, lsl #2
+ 276 003e 8034     		adds	r4, r4, #128
+ 277 0040 52F8102C 		ldr	r2, [r2, #-16]
+ 278 0044 52F82450 		ldr	r5, [r2, r4, lsl #2]
+ 279 0048 25F00305 		bic	r5, r5, #3
+ 280 004c 0D43     		orrs	r5, r5, r1
+ 281 004e 0133     		adds	r3, r3, #1
+ 282 0050 42F82450 		str	r5, [r2, r4, lsl #2]
+ 283 0054 DBB2     		uxtb	r3, r3
+ 284 0056 E7E7     		b	.L29
+ 285              	.L33:
+ 286 0058 0020     		movs	r0, #0
+ 287 005a 00E0     		b	.L28
+ 288              	.L31:
+ 289 005c 0120     		movs	r0, #1
+ 290              	.L28:
+ 291 005e 05B0     		add	sp, sp, #20
+ 292 0060 30BD     		pop	{r4, r5, pc}
+ 293              	.L35:
+ 294 0062 00BF     		.align	2
+ 295              	.L34:
+ 296 0064 00000000 		.word	ADC001_ChannelHandlePtr
+ 298              		.section	.text.ADC001_EnableResultEvt,"ax",%progbits
+ 299              		.align	1
+ 300              		.global	ADC001_EnableResultEvt
+ 301              		.thumb
+ 302              		.thumb_func
+ 304              	ADC001_EnableResultEvt:
+ 305              		@ args = 0, pretend = 0, frame = 0
+ 306              		@ frame_needed = 0, uses_anonymous_args = 0
+ 307              		@ link register save eliminated.
+ 308 0000 C26B     		ldr	r2, [r0, #60]
+ 309 0002 036C     		ldr	r3, [r0, #64]
+ 310 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 311 0006 38B1     		cbz	r0, .L38
+ 312 0008 D3F88012 		ldr	r1, [r3, #640]
+ 313 000c 41F00042 		orr	r2, r1, #-2147483648
+ 314 0010 C3F88022 		str	r2, [r3, #640]
+ 315 0014 0020     		movs	r0, #0
+ 316 0016 7047     		bx	lr
+ 317              	.L38:
+ 318 0018 0120     		movs	r0, #1
+ 319 001a 7047     		bx	lr
+ 321              		.section	.text.ADC001_DisableResultEvt,"ax",%progbits
+ 322              		.align	1
+ 323              		.global	ADC001_DisableResultEvt
+ 324              		.thumb
+ 325              		.thumb_func
+ 327              	ADC001_DisableResultEvt:
+ 328              		@ args = 0, pretend = 0, frame = 0
+ 329              		@ frame_needed = 0, uses_anonymous_args = 0
+ 330              		@ link register save eliminated.
+ 331 0000 C26B     		ldr	r2, [r0, #60]
+ 332 0002 036C     		ldr	r3, [r0, #64]
+ 333 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 334 0006 38B1     		cbz	r0, .L41
+ 335 0008 D3F88012 		ldr	r1, [r3, #640]
+ 336 000c 21F00042 		bic	r2, r1, #-2147483648
+ 337 0010 C3F88022 		str	r2, [r3, #640]
+ 338 0014 0020     		movs	r0, #0
+ 339 0016 7047     		bx	lr
+ 340              	.L41:
+ 341 0018 0120     		movs	r0, #1
+ 342 001a 7047     		bx	lr
+ 344              		.section	.text.ADC001_GetResult,"ax",%progbits
+ 345              		.align	1
+ 346              		.global	ADC001_GetResult
+ 347              		.thumb
+ 348              		.thumb_func
+ 350              	ADC001_GetResult:
+ 351              		@ args = 0, pretend = 0, frame = 0
+ 352              		@ frame_needed = 0, uses_anonymous_args = 0
+ 353              		@ link register save eliminated.
+ 354 0000 C26B     		ldr	r2, [r0, #60]
+ 355 0002 036C     		ldr	r3, [r0, #64]
+ 356 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 357 0006 0128     		cmp	r0, #1
+ 358 0008 0DD1     		bne	.L44
+ 359 000a 71B1     		cbz	r1, .L45
+ 360 000c D3F80033 		ldr	r3, [r3, #768]
+ 361 0010 002B     		cmp	r3, #0
+ 362 0012 0CDA     		bge	.L46
+ 363 0014 C3F30450 		ubfx	r0, r3, #20, #5
+ 364 0018 C3F30342 		ubfx	r2, r3, #16, #4
+ 365 001c 4870     		strb	r0, [r1, #1]
+ 366 001e 0A70     		strb	r2, [r1, #0]
+ 367 0020 4B80     		strh	r3, [r1, #2]	@ movhi
+ 368 0022 0020     		movs	r0, #0
+ 369 0024 7047     		bx	lr
+ 370              	.L44:
+ 371 0026 0120     		movs	r0, #1
+ 372 0028 7047     		bx	lr
+ 373              	.L45:
+ 374 002a 0220     		movs	r0, #2
+ 375 002c 7047     		bx	lr
+ 376              	.L46:
+ 377 002e 0320     		movs	r0, #3
+ 378 0030 7047     		bx	lr
+ 380              		.section	.text.ADC001_GetFastResult,"ax",%progbits
+ 381              		.align	1
+ 382              		.global	ADC001_GetFastResult
+ 383              		.thumb
+ 384              		.thumb_func
+ 386              	ADC001_GetFastResult:
+ 387              		@ args = 0, pretend = 0, frame = 0
+ 388              		@ frame_needed = 0, uses_anonymous_args = 0
+ 389              		@ link register save eliminated.
+ 390 0000 036C     		ldr	r3, [r0, #64]
+ 391 0002 D3F80003 		ldr	r0, [r3, #768]
+ 392 0006 80B2     		uxth	r0, r0
+ 393 0008 7047     		bx	lr
+ 395              		.section	.text.ADC001_GetResultEvtFlag,"ax",%progbits
+ 396              		.align	1
+ 397              		.global	ADC001_GetResultEvtFlag
+ 398              		.thumb
+ 399              		.thumb_func
+ 401              	ADC001_GetResultEvtFlag:
+ 402              		@ args = 0, pretend = 0, frame = 0
+ 403              		@ frame_needed = 0, uses_anonymous_args = 0
+ 404              		@ link register save eliminated.
+ 405 0000 C26B     		ldr	r2, [r0, #60]
+ 406 0002 036C     		ldr	r3, [r0, #64]
+ 407 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 408 0006 38B1     		cbz	r0, .L50
+ 409 0008 41B1     		cbz	r1, .L51
+ 410 000a D3F8E030 		ldr	r3, [r3, #224]
+ 411 000e C3F30022 		ubfx	r2, r3, #8, #1
+ 412 0012 0A70     		strb	r2, [r1, #0]
+ 413 0014 0020     		movs	r0, #0
+ 414 0016 7047     		bx	lr
+ 415              	.L50:
+ 416 0018 0120     		movs	r0, #1
+ 417 001a 7047     		bx	lr
+ 418              	.L51:
+ 419 001c 0220     		movs	r0, #2
+ 420 001e 7047     		bx	lr
+ 422              		.section	.text.ADC001_SetResultEvtFlag,"ax",%progbits
+ 423              		.align	1
+ 424              		.global	ADC001_SetResultEvtFlag
+ 425              		.thumb
+ 426              		.thumb_func
+ 428              	ADC001_SetResultEvtFlag:
+ 429              		@ args = 0, pretend = 0, frame = 0
+ 430              		@ frame_needed = 0, uses_anonymous_args = 0
+ 431              		@ link register save eliminated.
+ 432 0000 C26B     		ldr	r2, [r0, #60]
+ 433 0002 036C     		ldr	r3, [r0, #64]
+ 434 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 435 0006 38B1     		cbz	r0, .L54
+ 436 0008 D3F8E010 		ldr	r1, [r3, #224]
+ 437 000c 41F48072 		orr	r2, r1, #256
+ 438 0010 C3F8E020 		str	r2, [r3, #224]
+ 439 0014 0020     		movs	r0, #0
+ 440 0016 7047     		bx	lr
+ 441              	.L54:
+ 442 0018 0120     		movs	r0, #1
+ 443 001a 7047     		bx	lr
+ 445              		.section	.text.ADC001_ClearResultEvtFlag,"ax",%progbits
+ 446              		.align	1
+ 447              		.global	ADC001_ClearResultEvtFlag
+ 448              		.thumb
+ 449              		.thumb_func
+ 451              	ADC001_ClearResultEvtFlag:
+ 452              		@ args = 0, pretend = 0, frame = 0
+ 453              		@ frame_needed = 0, uses_anonymous_args = 0
+ 454              		@ link register save eliminated.
+ 455 0000 C26B     		ldr	r2, [r0, #60]
+ 456 0002 036C     		ldr	r3, [r0, #64]
+ 457 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 458 0006 38B1     		cbz	r0, .L57
+ 459 0008 D3F8E010 		ldr	r1, [r3, #224]
+ 460 000c 41F08072 		orr	r2, r1, #16777216
+ 461 0010 C3F8E020 		str	r2, [r3, #224]
+ 462 0014 0020     		movs	r0, #0
+ 463 0016 7047     		bx	lr
+ 464              	.L57:
+ 465 0018 0120     		movs	r0, #1
+ 466 001a 7047     		bx	lr
+ 468              		.section	.text.ADC001_GetChannelEvtFlag,"ax",%progbits
+ 469              		.align	1
+ 470              		.global	ADC001_GetChannelEvtFlag
+ 471              		.thumb
+ 472              		.thumb_func
+ 474              	ADC001_GetChannelEvtFlag:
+ 475              		@ args = 0, pretend = 0, frame = 16
+ 476              		@ frame_needed = 0, uses_anonymous_args = 0
+ 477 0000 1FB5     		push	{r0, r1, r2, r3, r4, lr}
+ 478 0002 436C     		ldr	r3, [r0, #68]
+ 479 0004 0093     		str	r3, [sp, #0]
+ 480 0006 836C     		ldr	r3, [r0, #72]
+ 481 0008 0193     		str	r3, [sp, #4]
+ 482 000a C36C     		ldr	r3, [r0, #76]
+ 483 000c 0293     		str	r3, [sp, #8]
+ 484 000e 036D     		ldr	r3, [r0, #80]
+ 485 0010 0393     		str	r3, [sp, #12]
+ 486 0012 C36B     		ldr	r3, [r0, #60]
+ 487 0014 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 488 0016 012B     		cmp	r3, #1
+ 489 0018 21D1     		bne	.L60
+ 490 001a 12B3     		cbz	r2, .L66
+ 491 001c 09B3     		cbz	r1, .L66
+ 492 001e 1478     		ldrb	r4, [r2, #0]	@ zero_extendqisi2
+ 493 0020 5378     		ldrb	r3, [r2, #1]	@ zero_extendqisi2
+ 494 0022 032C     		cmp	r4, #3
+ 495 0024 1DD8     		bhi	.L66
+ 496 0026 072B     		cmp	r3, #7
+ 497 0028 1BD8     		bhi	.L66
+ 498 002a 0219     		adds	r2, r0, r4
+ 499 002c 92F82A20 		ldrb	r2, [r2, #42]	@ zero_extendqisi2
+ 500 0030 012A     		cmp	r2, #1
+ 501 0032 16D1     		bne	.L66
+ 502 0034 00EBC400 		add	r0, r0, r4, lsl #3
+ 503 0038 C218     		adds	r2, r0, r3
+ 504 003a 927A     		ldrb	r2, [r2, #10]	@ zero_extendqisi2
+ 505 003c 012A     		cmp	r2, #1
+ 506 003e 10D1     		bne	.L66
+ 507 0040 04A8     		add	r0, sp, #16
+ 508 0042 00EB8404 		add	r4, r0, r4, lsl #2
+ 509 0046 02FA03F2 		lsl	r2, r2, r3
+ 510 004a 54F8100C 		ldr	r0, [r4, #-16]
+ 511 004e D0F88001 		ldr	r0, [r0, #384]
+ 512 0052 0240     		ands	r2, r2, r0
+ 513 0054 22FA03F3 		lsr	r3, r2, r3
+ 514 0058 0B70     		strb	r3, [r1, #0]
+ 515 005a 0020     		movs	r0, #0
+ 516 005c 02E0     		b	.L59
+ 517              	.L60:
+ 518 005e 0120     		movs	r0, #1
+ 519 0060 00E0     		b	.L59
+ 520              	.L66:
+ 521 0062 0220     		movs	r0, #2
+ 522              	.L59:
+ 523 0064 04B0     		add	sp, sp, #16
+ 524 0066 10BD     		pop	{r4, pc}
+ 526              		.section	.text.ADC001_SetChannelEvtFlag,"ax",%progbits
+ 527              		.align	1
+ 528              		.global	ADC001_SetChannelEvtFlag
+ 529              		.thumb
+ 530              		.thumb_func
+ 532              	ADC001_SetChannelEvtFlag:
+ 533              		@ args = 0, pretend = 0, frame = 16
+ 534              		@ frame_needed = 0, uses_anonymous_args = 0
+ 535              		@ link register save eliminated.
+ 536 0000 84B0     		sub	sp, sp, #16
+ 537 0002 436C     		ldr	r3, [r0, #68]
+ 538 0004 826C     		ldr	r2, [r0, #72]
+ 539 0006 0093     		str	r3, [sp, #0]
+ 540 0008 C36C     		ldr	r3, [r0, #76]
+ 541 000a 0192     		str	r2, [sp, #4]
+ 542 000c 0293     		str	r3, [sp, #8]
+ 543 000e 026D     		ldr	r2, [r0, #80]
+ 544 0010 C36B     		ldr	r3, [r0, #60]
+ 545 0012 0392     		str	r2, [sp, #12]
+ 546 0014 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 547 0016 012A     		cmp	r2, #1
+ 548 0018 1FD1     		bne	.L69
+ 549 001a 01B3     		cbz	r1, .L74
+ 550 001c 0B78     		ldrb	r3, [r1, #0]	@ zero_extendqisi2
+ 551 001e 4A78     		ldrb	r2, [r1, #1]	@ zero_extendqisi2
+ 552 0020 032B     		cmp	r3, #3
+ 553 0022 1CD8     		bhi	.L74
+ 554 0024 072A     		cmp	r2, #7
+ 555 0026 1AD8     		bhi	.L74
+ 556 0028 C118     		adds	r1, r0, r3
+ 557 002a 91F82A10 		ldrb	r1, [r1, #42]	@ zero_extendqisi2
+ 558 002e 0129     		cmp	r1, #1
+ 559 0030 15D1     		bne	.L74
+ 560 0032 00EBC300 		add	r0, r0, r3, lsl #3
+ 561 0036 8118     		adds	r1, r0, r2
+ 562 0038 897A     		ldrb	r1, [r1, #10]	@ zero_extendqisi2
+ 563 003a 0129     		cmp	r1, #1
+ 564 003c 0FD1     		bne	.L74
+ 565 003e 04A8     		add	r0, sp, #16
+ 566 0040 00EB8303 		add	r3, r0, r3, lsl #2
+ 567 0044 01FA02F2 		lsl	r2, r1, r2
+ 568 0048 53F8103C 		ldr	r3, [r3, #-16]
+ 569 004c D3F88001 		ldr	r0, [r3, #384]
+ 570 0050 0243     		orrs	r2, r2, r0
+ 571 0052 C3F88021 		str	r2, [r3, #384]
+ 572 0056 0020     		movs	r0, #0
+ 573 0058 02E0     		b	.L68
+ 574              	.L69:
+ 575 005a 0120     		movs	r0, #1
+ 576 005c 00E0     		b	.L68
+ 577              	.L74:
+ 578 005e 0220     		movs	r0, #2
+ 579              	.L68:
+ 580 0060 04B0     		add	sp, sp, #16
+ 581 0062 7047     		bx	lr
+ 583              		.section	.text.ADC001_ClearChannelEvtFlag,"ax",%progbits
+ 584              		.align	1
+ 585              		.global	ADC001_ClearChannelEvtFlag
+ 586              		.thumb
+ 587              		.thumb_func
+ 589              	ADC001_ClearChannelEvtFlag:
+ 590              		@ args = 0, pretend = 0, frame = 16
+ 591              		@ frame_needed = 0, uses_anonymous_args = 0
+ 592              		@ link register save eliminated.
+ 593 0000 84B0     		sub	sp, sp, #16
+ 594 0002 436C     		ldr	r3, [r0, #68]
+ 595 0004 826C     		ldr	r2, [r0, #72]
+ 596 0006 0093     		str	r3, [sp, #0]
+ 597 0008 C36C     		ldr	r3, [r0, #76]
+ 598 000a 0192     		str	r2, [sp, #4]
+ 599 000c 0293     		str	r3, [sp, #8]
+ 600 000e 026D     		ldr	r2, [r0, #80]
+ 601 0010 C36B     		ldr	r3, [r0, #60]
+ 602 0012 0392     		str	r2, [sp, #12]
+ 603 0014 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 604 0016 012A     		cmp	r2, #1
+ 605 0018 1FD1     		bne	.L77
+ 606 001a 01B3     		cbz	r1, .L82
+ 607 001c 0B78     		ldrb	r3, [r1, #0]	@ zero_extendqisi2
+ 608 001e 4A78     		ldrb	r2, [r1, #1]	@ zero_extendqisi2
+ 609 0020 032B     		cmp	r3, #3
+ 610 0022 1CD8     		bhi	.L82
+ 611 0024 072A     		cmp	r2, #7
+ 612 0026 1AD8     		bhi	.L82
+ 613 0028 C118     		adds	r1, r0, r3
+ 614 002a 91F82A10 		ldrb	r1, [r1, #42]	@ zero_extendqisi2
+ 615 002e 0129     		cmp	r1, #1
+ 616 0030 15D1     		bne	.L82
+ 617 0032 00EBC300 		add	r0, r0, r3, lsl #3
+ 618 0036 8118     		adds	r1, r0, r2
+ 619 0038 897A     		ldrb	r1, [r1, #10]	@ zero_extendqisi2
+ 620 003a 0129     		cmp	r1, #1
+ 621 003c 0FD1     		bne	.L82
+ 622 003e 04A8     		add	r0, sp, #16
+ 623 0040 00EB8303 		add	r3, r0, r3, lsl #2
+ 624 0044 01FA02F2 		lsl	r2, r1, r2
+ 625 0048 53F8103C 		ldr	r3, [r3, #-16]
+ 626 004c D3F89001 		ldr	r0, [r3, #400]
+ 627 0050 0243     		orrs	r2, r2, r0
+ 628 0052 C3F89021 		str	r2, [r3, #400]
+ 629 0056 0020     		movs	r0, #0
+ 630 0058 02E0     		b	.L76
+ 631              	.L77:
+ 632 005a 0120     		movs	r0, #1
+ 633 005c 00E0     		b	.L76
+ 634              	.L82:
+ 635 005e 0220     		movs	r0, #2
+ 636              	.L76:
+ 637 0060 04B0     		add	sp, sp, #16
+ 638 0062 7047     		bx	lr
+ 640              		.section	.text.ADC001_EnableBackGroundEvent,"ax",%progbits
+ 641              		.align	1
+ 642              		.global	ADC001_EnableBackGroundEvent
+ 643              		.thumb
+ 644              		.thumb_func
+ 646              	ADC001_EnableBackGroundEvent:
+ 647              		@ args = 0, pretend = 0, frame = 0
+ 648              		@ frame_needed = 0, uses_anonymous_args = 0
+ 649              		@ link register save eliminated.
+ 650 0000 C26B     		ldr	r2, [r0, #60]
+ 651 0002 036C     		ldr	r3, [r0, #64]
+ 652 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 653 0006 38B1     		cbz	r0, .L85
+ 654 0008 D3F80412 		ldr	r1, [r3, #516]
+ 655 000c 41F00802 		orr	r2, r1, #8
+ 656 0010 C3F80422 		str	r2, [r3, #516]
+ 657 0014 0020     		movs	r0, #0
+ 658 0016 7047     		bx	lr
+ 659              	.L85:
+ 660 0018 0120     		movs	r0, #1
+ 661 001a 7047     		bx	lr
+ 663              		.section	.text.ADC001_DisableBackGroundEvent,"ax",%progbits
+ 664              		.align	1
+ 665              		.global	ADC001_DisableBackGroundEvent
+ 666              		.thumb
+ 667              		.thumb_func
+ 669              	ADC001_DisableBackGroundEvent:
+ 670              		@ args = 0, pretend = 0, frame = 0
+ 671              		@ frame_needed = 0, uses_anonymous_args = 0
+ 672              		@ link register save eliminated.
+ 673 0000 C26B     		ldr	r2, [r0, #60]
+ 674 0002 036C     		ldr	r3, [r0, #64]
+ 675 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 676 0006 38B1     		cbz	r0, .L88
+ 677 0008 D3F80412 		ldr	r1, [r3, #516]
+ 678 000c 21F00802 		bic	r2, r1, #8
+ 679 0010 C3F80422 		str	r2, [r3, #516]
+ 680 0014 0020     		movs	r0, #0
+ 681 0016 7047     		bx	lr
+ 682              	.L88:
+ 683 0018 0120     		movs	r0, #1
+ 684 001a 7047     		bx	lr
+ 686              		.section	.text.ADC001_GetBackGroundEvtFlag,"ax",%progbits
+ 687              		.align	1
+ 688              		.global	ADC001_GetBackGroundEvtFlag
+ 689              		.thumb
+ 690              		.thumb_func
+ 692              	ADC001_GetBackGroundEvtFlag:
+ 693              		@ args = 0, pretend = 0, frame = 0
+ 694              		@ frame_needed = 0, uses_anonymous_args = 0
+ 695              		@ link register save eliminated.
+ 696 0000 C26B     		ldr	r2, [r0, #60]
+ 697 0002 036C     		ldr	r3, [r0, #64]
+ 698 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 699 0006 0128     		cmp	r0, #1
+ 700 0008 07D1     		bne	.L91
+ 701 000a 41B1     		cbz	r1, .L92
+ 702 000c D3F8E030 		ldr	r3, [r3, #224]
+ 703 0010 03F00102 		and	r2, r3, #1
+ 704 0014 0A70     		strb	r2, [r1, #0]
+ 705 0016 0020     		movs	r0, #0
+ 706 0018 7047     		bx	lr
+ 707              	.L91:
+ 708 001a 0120     		movs	r0, #1
+ 709 001c 7047     		bx	lr
+ 710              	.L92:
+ 711 001e 0220     		movs	r0, #2
+ 712 0020 7047     		bx	lr
+ 714              		.section	.text.ADC001_SetBackGroundEvtFlag,"ax",%progbits
+ 715              		.align	1
+ 716              		.global	ADC001_SetBackGroundEvtFlag
+ 717              		.thumb
+ 718              		.thumb_func
+ 720              	ADC001_SetBackGroundEvtFlag:
+ 721              		@ args = 0, pretend = 0, frame = 0
+ 722              		@ frame_needed = 0, uses_anonymous_args = 0
+ 723              		@ link register save eliminated.
+ 724 0000 C26B     		ldr	r2, [r0, #60]
+ 725 0002 036C     		ldr	r3, [r0, #64]
+ 726 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 727 0006 38B1     		cbz	r0, .L95
+ 728 0008 D3F8E010 		ldr	r1, [r3, #224]
+ 729 000c 41F00102 		orr	r2, r1, #1
+ 730 0010 C3F8E020 		str	r2, [r3, #224]
+ 731 0014 0020     		movs	r0, #0
+ 732 0016 7047     		bx	lr
+ 733              	.L95:
+ 734 0018 0120     		movs	r0, #1
+ 735 001a 7047     		bx	lr
+ 737              		.section	.text.ADC001_ClearBackGroundEvtFlag,"ax",%progbits
+ 738              		.align	1
+ 739              		.global	ADC001_ClearBackGroundEvtFlag
+ 740              		.thumb
+ 741              		.thumb_func
+ 743              	ADC001_ClearBackGroundEvtFlag:
+ 744              		@ args = 0, pretend = 0, frame = 0
+ 745              		@ frame_needed = 0, uses_anonymous_args = 0
+ 746              		@ link register save eliminated.
+ 747 0000 C26B     		ldr	r2, [r0, #60]
+ 748 0002 036C     		ldr	r3, [r0, #64]
+ 749 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 750 0006 38B1     		cbz	r0, .L98
+ 751 0008 D3F8E010 		ldr	r1, [r3, #224]
+ 752 000c 41F48032 		orr	r2, r1, #65536
+ 753 0010 C3F8E020 		str	r2, [r3, #224]
+ 754 0014 0020     		movs	r0, #0
+ 755 0016 7047     		bx	lr
+ 756              	.L98:
+ 757 0018 0120     		movs	r0, #1
+ 758 001a 7047     		bx	lr
+ 760              		.section	.text.ADC001_ClearPendingBits,"ax",%progbits
+ 761              		.align	1
+ 762              		.global	ADC001_ClearPendingBits
+ 763              		.thumb
+ 764              		.thumb_func
+ 766              	ADC001_ClearPendingBits:
+ 767              		@ args = 0, pretend = 0, frame = 0
+ 768              		@ frame_needed = 0, uses_anonymous_args = 0
+ 769              		@ link register save eliminated.
+ 770 0000 C26B     		ldr	r2, [r0, #60]
+ 771 0002 036C     		ldr	r3, [r0, #64]
+ 772 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 773 0006 0128     		cmp	r0, #1
+ 774 0008 07D1     		bne	.L101
+ 775 000a D3F80412 		ldr	r1, [r3, #516]
+ 776 000e 41F48072 		orr	r2, r1, #256
+ 777 0012 C3F80422 		str	r2, [r3, #516]
+ 778 0016 0020     		movs	r0, #0
+ 779 0018 7047     		bx	lr
+ 780              	.L101:
+ 781 001a 0120     		movs	r0, #1
+ 782 001c 7047     		bx	lr
+ 784              		.section	.text.ADC001_GenerateLoadEvent,"ax",%progbits
+ 785              		.align	1
+ 786              		.global	ADC001_GenerateLoadEvent
+ 787              		.thumb
+ 788              		.thumb_func
+ 790              	ADC001_GenerateLoadEvent:
+ 791              		@ args = 0, pretend = 0, frame = 0
+ 792              		@ frame_needed = 0, uses_anonymous_args = 0
+ 793              		@ link register save eliminated.
+ 794 0000 C26B     		ldr	r2, [r0, #60]
+ 795 0002 036C     		ldr	r3, [r0, #64]
+ 796 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 797 0006 0128     		cmp	r0, #1
+ 798 0008 07D1     		bne	.L104
+ 799 000a D3F80412 		ldr	r1, [r3, #516]
+ 800 000e 41F40072 		orr	r2, r1, #512
+ 801 0012 C3F80422 		str	r2, [r3, #516]
+ 802 0016 0020     		movs	r0, #0
+ 803 0018 7047     		bx	lr
+ 804              	.L104:
+ 805 001a 0120     		movs	r0, #1
+ 806 001c 7047     		bx	lr
+ 808              		.section	.text.ADC001_EnableGate,"ax",%progbits
+ 809              		.align	1
+ 810              		.global	ADC001_EnableGate
+ 811              		.thumb
+ 812              		.thumb_func
+ 814              	ADC001_EnableGate:
+ 815              		@ args = 0, pretend = 0, frame = 0
+ 816              		@ frame_needed = 0, uses_anonymous_args = 0
+ 817              		@ link register save eliminated.
+ 818 0000 C26B     		ldr	r2, [r0, #60]
+ 819 0002 036C     		ldr	r3, [r0, #64]
+ 820 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 821 0006 0128     		cmp	r0, #1
+ 822 0008 0AD1     		bne	.L107
+ 823 000a 0329     		cmp	r1, #3
+ 824 000c 0AD8     		bhi	.L108
+ 825 000e D3F80422 		ldr	r2, [r3, #516]
+ 826 0012 22F00300 		bic	r0, r2, #3
+ 827 0016 0143     		orrs	r1, r1, r0
+ 828 0018 C3F80412 		str	r1, [r3, #516]
+ 829 001c 0020     		movs	r0, #0
+ 830 001e 7047     		bx	lr
+ 831              	.L107:
+ 832 0020 0120     		movs	r0, #1
+ 833 0022 7047     		bx	lr
+ 834              	.L108:
+ 835 0024 0220     		movs	r0, #2
+ 836 0026 7047     		bx	lr
+ 838              		.section	.text.ADC001_GetGateLevel,"ax",%progbits
+ 839              		.align	1
+ 840              		.global	ADC001_GetGateLevel
+ 841              		.thumb
+ 842              		.thumb_func
+ 844              	ADC001_GetGateLevel:
+ 845              		@ args = 0, pretend = 0, frame = 0
+ 846              		@ frame_needed = 0, uses_anonymous_args = 0
+ 847              		@ link register save eliminated.
+ 848 0000 C26B     		ldr	r2, [r0, #60]
+ 849 0002 036C     		ldr	r3, [r0, #64]
+ 850 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 851 0006 0128     		cmp	r0, #1
+ 852 0008 07D1     		bne	.L111
+ 853 000a 41B1     		cbz	r1, .L112
+ 854 000c D3F80432 		ldr	r3, [r3, #516]
+ 855 0010 C3F3C012 		ubfx	r2, r3, #7, #1
+ 856 0014 0A70     		strb	r2, [r1, #0]
+ 857 0016 0020     		movs	r0, #0
+ 858 0018 7047     		bx	lr
+ 859              	.L111:
+ 860 001a 0120     		movs	r0, #1
+ 861 001c 7047     		bx	lr
+ 862              	.L112:
+ 863 001e 0220     		movs	r0, #2
+ 864 0020 7047     		bx	lr
+ 866              		.section	.text.ADC001_SetExternalTriggerMode,"ax",%progbits
+ 867              		.align	1
+ 868              		.global	ADC001_SetExternalTriggerMode
+ 869              		.thumb
+ 870              		.thumb_func
+ 872              	ADC001_SetExternalTriggerMode:
+ 873              		@ args = 0, pretend = 0, frame = 0
+ 874              		@ frame_needed = 0, uses_anonymous_args = 0
+ 875              		@ link register save eliminated.
+ 876 0000 C26B     		ldr	r2, [r0, #60]
+ 877 0002 036C     		ldr	r3, [r0, #64]
+ 878 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 879 0006 0128     		cmp	r0, #1
+ 880 0008 17D1     		bne	.L117
+ 881 000a 0329     		cmp	r1, #3
+ 882 000c 17D8     		bhi	.L118
+ 883 000e D3F80422 		ldr	r2, [r3, #516]
+ 884 0012 11B9     		cbnz	r1, .L115
+ 885 0014 22F00400 		bic	r0, r2, #4
+ 886 0018 01E0     		b	.L119
+ 887              	.L115:
+ 888 001a 42F00400 		orr	r0, r2, #4
+ 889              	.L119:
+ 890 001e C3F80402 		str	r0, [r3, #516]
+ 891 0022 D3F80022 		ldr	r2, [r3, #512]
+ 892 0026 22F4C040 		bic	r0, r2, #24576
+ 893 002a 40F40042 		orr	r2, r0, #32768
+ 894 002e 42EA4131 		orr	r1, r2, r1, lsl #13
+ 895 0032 C3F80012 		str	r1, [r3, #512]
+ 896 0036 0020     		movs	r0, #0
+ 897 0038 7047     		bx	lr
+ 898              	.L117:
+ 899 003a 0120     		movs	r0, #1
+ 900 003c 7047     		bx	lr
+ 901              	.L118:
+ 902 003e 0220     		movs	r0, #2
+ 903 0040 7047     		bx	lr
+ 905              		.section	.text.ADC001_EnableExternalTrigger,"ax",%progbits
+ 906              		.align	1
+ 907              		.global	ADC001_EnableExternalTrigger
+ 908              		.thumb
+ 909              		.thumb_func
+ 911              	ADC001_EnableExternalTrigger:
+ 912              		@ args = 0, pretend = 0, frame = 0
+ 913              		@ frame_needed = 0, uses_anonymous_args = 0
+ 914              		@ link register save eliminated.
+ 915 0000 C26B     		ldr	r2, [r0, #60]
+ 916 0002 036C     		ldr	r3, [r0, #64]
+ 917 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 918 0006 0128     		cmp	r0, #1
+ 919 0008 07D1     		bne	.L122
+ 920 000a D3F80412 		ldr	r1, [r3, #516]
+ 921 000e 41F00402 		orr	r2, r1, #4
+ 922 0012 C3F80422 		str	r2, [r3, #516]
+ 923 0016 0020     		movs	r0, #0
+ 924 0018 7047     		bx	lr
+ 925              	.L122:
+ 926 001a 0120     		movs	r0, #1
+ 927 001c 7047     		bx	lr
+ 929              		.section	.text.ADC001_DisableExternalTrigger,"ax",%progbits
+ 930              		.align	1
+ 931              		.global	ADC001_DisableExternalTrigger
+ 932              		.thumb
+ 933              		.thumb_func
+ 935              	ADC001_DisableExternalTrigger:
+ 936              		@ args = 0, pretend = 0, frame = 0
+ 937              		@ frame_needed = 0, uses_anonymous_args = 0
+ 938              		@ link register save eliminated.
+ 939 0000 C26B     		ldr	r2, [r0, #60]
+ 940 0002 036C     		ldr	r3, [r0, #64]
+ 941 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 942 0006 0128     		cmp	r0, #1
+ 943 0008 07D1     		bne	.L125
+ 944 000a D3F80412 		ldr	r1, [r3, #516]
+ 945 000e 21F00402 		bic	r2, r1, #4
+ 946 0012 C3F80422 		str	r2, [r3, #516]
+ 947 0016 0020     		movs	r0, #0
+ 948 0018 7047     		bx	lr
+ 949              	.L125:
+ 950 001a 0120     		movs	r0, #1
+ 951 001c 7047     		bx	lr
+ 953              		.section	.text.ADC001_EnableArbitrationSlot,"ax",%progbits
+ 954              		.align	1
+ 955              		.global	ADC001_EnableArbitrationSlot
+ 956              		.thumb
+ 957              		.thumb_func
+ 959              	ADC001_EnableArbitrationSlot:
+ 960              		@ args = 0, pretend = 0, frame = 16
+ 961              		@ frame_needed = 0, uses_anonymous_args = 0
+ 962              		@ link register save eliminated.
+ 963 0000 84B0     		sub	sp, sp, #16
+ 964 0002 816C     		ldr	r1, [r0, #72]
+ 965 0004 C26C     		ldr	r2, [r0, #76]
+ 966 0006 0191     		str	r1, [sp, #4]
+ 967 0008 C16B     		ldr	r1, [r0, #60]
+ 968 000a 436C     		ldr	r3, [r0, #68]
+ 969 000c 0292     		str	r2, [sp, #8]
+ 970 000e 0A79     		ldrb	r2, [r1, #4]	@ zero_extendqisi2
+ 971 0010 0093     		str	r3, [sp, #0]
+ 972 0012 036D     		ldr	r3, [r0, #80]
+ 973 0014 012A     		cmp	r2, #1
+ 974 0016 0393     		str	r3, [sp, #12]
+ 975 0018 12D1     		bne	.L130
+ 976 001a 0023     		movs	r3, #0
+ 977              	.L129:
+ 978 001c C118     		adds	r1, r0, r3
+ 979 001e 91F82A20 		ldrb	r2, [r1, #42]	@ zero_extendqisi2
+ 980 0022 012A     		cmp	r2, #1
+ 981 0024 07D1     		bne	.L128
+ 982 0026 5DF82320 		ldr	r2, [sp, r3, lsl #2]
+ 983 002a D2F88410 		ldr	r1, [r2, #132]
+ 984 002e 41F08061 		orr	r1, r1, #67108864
+ 985 0032 C2F88410 		str	r1, [r2, #132]
+ 986              	.L128:
+ 987 0036 0133     		adds	r3, r3, #1
+ 988 0038 042B     		cmp	r3, #4
+ 989 003a EFD1     		bne	.L129
+ 990 003c 0020     		movs	r0, #0
+ 991 003e 00E0     		b	.L127
+ 992              	.L130:
+ 993 0040 0120     		movs	r0, #1
+ 994              	.L127:
+ 995 0042 04B0     		add	sp, sp, #16
+ 996 0044 7047     		bx	lr
+ 998              		.section	.text.ADC001_DisableArbitrationSlot,"ax",%progbits
+ 999              		.align	1
+ 1000              		.global	ADC001_DisableArbitrationSlot
+ 1001              		.thumb
+ 1002              		.thumb_func
+ 1004              	ADC001_DisableArbitrationSlot:
+ 1005              		@ args = 0, pretend = 0, frame = 16
+ 1006              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1007              		@ link register save eliminated.
+ 1008 0000 84B0     		sub	sp, sp, #16
+ 1009 0002 816C     		ldr	r1, [r0, #72]
+ 1010 0004 C26C     		ldr	r2, [r0, #76]
+ 1011 0006 0191     		str	r1, [sp, #4]
+ 1012 0008 C16B     		ldr	r1, [r0, #60]
+ 1013 000a 436C     		ldr	r3, [r0, #68]
+ 1014 000c 0292     		str	r2, [sp, #8]
+ 1015 000e 0A79     		ldrb	r2, [r1, #4]	@ zero_extendqisi2
+ 1016 0010 0093     		str	r3, [sp, #0]
+ 1017 0012 036D     		ldr	r3, [r0, #80]
+ 1018 0014 012A     		cmp	r2, #1
+ 1019 0016 0393     		str	r3, [sp, #12]
+ 1020 0018 12D1     		bne	.L136
+ 1021 001a 0023     		movs	r3, #0
+ 1022              	.L135:
+ 1023 001c C118     		adds	r1, r0, r3
+ 1024 001e 91F82A20 		ldrb	r2, [r1, #42]	@ zero_extendqisi2
+ 1025 0022 012A     		cmp	r2, #1
+ 1026 0024 07D1     		bne	.L134
+ 1027 0026 5DF82320 		ldr	r2, [sp, r3, lsl #2]
+ 1028 002a D2F88410 		ldr	r1, [r2, #132]
+ 1029 002e 21F08061 		bic	r1, r1, #67108864
+ 1030 0032 C2F88410 		str	r1, [r2, #132]
+ 1031              	.L134:
+ 1032 0036 0133     		adds	r3, r3, #1
+ 1033 0038 042B     		cmp	r3, #4
+ 1034 003a EFD1     		bne	.L135
+ 1035 003c 0020     		movs	r0, #0
+ 1036 003e 00E0     		b	.L133
+ 1037              	.L136:
+ 1038 0040 0120     		movs	r0, #1
+ 1039              	.L133:
+ 1040 0042 04B0     		add	sp, sp, #16
+ 1041 0044 7047     		bx	lr
+ 1043              		.section	.text.ADC001_SetLoadEventMode,"ax",%progbits
+ 1044              		.align	1
+ 1045              		.global	ADC001_SetLoadEventMode
+ 1046              		.thumb
+ 1047              		.thumb_func
+ 1049              	ADC001_SetLoadEventMode:
+ 1050              		@ args = 0, pretend = 0, frame = 0
+ 1051              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1052              		@ link register save eliminated.
+ 1053 0000 C26B     		ldr	r2, [r0, #60]
+ 1054 0002 036C     		ldr	r3, [r0, #64]
+ 1055 0004 1079     		ldrb	r0, [r2, #4]	@ zero_extendqisi2
+ 1056 0006 0128     		cmp	r0, #1
+ 1057 0008 0FD1     		bne	.L141
+ 1058 000a 21B9     		cbnz	r1, .L140
+ 1059 000c D3F80402 		ldr	r0, [r3, #516]
+ 1060 0010 20F02002 		bic	r2, r0, #32
+ 1061 0014 05E0     		b	.L143
+ 1062              	.L140:
+ 1063 0016 0129     		cmp	r1, #1
+ 1064 0018 09D1     		bne	.L142
+ 1065 001a D3F80412 		ldr	r1, [r3, #516]
+ 1066 001e 41F02002 		orr	r2, r1, #32
+ 1067              	.L143:
+ 1068 0022 C3F80422 		str	r2, [r3, #516]
+ 1069 0026 0020     		movs	r0, #0
+ 1070 0028 7047     		bx	lr
+ 1071              	.L141:
+ 1072 002a 0120     		movs	r0, #1
+ 1073 002c 7047     		bx	lr
+ 1074              	.L142:
+ 1075 002e 0220     		movs	r0, #2
+ 1076 0030 7047     		bx	lr
+ 1078              		.section	.text.ADC001_SetPendingChannel,"ax",%progbits
+ 1079              		.align	1
+ 1080              		.global	ADC001_SetPendingChannel
+ 1081              		.thumb
+ 1082              		.thumb_func
+ 1084              	ADC001_SetPendingChannel:
+ 1085              		@ args = 0, pretend = 0, frame = 0
+ 1086              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1087 0000 C36B     		ldr	r3, [r0, #60]
+ 1088 0002 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 1089 0004 012A     		cmp	r2, #1
+ 1090 0006 30B5     		push	{r4, r5, lr}
+ 1091 0008 046C     		ldr	r4, [r0, #64]
+ 1092 000a 1BD1     		bne	.L146
+ 1093 000c E1B1     		cbz	r1, .L151
+ 1094 000e 0B78     		ldrb	r3, [r1, #0]	@ zero_extendqisi2
+ 1095 0010 4A78     		ldrb	r2, [r1, #1]	@ zero_extendqisi2
+ 1096 0012 C118     		adds	r1, r0, r3
+ 1097 0014 00EBC300 		add	r0, r0, r3, lsl #3
+ 1098 0018 91F82A50 		ldrb	r5, [r1, #42]	@ zero_extendqisi2
+ 1099 001c 8118     		adds	r1, r0, r2
+ 1100 001e 042B     		cmp	r3, #4
+ 1101 0020 897A     		ldrb	r1, [r1, #10]	@ zero_extendqisi2
+ 1102 0022 11D8     		bhi	.L151
+ 1103 0024 082A     		cmp	r2, #8
+ 1104 0026 0FD8     		bhi	.L151
+ 1105 0028 012D     		cmp	r5, #1
+ 1106 002a 0DD1     		bne	.L151
+ 1107 002c 0129     		cmp	r1, #1
+ 1108 002e 0BD1     		bne	.L151
+ 1109 0030 7033     		adds	r3, r3, #112
+ 1110 0032 01FA02F2 		lsl	r2, r1, r2
+ 1111 0036 54F82300 		ldr	r0, [r4, r3, lsl #2]
+ 1112 003a 0243     		orrs	r2, r2, r0
+ 1113 003c 44F82320 		str	r2, [r4, r3, lsl #2]
+ 1114 0040 0020     		movs	r0, #0
+ 1115 0042 30BD     		pop	{r4, r5, pc}
+ 1116              	.L146:
+ 1117 0044 0120     		movs	r0, #1
+ 1118 0046 30BD     		pop	{r4, r5, pc}
+ 1119              	.L151:
+ 1120 0048 0220     		movs	r0, #2
+ 1121 004a 30BD     		pop	{r4, r5, pc}
+ 1123              		.section	.text.ADC001_ClearPendingChannel,"ax",%progbits
+ 1124              		.align	1
+ 1125              		.global	ADC001_ClearPendingChannel
+ 1126              		.thumb
+ 1127              		.thumb_func
+ 1129              	ADC001_ClearPendingChannel:
+ 1130              		@ args = 0, pretend = 0, frame = 0
+ 1131              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1132 0000 C36B     		ldr	r3, [r0, #60]
+ 1133 0002 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 1134 0004 012A     		cmp	r2, #1
+ 1135 0006 30B5     		push	{r4, r5, lr}
+ 1136 0008 046C     		ldr	r4, [r0, #64]
+ 1137 000a 1CD1     		bne	.L154
+ 1138 000c E9B1     		cbz	r1, .L159
+ 1139 000e 0B78     		ldrb	r3, [r1, #0]	@ zero_extendqisi2
+ 1140 0010 4A78     		ldrb	r2, [r1, #1]	@ zero_extendqisi2
+ 1141 0012 C118     		adds	r1, r0, r3
+ 1142 0014 00EBC300 		add	r0, r0, r3, lsl #3
+ 1143 0018 91F82A50 		ldrb	r5, [r1, #42]	@ zero_extendqisi2
+ 1144 001c 8118     		adds	r1, r0, r2
+ 1145 001e 042B     		cmp	r3, #4
+ 1146 0020 897A     		ldrb	r1, [r1, #10]	@ zero_extendqisi2
+ 1147 0022 12D8     		bhi	.L159
+ 1148 0024 082A     		cmp	r2, #8
+ 1149 0026 10D8     		bhi	.L159
+ 1150 0028 012D     		cmp	r5, #1
+ 1151 002a 0ED1     		bne	.L159
+ 1152 002c 0129     		cmp	r1, #1
+ 1153 002e 0CD1     		bne	.L159
+ 1154 0030 7033     		adds	r3, r3, #112
+ 1155 0032 01FA02F2 		lsl	r2, r1, r2
+ 1156 0036 54F82300 		ldr	r0, [r4, r3, lsl #2]
+ 1157 003a 20EA0201 		bic	r1, r0, r2
+ 1158 003e 44F82310 		str	r1, [r4, r3, lsl #2]
+ 1159 0042 0020     		movs	r0, #0
+ 1160 0044 30BD     		pop	{r4, r5, pc}
+ 1161              	.L154:
+ 1162 0046 0120     		movs	r0, #1
+ 1163 0048 30BD     		pop	{r4, r5, pc}
+ 1164              	.L159:
+ 1165 004a 0220     		movs	r0, #2
+ 1166 004c 30BD     		pop	{r4, r5, pc}
+ 1168              		.section	.text.ADC001_SetChannelSelect,"ax",%progbits
+ 1169              		.align	1
+ 1170              		.global	ADC001_SetChannelSelect
+ 1171              		.thumb
+ 1172              		.thumb_func
+ 1174              	ADC001_SetChannelSelect:
+ 1175              		@ args = 0, pretend = 0, frame = 0
+ 1176              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1177 0000 C36B     		ldr	r3, [r0, #60]
+ 1178 0002 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 1179 0004 012A     		cmp	r2, #1
+ 1180 0006 30B5     		push	{r4, r5, lr}
+ 1181 0008 046C     		ldr	r4, [r0, #64]
+ 1182 000a 1BD1     		bne	.L162
+ 1183 000c E1B1     		cbz	r1, .L167
+ 1184 000e 0B78     		ldrb	r3, [r1, #0]	@ zero_extendqisi2
+ 1185 0010 4A78     		ldrb	r2, [r1, #1]	@ zero_extendqisi2
+ 1186 0012 C118     		adds	r1, r0, r3
+ 1187 0014 00EBC300 		add	r0, r0, r3, lsl #3
+ 1188 0018 91F82A50 		ldrb	r5, [r1, #42]	@ zero_extendqisi2
+ 1189 001c 8118     		adds	r1, r0, r2
+ 1190 001e 042B     		cmp	r3, #4
+ 1191 0020 897A     		ldrb	r1, [r1, #10]	@ zero_extendqisi2
+ 1192 0022 11D8     		bhi	.L167
+ 1193 0024 082A     		cmp	r2, #8
+ 1194 0026 0FD8     		bhi	.L167
+ 1195 0028 012D     		cmp	r5, #1
+ 1196 002a 0DD1     		bne	.L167
+ 1197 002c 0129     		cmp	r1, #1
+ 1198 002e 0BD1     		bne	.L167
+ 1199 0030 6033     		adds	r3, r3, #96
+ 1200 0032 01FA02F2 		lsl	r2, r1, r2
+ 1201 0036 54F82300 		ldr	r0, [r4, r3, lsl #2]
+ 1202 003a 0243     		orrs	r2, r2, r0
+ 1203 003c 44F82320 		str	r2, [r4, r3, lsl #2]
+ 1204 0040 0020     		movs	r0, #0
+ 1205 0042 30BD     		pop	{r4, r5, pc}
+ 1206              	.L162:
+ 1207 0044 0120     		movs	r0, #1
+ 1208 0046 30BD     		pop	{r4, r5, pc}
+ 1209              	.L167:
+ 1210 0048 0220     		movs	r0, #2
+ 1211 004a 30BD     		pop	{r4, r5, pc}
+ 1213              		.section	.text.ADC001_ClearChannelSelect,"ax",%progbits
+ 1214              		.align	1
+ 1215              		.global	ADC001_ClearChannelSelect
+ 1216              		.thumb
+ 1217              		.thumb_func
+ 1219              	ADC001_ClearChannelSelect:
+ 1220              		@ args = 0, pretend = 0, frame = 0
+ 1221              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1222 0000 C36B     		ldr	r3, [r0, #60]
+ 1223 0002 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 1224 0004 012A     		cmp	r2, #1
+ 1225 0006 30B5     		push	{r4, r5, lr}
+ 1226 0008 046C     		ldr	r4, [r0, #64]
+ 1227 000a 1CD1     		bne	.L170
+ 1228 000c E9B1     		cbz	r1, .L175
+ 1229 000e 0B78     		ldrb	r3, [r1, #0]	@ zero_extendqisi2
+ 1230 0010 4A78     		ldrb	r2, [r1, #1]	@ zero_extendqisi2
+ 1231 0012 C118     		adds	r1, r0, r3
+ 1232 0014 00EBC300 		add	r0, r0, r3, lsl #3
+ 1233 0018 91F82A50 		ldrb	r5, [r1, #42]	@ zero_extendqisi2
+ 1234 001c 8118     		adds	r1, r0, r2
+ 1235 001e 042B     		cmp	r3, #4
+ 1236 0020 897A     		ldrb	r1, [r1, #10]	@ zero_extendqisi2
+ 1237 0022 12D8     		bhi	.L175
+ 1238 0024 082A     		cmp	r2, #8
+ 1239 0026 10D8     		bhi	.L175
+ 1240 0028 012D     		cmp	r5, #1
+ 1241 002a 0ED1     		bne	.L175
+ 1242 002c 0129     		cmp	r1, #1
+ 1243 002e 0CD1     		bne	.L175
+ 1244 0030 6033     		adds	r3, r3, #96
+ 1245 0032 01FA02F2 		lsl	r2, r1, r2
+ 1246 0036 54F82300 		ldr	r0, [r4, r3, lsl #2]
+ 1247 003a 20EA0201 		bic	r1, r0, r2
+ 1248 003e 44F82310 		str	r1, [r4, r3, lsl #2]
+ 1249 0042 0020     		movs	r0, #0
+ 1250 0044 30BD     		pop	{r4, r5, pc}
+ 1251              	.L170:
+ 1252 0046 0120     		movs	r0, #1
+ 1253 0048 30BD     		pop	{r4, r5, pc}
+ 1254              	.L175:
+ 1255 004a 0220     		movs	r0, #2
+ 1256 004c 30BD     		pop	{r4, r5, pc}
+ 1258              		.section	.text.ADC001_SetChannelEventMode,"ax",%progbits
+ 1259              		.align	1
+ 1260              		.global	ADC001_SetChannelEventMode
+ 1261              		.thumb
+ 1262              		.thumb_func
+ 1264              	ADC001_SetChannelEventMode:
+ 1265              		@ args = 0, pretend = 0, frame = 16
+ 1266              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1267 0000 1FB5     		push	{r0, r1, r2, r3, r4, lr}
+ 1268 0002 436C     		ldr	r3, [r0, #68]
+ 1269 0004 0093     		str	r3, [sp, #0]
+ 1270 0006 836C     		ldr	r3, [r0, #72]
+ 1271 0008 0193     		str	r3, [sp, #4]
+ 1272 000a C36C     		ldr	r3, [r0, #76]
+ 1273 000c 0293     		str	r3, [sp, #8]
+ 1274 000e 036D     		ldr	r3, [r0, #80]
+ 1275 0010 0393     		str	r3, [sp, #12]
+ 1276 0012 C36B     		ldr	r3, [r0, #60]
+ 1277 0014 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+ 1278 0016 012B     		cmp	r3, #1
+ 1279 0018 26D1     		bne	.L179
+ 1280 001a 39B3     		cbz	r1, .L185
+ 1281 001c 0B78     		ldrb	r3, [r1, #0]	@ zero_extendqisi2
+ 1282 001e 4978     		ldrb	r1, [r1, #1]	@ zero_extendqisi2
+ 1283 0020 C418     		adds	r4, r0, r3
+ 1284 0022 00EBC300 		add	r0, r0, r3, lsl #3
+ 1285 0026 4018     		adds	r0, r0, r1
+ 1286 0028 042B     		cmp	r3, #4
+ 1287 002a 94F82A40 		ldrb	r4, [r4, #42]	@ zero_extendqisi2
+ 1288 002e 807A     		ldrb	r0, [r0, #10]	@ zero_extendqisi2
+ 1289 0030 1CD8     		bhi	.L185
+ 1290 0032 0829     		cmp	r1, #8
+ 1291 0034 1AD8     		bhi	.L185
+ 1292 0036 012C     		cmp	r4, #1
+ 1293 0038 18D1     		bne	.L185
+ 1294 003a 0128     		cmp	r0, #1
+ 1295 003c 16D1     		bne	.L185
+ 1296 003e 0AB1     		cbz	r2, .L178
+ 1297 0040 032A     		cmp	r2, #3
+ 1298 0042 13D1     		bne	.L185
+ 1299              	.L178:
+ 1300 0044 04A8     		add	r0, sp, #16
+ 1301 0046 00EB8303 		add	r3, r0, r3, lsl #2
+ 1302 004a 8031     		adds	r1, r1, #128
+ 1303 004c 53F8103C 		ldr	r3, [r3, #-16]
+ 1304 0050 53F82100 		ldr	r0, [r3, r1, lsl #2]
+ 1305 0054 1202     		lsls	r2, r2, #8
+ 1306 0056 20F44070 		bic	r0, r0, #768
+ 1307 005a 02F44072 		and	r2, r2, #768
+ 1308 005e 0243     		orrs	r2, r2, r0
+ 1309 0060 43F82120 		str	r2, [r3, r1, lsl #2]
+ 1310 0064 0020     		movs	r0, #0
+ 1311 0066 02E0     		b	.L177
+ 1312              	.L179:
+ 1313 0068 0120     		movs	r0, #1
+ 1314 006a 00E0     		b	.L177
+ 1315              	.L185:
+ 1316 006c 0220     		movs	r0, #2
+ 1317              	.L177:
+ 1318 006e 04B0     		add	sp, sp, #16
+ 1319 0070 10BD     		pop	{r4, pc}
+ 1321              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 ADC001.c
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:17     .text.ADC001_lInit:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:22     .text.ADC001_lInit:00000000 ADC001_lInit
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:136    .text.ADC001_lInit:00000138 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:139    .text.ADC001_Init:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:144    .text.ADC001_Init:00000000 ADC001_Init
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:155    .text.ADC001_Init:00000010 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:158    .text.ADC001_Deinit:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:163    .text.ADC001_Deinit:00000000 ADC001_Deinit
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:232    .text.ADC001_Deinit:0000008c $d
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:236    .text.ADC001_SelectInputClass:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:241    .text.ADC001_SelectInputClass:00000000 ADC001_SelectInputClass
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:296    .text.ADC001_SelectInputClass:00000064 $d
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:299    .text.ADC001_EnableResultEvt:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:304    .text.ADC001_EnableResultEvt:00000000 ADC001_EnableResultEvt
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:322    .text.ADC001_DisableResultEvt:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:327    .text.ADC001_DisableResultEvt:00000000 ADC001_DisableResultEvt
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:345    .text.ADC001_GetResult:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:350    .text.ADC001_GetResult:00000000 ADC001_GetResult
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:381    .text.ADC001_GetFastResult:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:386    .text.ADC001_GetFastResult:00000000 ADC001_GetFastResult
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:396    .text.ADC001_GetResultEvtFlag:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:401    .text.ADC001_GetResultEvtFlag:00000000 ADC001_GetResultEvtFlag
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:423    .text.ADC001_SetResultEvtFlag:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:428    .text.ADC001_SetResultEvtFlag:00000000 ADC001_SetResultEvtFlag
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:446    .text.ADC001_ClearResultEvtFlag:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:451    .text.ADC001_ClearResultEvtFlag:00000000 ADC001_ClearResultEvtFlag
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:469    .text.ADC001_GetChannelEvtFlag:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:474    .text.ADC001_GetChannelEvtFlag:00000000 ADC001_GetChannelEvtFlag
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:527    .text.ADC001_SetChannelEvtFlag:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:532    .text.ADC001_SetChannelEvtFlag:00000000 ADC001_SetChannelEvtFlag
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:584    .text.ADC001_ClearChannelEvtFlag:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:589    .text.ADC001_ClearChannelEvtFlag:00000000 ADC001_ClearChannelEvtFlag
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:641    .text.ADC001_EnableBackGroundEvent:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:646    .text.ADC001_EnableBackGroundEvent:00000000 ADC001_EnableBackGroundEvent
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:664    .text.ADC001_DisableBackGroundEvent:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:669    .text.ADC001_DisableBackGroundEvent:00000000 ADC001_DisableBackGroundEvent
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:687    .text.ADC001_GetBackGroundEvtFlag:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:692    .text.ADC001_GetBackGroundEvtFlag:00000000 ADC001_GetBackGroundEvtFlag
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:715    .text.ADC001_SetBackGroundEvtFlag:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:720    .text.ADC001_SetBackGroundEvtFlag:00000000 ADC001_SetBackGroundEvtFlag
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:738    .text.ADC001_ClearBackGroundEvtFlag:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:743    .text.ADC001_ClearBackGroundEvtFlag:00000000 ADC001_ClearBackGroundEvtFlag
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:761    .text.ADC001_ClearPendingBits:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:766    .text.ADC001_ClearPendingBits:00000000 ADC001_ClearPendingBits
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:785    .text.ADC001_GenerateLoadEvent:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:790    .text.ADC001_GenerateLoadEvent:00000000 ADC001_GenerateLoadEvent
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:809    .text.ADC001_EnableGate:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:814    .text.ADC001_EnableGate:00000000 ADC001_EnableGate
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:839    .text.ADC001_GetGateLevel:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:844    .text.ADC001_GetGateLevel:00000000 ADC001_GetGateLevel
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:867    .text.ADC001_SetExternalTriggerMode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:872    .text.ADC001_SetExternalTriggerMode:00000000 ADC001_SetExternalTriggerMode
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:906    .text.ADC001_EnableExternalTrigger:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:911    .text.ADC001_EnableExternalTrigger:00000000 ADC001_EnableExternalTrigger
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:930    .text.ADC001_DisableExternalTrigger:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:935    .text.ADC001_DisableExternalTrigger:00000000 ADC001_DisableExternalTrigger
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:954    .text.ADC001_EnableArbitrationSlot:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:959    .text.ADC001_EnableArbitrationSlot:00000000 ADC001_EnableArbitrationSlot
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:999    .text.ADC001_DisableArbitrationSlot:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:1004   .text.ADC001_DisableArbitrationSlot:00000000 ADC001_DisableArbitrationSlot
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:1044   .text.ADC001_SetLoadEventMode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:1049   .text.ADC001_SetLoadEventMode:00000000 ADC001_SetLoadEventMode
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:1079   .text.ADC001_SetPendingChannel:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:1084   .text.ADC001_SetPendingChannel:00000000 ADC001_SetPendingChannel
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:1124   .text.ADC001_ClearPendingChannel:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:1129   .text.ADC001_ClearPendingChannel:00000000 ADC001_ClearPendingChannel
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:1169   .text.ADC001_SetChannelSelect:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:1174   .text.ADC001_SetChannelSelect:00000000 ADC001_SetChannelSelect
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:1214   .text.ADC001_ClearChannelSelect:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:1219   .text.ADC001_ClearChannelSelect:00000000 ADC001_ClearChannelSelect
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:1259   .text.ADC001_SetChannelEventMode:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\ccdUrudT.s:1264   .text.ADC001_SetChannelEventMode:00000000 ADC001_SetChannelEventMode
+
+UNDEFINED SYMBOLS
+ADC001_ChannelHandlePtr
+ADCGLOB001_Init
+ADC001_Handle0

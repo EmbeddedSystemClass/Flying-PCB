@@ -1,0 +1,248 @@
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 3
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 4
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.file	"IO004.c"
+  16              		.section	.text.IO004_Init,"ax",%progbits
+  17              		.align	1
+  18              		.global	IO004_Init
+  19              		.thumb
+  20              		.thumb_func
+  22              	IO004_Init:
+  23              		@ args = 0, pretend = 0, frame = 0
+  24              		@ frame_needed = 0, uses_anonymous_args = 0
+  25              		@ link register save eliminated.
+  26 0000 144B     		ldr	r3, .L2
+  27 0002 5868     		ldr	r0, [r3, #4]
+  28 0004 0022     		movs	r2, #0
+  29 0006 4260     		str	r2, [r0, #4]
+  30 0008 016C     		ldr	r1, [r0, #64]
+  31 000a 21F00703 		bic	r3, r1, #7
+  32 000e 0364     		str	r3, [r0, #64]
+  33 0010 016C     		ldr	r1, [r0, #64]
+  34 0012 41F00403 		orr	r3, r1, #4
+  35 0016 0364     		str	r3, [r0, #64]
+  36 0018 0169     		ldr	r1, [r0, #16]
+  37 001a 0161     		str	r1, [r0, #16]
+  38 001c 0E48     		ldr	r0, .L2+4
+  39 001e 4368     		ldr	r3, [r0, #4]
+  40 0020 5A60     		str	r2, [r3, #4]
+  41 0022 196C     		ldr	r1, [r3, #64]
+  42 0024 21F07000 		bic	r0, r1, #112
+  43 0028 1864     		str	r0, [r3, #64]
+  44 002a 196C     		ldr	r1, [r3, #64]
+  45 002c 41F04000 		orr	r0, r1, #64
+  46 0030 1864     		str	r0, [r3, #64]
+  47 0032 1969     		ldr	r1, [r3, #16]
+  48 0034 1961     		str	r1, [r3, #16]
+  49 0036 094B     		ldr	r3, .L2+8
+  50 0038 5868     		ldr	r0, [r3, #4]
+  51 003a 4260     		str	r2, [r0, #4]
+  52 003c 026C     		ldr	r2, [r0, #64]
+  53 003e 22F4E061 		bic	r1, r2, #1792
+  54 0042 0164     		str	r1, [r0, #64]
+  55 0044 036C     		ldr	r3, [r0, #64]
+  56 0046 43F48062 		orr	r2, r3, #1024
+  57 004a 0264     		str	r2, [r0, #64]
+  58 004c 0169     		ldr	r1, [r0, #16]
+  59 004e 0161     		str	r1, [r0, #16]
+  60 0050 7047     		bx	lr
+  61              	.L3:
+  62 0052 00BF     		.align	2
+  63              	.L2:
+  64 0054 00000000 		.word	IO004_Handle0
+  65 0058 00000000 		.word	IO004_Handle1
+  66 005c 00000000 		.word	IO004_Handle2
+  68              		.section	.text.IO004_DisableOutputDriver,"ax",%progbits
+  69              		.align	1
+  70              		.global	IO004_DisableOutputDriver
+  71              		.thumb
+  72              		.thumb_func
+  74              	IO004_DisableOutputDriver:
+  75              		@ args = 0, pretend = 0, frame = 0
+  76              		@ frame_needed = 0, uses_anonymous_args = 0
+  77 0000 10B5     		push	{r4, lr}
+  78 0002 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+  79 0004 032B     		cmp	r3, #3
+  80 0006 11D8     		bhi	.L5
+  81 0008 4268     		ldr	r2, [r0, #4]
+  82 000a DB00     		lsls	r3, r3, #3
+  83 000c 1469     		ldr	r4, [r2, #16]
+  84 000e 0333     		adds	r3, r3, #3
+  85 0010 1F20     		movs	r0, #31
+  86 0012 00FA03F0 		lsl	r0, r0, r3
+  87 0016 24EA0000 		bic	r0, r4, r0
+  88 001a 1061     		str	r0, [r2, #16]
+  89 001c 1069     		ldr	r0, [r2, #16]
+  90 001e 01F01F01 		and	r1, r1, #31
+  91 0022 01FA03F3 		lsl	r3, r1, r3
+  92 0026 0343     		orrs	r3, r3, r0
+  93 0028 1361     		str	r3, [r2, #16]
+  94 002a 10BD     		pop	{r4, pc}
+  95              	.L5:
+  96 002c 1A1F     		subs	r2, r3, #4
+  97 002e D2B2     		uxtb	r2, r2
+  98 0030 032A     		cmp	r2, #3
+  99 0032 11D8     		bhi	.L7
+ 100 0034 4368     		ldr	r3, [r0, #4]
+ 101 0036 D000     		lsls	r0, r2, #3
+ 102 0038 5C69     		ldr	r4, [r3, #20]
+ 103 003a C21C     		adds	r2, r0, #3
+ 104 003c 1F20     		movs	r0, #31
+ 105 003e 00FA02F0 		lsl	r0, r0, r2
+ 106 0042 24EA0000 		bic	r0, r4, r0
+ 107 0046 5861     		str	r0, [r3, #20]
+ 108 0048 5869     		ldr	r0, [r3, #20]
+ 109 004a 01F01F01 		and	r1, r1, #31
+ 110 004e 01FA02F2 		lsl	r2, r1, r2
+ 111 0052 0243     		orrs	r2, r2, r0
+ 112 0054 5A61     		str	r2, [r3, #20]
+ 113 0056 10BD     		pop	{r4, pc}
+ 114              	.L7:
+ 115 0058 A3F10802 		sub	r2, r3, #8
+ 116 005c D2B2     		uxtb	r2, r2
+ 117 005e 032A     		cmp	r2, #3
+ 118 0060 11D8     		bhi	.L8
+ 119 0062 4368     		ldr	r3, [r0, #4]
+ 120 0064 D200     		lsls	r2, r2, #3
+ 121 0066 9C69     		ldr	r4, [r3, #24]
+ 122 0068 0332     		adds	r2, r2, #3
+ 123 006a 1F20     		movs	r0, #31
+ 124 006c 00FA02F0 		lsl	r0, r0, r2
+ 125 0070 24EA0000 		bic	r0, r4, r0
+ 126 0074 9861     		str	r0, [r3, #24]
+ 127 0076 9869     		ldr	r0, [r3, #24]
+ 128 0078 01F01F01 		and	r1, r1, #31
+ 129 007c 01FA02F2 		lsl	r2, r1, r2
+ 130 0080 0243     		orrs	r2, r2, r0
+ 131 0082 9A61     		str	r2, [r3, #24]
+ 132 0084 10BD     		pop	{r4, pc}
+ 133              	.L8:
+ 134 0086 0C3B     		subs	r3, r3, #12
+ 135 0088 DBB2     		uxtb	r3, r3
+ 136 008a 032B     		cmp	r3, #3
+ 137 008c 10D8     		bhi	.L4
+ 138 008e 4268     		ldr	r2, [r0, #4]
+ 139 0090 D800     		lsls	r0, r3, #3
+ 140 0092 D469     		ldr	r4, [r2, #28]
+ 141 0094 C31C     		adds	r3, r0, #3
+ 142 0096 1F20     		movs	r0, #31
+ 143 0098 00FA03F0 		lsl	r0, r0, r3
+ 144 009c 24EA0000 		bic	r0, r4, r0
+ 145 00a0 D061     		str	r0, [r2, #28]
+ 146 00a2 D069     		ldr	r0, [r2, #28]
+ 147 00a4 01F01F01 		and	r1, r1, #31
+ 148 00a8 01FA03F3 		lsl	r3, r1, r3
+ 149 00ac 0343     		orrs	r3, r3, r0
+ 150 00ae D361     		str	r3, [r2, #28]
+ 151              	.L4:
+ 152 00b0 10BD     		pop	{r4, pc}
+ 154              		.section	.text.IO004_EnableOutputDriver,"ax",%progbits
+ 155              		.align	1
+ 156              		.global	IO004_EnableOutputDriver
+ 157              		.thumb
+ 158              		.thumb_func
+ 160              	IO004_EnableOutputDriver:
+ 161              		@ args = 0, pretend = 0, frame = 0
+ 162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 163 0000 10B5     		push	{r4, lr}
+ 164 0002 4378     		ldrb	r3, [r0, #1]	@ zero_extendqisi2
+ 165 0004 032B     		cmp	r3, #3
+ 166 0006 11D8     		bhi	.L11
+ 167 0008 4268     		ldr	r2, [r0, #4]
+ 168 000a DB00     		lsls	r3, r3, #3
+ 169 000c 1469     		ldr	r4, [r2, #16]
+ 170 000e 0333     		adds	r3, r3, #3
+ 171 0010 1F20     		movs	r0, #31
+ 172 0012 00FA03F0 		lsl	r0, r0, r3
+ 173 0016 24EA0000 		bic	r0, r4, r0
+ 174 001a 1061     		str	r0, [r2, #16]
+ 175 001c 1069     		ldr	r0, [r2, #16]
+ 176 001e 01F01F01 		and	r1, r1, #31
+ 177 0022 01FA03F3 		lsl	r3, r1, r3
+ 178 0026 0343     		orrs	r3, r3, r0
+ 179 0028 1361     		str	r3, [r2, #16]
+ 180 002a 10BD     		pop	{r4, pc}
+ 181              	.L11:
+ 182 002c 1A1F     		subs	r2, r3, #4
+ 183 002e D2B2     		uxtb	r2, r2
+ 184 0030 032A     		cmp	r2, #3
+ 185 0032 11D8     		bhi	.L13
+ 186 0034 4368     		ldr	r3, [r0, #4]
+ 187 0036 D000     		lsls	r0, r2, #3
+ 188 0038 5C69     		ldr	r4, [r3, #20]
+ 189 003a C21C     		adds	r2, r0, #3
+ 190 003c 1F20     		movs	r0, #31
+ 191 003e 00FA02F0 		lsl	r0, r0, r2
+ 192 0042 24EA0000 		bic	r0, r4, r0
+ 193 0046 5861     		str	r0, [r3, #20]
+ 194 0048 5869     		ldr	r0, [r3, #20]
+ 195 004a 01F01F01 		and	r1, r1, #31
+ 196 004e 01FA02F2 		lsl	r2, r1, r2
+ 197 0052 0243     		orrs	r2, r2, r0
+ 198 0054 5A61     		str	r2, [r3, #20]
+ 199 0056 10BD     		pop	{r4, pc}
+ 200              	.L13:
+ 201 0058 A3F10802 		sub	r2, r3, #8
+ 202 005c D2B2     		uxtb	r2, r2
+ 203 005e 032A     		cmp	r2, #3
+ 204 0060 11D8     		bhi	.L14
+ 205 0062 4368     		ldr	r3, [r0, #4]
+ 206 0064 D200     		lsls	r2, r2, #3
+ 207 0066 9C69     		ldr	r4, [r3, #24]
+ 208 0068 0332     		adds	r2, r2, #3
+ 209 006a 1F20     		movs	r0, #31
+ 210 006c 00FA02F0 		lsl	r0, r0, r2
+ 211 0070 24EA0000 		bic	r0, r4, r0
+ 212 0074 9861     		str	r0, [r3, #24]
+ 213 0076 9869     		ldr	r0, [r3, #24]
+ 214 0078 01F01F01 		and	r1, r1, #31
+ 215 007c 01FA02F2 		lsl	r2, r1, r2
+ 216 0080 0243     		orrs	r2, r2, r0
+ 217 0082 9A61     		str	r2, [r3, #24]
+ 218 0084 10BD     		pop	{r4, pc}
+ 219              	.L14:
+ 220 0086 0C3B     		subs	r3, r3, #12
+ 221 0088 DBB2     		uxtb	r3, r3
+ 222 008a 032B     		cmp	r3, #3
+ 223 008c 10D8     		bhi	.L10
+ 224 008e 4268     		ldr	r2, [r0, #4]
+ 225 0090 D800     		lsls	r0, r3, #3
+ 226 0092 D469     		ldr	r4, [r2, #28]
+ 227 0094 C31C     		adds	r3, r0, #3
+ 228 0096 1F20     		movs	r0, #31
+ 229 0098 00FA03F0 		lsl	r0, r0, r3
+ 230 009c 24EA0000 		bic	r0, r4, r0
+ 231 00a0 D061     		str	r0, [r2, #28]
+ 232 00a2 D069     		ldr	r0, [r2, #28]
+ 233 00a4 01F01F01 		and	r1, r1, #31
+ 234 00a8 01FA03F3 		lsl	r3, r1, r3
+ 235 00ac 0343     		orrs	r3, r3, r0
+ 236 00ae D361     		str	r3, [r2, #28]
+ 237              	.L10:
+ 238 00b0 10BD     		pop	{r4, pc}
+ 240              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.4 20130913 (release) [ARM/embedded-4_7-br
+DEFINED SYMBOLS
+                            *ABS*:00000000 IO004.c
+C:\Users\SteurerE\AppData\Local\Temp\cceyK4JG.s:17     .text.IO004_Init:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cceyK4JG.s:22     .text.IO004_Init:00000000 IO004_Init
+C:\Users\SteurerE\AppData\Local\Temp\cceyK4JG.s:64     .text.IO004_Init:00000054 $d
+C:\Users\SteurerE\AppData\Local\Temp\cceyK4JG.s:69     .text.IO004_DisableOutputDriver:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cceyK4JG.s:74     .text.IO004_DisableOutputDriver:00000000 IO004_DisableOutputDriver
+C:\Users\SteurerE\AppData\Local\Temp\cceyK4JG.s:155    .text.IO004_EnableOutputDriver:00000000 $t
+C:\Users\SteurerE\AppData\Local\Temp\cceyK4JG.s:160    .text.IO004_EnableOutputDriver:00000000 IO004_EnableOutputDriver
+
+UNDEFINED SYMBOLS
+IO004_Handle0
+IO004_Handle1
+IO004_Handle2
