@@ -14,18 +14,25 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.Toast;
+
 import java.util.List;
 
-public class MainActivity extends Activity implements SurfaceHolder.Callback, SensorEventListener, View.OnClickListener {
+public class MainActivity extends Activity implements SurfaceHolder.Callback, SensorEventListener, View.OnClickListener, View.OnTouchListener,SeekBar.OnSeekBarChangeListener {
 
     private static final String DEBUG_TAG = "DEBUG";
+    private static final int SLIDER_SPEED_MS = 40;
+    private static final int SLIDER_MID_VAL = 500;
+    private static final int SLIDER_BUTTON_STEP = 40;
+    private static final float YAW_SCALE_MAX = 10.0f;
     private static final int ENABLE_BLUETOOTH = 1;
     private boolean mHeightControlActivated = false;
     private boolean mSendBT = false;
@@ -35,11 +42,14 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Se
     private ProgressDialog mProgressBar;
     private CustomSliderViewVertical mSeekBarTrottle;
     private CustomSliderView mSeekBarYaw;
+    private SeekBar mYawTrimBar;
     private Button mHeightControlButton;
+    private Button mYawTrimRight;
+    private Button mYawTrimLeft;
     private DroneCommunicator mDroneCommunicator;
     private SensorManager mSensorManager;
     private SensorFusion mSensorFusion;
-
+    private Handler mYawAdjustHandler;
     //reference of Handler Object of DroneCommunicator Class
     private Handler droneHandler;
     private ControlPacket mControlPacket;
@@ -47,6 +57,9 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Se
 
     private float[] mSensorValues = new float[]{(float) 0.0, (float) 0.0, (float) 0.0};
     private float[] mViewDimensions = new float[]{(float) 0.0, (float) 0.0};
+    private float mYawOffset = 0.0f;
+    private boolean mYawRightDown = false;
+    private boolean mYawLeftDown = false;
 
     //For Visualisation to get the SensorValues
     public float[] getSensorValues() {
@@ -60,6 +73,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Se
         //Instantiate Sensor-Fusion Class
         mSensorFusion = new SensorFusion(mFusionUpdateHandler, doSensorValuesUpdate);
         mSensorFusion.setMode(SensorFusion.Mode.FUSION);
+        mYawAdjustHandler = new Handler();
         initBluetooth();
     }
 
@@ -224,40 +238,43 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Se
     /**
      * check if new sensor-values should be send
      * divides sending frequency by 2
+     *
      * @return
      */
-    private boolean shouldSend(){
-        if(mSendBT){
+    private boolean shouldSend() {
+        if (mSendBT) {
             mSendBT = false;
-        }else{
+        } else {
             mSendBT = true;
         }
         return mSendBT;
     }
+
     /**
      * will get called by sensorfusion-class
      * and informs about new fused data with a period of approx. 20ms
      * triggers also sending of data to drone
      */
-    private Runnable doSensorValuesUpdate = new Runnable() {
-        @Override
-        public void run() {
-            if (mSensorFusion != null) {
-                mSensorValues[0] = mSensorFusion.getPitch();
-                mSensorValues[1] = -mSensorFusion.getRoll();
-                mSensorValues[2] = mSensorFusion.getAzimuth();
-                    if (mDroneCommunicator != null && mDroneCommunicator.isConnected()) {
-                        if (shouldSend()) {
-                            mControlPacket.setRoll(mSensorValues[1]);
-                            mControlPacket.setPitch(mSensorValues[0]);
-                            mControlPacket.setAzimuth((float) mSeekBarYaw.getScaledValue());
-                            mControlPacket.setSpeed((byte) mSeekBarTrottle.getScaledValue());
-                            sendBTControlPacket(mControlPacket, DroneCommunicator.SEND_CONTROL_DATA);
+    private Runnable doSensorValuesUpdate =
+            new Runnable() {
+                @Override
+                public void run() {
+                    if (mSensorFusion != null) {
+                        mSensorValues[0] = mSensorFusion.getPitch();
+                        mSensorValues[1] = -mSensorFusion.getRoll();
+                        mSensorValues[2] = mSensorFusion.getAzimuth();
+                        if (mDroneCommunicator != null && mDroneCommunicator.isConnected()) {
+                            if (shouldSend()) {
+                                mControlPacket.setRoll(mSensorValues[1]);
+                                mControlPacket.setPitch(mSensorValues[0]);
+                                mControlPacket.setAzimuth((float) mSeekBarYaw.getScaledValue()+mYawOffset);
+                                mControlPacket.setSpeed((byte) mSeekBarTrottle.getScaledValue());
+                                sendBTControlPacket(mControlPacket, DroneCommunicator.SEND_CONTROL_DATA);
+                            }
                         }
                     }
-            }
-        }
-    };
+                }
+            };
 
     private void setSystemUIVisibility(View view) {
         int mUIFlag = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -309,9 +326,18 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Se
         mSeekBarTrottle.setStartPos(0);
         mSeekBarYaw = (CustomSliderView) findViewById(R.id.slider2);
         mSeekBarYaw.setResourceIds(R.drawable.slider_front1, R.drawable.rotation);
-        mSeekBarYaw.setRange(90,-90);//-90,90
+        mSeekBarYaw.setRange(90, -90);//-90,90
         mSeekBarYaw.setScaledValue(0);
         mSeekBarYaw.setStartPos(0);
+        mYawTrimRight = (Button) findViewById(R.id.buttonRight);
+        mYawTrimRight.setOnClickListener(this);
+        mYawTrimRight.setOnTouchListener(this);
+        mYawTrimLeft = (Button) findViewById(R.id.buttonLeft);
+        mYawTrimLeft.setOnClickListener(this);
+        mYawTrimLeft.setOnTouchListener(this);
+        mYawTrimBar = (SeekBar) findViewById(R.id.yawTrim);
+        mYawTrimBar.setOnSeekBarChangeListener(this);
+
         //sets flags to get fullscreen-mode
         setSystemUIVisibility(mViewholder);
         //Get Reference to SurfaceView on which Visualisation takes place
@@ -326,16 +352,102 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Se
         });
     }
 
-    //for Height Control Click
+    /**
+     * Runnable for Triggering of Yaw-Trim Adjustments
+     */
+    private Runnable doYawAdjust =
+            new Runnable() {
+                @Override
+                public void run() {
+                    if(mYawRightDown){
+                        mYawTrimBar.setProgress(mYawTrimBar.getProgress() + (SLIDER_MID_VAL / SLIDER_BUTTON_STEP));
+                        mYawAdjustHandler.postDelayed(this,SLIDER_SPEED_MS);
+                    }
+                    if(mYawLeftDown){
+                        mYawTrimBar.setProgress(mYawTrimBar.getProgress() - (SLIDER_MID_VAL / SLIDER_BUTTON_STEP));
+                        mYawAdjustHandler.postDelayed(this,SLIDER_SPEED_MS);
+                    }
+                }
+            };
+
+    /**
+     * for Button Event Handling
+     * @param v
+     */
     public void onClick(View v) {
-        Button b = (Button) v;
-        if (mHeightControlActivated == false) {
-            b.setBackgroundColor(Color.parseColor("green"));
-            mHeightControlActivated = true;
-        } else {
-            b.setBackgroundColor(Color.parseColor("white"));
-            mHeightControlActivated = false;
+        switch (v.getId()) {
+            case R.id.button_height_control:
+                if (mHeightControlActivated == false) {
+                    v.setBackgroundColor(Color.parseColor("green"));
+                    mHeightControlActivated = true;
+                } else {
+                    v.setBackgroundColor(Color.parseColor("white"));
+                    mHeightControlActivated = false;
+                }
+                break;
         }
+    }
+
+    /**
+     * Touch-Event Handling for Yaw-Trim Slider
+     * @param v
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_UP){
+            switch (v.getId()) {
+                case R.id.buttonLeft:
+                    mYawLeftDown = false;
+                    mYawAdjustHandler.removeCallbacks(doYawAdjust);
+                    break;
+                case R.id.buttonRight:
+                    mYawRightDown = false;
+                    mYawAdjustHandler.removeCallbacks(doYawAdjust);
+                    break;
+            }
+        }
+        if(event.getAction() == MotionEvent.ACTION_DOWN){
+            switch (v.getId()) {
+                case R.id.buttonLeft:
+                    mYawLeftDown = true;
+                    mYawAdjustHandler.postDelayed(doYawAdjust,SLIDER_SPEED_MS);
+                    break;
+                case R.id.buttonRight:
+                    mYawRightDown = true;
+                    mYawAdjustHandler.postDelayed(doYawAdjust,SLIDER_SPEED_MS);
+                    break;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * for updating Yaw-Offset
+     * @param seekBar
+     * @param progress
+     * @param fromUser
+     */
+    public void onProgressChanged(SeekBar seekBar, int progress,
+                                  boolean fromUser) {
+        switch (seekBar.getId()) {
+            case R.id.yawTrim:
+                if (progress < SLIDER_MID_VAL) {
+                    mYawOffset = (((float)(SLIDER_MID_VAL - progress)) / (float)SLIDER_MID_VAL * YAW_SCALE_MAX);
+                } else {
+                    mYawOffset = (((float)(progress-SLIDER_MID_VAL)) / (float)SLIDER_MID_VAL * -YAW_SCALE_MAX);
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
 
@@ -433,4 +545,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback, Se
             setSystemUIVisibility(getWindow().getDecorView());
         }
     };
+
+
+
 }

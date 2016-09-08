@@ -58,14 +58,74 @@
 
     </steurer.infineon.com.flightcontroller_gui.CustomSliderView>
 
-    <steurer.infineon.com.flightcontroller_gui.VisualisationView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginBottom="80dp"
         android:layout_marginLeft="120dp"
-        android:id="@+id/visualisationView"
+        android:id="@+id/frameView"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true">
+
+        <steurer.infineon.com.flightcontroller_gui.VisualisationView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/visualisationView" />
+
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_gravity="right|top"
+            android:background="#84b6a7">
+            <!--android:background="#84b6a7">-->
+
+            <Button
+                android:id="@+id/buttonLeft"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:drawableTop="@drawable/ic_chevron_left_black_36dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@android:color/transparent"/>
+
+            <Button
+                android:id="@+id/buttonRight"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:drawableTop="@drawable/ic_chevron_right_black_36dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:background="@android:color/transparent"/>
+
+            <SeekBar
+                android:id="@+id/yawTrim"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:maxHeight="1000dp"
+                android:layout_toLeftOf="@+id/buttonRight"
+                android:layout_toRightOf="@+id/buttonLeft"
+                android:layout_alignParentTop="true"
+                android:progress="500"
+                android:max="1000"
+                android:background="@android:color/transparent">
+            </SeekBar>
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/yawTrim"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/yaw_trim"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:background="@android:color/transparent" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
 
     <Button
         android:id="@+id/button_height_control"
@@ -74,7 +134,7 @@
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/slider2"
         android:layout_toRightOf="@+id/slider1"
-        android:layout_toStartOf="@+id/visualisationView"
+        android:layout_toStartOf="@+id/frameView"
         android:text="Height Control"
         android:gravity="center_horizontal|center_vertical"
         android:textSize="20sp"
